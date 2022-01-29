@@ -1,6 +1,6 @@
 Neodex
 ===========================
-An iOS and iPadOS visual database for the Pokémon series of games...
+An iOS visual database for the Pokémon series of games...
 
 ...or as the fans call it, a Pokédex!
 
