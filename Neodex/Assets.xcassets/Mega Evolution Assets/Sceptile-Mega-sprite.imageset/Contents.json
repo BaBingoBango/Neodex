@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "bw_style__mega_sceptile_by_trainersplash_d8a6z9y-fullview.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
