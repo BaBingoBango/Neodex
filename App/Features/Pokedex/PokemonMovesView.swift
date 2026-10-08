@@ -75,3 +75,7 @@ struct PokemonMovesView: View {
         }
     }
 }
+
+#if DEBUG
+#Preview { PreviewHost { PokemonMovesView(pokemon: PokedexDatabase.preview.previewPokemon("Garchomp")) } }
+#endif

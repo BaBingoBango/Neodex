@@ -82,3 +82,9 @@ struct NatureDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 }
+
+#if DEBUG
+#Preview("List") { PreviewHost { NatureListView() } }
+
+#Preview("Detail") { PreviewHost { NatureDetailView(nature: .adamant) } }
+#endif

@@ -90,3 +90,7 @@ struct MoveListContent: View {
         }
     }
 }
+
+#if DEBUG
+#Preview { MoveListView().previewEnvironment() }
+#endif

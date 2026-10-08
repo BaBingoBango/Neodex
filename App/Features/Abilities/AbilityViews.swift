@@ -98,3 +98,13 @@ struct AbilityDetailView: View {
         .recordsHistory(.ability, id: ability.id)
     }
 }
+
+#if DEBUG
+#Preview("List") { PreviewHost { AbilityListView() } }
+
+#Preview("Detail") {
+    PreviewHost {
+        if let ability = PokedexDatabase.preview.ability(named: "Blaze") { AbilityDetailView(ability: ability) }
+    }
+}
+#endif

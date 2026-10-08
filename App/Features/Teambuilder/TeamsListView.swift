@@ -172,3 +172,9 @@ struct TeamImportSheet: View {
         if result.warnings.isEmpty, !result.teams.isEmpty { dismiss() }
     }
 }
+
+#if DEBUG
+#Preview("Teams") { TeamsView().previewEnvironment() }
+
+#Preview("Import") { TeamImportSheet().previewEnvironment() }
+#endif

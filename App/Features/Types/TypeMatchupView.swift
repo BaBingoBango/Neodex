@@ -81,3 +81,7 @@ struct TypeMatchupView: View {
         }
     }
 }
+
+#if DEBUG
+#Preview { PreviewHost { TypeMatchupView() } }
+#endif

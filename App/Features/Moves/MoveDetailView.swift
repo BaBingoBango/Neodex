@@ -192,3 +192,17 @@ struct MoveLearnersView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 }
+
+#if DEBUG
+#Preview("Flamethrower") {
+    PreviewHost {
+        if let move = PokedexDatabase.preview.move(named: "Flamethrower") { MoveDetailView(move: move) }
+    }
+}
+
+#Preview("Learners") {
+    PreviewHost {
+        if let move = PokedexDatabase.preview.move(named: "Earthquake") { MoveLearnersView(move: move) }
+    }
+}
+#endif

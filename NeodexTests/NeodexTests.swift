@@ -53,3 +53,33 @@ struct BundledDataTests {
         }
     }
 }
+
+@Suite("Preview fixture")
+struct PreviewFixtureTests {
+    @Test("The preview fixture is bundled in debug builds and self-consistent")
+    func previewFixture() throws {
+        let database = try PokedexDatabase.loadSynchronously(from: .main, subdirectory: nil, filePrefix: "preview-")
+        #expect(database.manifest?.schemaVersion == DataManifest.currentSchemaVersion)
+        #expect(database.pokemon.count >= 20)
+        #expect(database.pokemon(named: "Charizard") != nil)
+        #expect(database.item(id: "leftovers") != nil)
+        for pokemon in database.pokemon {
+            for abilityID in pokemon.abilities.all {
+                #expect(database.ability(id: abilityID) != nil, "\(pokemon.name) references unknown ability \(abilityID)")
+            }
+            for evolution in pokemon.evolutions {
+                #expect(database.pokemon(id: evolution.to) != nil, "\(pokemon.name) evolves into unknown \(evolution.to)")
+            }
+            for form in pokemon.otherFormIDs {
+                #expect(database.pokemon(id: form) != nil, "\(pokemon.name) lists unknown form \(form)")
+            }
+            for itemID in pokemon.requiredItems ?? [] {
+                #expect(database.item(id: itemID) != nil, "\(pokemon.name) requires unknown item \(itemID)")
+            }
+            if pokemon.isBaseForm {
+                #expect(!database.learnset(for: pokemon).isEmpty, "\(pokemon.name) has no moves in the fixture")
+            }
+            #expect(Bundle.main.url(forResource: "\(pokemon.imageID)-thumb", withExtension: "heic") != nil, "\(pokemon.name) has no thumbnail")
+        }
+    }
+}

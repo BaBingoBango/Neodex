@@ -138,3 +138,13 @@ struct ItemDetailView: View {
         }
     }
 }
+
+#if DEBUG
+#Preview("List") { PreviewHost { ItemListView() } }
+
+#Preview("Detail") {
+    PreviewHost {
+        if let item = PokedexDatabase.preview.item(id: "leftovers") { ItemDetailView(item: item) }
+    }
+}
+#endif

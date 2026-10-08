@@ -50,17 +50,19 @@ The generated data and images are checked in, so the app builds without running 
 
 ```bash
 cd Tools/NeodexData
-swift run neodex-data            # full refresh: data + images (about a minute)
-swift run neodex-data --skip-images
+swift run neodex-data                    # full refresh: data + images (about a minute)
+swift run neodex-data --skip-images      # data only
+swift run neodex-data --preview-fixture  # just the Xcode Previews fixture
 ```
 
 ### Tests
 
 ```bash
-cd Packages/NeodexKit && swift test
+cd Packages/NeodexKit && swift test   # models, type chart, stat math, Showdown codec, Smogon parsers
+cd Tools/NeodexData && swift test     # the data pipeline
 ```
 
-The Xcode scheme also runs the kit tests plus the app's bundled‑data smoke tests (⌘U).
+The Xcode scheme also runs the kit tests plus the app's bundled‑data smoke tests (⌘U). Every screen has an Xcode Preview backed by a small fixture cut from the real dataset.
 
 ## Data sources and licensing
 

@@ -537,3 +537,17 @@ struct FlowLayout: Layout {
         }
     }
 }
+
+#if DEBUG
+#Preview("Charizard") {
+    PreviewHost { PokemonDetailView(pokemon: PokedexDatabase.preview.previewPokemon("Charizard")) }
+}
+
+#Preview("Ogerpon-Wellspring") {
+    PreviewHost { PokemonDetailView(pokemon: PokedexDatabase.preview.previewPokemon("Ogerpon-Wellspring")) }
+}
+
+#Preview("Eevee") {
+    PreviewHost { PokemonDetailView(pokemon: PokedexDatabase.preview.previewPokemon("Eevee")) }
+}
+#endif

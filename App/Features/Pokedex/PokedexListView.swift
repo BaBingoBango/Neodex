@@ -126,3 +126,7 @@ struct PokemonRow: View {
         .padding(.vertical, 2)
     }
 }
+
+#if DEBUG
+#Preview { PokedexListView().previewEnvironment() }
+#endif

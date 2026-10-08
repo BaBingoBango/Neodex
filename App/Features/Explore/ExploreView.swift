@@ -205,3 +205,7 @@ struct ExploreCard: View {
         }
     }
 }
+
+#if DEBUG
+#Preview { PreviewHost { ExploreView() } }
+#endif

@@ -66,3 +66,7 @@ struct SearchView: View {
         }
     }
 }
+
+#if DEBUG
+#Preview { SearchView().previewEnvironment() }
+#endif

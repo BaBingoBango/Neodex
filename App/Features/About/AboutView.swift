@@ -54,3 +54,7 @@ struct AboutView: View {
         .navigationTitle("About")
     }
 }
+
+#if DEBUG
+#Preview { PreviewHost { AboutView() } }
+#endif

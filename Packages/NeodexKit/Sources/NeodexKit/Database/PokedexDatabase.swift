@@ -80,15 +80,23 @@ public final class PokedexDatabase: Sendable {
 
     // MARK: - Loading
 
-    /// Loads the bundled dataset. Looks in `subdirectory` first, then at the bundle root.
+    /// Loads the bundled dataset off the calling actor. Looks in `subdirectory` first, then at the bundle root.
+    /// `filePrefix` selects an alternative set of files, such as the `preview-` fixture used by Xcode Previews.
     @concurrent
-    public static func load(from bundle: Bundle, subdirectory: String? = "Data") async throws -> PokedexDatabase {
+    public static func load(from bundle: Bundle, subdirectory: String? = "Data", filePrefix: String = "") async throws -> PokedexDatabase {
+        try loadSynchronously(from: bundle, subdirectory: subdirectory, filePrefix: filePrefix)
+    }
+
+    /// Loads the bundled dataset on the current thread. Intended for Xcode Previews and tests;
+    /// the app uses ``load(from:subdirectory:filePrefix:)`` so launch never blocks the main actor.
+    public static func loadSynchronously(from bundle: Bundle, subdirectory: String? = "Data", filePrefix: String = "") throws -> PokedexDatabase {
         func url(_ name: String) throws -> URL {
-            if let subdirectory, let url = bundle.url(forResource: name, withExtension: "json", subdirectory: subdirectory) {
+            let resource = filePrefix + name
+            if let subdirectory, let url = bundle.url(forResource: resource, withExtension: "json", subdirectory: subdirectory) {
                 return url
             }
-            if let url = bundle.url(forResource: name, withExtension: "json") { return url }
-            throw LoadError.missingFile(name)
+            if let url = bundle.url(forResource: resource, withExtension: "json") { return url }
+            throw LoadError.missingFile(resource)
         }
         return try load(pokemonURL: url("pokemon"), movesURL: url("moves"), abilitiesURL: url("abilities"),
                         itemsURL: url("items"), learnsetsURL: url("learnsets"),
@@ -97,8 +105,8 @@ public final class PokedexDatabase: Sendable {
 
     /// Loads the dataset from a directory containing the generated JSON files.
     @concurrent
-    public static func load(from directory: URL) async throws -> PokedexDatabase {
-        func url(_ name: String) -> URL { directory.appendingPathComponent("\(name).json") }
+    public static func load(from directory: URL, filePrefix: String = "") async throws -> PokedexDatabase {
+        func url(_ name: String) -> URL { directory.appendingPathComponent("\(filePrefix)\(name).json") }
         return try load(pokemonURL: url("pokemon"), movesURL: url("moves"), abilitiesURL: url("abilities"),
                         itemsURL: url("items"), learnsetsURL: url("learnsets"), manifestURL: url("manifest"))
     }

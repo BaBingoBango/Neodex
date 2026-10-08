@@ -135,3 +135,7 @@ struct TypeMoveListView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 }
+
+#if DEBUG
+#Preview { PreviewHost { TypeDetailView(types: [.fire, .flying]) } }
+#endif

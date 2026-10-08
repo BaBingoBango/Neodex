@@ -44,7 +44,8 @@ generated dataset when it is present on disk.
 
 ## NeodexData (`Tools/NeodexData`)
 
-A dependency-free Swift command-line tool that rebuilds the bundled dataset from two open sources:
+A Swift package with a tested library (`NeodexDataCore`) and a thin command-line executable
+(`neodex-data`) that rebuilds the bundled dataset from two open sources:
 
 | Source | What we take | Why |
 | --- | --- | --- |
@@ -70,10 +71,14 @@ Steps, in order:
 
 ```bash
 cd Tools/NeodexData
-swift run neodex-data                 # full refresh (≈1 minute on a fresh cache)
-swift run neodex-data --skip-images   # data only, a few seconds
+swift run neodex-data                    # full refresh (≈1 minute on a fresh cache)
+swift run neodex-data --skip-images      # data only, a few seconds
+swift run neodex-data --preview-fixture  # rebuild only the Xcode Previews fixture
 swift run neodex-data --help
+swift test                               # pipeline tests: CSV, JS evaluation, name mapping, join rules, fixture
 ```
+
+Every full run also refreshes the preview fixture (below), so the two never drift apart.
 
 The whole bundle is ≈49 MB (5.5 MB JSON, 44 MB images) versus the 454 MB asset catalog of the
 original app.
@@ -91,7 +96,9 @@ App/
 ├── DesignSystem/          Type palette, TypeBadge, PokemonImage, shared components
 ├── Services/              SmogonStatsClient (actor), SpotlightIndexer, History
 ├── Persistence/           SwiftData models: SavedTeam, TeamMember, BrowsingRecord
-└── Resources/             Assets.xcassets (icon + colours), Data/, Images/  ← generated
+├── Preview Content/       preview-*.json fixture for Xcode Previews  ← generated, debug builds only
+├── PrivacyInfo.xcprivacy  Privacy manifest (UserDefaults access, no tracking, no data collection)
+└── Resources/             Assets.xcassets (icon + colours), AppIcon.icon, Data/, Images/  ← generated
 ```
 
 Key decisions:
@@ -111,12 +118,18 @@ Key decisions:
 - **Showdown compatibility.** Teams round-trip through `ShowdownTeamCodec`; the editor only offers
   moves the Pokémon can learn, resolves pasted sets by tolerant name matching, and reports anything it
   could not match.
+- **Previews run on real data.** `App/Preview Content` holds a 0.7 MB slice of the generated dataset
+  (14 seed species, their whole evolution families and forms, and every move, ability and item they
+  reference). `PokedexDatabase.preview` loads it synchronously and `PreviewHost` wraps any screen with
+  it plus an in-memory SwiftData store seeded with a sample team. The folder is a development asset,
+  so archives never ship it.
 
 ## Testing
 
 ```bash
-cd Packages/NeodexKit && swift test                       # logic, codec, parsers, database (fast, macOS)
-xcodebuild -scheme Neodex -destination 'platform=iOS Simulator,name=iPhone 17 Pro' test   # + bundled-data smoke tests
+cd Packages/NeodexKit && swift test     # logic, codec, parsers, database (fast, macOS)
+cd Tools/NeodexData && swift test       # pipeline: CSV, JS evaluation, name mapping, join rules, fixture
+xcodebuild -scheme Neodex -destination 'platform=iOS Simulator,name=iPhone 17 Pro' test   # + bundled-data and fixture smoke tests
 ```
 
 ## Known limitations

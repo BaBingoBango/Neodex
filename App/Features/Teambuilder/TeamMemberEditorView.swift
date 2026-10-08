@@ -284,3 +284,7 @@ struct NaturePickerList: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 }
+
+#if DEBUG
+#Preview { PreviewHost { TeamMemberEditorView(team: PreviewStore.sampleTeam, memberIndex: 0) } }
+#endif

@@ -77,3 +77,7 @@ struct SettingsView: View {
         storedTabs = TabPreferences.encode(tabs)
     }
 }
+
+#if DEBUG
+#Preview { SettingsView().previewEnvironment() }
+#endif

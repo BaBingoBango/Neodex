@@ -42,3 +42,7 @@ struct MainTabView: View {
         }
     }
 }
+
+#if DEBUG
+#Preview { MainTabView().previewEnvironment() }
+#endif

@@ -293,3 +293,7 @@ final class UsageStatsModel {
         return date.formatted(.dateTime.month(.wide).year())
     }
 }
+
+#if DEBUG
+#Preview { PreviewHost { UsageStatsView() } }
+#endif

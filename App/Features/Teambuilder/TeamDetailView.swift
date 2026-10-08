@@ -288,3 +288,7 @@ struct PokemonPickerSheet: View {
         }
     }
 }
+
+#if DEBUG
+#Preview { PreviewHost { TeamDetailView(team: PreviewStore.sampleTeam) } }
+#endif

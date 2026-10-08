@@ -155,3 +155,7 @@ struct FeatureCard: View {
         .accessibilityElement(children: .combine)
     }
 }
+
+#if DEBUG
+#Preview { HomeView().previewEnvironment() }
+#endif

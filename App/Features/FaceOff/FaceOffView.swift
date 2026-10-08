@@ -207,3 +207,7 @@ struct ComparisonBar: View {
         .accessibilityLabel("\(label): \(left) versus \(right)")
     }
 }
+
+#if DEBUG
+#Preview { PreviewHost { FaceOffView(initial: PokedexDatabase.preview.previewPokemon("Charizard")) } }
+#endif
