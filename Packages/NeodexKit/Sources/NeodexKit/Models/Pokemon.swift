@@ -149,6 +149,15 @@ public struct Pokemon: Codable, Sendable, Hashable, Identifiable {
 
     /// Weaknesses, resistances and immunities derived from the type combination.
     public var defensiveProfile: TypeMatchup.DefensiveProfile { TypeMatchup.defensiveProfile(for: types) }
+
+    /// Pokémon Showdown's sprite and cry file stem, e.g. `"charizard-megax"` or `"pikachu"`.
+    public var showdownSpriteID: String {
+        guard let baseSpeciesID, let formName else { return id }
+        return baseSpeciesID + "-" + ShowdownID.make(formName)
+    }
+
+    /// `true` when the Pokémon has no further evolutions.
+    public var isFullyEvolved: Bool { evolutions.isEmpty }
 }
 
 /// The regular and hidden abilities of a Pokémon, stored as ability IDs.
