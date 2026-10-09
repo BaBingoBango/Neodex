@@ -32,9 +32,13 @@ enum History {
         try? context.delete(model: BrowsingRecord.self)
     }
 
+    /// Deletes everything past the newest `maximumRecords`. Looks only at saved records: a fetch that
+    /// includes pending changes would return the record inserted a moment ago regardless of the
+    /// offset, and delete it on the spot.
     private static func prune(in context: ModelContext) {
         var descriptor = FetchDescriptor<BrowsingRecord>(sortBy: [SortDescriptor(\.viewedAt, order: .reverse)])
         descriptor.fetchOffset = maximumRecords
+        descriptor.includePendingChanges = false
         for stale in (try? context.fetch(descriptor)) ?? [] { context.delete(stale) }
     }
 }
