@@ -99,7 +99,12 @@ struct PokemonImage: View {
             }
         }
         .task(id: "\(pokemon.imageID)-\(kind.rawValue)") {
-            guard image == nil else { return }
+            // Another view may have finished decoding this image between this view's first render
+            // and its task starting; always publish what the store has, or the view stays blank.
+            if let cached = BundledImageStore.shared.cachedPokemonImage(pokemon.imageID, kind: kind) {
+                loaded = cached
+                return
+            }
             let result = await BundledImageStore.shared.pokemonImage(pokemon.imageID, kind: kind)
             if !Task.isCancelled {
                 loaded = result
