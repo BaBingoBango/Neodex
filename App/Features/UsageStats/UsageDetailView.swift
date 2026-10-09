@@ -38,6 +38,7 @@ struct UsageDetailView: View {
                         header
                     }
                 }
+                UsageTrendChart(selection: selection, name: detail.name)
                 entries("Abilities", detail.abilities.prefix(6)) { database.ability(id: $0)?.name ?? $0 }
                 entries("Items", detail.items.prefix(8)) { $0 == "nothing" ? "No item" : database.item(id: $0)?.name ?? $0 }
                 entries("Moves", detail.moves.prefix(12)) { database.move(id: $0)?.name ?? $0 }

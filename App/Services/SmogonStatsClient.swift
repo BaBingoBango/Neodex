@@ -11,6 +11,25 @@ nonisolated struct UsageSelection: Hashable, Sendable {
     var chaosURL: URL { SmogonStatsClient.base.appendingPathComponent("\(month)/chaos/\(format)-\(rating).json") }
 }
 
+/// One month of a Pokémon's usage in a format.
+nonisolated struct UsageTrendPoint: Identifiable, Hashable, Sendable {
+    var month: String
+    var usagePercent: Double
+    var rank: Int?
+
+    var id: String { month }
+
+    /// The first day of the month, for charting.
+    var date: Date {
+        let parts = month.split(separator: "-").compactMap { Int($0) }
+        var components = DateComponents()
+        components.year = parts.first
+        components.month = parts.count > 1 ? parts[1] : 1
+        components.day = 1
+        return Calendar(identifier: .gregorian).date(from: components) ?? .distantPast
+    }
+}
+
 /// Fetches and caches Smogon's monthly usage statistics.
 actor SmogonStatsClient {
     static let shared = SmogonStatsClient()
@@ -78,6 +97,30 @@ actor SmogonStatsClient {
         let report = try UsageChaosReport.decode(data)
         chaosCache[selection] = report
         return report
+    }
+
+    /// A Pokémon's usage across the most recent months of a format, oldest first.
+    /// Months in which the format or rating cutoff didn't exist are skipped.
+    func usageTrend(for name: String, format: String, rating: Int, months limit: Int) async -> [UsageTrendPoint] {
+        guard let months = try? await months() else { return [] }
+        let key = ShowdownID.make(name)
+        return await withTaskGroup(of: UsageTrendPoint?.self) { group in
+            for month in months.prefix(limit) {
+                group.addTask {
+                    let selection = UsageSelection(month: month, format: format, rating: rating)
+                    guard let report = try? await self.rankings(for: selection) else { return nil }
+                    guard let ranking = report.rankings.first(where: { ShowdownID.make($0.name) == key }) else {
+                        return UsageTrendPoint(month: month, usagePercent: 0, rank: nil)
+                    }
+                    return UsageTrendPoint(month: month, usagePercent: ranking.usagePercent, rank: ranking.rank)
+                }
+            }
+            var points: [UsageTrendPoint] = []
+            for await point in group {
+                if let point { points.append(point) }
+            }
+            return points.sorted { $0.month < $1.month }
+        }
     }
 
     private func string(_ url: URL, policy: URLRequest.CachePolicy) async throws -> String {
