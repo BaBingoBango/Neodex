@@ -1,3 +1,4 @@
+import AppIntents
 import CoreSpotlight
 import NeodexKit
 import SwiftUI
@@ -17,6 +18,7 @@ struct RootView: View {
                     .environment(\.database, database)
                     .task(id: database.manifest?.generatedAt) {
                         await SpotlightIndexer.indexIfNeeded(database: database)
+                        NeodexShortcuts.updateAppShortcutParameters()
                     }
             case .failed(let error):
                 ContentUnavailableView {
@@ -33,7 +35,7 @@ struct RootView: View {
         .onContinueUserActivity(CSSearchableItemActionType) { activity in
             guard let identifier = activity.userInfo?[CSSearchableItemActivityIdentifier] as? String,
                   let route = AppRoute(spotlightIdentifier: identifier) else { return }
-            appModel.pendingRoute = route
+            DeepLinkRouter.shared.open(route)
         }
     }
 }

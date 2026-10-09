@@ -2,16 +2,16 @@ import NeodexKit
 import SwiftUI
 
 /// Top-level navigation. Adapts to a sidebar on iPad and a tab bar on iPhone; the user chooses
-/// which features appear as tabs in Settings.
+/// which features appear as tabs in Settings. Screens requested by Spotlight or Siri open as a sheet.
 struct MainTabView: View {
-    @Environment(AppModel.self) private var appModel
+    @State private var router = DeepLinkRouter.shared
     @AppStorage(TabPreferences.key) private var storedTabs = TabPreferences.encode(TabPreferences.defaultTabs)
     @State private var selection: AppTab = .home
 
     private var customTabs: [AppTab] { TabPreferences.decode(storedTabs) }
 
     var body: some View {
-        @Bindable var appModel = appModel
+        @Bindable var router = router
         TabView(selection: $selection) {
             Tab(AppTab.home.title, systemImage: AppTab.home.systemImage, value: AppTab.home) {
                 AppTab.home.root
@@ -26,13 +26,13 @@ struct MainTabView: View {
             }
         }
         .tabViewStyle(.sidebarAdaptable)
-        .sheet(item: $appModel.pendingRoute) { route in
+        .sheet(item: $router.pendingRoute) { route in
             NavigationStack {
                 AppRouteView(route: route)
                     .appDestinations()
                     .toolbar {
                         ToolbarItem(placement: .confirmationAction) {
-                            Button("Done") { appModel.pendingRoute = nil }
+                            Button("Done") { router.pendingRoute = nil }
                         }
                     }
             }

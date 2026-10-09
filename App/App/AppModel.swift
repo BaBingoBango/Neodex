@@ -14,19 +14,17 @@ final class AppModel {
 
     private(set) var loadState: LoadState = .loading
 
-    /// A screen requested from outside the app (Spotlight), presented as a sheet once data is ready.
-    var pendingRoute: AppRoute?
-
     var database: PokedexDatabase? {
         if case .ready(let database) = loadState { return database }
         return nil
     }
 
-    /// Loads the bundled dataset off the main actor. Safe to call more than once; later calls are no-ops.
+    /// Loads the bundled dataset through the shared provider, so App Intents reuse the same copy.
+    /// Safe to call more than once; later calls are no-ops.
     func loadIfNeeded() async {
         guard case .loading = loadState else { return }
         do {
-            let database = try await PokedexDatabase.load(from: .main)
+            let database = try await DatabaseProvider.shared.database()
             loadState = .ready(database)
         } catch {
             loadState = .failed(error)
