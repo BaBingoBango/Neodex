@@ -15,15 +15,17 @@ An offline Pokédex for iPhone and iPad with [Pokémon Showdown](https://play.po
 
 ## Features
 
-- **Pokédex** — 1,025 species and 1,330 forms (Megas, Gigantamax, regional variants, Paradox Pokémon, the Legends: Z‑A Megas), with filters, sorting, a grid mode, and a detail screen covering Pokédex entries from every game, abilities, base stats, evolutions, forms, traits, type matchups, locations and the full learnset.
+- **Pokédex** — 1,025 species and 1,330 forms (Megas, Gigantamax, regional variants, Paradox Pokémon, the Legends: Z‑A Megas), with filters, sorting, a grid mode, and a detail screen covering Pokédex entries from every game, abilities, base stats, evolutions, forms, traits, type matchups, locations and the full learnset. Showdown's animated battle sprites, shinies and cries stream in on demand.
 - **Move, Ability and Item dexes** — in‑game descriptions alongside Showdown's competitive summaries, TM numbers, and reverse lookups (every Pokémon that learns a move or has an ability).
 - **Type‑O‑Matic** — combine up to two types and see exactly what they're weak to and resist.
-- **Teambuilder** — build teams of six with an editor that only offers legal moves, live stat calculation, EV/IV controls, natures and Tera Types. Import teams from Showdown's export text and export them back, byte‑for‑byte compatible.
-- **Face‑Off** — compare any two Pokémon side by side.
-- **Global Stats** — Smogon usage rankings for any format and month, with abilities, items, moves, spreads, teammates and checks for every Pokémon.
+- **Teambuilder** — build teams of six with an editor that only offers legal moves, live stat calculation, EV/IV controls, natures and Tera Types. Import teams from Showdown's export text and export them back, byte‑for‑byte compatible. Teams are checked against the Smogon tier you pick, from Anything Goes to Little Cup, with every clause explained.
+- **Damage Calculator** — Showdown‑faithful Gen 9 damage calcs in both directions between any two sets: EVs, natures, stat stages, items, abilities, Terastallization, weather, terrain, screens and status, with KO chances and the exact calc line to copy.
+- **Face‑Off** — compare any two Pokémon side by side, then jump straight into a damage calc.
+- **Global Stats** — Smogon usage rankings for any format and month, with abilities, items, moves, spreads, teammates and checks for every Pokémon, plus a usage‑trend chart across recent months.
 - **Explore** — recently viewed, picks based on what you've been reading, and what's popular on Showdown right now.
 - **Spotlight** — every Pokémon, move, Ability, item and nature is searchable from the Home Screen and deep‑links into the app.
-- Fully offline except for Smogon statistics. Customisable tab bar, sidebar on iPad, Dynamic Type and dark mode throughout.
+- **Siri and Shortcuts** — ask what a Pokémon is weak to, have its Pokédex entry read aloud, open any Pokémon by name or get a random one; every species works in App Shortcuts phrases.
+- Fully offline except for Smogon statistics and the optional animated sprites and cries, which are cached after first use. Customisable tab bar, sidebar on iPad, Dynamic Type and dark mode throughout.
 
 ## How it's built
 
@@ -31,9 +33,9 @@ Neodex is three pieces sharing one set of Swift types; see [Docs/ARCHITECTURE.md
 
 | Piece | What it is |
 | --- | --- |
-| [`Packages/NeodexKit`](Packages/NeodexKit) | Platform‑independent Swift package: models, an in‑memory Pokédex database, the type chart and stat formulas, a native parser/exporter for Showdown's team format, Smogon statistics parsers. Covered by Swift Testing suites. |
+| [`Packages/NeodexKit`](Packages/NeodexKit) | Platform‑independent Swift package: models, an in‑memory Pokédex database, the type chart and stat formulas, a native parser/exporter for Showdown's team format, Smogon statistics parsers, a Showdown‑faithful damage calculator and Smogon format‑legality rules. Covered by Swift Testing suites. |
 | [`Tools/NeodexData`](Tools/NeodexData) | A Swift command‑line tool that regenerates the bundled dataset from [Pokémon Showdown](https://github.com/smogon/pokemon-showdown) and [PokeAPI](https://github.com/PokeAPI/pokeapi), verifies every cross‑reference, and produces compact HEIC artwork. One command refreshes everything. |
-| [`App`](App) | The SwiftUI app. iOS 26 and later, Swift 6 with strict concurrency, SwiftData for teams and history, a single typed route for navigation and Spotlight deep links. |
+| [`App`](App) | The SwiftUI app. iOS 26 and later, Swift 6 with strict concurrency, SwiftData for teams and history, a single typed route for navigation, Spotlight and Siri deep links, App Intents, Swift Charts. |
 
 The whole data bundle is about 49 MB, down from 454 MB of hand‑collected assets in the original app.
 
@@ -58,11 +60,11 @@ swift run neodex-data --preview-fixture  # just the Xcode Previews fixture
 ### Tests
 
 ```bash
-cd Packages/NeodexKit && swift test   # models, type chart, stat math, Showdown codec, Smogon parsers
+cd Packages/NeodexKit && swift test   # models, type chart, stat math, damage calc, legality, Showdown codec, Smogon parsers
 cd Tools/NeodexData && swift test     # the data pipeline
 ```
 
-The Xcode scheme also runs the kit tests plus the app's bundled‑data smoke tests (⌘U). Every screen has an Xcode Preview backed by a small fixture cut from the real dataset.
+The Xcode scheme also runs the kit tests plus the app's bundled‑data smoke tests and feature tests for the intents, calculator and legality (⌘U). Every screen has an Xcode Preview backed by a small fixture cut from the real dataset.
 
 ## Data sources and licensing
 
