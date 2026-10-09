@@ -103,8 +103,8 @@ App/
 ├── Intents/               App Intents: PokemonEntity + query, Open / Random / Type Matchup /
 │                          Dex Entry intents, and the App Shortcuts phrases
 ├── Features/              One folder per feature: Home, Pokedex, Moves, Abilities, Items, Types,
-│                          Natures, Search, Teambuilder, DamageCalc, FaceOff, UsageStats, Explore,
-│                          Settings, About
+│                          Natures, Search, Teambuilder, DamageCalc, FaceOff, UsageStats, Settings,
+│                          About
 ├── DesignSystem/          Type palette, TypeBadge, PokemonImage, shared components
 ├── Services/              SmogonStatsClient (actor, rankings + trends), MediaCache (actor),
 │                          AnimatedSprite, CryPlayer, SpotlightIndexer, History
@@ -119,6 +119,11 @@ Key decisions:
 - **Reference data is read-only JSON, not a database.** 5.5 MB decodes in well under a second off
   the main actor, the whole dataset fits comfortably in memory, and every lookup is a dictionary hit.
   SwiftData is used only for what the user creates (teams, browsing history).
+- **Every feature is a tab.** `AppTab` declares them inside `TabSection`s (Reference, Battle) with
+  `customizationID`s. iPad shows the grouped sidebar with the system's drag-to-customise editing;
+  iPhone shows Home, Search and the tabs the user keeps visible. That set is stored by the app, since
+  `TabViewCustomization` exposes tab-bar visibility read-only; Settings' toggles write it and reset
+  sidebar edits. Home's cards push the same feature content inside Home's own stack.
 - **One route type.** `AppRoute` enumerates every pushable screen; every `NavigationStack` registers
   `.appDestinations()`, so any view can link to any entity with `NavigationLink(value:)`. The same
   type doubles as the Spotlight deep-link identifier (`pokemon:bulbasaur`).
@@ -162,7 +167,7 @@ xcodebuild -scheme Neodex -destination 'platform=iOS Simulator,name=iPhone 17 Pr
 
 - PokeAPI's Pokédex entries and encounter data lag the newest games; locations are shown for the most
   recent game that has data (often Sword/Shield).
-- Global Stats and Explore's "Popular on Showdown" need a network connection; everything else works
+- Global Stats and Home's "Popular on Showdown" need a network connection; everything else works
   offline.
 - Animated sprites and cries are not bundled; they stream from Showdown and are cached after first
   use. A few of the newest forms have no animation yet and fall back to the still sprite.

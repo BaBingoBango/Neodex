@@ -22,10 +22,10 @@ An offline Pokédex for iPhone and iPad with [Pokémon Showdown](https://play.po
 - **Damage Calculator** — Showdown‑faithful Gen 9 damage calcs in both directions between any two sets: EVs, natures, stat stages, items, abilities, Terastallization, weather, terrain, screens and status, with KO chances and the exact calc line to copy.
 - **Face‑Off** — compare any two Pokémon side by side, then jump straight into a damage calc.
 - **Global Stats** — Smogon usage rankings for any format and month, with abilities, items, moves, spreads, teammates and checks for every Pokémon, plus a usage‑trend chart across recent months.
-- **Explore** — recently viewed, picks based on what you've been reading, and what's popular on Showdown right now.
+- **Home** — jump back into what you were reading, picks based on your browsing, a Pokémon of the day and what's popular on Showdown, above every feature.
 - **Spotlight** — every Pokémon, move, Ability, item and nature is searchable from the Home Screen and deep‑links into the app.
 - **Siri and Shortcuts** — ask what a Pokémon is weak to, have its Pokédex entry read aloud, open any Pokémon by name or get a random one; every species works in App Shortcuts phrases.
-- Fully offline except for Smogon statistics and the optional animated sprites and cries, which are cached after first use. Customisable tab bar, sidebar on iPad, Dynamic Type and dark mode throughout.
+- Fully offline except for Smogon statistics and the optional animated sprites and cries, which are cached after first use. Every feature is a tab: a grouped, customisable sidebar on iPad and a customisable tab bar on iPhone. Dynamic Type and dark mode throughout.
 
 ## How it's built
 
