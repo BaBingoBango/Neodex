@@ -18,6 +18,7 @@ struct PokemonDetailView: View {
                 dexEntrySection
                 abilitiesSection
                 statsSection
+                damageCalcLink
                 evolutionSection
                 formsSection
                 characteristicsSection
@@ -79,6 +80,31 @@ struct PokemonDetailView: View {
             }
             .padding(.horizontal)
         }
+    }
+
+    private var damageCalcLink: some View {
+        NavigationLink(value: AppRoute.damageCalculator(attacker: pokemon.id, defender: nil)) {
+            HStack(spacing: 12) {
+                Image(systemName: "function")
+                    .font(.title2)
+                    .foregroundStyle(PokemonType.fire.color)
+                    .frame(width: 32)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Damage Calculator")
+                        .font(.body.weight(.semibold))
+                        .foregroundStyle(.primary)
+                    Text("Run \(pokemon.displayName)'s attacks against any Pokémon.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .foregroundStyle(.tertiary)
+            }
+            .card()
+        }
+        .buttonStyle(.plain)
+        .padding(.horizontal)
     }
 
     private var abilitiesSection: some View {
@@ -287,8 +313,14 @@ struct PokemonDetailView: View {
 // MARK: - Header
 
 /// The colourful banner: type-coloured background, dex number, artwork, name, types and genus.
+/// The hero header: a type-coloured gradient, official artwork or Showdown's animated sprite,
+/// the name and types, and controls for animation, shiny colouring and the Pokémon's cry.
 struct PokemonHeader: View {
     var pokemon: Pokemon
+
+    @AppStorage("showsAnimatedSprites") private var showsSprite = false
+    @State private var shiny = false
+    @State private var cryPlayer = CryPlayer()
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -307,10 +339,16 @@ struct PokemonHeader: View {
                 }
                 .padding(.horizontal)
                 .padding(.top, 72)
-                PokemonImage(pokemon: pokemon, kind: .artwork)
-                    .frame(height: 220)
-                    .shadow(color: .black.opacity(0.25), radius: 16, y: 8)
-                    .padding(.top, -24)
+                Group {
+                    if showsSprite {
+                        AnimatedSpriteView(pokemon: pokemon, shiny: shiny, maxHeight: 200)
+                    } else {
+                        PokemonImage(pokemon: pokemon, kind: .artwork)
+                    }
+                }
+                .frame(height: 220)
+                .shadow(color: .black.opacity(0.25), radius: 16, y: 8)
+                .padding(.top, -24)
                 VStack(spacing: 8) {
                     Text(pokemon.displayName)
                         .font(.system(.largeTitle, design: .rounded).weight(.heavy))
@@ -324,10 +362,44 @@ struct PokemonHeader: View {
                             .font(.headline)
                             .foregroundStyle(.white.opacity(0.9))
                     }
+                    mediaControls
+                        .padding(.top, 6)
                 }
                 .padding(.horizontal)
                 .padding(.bottom, 28)
             }
+        }
+        .onDisappear { cryPlayer.stop() }
+    }
+
+    private var cryIcon: String {
+        if cryPlayer.unavailableID == pokemon.id { return "speaker.slash.fill" }
+        return cryPlayer.isPlaying ? "speaker.wave.3.fill" : "speaker.wave.2.fill"
+    }
+
+    /// Animate / Shiny / Cry as Liquid Glass pills over the gradient.
+    private var mediaControls: some View {
+        GlassEffectContainer(spacing: 10) {
+            HStack(spacing: 10) {
+                Toggle(isOn: $showsSprite.animation()) {
+                    Label("Animate", systemImage: showsSprite ? "figure.walk.motion" : "play.fill")
+                }
+                Toggle(isOn: $shiny) {
+                    Label("Shiny", systemImage: "sparkles")
+                }
+                .onChange(of: shiny) {
+                    if shiny { showsSprite = true }
+                }
+                Button {
+                    cryPlayer.play(pokemon)
+                } label: {
+                    Label("Cry", systemImage: cryIcon)
+                }
+                .disabled(cryPlayer.isLoading || cryPlayer.unavailableID == pokemon.id)
+            }
+            .toggleStyle(.button)
+            .buttonStyle(.glass)
+            .font(.subheadline.weight(.semibold))
         }
     }
 }
