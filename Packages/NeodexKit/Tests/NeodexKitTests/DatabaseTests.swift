@@ -72,11 +72,15 @@ struct DatabaseTests {
         #expect(learned.map(\.move.id) == ["solarbeam", "tackle"])
         #expect(learned[1].levelUpLevel() == 1)
         let mega = try #require(db.pokemon(id: "venusaurmega"))
-        #expect(db.learnset(for: mega).map(\.move.id) == ["solarbeam"])   // falls back to Venusaur
+        // Falls back to Venusaur's learnset and inherits Bulbasaur's Tackle through the line.
+        #expect(db.learnset(for: mega).map(\.move.id) == ["solarbeam", "tackle"])
         #expect(db.canLearn(mega, moveID: "solarbeam"))
-        #expect(!db.canLearn(mega, moveID: "tackle"))
+        #expect(db.canLearn(mega, moveID: "tackle"))
+        #expect(!db.canLearn(mega, moveID: "vinewhip"))
+        #expect(db.lineage(of: mega).map(\.id) == ["venusaurmega", "venusaur", "ivysaur", "bulbasaur"])
+        #expect(db.learnSources(for: mega, moveID: "solarbeam")?.count == 2)   // Venusaur 9M + 9L1; Bulbasaur 9M is a duplicate
         let solarBeam = try #require(db.move(id: "solarbeam"))
-        #expect(db.learners(of: solarBeam).map(\.pokemon.id) == ["bulbasaur", "venusaur"])
+        #expect(db.learners(of: solarBeam).map(\.pokemon.id) == ["bulbasaur", "ivysaur", "venusaur", "venusaurmega"])
     }
 
     @Test("Search ranks across categories and understands dex numbers")

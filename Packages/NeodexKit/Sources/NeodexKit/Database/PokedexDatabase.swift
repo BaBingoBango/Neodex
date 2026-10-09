@@ -51,10 +51,29 @@ public final class PokedexDatabase: Sendable {
         itemByName = Dictionary(items.map { (ShowdownID.make($0.name), $0.id) }, uniquingKeysWith: { first, _ in first })
         abilityByName = Dictionary(abilities.map { (ShowdownID.make($0.name), $0.id) }, uniquingKeysWith: { first, _ in first })
 
+        // A Pokémon can use every move its pre-evolutions learn, so the reverse index walks each line.
+        let byID = pokemonIndex
+        func stages(of entry: Pokemon) -> [Pokemon] {
+            var result = [entry]
+            var current = entry.baseSpeciesID.flatMap { byID[$0] }.map { pokemon[$0] } ?? entry
+            if current.id != entry.id { result.append(current) }
+            var seen = Set(result.map(\.id))
+            while let previousID = current.evolvesFrom, let index = byID[previousID], seen.insert(previousID).inserted {
+                current = pokemon[index]
+                result.append(current)
+            }
+            return result
+        }
         var learners: [String: [String]] = [:]
-        for (pokemonID, learnset) in learnsets {
-            for moveID in learnset.moves.keys {
-                learners[moveID, default: []].append(pokemonID)
+        for entry in pokemon {
+            var moveIDs: Set<String> = []
+            for stage in stages(of: entry) {
+                if let learnset = learnsets[stage.id] ?? learnsets[stage.speciesID] {
+                    moveIDs.formUnion(learnset.moves.keys)
+                }
+            }
+            for moveID in moveIDs {
+                learners[moveID, default: []].append(entry.id)
             }
         }
         let order = pokemonIndex
@@ -229,24 +248,61 @@ public final class PokedexDatabase: Sendable {
         (pokemonByAbility[abilityID] ?? []).compactMap(pokemon(id:))
     }
 
-    /// Resolved learnset for a Pokémon. Forms without their own learnset fall back to the base species.
+    /// The Pokémon, its base species (for alternate forms) and every pre-evolution, nearest first.
+    public func lineage(of pokemon: Pokemon) -> [Pokemon] {
+        var result = [pokemon]
+        var current = baseForm(of: pokemon)
+        if current.id != pokemon.id { result.append(current) }
+        var seen = Set(result.map(\.id))
+        while let previous = preEvolution(of: current), seen.insert(previous.id).inserted {
+            result.append(previous)
+            current = previous
+        }
+        return result
+    }
+
+    /// Every way a Pokémon can learn a move, including as a pre-evolution; `nil` if it can't.
+    /// Forms without their own learnset use the base species'.
+    public func learnSources(for pokemon: Pokemon, moveID: String) -> [LearnSource]? {
+        var sources: [LearnSource] = []
+        for stage in lineage(of: pokemon) {
+            guard let learnset = learnsets[stage.id] ?? learnsets[stage.speciesID] else { continue }
+            for source in learnset.moves[moveID] ?? [] where !sources.contains(source) {
+                sources.append(source)
+            }
+        }
+        return sources.isEmpty ? nil : sources
+    }
+
+    /// Resolved learnset for a Pokémon. An evolved Pokémon keeps everything its pre-evolutions can
+    /// learn (egg moves, earlier level-up moves), so those are merged in, as Showdown's validator does.
     public func learnset(for pokemon: Pokemon) -> [LearnedMove] {
-        guard let learnset = learnsets[pokemon.id] ?? learnsets[pokemon.speciesID] else { return [] }
-        return learnset.moves.compactMap { moveID, sources in
+        var merged: [String: [LearnSource]] = [:]
+        for stage in lineage(of: pokemon) {
+            guard let learnset = learnsets[stage.id] ?? learnsets[stage.speciesID] else { continue }
+            for (moveID, sources) in learnset.moves {
+                var existing = merged[moveID] ?? []
+                for source in sources where !existing.contains(source) {
+                    existing.append(source)
+                }
+                merged[moveID] = existing
+            }
+        }
+        return merged.compactMap { moveID, sources in
             move(id: moveID).map { LearnedMove(move: $0, sources: sources) }
         }
         .sorted { $0.move.name < $1.move.name }
     }
 
-    /// Whether a Pokémon can learn a move (by any method, in any generation).
+    /// Whether a Pokémon can learn a move (by any method, in any generation, at any stage of its line).
     public func canLearn(_ pokemon: Pokemon, moveID: String) -> Bool {
-        (learnsets[pokemon.id] ?? learnsets[pokemon.speciesID])?.moves[moveID] != nil
+        learnSources(for: pokemon, moveID: moveID) != nil
     }
 
     /// Pokémon that can learn a move, with how they learn it, in dex order.
     public func learners(of move: Move) -> [(pokemon: Pokemon, sources: [LearnSource])] {
         (learnersByMove[move.id] ?? []).compactMap { pokemonID in
-            guard let pokemon = pokemon(id: pokemonID), let sources = learnsets[pokemonID]?.moves[move.id] else { return nil }
+            guard let pokemon = pokemon(id: pokemonID), let sources = learnSources(for: pokemon, moveID: move.id) else { return nil }
             return (pokemon, sources.sorted())
         }
     }
