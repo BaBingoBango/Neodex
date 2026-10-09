@@ -133,6 +133,14 @@ struct FaceOffView: View {
             }
             .font(.subheadline.weight(.semibold))
             .padding(.horizontal)
+
+            NavigationLink(value: AppRoute.damageCalculator(attacker: left.id, defender: right.id)) {
+                Label("Run a Damage Calc", systemImage: "function")
+                    .font(.subheadline.weight(.semibold))
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.bordered)
+            .padding(.horizontal)
         }
     }
 

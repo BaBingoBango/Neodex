@@ -43,7 +43,7 @@ struct HomeView: View {
 
 /// Every feature reachable from Home.
 enum Feature: String, CaseIterable, Identifiable, Hashable {
-    case pokedex, moves, abilities, items, types, natures, teambuilder, faceOff, usageStats, explore, about
+    case pokedex, moves, abilities, items, types, natures, teambuilder, faceOff, damageCalc, usageStats, explore, about
 
     var id: String { rawValue }
 
@@ -57,6 +57,7 @@ enum Feature: String, CaseIterable, Identifiable, Hashable {
         case .natures: "Natures"
         case .teambuilder: "Teambuilder"
         case .faceOff: "Face-Off"
+        case .damageCalc: "Damage Calculator"
         case .usageStats: "Global Stats"
         case .explore: "Explore"
         case .about: "About"
@@ -73,6 +74,7 @@ enum Feature: String, CaseIterable, Identifiable, Hashable {
         case .natures: "All 25 natures"
         case .teambuilder: "Build and share Showdown teams"
         case .faceOff: "Compare two Pokémon"
+        case .damageCalc: "Showdown-style damage calcs"
         case .usageStats: "Smogon usage statistics"
         case .explore: "Picks based on your browsing"
         case .about: "Data sources and credits"
@@ -89,6 +91,7 @@ enum Feature: String, CaseIterable, Identifiable, Hashable {
         case .natures: "leaf.fill"
         case .teambuilder: "rectangle.stack.person.crop.fill"
         case .faceOff: "bolt.circle.fill"
+        case .damageCalc: "function"
         case .usageStats: "network"
         case .explore: "wand.and.stars"
         case .about: "info.circle.fill"
@@ -105,6 +108,7 @@ enum Feature: String, CaseIterable, Identifiable, Hashable {
         case .natures: .green
         case .teambuilder: PokemonType.ice.color
         case .faceOff: PokemonType.dragon.color
+        case .damageCalc: PokemonType.fire.color
         case .usageStats: .blue
         case .explore: .bronze
         case .about: .gray
@@ -122,6 +126,7 @@ enum Feature: String, CaseIterable, Identifiable, Hashable {
         case .natures: NatureListView()
         case .teambuilder: TeamsContent()
         case .faceOff: FaceOffView()
+        case .damageCalc: DamageCalculatorView()
         case .usageStats: UsageStatsView()
         case .explore: ExploreView()
         case .about: AboutView()

@@ -15,6 +15,7 @@ nonisolated enum AppRoute: Hashable, Identifiable {
     case pokemonMoves(Pokemon.ID)
     case faceOff(Pokemon.ID?)
     case usageDetail(UsageSelection, name: String)
+    case damageCalculator(attacker: Pokemon.ID?, defender: Pokemon.ID?)
 
     var id: String { String(describing: self) }
 
@@ -73,6 +74,8 @@ struct AppRouteView: View {
             FaceOffView(initial: id.flatMap(database.pokemon(id:)))
         case .usageDetail(let selection, let name):
             UsageDetailView(selection: selection, name: name)
+        case .damageCalculator(let attacker, let defender):
+            DamageCalculatorView(initialAttackerID: attacker, initialDefenderID: defender)
         }
     }
 

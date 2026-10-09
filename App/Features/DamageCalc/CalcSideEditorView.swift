@@ -1,44 +1,37 @@
 import NeodexKit
-import SwiftData
 import SwiftUI
 
-/// Edits a single set on a team: species, item, ability, nature, moves, EVs and IVs.
-struct TeamMemberEditorView: View {
+/// Edits one side of a damage calculation: the set, its battle state and its stat investment.
+struct CalcSideEditorView: View {
     @Environment(\.database) private var database
-    @Bindable var team: SavedTeam
-    var memberIndex: Int
+    var role: CalcRole
+    @Binding var side: CalcSide
 
     @State private var changingPokemon = false
-    @State private var showingImport = false
-    @State private var showingCalculator = false
-
-    private var member: Binding<TeamMember> {
-        Binding(
-            get: { team.members[memberIndex] },
-            set: { team.members[memberIndex] = $0; team.touch() }
-        )
-    }
+    @State private var showingPaste = false
 
     var body: some View {
-        if memberIndex < team.members.count, let pokemon = database.pokemon(id: team.members[memberIndex].pokemonID) {
+        if let current = side.member, let pokemon = database.pokemon(id: current.pokemonID) {
+            let member = Binding(get: { side.member ?? current }, set: { side.member = $0 })
             Form {
-                speciesSection(pokemon)
-                detailsSection(pokemon)
-                movesSection(pokemon)
-                statsSection(pokemon)
+                speciesSection(pokemon, member)
+                battleStateSection(pokemon, member)
+                setSection(pokemon, member)
+                movesSection(pokemon, member)
+                statsSection(pokemon, member)
             }
-            .navigationTitle(pokemon.displayName)
+            .navigationTitle(role.title)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Menu {
-                        Button("Copy Set", systemImage: "doc.on.doc") {
-                            TeamConversion.copyToPasteboard(TeamConversion.exportText(for: member.wrappedValue, database: database))
-                        }
-                        Button("Paste Set", systemImage: "doc.on.clipboard") { showingImport = true }
-                        Button("Damage Calculator", systemImage: "function") {
-                            DamageCalcModel.handoff = (member.wrappedValue, nil)
-                            showingCalculator = true
+                        Button("Paste Showdown Set", systemImage: "doc.on.clipboard") { showingPaste = true }
+                        Button("Reset Battle State", systemImage: "arrow.counterclockwise") {
+                            side.boosts = .zero
+                            side.status = .none
+                            side.hpPercent = 100
+                            side.terastallized = false
+                            side.faintedAllies = 0
                         }
                         NavigationLink(value: AppRoute.pokemon(pokemon.id)) {
                             Label("View in Pokédex", systemImage: "book")
@@ -48,31 +41,25 @@ struct TeamMemberEditorView: View {
                     }
                 }
             }
-            .navigationDestination(isPresented: $showingCalculator) {
-                DamageCalculatorView()
-            }
             .sheet(isPresented: $changingPokemon) {
                 PokemonPickerSheet(title: "Change Pokémon") { newPokemon in
-                    var updated = TeamMember(pokemon: newPokemon)
-                    updated.id = member.wrappedValue.id
-                    updated.level = member.wrappedValue.level
-                    member.wrappedValue = updated
+                    side = CalcSide.make(newPokemon, database: database)
                 }
             }
-            .alert("Paste a Showdown set", isPresented: $showingImport) {
+            .alert("Paste a Showdown set", isPresented: $showingPaste) {
                 Button("Paste from Clipboard") { pasteSet() }
                 Button("Cancel", role: .cancel) {}
             } message: {
                 Text("Copy a single set from Pokémon Showdown, then paste it here to replace this Pokémon.")
             }
         } else {
-            ContentUnavailableView("Removed", systemImage: "trash", description: Text("This Pokémon is no longer on the team."))
+            ContentUnavailableView("No Pokémon", systemImage: "questionmark.circle")
         }
     }
 
     // MARK: Sections
 
-    private func speciesSection(_ pokemon: Pokemon) -> some View {
+    private func speciesSection(_ pokemon: Pokemon, _ member: Binding<TeamMember>) -> some View {
         Section {
             Button {
                 changingPokemon = true
@@ -88,29 +75,56 @@ struct TeamMemberEditorView: View {
                 }
             }
             .buttonStyle(.plain)
-            TextField("Nickname", text: Binding(get: { member.wrappedValue.nickname ?? "" },
-                                                set: { member.wrappedValue.nickname = $0.isEmpty ? nil : $0 }))
-            if pokemon.maleRatio != nil {
-                Picker("Gender", selection: member.gender) {
-                    if pokemon.maleRatio ?? 0 > 0 { Text("Male").tag(String?.some("M")) }
-                    if pokemon.maleRatio ?? 0 < 1 { Text("Female").tag(String?.some("F")) }
-                    Text("Unspecified").tag(String?.none)
-                }
-            }
             Stepper("Level \(member.wrappedValue.level)", value: member.level, in: 1...100)
-            Toggle("Shiny", isOn: member.shiny)
         }
     }
 
-    private func detailsSection(_ pokemon: Pokemon) -> some View {
-        Section("Battle Details") {
+    private func battleStateSection(_ pokemon: Pokemon, _ member: Binding<TeamMember>) -> some View {
+        Section {
+            Picker("Status", selection: $side.status) {
+                ForEach(StatusCondition.allCases) { Text($0.name).tag($0) }
+            }
+            VStack(alignment: .leading, spacing: 6) {
+                HStack {
+                    Text("HP")
+                    Spacer()
+                    Text("\(Int(side.hpPercent))%").monospacedDigit().foregroundStyle(.secondary)
+                }
+                Slider(value: $side.hpPercent, in: 1...100, step: 1)
+            }
+            ForEach([Stat.attack, .defense, .specialAttack, .specialDefense, .speed]) { stat in
+                Stepper(value: Binding(get: { side.boosts[stat] }, set: { side.boosts[stat] = $0 }), in: -6...6) {
+                    HStack {
+                        Text(stat.shortName)
+                        Spacer()
+                        Text(stageText(side.boosts[stat]))
+                            .monospacedDigit()
+                            .foregroundStyle(side.boosts[stat] > 0 ? .green : side.boosts[stat] < 0 ? .red : .secondary)
+                    }
+                }
+            }
+            if let tera = member.wrappedValue.teraType {
+                Toggle("Terastallized (\(tera.name))", isOn: $side.terastallized)
+            }
+            if member.wrappedValue.abilityID == "supremeoverlord" || member.wrappedValue.chosenMoveIDs.contains("lastrespects") {
+                Stepper("Fainted allies: \(side.faintedAllies)", value: $side.faintedAllies, in: 0...5)
+            }
+        } header: {
+            Text("Battle State")
+        } footer: {
+            Text("Stat stages, status and remaining HP as they are right now in the battle.")
+        }
+    }
+
+    private func setSection(_ pokemon: Pokemon, _ member: Binding<TeamMember>) -> some View {
+        Section("Set") {
             NavigationLink {
                 ItemPickerList(selection: member.itemID)
             } label: {
                 LabeledContent("Item", value: member.wrappedValue.itemID.flatMap { database.item(id: $0)?.name } ?? "None")
             }
             Picker("Ability", selection: member.abilityID) {
-                ForEach(pokemon.abilities.all, id: \.self) { id in
+                ForEach(abilityChoices(pokemon, current: member.wrappedValue.abilityID), id: \.self) { id in
                     Text(abilityLabel(id, pokemon: pokemon)).tag(String?.some(id))
                 }
             }
@@ -129,12 +143,18 @@ struct TeamMemberEditorView: View {
         }
     }
 
+    private func abilityChoices(_ pokemon: Pokemon, current: String?) -> [String] {
+        var ids = pokemon.abilities.all
+        if let current, !ids.contains(current) { ids.append(current) }
+        return ids
+    }
+
     private func abilityLabel(_ id: String, pokemon: Pokemon) -> String {
         let name = database.ability(id: id)?.name ?? id
         return pokemon.abilities.hidden == id ? "\(name) (Hidden)" : name
     }
 
-    private func movesSection(_ pokemon: Pokemon) -> some View {
+    private func movesSection(_ pokemon: Pokemon, _ member: Binding<TeamMember>) -> some View {
         Section {
             ForEach(0..<4, id: \.self) { slot in
                 NavigationLink {
@@ -157,11 +177,11 @@ struct TeamMemberEditorView: View {
         } header: {
             Text("Moves")
         } footer: {
-            Text("Only moves \(pokemon.displayName) can learn are offered.")
+            Text("Only moves \(pokemon.displayName) can learn are offered. Status moves do no damage.")
         }
     }
 
-    private func statsSection(_ pokemon: Pokemon) -> some View {
+    private func statsSection(_ pokemon: Pokemon, _ member: Binding<TeamMember>) -> some View {
         let current = member.wrappedValue
         let stats = current.calculatedStats(for: pokemon)
         let nature = Nature.named(current.natureID) ?? .serious
@@ -186,7 +206,7 @@ struct TeamMemberEditorView: View {
                             .font(.caption2.weight(.bold))
                             .foregroundStyle(.secondary)
                         Slider(value: Binding(get: { Double(current.evs[stat]) },
-                                              set: { setEV(Int($0.rounded()), for: stat) }),
+                                              set: { setEV(Int($0.rounded()), for: stat, member) }),
                                in: 0...Double(StatCalculator.maximumStatEVs), step: 4)
                         Text("\(current.evs[stat])")
                             .font(.caption.monospacedDigit())
@@ -208,11 +228,17 @@ struct TeamMemberEditorView: View {
                     .foregroundStyle(current.remainingEVs < 0 ? .red : .secondary)
             }
         } footer: {
-            Text("Stats are calculated at level \(current.level) with a \(nature.name) nature. Sliders move in steps of 4 EVs; the total cannot exceed \(StatCalculator.maximumTotalEVs).")
+            Text("Stats are calculated at level \(current.level) with a \(nature.name) nature.")
         }
     }
 
-    private func setEV(_ value: Int, for stat: Stat) {
+    // MARK: Helpers
+
+    private func stageText(_ stage: Int) -> String {
+        stage == 0 ? "±0" : stage > 0 ? "+\(stage)" : "\(stage)"
+    }
+
+    private func setEV(_ value: Int, for stat: Stat, _ member: Binding<TeamMember>) {
         var evs = member.wrappedValue.evs
         let others = evs.total - evs[stat]
         evs[stat] = max(0, min(value, StatCalculator.maximumTotalEVs - others, StatCalculator.maximumStatEVs))
@@ -220,79 +246,18 @@ struct TeamMemberEditorView: View {
     }
 
     private func pasteSet() {
-        guard let text = UIPasteboard.general.string, let set = ShowdownTeamCodec.parseSet(text) else { return }
-        guard let pokemon = database.pokemon(named: set.species) else { return }
+        guard let text = UIPasteboard.general.string, let set = ShowdownTeamCodec.parseSet(text),
+              let pokemon = database.pokemon(named: set.species) else { return }
         var warnings: [String] = []
-        var updated = TeamConversion.member(from: set, pokemon: pokemon, database: database, warnings: &warnings)
-        updated.id = member.wrappedValue.id
-        member.wrappedValue = updated
-    }
-}
-
-/// Searchable item chooser grouped by category.
-struct ItemPickerList: View {
-    @Environment(\.database) private var database
-    @Environment(\.dismiss) private var dismiss
-    @Binding var selection: String?
-    @State private var searchText = ""
-
-    private var results: [Item] {
-        let query = SearchNormalizer.normalize(searchText)
-        let items = database.items.filter { $0.availability == .current || $0.id == selection }
-        guard !query.isEmpty else { return items }
-        return items.filter { SearchNormalizer.match(SearchNormalizer.normalize($0.name), query: query) != .none }
-    }
-
-    var body: some View {
-        List {
-            Button("No item") { selection = nil; dismiss() }
-            ForEach(results) { item in
-                Button {
-                    selection = item.id
-                    dismiss()
-                } label: {
-                    HStack {
-                        ItemRow(item: item)
-                        if selection == item.id { Image(systemName: "checkmark").foregroundStyle(.tint) }
-                    }
-                }
-                .buttonStyle(.plain)
-            }
-        }
-        .listStyle(.plain)
-        .searchable(text: $searchText, prompt: "Item name")
-        .navigationTitle("Item")
-        .navigationBarTitleDisplayMode(.inline)
-    }
-}
-
-/// Nature chooser showing each nature's stat effect.
-struct NaturePickerList: View {
-    @Environment(\.dismiss) private var dismiss
-    @Binding var selection: String
-
-    var body: some View {
-        List(Nature.all) { nature in
-            Button {
-                selection = nature.id
-                dismiss()
-            } label: {
-                HStack {
-                    Text(nature.name)
-                    Spacer()
-                    Text(nature.summary)
-                        .font(.subheadline.monospaced())
-                        .foregroundStyle(nature.isNeutral ? .secondary : .primary)
-                    if selection == nature.id { Image(systemName: "checkmark").foregroundStyle(.tint) }
-                }
-            }
-            .buttonStyle(.plain)
-        }
-        .navigationTitle("Nature")
-        .navigationBarTitleDisplayMode(.inline)
+        side.member = TeamConversion.member(from: set, pokemon: pokemon, database: database, warnings: &warnings)
     }
 }
 
 #if DEBUG
-#Preview { PreviewHost { TeamMemberEditorView(team: PreviewStore.sampleTeam, memberIndex: 0) } }
+#Preview {
+    PreviewHost {
+        CalcSideEditorView(role: .attacker, side: .constant(CalcSide.make(PokedexDatabase.preview.previewPokemon("Garchomp"),
+                                                                            database: .preview)))
+    }
+}
 #endif

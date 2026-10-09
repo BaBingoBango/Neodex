@@ -3,12 +3,12 @@ import SwiftUI
 
 /// Tabs the user can place in the tab bar. Search is always present as the system search tab.
 enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
-    case home, pokedex, moves, abilities, items, types, natures, teams, faceOff, usageStats, explore, search
+    case home, pokedex, moves, abilities, items, types, natures, teams, faceOff, damageCalc, usageStats, explore, search
 
     var id: String { rawValue }
 
     /// Tabs the user may choose from (Home is always first; Search is handled separately).
-    static let customizable: [AppTab] = [.pokedex, .moves, .abilities, .items, .types, .natures, .teams, .faceOff, .usageStats, .explore]
+    static let customizable: [AppTab] = [.pokedex, .moves, .abilities, .items, .types, .natures, .teams, .faceOff, .damageCalc, .usageStats, .explore]
 
     var title: String {
         switch self {
@@ -21,6 +21,7 @@ enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
         case .natures: "Natures"
         case .teams: "Teams"
         case .faceOff: "Face-Off"
+        case .damageCalc: "Damage Calc"
         case .usageStats: "Global Stats"
         case .explore: "Explore"
         case .search: "Search"
@@ -38,6 +39,7 @@ enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
         case .natures: "leaf.fill"
         case .teams: "rectangle.stack.person.crop.fill"
         case .faceOff: "bolt.circle.fill"
+        case .damageCalc: "function"
         case .usageStats: "network"
         case .explore: "wand.and.stars"
         case .search: "magnifyingglass"
@@ -68,6 +70,7 @@ enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
         case .natures: NatureListView()
         case .teams: TeamsContent()
         case .faceOff: FaceOffView(initial: nil)
+        case .damageCalc: DamageCalculatorView()
         case .usageStats: UsageStatsView()
         case .explore: ExploreView()
         case .home, .search: EmptyView()
