@@ -7,26 +7,34 @@ struct SettingsView: View {
     @Environment(\.database) private var database
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
-    @AppStorage(TabPreferences.key) private var storedTabs = TabPreferences.encode(TabPreferences.defaultTabs)
+    @AppStorage(TabBarPreferences.customizationKey) private var customization = TabViewCustomization()
+    @AppStorage(TabBarPreferences.storageKey) private var storedVisible = TabBarPreferences.encode(AppTab.defaultVisible)
     @State private var confirmingHistoryClear = false
     @State private var reindexing = false
 
-    private var selectedTabs: [AppTab] { TabPreferences.decode(storedTabs) }
+    private var visibleTabs: [AppTab] {
+        AppTab.features.filter { TabBarPreferences.isVisible($0, stored: TabBarPreferences.decode(storedVisible), customization: customization) }
+    }
 
     var body: some View {
         NavigationStack {
             List {
-                Section {
-                    ForEach(AppTab.customizable) { tab in
-                        Toggle(isOn: Binding(get: { selectedTabs.contains(tab) }, set: { set(tab, selected: $0) })) {
-                            Label(tab.title, systemImage: tab.systemImage)
+                ForEach(AppTab.Group.allCases) { group in
+                    Section {
+                        ForEach(group.tabs) { tab in
+                            let isVisible = visibleTabs.contains(tab)
+                            Toggle(isOn: Binding(get: { isVisible }, set: { set(tab, visible: $0) })) {
+                                Label(tab.title, systemImage: tab.systemImage)
+                            }
+                            .disabled(!isVisible && visibleTabs.count >= TabBarPreferences.maximumVisible)
                         }
-                        .disabled(!selectedTabs.contains(tab) && selectedTabs.count >= TabPreferences.maximumCustomTabs)
+                    } header: {
+                        Text(group == .reference ? "Tab Bar · Reference" : "Tab Bar · Battle")
+                    } footer: {
+                        if group == .battle {
+                            Text("Keep up to \(TabBarPreferences.maximumVisible) features in the tab bar alongside Home and Search. Everything is always on Home, and on iPad the sidebar lists every feature.")
+                        }
                     }
-                } header: {
-                    Text("Tab Bar")
-                } footer: {
-                    Text("Choose up to \(TabPreferences.maximumCustomTabs) features to keep alongside Home and Search. Everything is always available from Home.")
                 }
 
                 Section("Your Data") {
@@ -65,16 +73,18 @@ struct SettingsView: View {
         }
     }
 
-    private func set(_ tab: AppTab, selected: Bool) {
-        var tabs = selectedTabs
-        if selected {
-            guard !tabs.contains(tab), tabs.count < TabPreferences.maximumCustomTabs else { return }
+    private func set(_ tab: AppTab, visible: Bool) {
+        var tabs = visibleTabs
+        if visible {
+            guard !tabs.contains(tab), tabs.count < TabBarPreferences.maximumVisible else { return }
             tabs.append(tab)
-            tabs.sort { (AppTab.customizable.firstIndex(of: $0) ?? 0) < (AppTab.customizable.firstIndex(of: $1) ?? 0) }
+            tabs.sort { (AppTab.features.firstIndex(of: $0) ?? 0) < (AppTab.features.firstIndex(of: $1) ?? 0) }
         } else {
             tabs.removeAll { $0 == tab }
         }
-        storedTabs = TabPreferences.encode(tabs)
+        storedVisible = TabBarPreferences.encode(tabs)
+        // The toggles are the explicit choice; clear any visibility edits made in iPad's sidebar.
+        customization.resetVisibility()
     }
 }
 
