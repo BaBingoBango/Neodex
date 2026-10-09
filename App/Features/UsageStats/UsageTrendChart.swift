@@ -40,6 +40,13 @@ struct UsageTrendChart: View {
         }
     }
 
+    /// Pads the domain past the last month so its axis label isn't dropped at the plot's edge.
+    private var xDomain: ClosedRange<Date> {
+        let first = points.first?.date ?? .now
+        let last = points.last?.date ?? .now
+        return first.addingTimeInterval(-3 * 86_400)...last.addingTimeInterval(12 * 86_400)
+    }
+
     private var chart: some View {
         let maximum = points.map(\.usagePercent).max() ?? 1
         return Chart(points) { point in
@@ -62,7 +69,7 @@ struct UsageTrendChart: View {
                 }
         }
         .chartYScale(domain: 0...(maximum * 1.25 + 0.5))
-        .chartXScale(range: .plotDimension(startPadding: 12, endPadding: 28))
+        .chartXScale(domain: xDomain, range: .plotDimension(startPadding: 12, endPadding: 12))
         .chartYAxis {
             AxisMarks(position: .leading) { value in
                 AxisGridLine()
