@@ -21,6 +21,7 @@ struct TeamDetailView: View {
                 membersSection
                 if !team.members.isEmpty {
                     summarySection
+                    legalitySection
                     coverageSection
                 }
             }
@@ -77,7 +78,7 @@ struct TeamDetailView: View {
                 Button {
                     editingMemberID = member.id
                 } label: {
-                    TeamMemberCard(member: member)
+                    TeamMemberCard(member: member, issueCount: legalityIssues.filter { $0.setID == member.id.uuidString }.count)
                 }
                 .buttonStyle(.plain)
                 .contextMenu {
@@ -120,6 +121,16 @@ struct TeamDetailView: View {
         .padding(.horizontal)
     }
 
+    private var legalityIssues: [LegalityIssue] {
+        guard let format = team.smogonFormat else { return [] }
+        return FormatLegality.check(team.legalitySets, format: format, database: database)
+    }
+
+    private var legalitySection: some View {
+        TeamLegalityView(team: team, issues: legalityIssues)
+            .padding(.horizontal)
+    }
+
     private var coverageSection: some View {
         VStack(alignment: .leading, spacing: 12) {
             SectionTitle("Defensive Coverage")
@@ -136,6 +147,8 @@ struct TeamDetailView: View {
 struct TeamMemberCard: View {
     @Environment(\.database) private var database
     var member: TeamMember
+    /// Format-legality problems with this set, shown as a badge.
+    var issueCount = 0
 
     var body: some View {
         if let pokemon = database.pokemon(id: member.pokemonID) {
@@ -184,9 +197,18 @@ struct TeamMemberCard: View {
             .padding(12)
             .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
             .overlay(alignment: .topTrailing) {
-                if member.shiny {
-                    Image(systemName: "sparkle").font(.caption).foregroundStyle(.yellow).padding(8)
+                HStack(spacing: 4) {
+                    if issueCount > 0 {
+                        Label("\(issueCount)", systemImage: "exclamationmark.triangle.fill")
+                            .font(.caption2.weight(.bold))
+                            .foregroundStyle(.orange)
+                            .accessibilityLabel("\(issueCount) legality issues")
+                    }
+                    if member.shiny {
+                        Image(systemName: "sparkle").font(.caption).foregroundStyle(.yellow)
+                    }
                 }
+                .padding(8)
             }
         }
     }
