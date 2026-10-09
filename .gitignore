@@ -5,6 +5,8 @@ xcuserdata/
 *.xccheckout
 DerivedData/
 build/
+# The data pipeline keeps its dataset builders in a folder named Build; keep those.
+!Tools/NeodexData/Sources/NeodexDataCore/Build/
 *.moved-aside
 *.hmap
 *.ipa
