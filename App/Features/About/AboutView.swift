@@ -17,15 +17,12 @@ struct AboutView: View {
                 }
                 .padding(.vertical, 4)
             }
-            Section("Dataset") {
-                LabeledContent("Pokémon", value: database.pokemon.count.formatted())
-                LabeledContent("Species", value: database.species.count.formatted())
-                LabeledContent("Moves", value: database.moves.count.formatted())
-                LabeledContent("Abilities", value: database.abilities.count.formatted())
-                LabeledContent("Items", value: database.items.count.formatted())
-                if let manifest = database.manifest {
-                    LabeledContent("Generated", value: manifest.generatedAt.formatted(date: .abbreviated, time: .shortened))
-                }
+            Section {
+                DatasetCard()
+            } header: {
+                Text("Dataset")
+            } footer: {
+                Text("The Pokédex ships inside the app, so everything works offline. A fresh dataset arrives with each app update.")
             }
             if let manifest = database.manifest {
                 Section {

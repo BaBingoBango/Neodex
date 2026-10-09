@@ -7,12 +7,30 @@ public struct DataManifest: Codable, Sendable, Hashable {
     public var schemaVersion: Int
     public var counts: Counts
     public var sources: [DataSource]
+    /// Calendar version of the dataset written by the pipeline, e.g. `"2026.10.8"`.
+    public var version: String?
+    /// "What's new" notes describing the dataset, written by the pipeline.
+    public var releaseNotes: [String]?
 
-    public init(generatedAt: Date, schemaVersion: Int, counts: Counts, sources: [DataSource]) {
+    public init(generatedAt: Date, schemaVersion: Int, counts: Counts, sources: [DataSource],
+                version: String? = nil, releaseNotes: [String]? = nil) {
         self.generatedAt = generatedAt
         self.schemaVersion = schemaVersion
         self.counts = counts
         self.sources = sources
+        self.version = version
+        self.releaseNotes = releaseNotes
+    }
+
+    /// The version to show, falling back to the generation date for older manifests.
+    public var displayVersion: String { version ?? Self.calendarVersion(for: generatedAt) }
+
+    /// `"2026.10.8"` for 8 October 2026 (UTC).
+    public static func calendarVersion(for date: Date) -> String {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(identifier: "UTC")!
+        let parts = calendar.dateComponents([.year, .month, .day], from: date)
+        return "\(parts.year ?? 0).\(parts.month ?? 0).\(parts.day ?? 0)"
     }
 
     public struct Counts: Codable, Sendable, Hashable {
