@@ -176,7 +176,10 @@ Key decisions:
   scene is declared in `App/Info.plist`; the `com.apple.developer.carplay-voice-based-conversation`
   entitlement lives in a simulator-only entitlements file (`App/Neodex-Simulator.entitlements`, which
   also claims the Private Cloud Compute entitlement so both can be exercised in the simulator) until
-  Apple grants them for devices.
+  Apple grants them for devices. Xcode 27's Device Hub has no CarPlay (or other external) display for
+  simulators; its CarPlay Simulator plug-in pairs with a physical iPhone over USB. To see the scene
+  without the entitlement, run an iOS 26.4+ simulator from Xcode 26's Simulator app and choose
+  I/O › External Displays › CarPlay.
 - **The dataset is versioned.** The pipeline writes a calendar version (`2026.10.9`) and "what's
   new" notes into the manifest; About shows them in an App Store-style card.
 - **Widgets read a snapshot, not the bundle.** An app extension cannot read the app's bundle, so
