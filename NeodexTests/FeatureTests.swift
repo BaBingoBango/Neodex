@@ -56,6 +56,14 @@ struct FeatureTests {
         #expect(combatant.stats.hp == 357)
     }
 
+    @Test("Heights round to whole inches before splitting into feet")
+    func heightFormatting() {
+        #expect(Measurements.feetAndInches(0.6) == "2′00″")
+        #expect(Measurements.feetAndInches(1.9) == "6′03″")
+        #expect(Measurements.feetAndInches(0.3) == "1′00″")
+        #expect(Measurements.height(0.6).hasSuffix("2′00″"))
+    }
+
     @Test("Usage trend months parse to the first of the month")
     func trendDates() {
         let point = UsageTrendPoint(month: "2026-09", usagePercent: 12.5, rank: 3)

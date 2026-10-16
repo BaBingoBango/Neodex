@@ -127,12 +127,15 @@ struct MoveRow: View {
 
 /// Measurement formatting shared by detail screens.
 enum Measurements {
+    /// Feet and inches, rounding to the nearest inch first so 0.6 m is 2′00″ rather than 1′12″.
+    static func feetAndInches(_ meters: Double) -> String {
+        let totalInches = Int((meters * 39.3701).rounded())
+        return "\(totalInches / 12)′\(String(format: "%02d", totalInches % 12))″"
+    }
+
     static func height(_ meters: Double) -> String {
-        let totalInches = meters * 39.3701
-        let feet = Int(totalInches / 12)
-        let inches = Int((totalInches - Double(feet) * 12).rounded())
         let metric = meters.formatted(.number.precision(.fractionLength(1)))
-        return "\(metric) m · \(feet)′\(String(format: "%02d", inches))″"
+        return "\(metric) m · \(feetAndInches(meters))"
     }
 
     static func weight(_ kilograms: Double) -> String {
@@ -142,10 +145,7 @@ enum Measurements {
 
     /// Height with the user's unit system first and the other second, e.g. `("6′03″", "1.9 m")`.
     static func heightParts(_ meters: Double) -> (primary: String, secondary: String) {
-        let totalInches = meters * 39.3701
-        let feet = Int(totalInches / 12)
-        let inches = Int((totalInches - Double(feet) * 12).rounded())
-        let imperial = "\(feet)′\(String(format: "%02d", inches))″"
+        let imperial = feetAndInches(meters)
         let metric = "\(meters.formatted(.number.precision(.fractionLength(1)))) m"
         return Locale.current.measurementSystem == .us ? (imperial, metric) : (metric, imperial)
     }
