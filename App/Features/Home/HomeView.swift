@@ -8,12 +8,16 @@ struct HomeView: View {
     @Environment(\.database) private var database
     @Query(sort: \BrowsingRecord.viewedAt, order: .reverse) private var records: [BrowsingRecord]
 
+    @AppStorage("popularFormat") private var popularFormat = "gen9ou"
     @State private var showingSettings = false
     @State private var popular: [Pokemon] = []
     @State private var popularSelection: UsageSelection?
+    @State private var popularFormats: [UsageFormat] = []
+    @State private var choosingPopularFormat = false
     @State private var shuffled: Pokemon?
+    @State private var explainer = PickExplainer.shared
 
-    private let columns = [GridItem(.adaptive(minimum: 150), spacing: 12)]
+    private let columns = [GridItem(.adaptive(minimum: 160), spacing: 10)]
 
     var body: some View {
         NavigationStack {
@@ -25,6 +29,7 @@ struct HomeView: View {
                     }
                     if !picks.isEmpty {
                         shelf("Picks for You", subtitle: "Based on what you've been exploring", pokemon: picks)
+                        explainedPicks
                     }
                     spotlightSection
                     popularSection
@@ -48,7 +53,54 @@ struct HomeView: View {
             .sheet(isPresented: $showingSettings) {
                 SettingsView()
             }
-            .task { await loadPopular() }
+            .sheet(isPresented: $choosingPopularFormat) {
+                UsageFormatPicker(formats: popularFormats, selected: popularFormat) { format in
+                    popularFormat = format.id
+                }
+            }
+            .task(id: popularFormat) { await loadPopular() }
+            .task(id: picks.prefix(3).map(\.id).joined()) {
+                await explainer.explain(picks: picks, basedOn: recentPokemon)
+            }
+        }
+    }
+
+    /// Apple Intelligence's one-line reasons for the first picks, when the on-device model is available.
+    @ViewBuilder
+    private var explainedPicks: some View {
+        let blurbs = explainer.blurbs.filter { blurb in picks.contains { $0.id == blurb.pokemonID } }
+        if !blurbs.isEmpty {
+            VStack(alignment: .leading, spacing: 10) {
+                Label("Why these picks", systemImage: "apple.intelligence")
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.secondary)
+                ForEach(blurbs) { blurb in
+                    if let pokemon = database.pokemon(id: blurb.pokemonID) {
+                        NavigationLink(value: AppRoute.pokemon(pokemon.id)) {
+                            HStack(alignment: .top, spacing: 10) {
+                                PokemonImage(pokemon: pokemon, kind: .sprite).frame(width: 40, height: 40)
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text(pokemon.displayName).font(.subheadline.weight(.semibold)).foregroundStyle(.primary)
+                                    Text(blurb.text).font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+                                }
+                                Spacer(minLength: 0)
+                            }
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+                Text("Written on your device by Apple Intelligence from this Pokémon's types and egg groups.")
+                    .font(.caption2)
+                    .foregroundStyle(.tertiary)
+            }
+            .padding(14)
+            .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+            .overlay {
+                RoundedRectangle(cornerRadius: 18, style: .continuous)
+                    .strokeBorder(LinearGradient(colors: [.purple.opacity(0.5), .blue.opacity(0.4), .orange.opacity(0.4)],
+                                                 startPoint: .topLeading, endPoint: .bottomTrailing), lineWidth: 1)
+            }
+            .padding(.horizontal)
         }
     }
 
@@ -138,7 +190,7 @@ struct HomeView: View {
     private func featureSection(_ group: AppTab.Group) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             SectionTitle(LocalizedStringKey(group.title)).padding(.horizontal)
-            LazyVGrid(columns: columns, spacing: 12) {
+            LazyVGrid(columns: columns, spacing: 10) {
                 ForEach(group.tabs) { tab in
                     NavigationLink(value: tab) {
                         FeatureCard(tab: tab)
@@ -204,11 +256,20 @@ struct HomeView: View {
     private var popularSection: some View {
         if !popular.isEmpty, let popularSelection {
             VStack(alignment: .leading, spacing: 10) {
-                VStack(alignment: .leading, spacing: 2) {
-                    SectionTitle("Popular on Showdown")
-                    Text("\(UsageFormat.displayName(for: popularSelection.format)) · \(UsageStatsModel.displayMonth(popularSelection.month))")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                HStack(alignment: .firstTextBaseline) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        SectionTitle("Popular on Showdown")
+                        Text("\(UsageFormat.displayName(for: popularSelection.format)) · \(UsageStatsModel.displayMonth(popularSelection.month))")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
+                    Button {
+                        choosingPopularFormat = true
+                    } label: {
+                        Label("Format", systemImage: "chevron.up.chevron.down")
+                            .font(.subheadline.weight(.semibold))
+                    }
+                    .disabled(popularFormats.isEmpty)
                 }
                 .padding(.horizontal)
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -247,12 +308,13 @@ struct HomeView: View {
     }
 
     private func loadPopular() async {
-        guard popular.isEmpty else { return }
+        if let popularSelection, popularSelection.format == popularFormat, !popular.isEmpty { return }
         do {
             let client = SmogonStatsClient.shared
             guard let month = try await client.months().first else { return }
             let formats = try await client.formats(for: month)
-            guard let format = formats.first(where: { $0.id == "gen9ou" }) ?? formats.first else { return }
+            popularFormats = formats
+            guard let format = formats.first(where: { $0.id == popularFormat }) ?? formats.first(where: { $0.id == "gen9ou" }) ?? formats.first else { return }
             let selection = UsageSelection(month: month, format: format.id, rating: UsageStatsModel.defaultRating(for: format))
             let report = try await client.rankings(for: selection)
             popular = report.rankings.prefix(12).compactMap { database.pokemon(named: $0.name) }
@@ -276,32 +338,33 @@ enum RecentItem: Identifiable {
     }
 }
 
-/// A feature card on Home.
+/// A feature card on Home: compact, so the grid leaves room for what's below it.
 struct FeatureCard: View {
     var tab: AppTab
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        HStack(spacing: 10) {
             Image(systemName: tab.systemImage)
-                .font(.title3)
+                .font(.body.weight(.semibold))
                 .foregroundStyle(tab.tint)
-                .frame(width: 38, height: 38)
+                .frame(width: 36, height: 36)
                 .background(tab.tint.opacity(0.15), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: 1) {
                 Text(tab.cardTitle)
-                    .font(.headline)
+                    .font(.subheadline.weight(.semibold))
                     .foregroundStyle(.primary)
                     .lineLimit(1)
                     .minimumScaleFactor(0.8)
                 Text(tab.subtitle)
-                    .font(.caption)
+                    .font(.caption2)
                     .foregroundStyle(.secondary)
                     .lineLimit(2)
             }
+            Spacer(minLength: 0)
         }
-        .frame(maxWidth: .infinity, minHeight: 104, alignment: .topLeading)
-        .padding(12)
-        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .padding(10)
+        .frame(maxWidth: .infinity, minHeight: 60, alignment: .leading)
+        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
         .accessibilityElement(children: .combine)
     }
 }

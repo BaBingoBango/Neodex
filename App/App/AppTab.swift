@@ -63,7 +63,6 @@ enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
         case .abilities: "Ability Dex"
         case .items: "Item Dex"
         case .teams: "Teambuilder"
-        case .damageCalc: "Damage Calculator"
         default: title
         }
     }
