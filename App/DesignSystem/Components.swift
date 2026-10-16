@@ -18,11 +18,13 @@ struct SectionTitle: View {
     }
 }
 
-/// A tinted tile with an icon, a caption and a value — the "Characteristics" grid.
+/// A tinted tile with an icon, a caption, a value and an optional detail line — the "Characteristics"
+/// grid. Every tile reserves the detail line so the grid's rows stay the same height.
 struct InfoTile: View {
     var systemImage: String
     var label: LocalizedStringKey
     var value: String
+    var detail: String? = nil
     var tint: Color
 
     var body: some View {
@@ -38,8 +40,13 @@ struct InfoTile: View {
                     .foregroundStyle(.secondary)
                 Text(value)
                     .font(.body.weight(.semibold))
-                    .minimumScaleFactor(0.7)
-                    .lineLimit(2)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.65)
+                Text(detail ?? " ")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
             }
             Spacer(minLength: 0)
         }
@@ -131,6 +138,31 @@ enum Measurements {
     static func weight(_ kilograms: Double) -> String {
         let pounds = kilograms * 2.20462
         return "\(kilograms.formatted(.number.precision(.fractionLength(1)))) kg · \(pounds.formatted(.number.precision(.fractionLength(1)))) lbs"
+    }
+
+    /// Height with the user's unit system first and the other second, e.g. `("6′03″", "1.9 m")`.
+    static func heightParts(_ meters: Double) -> (primary: String, secondary: String) {
+        let totalInches = meters * 39.3701
+        let feet = Int(totalInches / 12)
+        let inches = Int((totalInches - Double(feet) * 12).rounded())
+        let imperial = "\(feet)′\(String(format: "%02d", inches))″"
+        let metric = "\(meters.formatted(.number.precision(.fractionLength(1)))) m"
+        return Locale.current.measurementSystem == .us ? (imperial, metric) : (metric, imperial)
+    }
+
+    /// Weight with the user's unit system first and the other second.
+    static func weightParts(_ kilograms: Double) -> (primary: String, secondary: String) {
+        let imperial = "\((kilograms * 2.20462).formatted(.number.precision(.fractionLength(1)))) lbs"
+        let metric = "\(kilograms.formatted(.number.precision(.fractionLength(1)))) kg"
+        return Locale.current.measurementSystem == .us ? (imperial, metric) : (metric, imperial)
+    }
+
+    /// `("87.5% ♂", "12.5% ♀")`, or `("Genderless", nil)`.
+    static func genderParts(_ maleRatio: Double?) -> (primary: String, secondary: String?) {
+        guard let maleRatio else { return ("Genderless", nil) }
+        let male = (maleRatio * 100).formatted(.number.precision(.fractionLength(0...1)))
+        let female = ((1 - maleRatio) * 100).formatted(.number.precision(.fractionLength(0...1)))
+        return ("\(male)% ♂", "\(female)% ♀")
     }
 
     static func genderRatio(_ maleRatio: Double?) -> String {
