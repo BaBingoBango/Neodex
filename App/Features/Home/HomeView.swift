@@ -37,7 +37,14 @@ struct HomeView: View {
                 }
                 .padding(.vertical)
             }
-            .background(Color(.systemGroupedBackground))
+            .background {
+                ZStack(alignment: .top) {
+                    Color(.systemGroupedBackground)
+                    AmbientBackground(colors: ambientColors)
+                        .frame(height: 440)
+                }
+                .ignoresSafeArea()
+            }
             .navigationTitle("Neodex")
             .navigationDestination(for: AppTab.self) { $0.content }
             .appDestinations()
@@ -164,6 +171,12 @@ struct HomeView: View {
 
     private static var dayOrdinal: Int { Calendar.current.ordinality(of: .day, in: .era, for: .now) ?? 0 }
 
+    /// The wash behind the top of Home takes its colours from the Pokémon of the Day.
+    private var ambientColors: [Color] {
+        guard let spotlight else { return [.accentColor, .purple] }
+        return [spotlight.primaryType.color, (spotlight.secondaryType ?? spotlight.primaryType).color, .accentColor]
+    }
+
     // MARK: - Sections
 
     private var jumpBackIn: some View {
@@ -176,9 +189,11 @@ struct HomeView: View {
                         case .pokemon(let pokemon):
                             NavigationLink(value: AppRoute.pokemon(pokemon.id)) { RecentPokemonCard(pokemon: pokemon) }
                                 .buttonStyle(.plain)
+                                .shelfTransition()
                         case .move(let move):
                             NavigationLink(value: AppRoute.move(move.id)) { RecentMoveCard(move: move) }
                                 .buttonStyle(.plain)
+                                .shelfTransition()
                         }
                     }
                 }
@@ -216,6 +231,7 @@ struct HomeView: View {
                     ForEach(pokemon) { entry in
                         NavigationLink(value: AppRoute.pokemon(entry.id)) { PokemonShelfCard(pokemon: entry) }
                             .buttonStyle(.plain)
+                            .shelfTransition()
                     }
                 }
                 .padding(.horizontal)
@@ -279,6 +295,7 @@ struct HomeView: View {
                                 PokemonShelfCard(pokemon: entry, badge: "#\(index + 1)")
                             }
                             .buttonStyle(.plain)
+                            .shelfTransition()
                         }
                     }
                     .padding(.horizontal)
