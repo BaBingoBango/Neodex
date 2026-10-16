@@ -96,8 +96,14 @@ original app.
 SwiftUI, iOS 26 and later, Swift 6 language mode with main-actor default isolation.
 
 ```
+Shared/                    Compiled into the app and the widget extension: TypeStyle/TypeBadge,
+                           PersistenceModels (SavedTeam, TeamMember, BrowsingRecord), SmogonStatsClient,
+                           SharedContainer (App Group paths), WidgetModels (WidgetPokemon, snapshot,
+                           DailyPick), UsageDefaults, TeamReader, Shared.xcassets (type colours)
+Widgets/                   WidgetKit extension: Pokémon of the Day, Who's That Pokémon?, Team,
+                           Popular on Showdown, and two Control Center controls
 App/
-├── NeodexApp.swift        @main; SwiftData container for teams and history
+├── NeodexApp.swift        @main; SwiftData container for teams and history (in the App Group)
 ├── App/                   AppModel (load state), DatabaseProvider, DeepLinkRouter, RootView,
 │                          MainTabView, AppTab, AppRoute
 ├── Intents/               App Intents: PokemonEntity + query, Open / Random / Type Matchup /
@@ -153,6 +159,15 @@ Key decisions:
   the Pokémon's types, genus and egg groups, and the section simply doesn't appear otherwise.
 - **The dataset is versioned.** The pipeline writes a calendar version (`2026.10.9`) and "what's
   new" notes into the manifest; About shows them in an App Store-style card.
+- **Widgets read a snapshot, not the bundle.** An app extension cannot read the app's bundle, so
+  `WidgetBridge` stocks the App Group after each launch: a 270 KB index of every Pokémon
+  (`WidgetPokemon`), every battle sprite (5 MB, once per dataset version), artwork for two weeks of
+  daily picks, and the pick schedule itself. `DailyPick` is the one formula Home and the widgets both
+  use for the Pokémon of the Day. The SwiftData store lives in the group too, so the Team widget reads
+  teams directly (hopping to the main actor, since `@Model` classes are isolated there); the app
+  migrates an existing store into the group on first launch. Widgets deep-link with `neodex://`
+  URLs that `DeepLinkRouter` turns into routes; picks that need the database (`random`, `today`,
+  `mystery`) are resolved by `MainTabView`. Controls open the app through `OpenURLIntent`.
 - **Previews run on real data.** `App/Preview Content` holds a 0.7 MB slice of the generated dataset
   (14 seed species, their whole evolution families and forms, and every move, ability and item they
   reference). `PokedexDatabase.preview` loads it synchronously and `PreviewHost` wraps any screen with
@@ -164,6 +179,8 @@ Key decisions:
 ```bash
 cd Packages/NeodexKit && swift test     # logic, codec, parsers, database (fast, macOS)
 cd Tools/NeodexData && swift test       # pipeline: CSV, JS evaluation, name mapping, join rules, fixture
+# The widget extension builds with the app; the simulator ignores the App Group entitlement, so widgets
+# can be added to the simulator Home Screen and read the group container like on a device.
 xcodebuild -scheme Neodex -destination 'platform=iOS Simulator,name=iPhone 17 Pro' test   # + bundled-data and fixture smoke tests
 ```
 

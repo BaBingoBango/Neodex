@@ -18,12 +18,13 @@ An offline Pokédex for iPhone and iPad with [Pokémon Showdown](https://play.po
 - **Pokédex** — 1,025 species and 1,330 forms (Megas, Gigantamax, regional variants, Paradox Pokémon, the Legends: Z‑A Megas), with filters, sorting, a grid mode, and a detail screen covering Pokédex entries from every game, abilities, base stats, evolutions, forms, traits, type matchups, locations and the full learnset. Showdown's animated battle sprites, shinies and cries stream in on demand, and every Pokédex entry from every game is a tap away.
 - **Move, Ability and Item dexes** — in‑game descriptions alongside Showdown's competitive summaries, TM numbers, and reverse lookups (every Pokémon that learns a move or has an ability).
 - **Type‑O‑Matic** — combine up to two types and see exactly what they're weak to and resist.
-- **Teambuilder** — build teams of six with an editor that only offers legal moves, live stat calculation, EV/IV controls, natures and Tera Types. Import teams from Showdown's export text and export them back, byte‑for‑byte compatible. Teams are checked against the Smogon tier you pick, from Anything Goes to Little Cup, with every clause explained.
+- **Teambuilder** — build teams of six with an editor that only offers legal moves, live stat calculation, EV/IV controls, natures and Tera Types. Import teams from Showdown's export text and export them back, byte‑for‑byte compatible. Teams are checked against the Smogon tier you pick, from Anything Goes to Little Cup, with every clause explained, and every team opens with its six sprites lined up like the original Neodex.
 - **Damage Calculator** — Showdown‑faithful Gen 9 damage calcs in both directions between any two sets: EVs, natures, stat stages, items, abilities, Terastallization, weather, terrain, screens and status, with KO chances and the exact calc line to copy.
 - **Face‑Off** — compare any two Pokémon side by side, then jump straight into a damage calc.
 - **Global Stats** — Smogon usage rankings for any format and month, with abilities, items, moves, spreads, teammates and checks for every Pokémon, plus a usage‑trend chart across recent months.
 - **Home** — jump back into what you were reading, picks based on your browsing (with one‑line reasons written on device by Apple Intelligence where available), a Pokémon of the day and what's popular on Showdown in the format you choose, above every feature.
 - **Spotlight** — every Pokémon, move, Ability, item and nature is searchable from the Home Screen and deep‑links into the app.
+- **Widgets and Controls** — Pokémon of the Day (Home Screen and Lock Screen), a daily *Who's That Pokémon?* silhouette you reveal in place, one of your teams lined up like a battle preview, and Smogon's most‑used Pokémon in a format you choose. Control Center and Action button controls open a random Pokémon or the Damage Calculator.
 - **Siri and Shortcuts** — ask what a Pokémon is weak to, have its Pokédex entry read aloud, open any Pokémon by name or get a random one; every species works in App Shortcuts phrases.
 - Fully offline except for Smogon statistics and the optional animated sprites and cries, which are cached after first use. Every feature is a tab: a grouped, customisable sidebar on iPad and a customisable tab bar on iPhone. Dynamic Type and dark mode throughout.
 
@@ -35,7 +36,8 @@ Neodex is three pieces sharing one set of Swift types; see [Docs/ARCHITECTURE.md
 | --- | --- |
 | [`Packages/NeodexKit`](Packages/NeodexKit) | Platform‑independent Swift package: models, an in‑memory Pokédex database, the type chart and stat formulas, a native parser/exporter for Showdown's team format, Smogon statistics parsers, a Showdown‑faithful damage calculator and Smogon format‑legality rules. Covered by Swift Testing suites. |
 | [`Tools/NeodexData`](Tools/NeodexData) | A Swift command‑line tool that regenerates the bundled dataset from [Pokémon Showdown](https://github.com/smogon/pokemon-showdown) and [PokeAPI](https://github.com/PokeAPI/pokeapi), verifies every cross‑reference, and produces compact HEIC artwork. One command refreshes everything. |
-| [`App`](App) | The SwiftUI app. iOS 26 and later, Swift 6 with strict concurrency, SwiftData for teams and history, a single typed route for navigation, Spotlight and Siri deep links, App Intents, Swift Charts. |
+| [`App`](App) | The SwiftUI app. iOS 26 and later, Swift 6 with strict concurrency, SwiftData for teams and history, a single typed route for navigation, Spotlight, Siri and `neodex://` deep links, App Intents, Swift Charts. |
+| [`Widgets`](Widgets) + [`Shared`](Shared) | The WidgetKit extension and the code it shares with the app (type palette, SwiftData models, the Smogon client). The app stocks an App Group with a compact Pokémon index, sprites and the daily pick schedule, so widgets never need the 49 MB bundle. |
 
 The whole data bundle is about 49 MB, down from 454 MB of hand‑collected assets in the original app.
 
