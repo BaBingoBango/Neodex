@@ -8,7 +8,7 @@ struct HomeView: View {
     @Environment(\.database) private var database
     @Query(sort: \BrowsingRecord.viewedAt, order: .reverse) private var records: [BrowsingRecord]
 
-    @AppStorage("popularFormat") private var popularFormat = "gen9ou"
+    @AppStorage(SharedContainer.DefaultsKey.popularFormat, store: SharedContainer.defaults) private var popularFormat = "gen9ou"
     @State private var showingSettings = false
     @State private var popular: [Pokemon] = []
     @State private var popularSelection: UsageSelection?
@@ -163,13 +163,10 @@ struct HomeView: View {
 
     /// The same Pokémon all day for everyone, until the user shuffles.
     private var spotlight: Pokemon? {
-        if let shuffled { return shuffled }
-        let species = database.species
-        guard !species.isEmpty else { return nil }
-        return species[(Self.dayOrdinal &* 7919) % species.count]
+        shuffled ?? DailyPick.pokemonOfTheDay(database.species)
     }
 
-    private static var dayOrdinal: Int { Calendar.current.ordinality(of: .day, in: .era, for: .now) ?? 0 }
+    private static var dayOrdinal: Int { DailyPick.dayOrdinal() }
 
     /// The wash behind the top of Home takes its colours from the Pokémon of the Day.
     private var ambientColors: [Color] {

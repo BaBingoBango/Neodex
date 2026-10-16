@@ -6,12 +6,13 @@ import SwiftUI
 @main
 struct NeodexApp: App {
     @State private var appModel = AppModel()
+    private let container = PersistenceContainer.make()
 
     var body: some Scene {
         WindowGroup {
             RootView()
                 .environment(appModel)
         }
-        .modelContainer(for: [SavedTeam.self, BrowsingRecord.self])
+        .modelContainer(container)
     }
 }

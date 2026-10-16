@@ -1,6 +1,7 @@
 import NeodexKit
 import SwiftData
 import SwiftUI
+import WidgetKit
 
 /// Teams tab root.
 struct TeamsView: View {
@@ -76,6 +77,7 @@ struct TeamsContent: View {
 
     private func delete(at offsets: IndexSet) {
         for index in offsets { modelContext.delete(teams[index]) }
+        WidgetCenter.shared.reloadTimelines(ofKind: WidgetKind.team)
     }
 }
 

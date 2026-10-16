@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		AADE0000000000000000001E /* NeodexKit in Frameworks */ = {isa = PBXBuildFile; productRef = AADE0000000000000000001D /* NeodexKit */; };
 		AADE00000000000000000020 /* NeodexKit in Frameworks */ = {isa = PBXBuildFile; productRef = AADE0000000000000000001F /* NeodexKit */; };
+		AADE00000000000000000029 /* NeodexKit in Frameworks */ = {isa = PBXBuildFile; productRef = AADE00000000000000000028 /* NeodexKit */; };
+		AADE0000000000000000002D /* NeodexWidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AADE00000000000000000021 /* NeodexWidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -19,22 +21,77 @@
 			remoteGlobalIDString = AADE00000000000000000002;
 			remoteInfo = Neodex;
 		};
+		AADE0000000000000000002A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AADE00000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AADE00000000000000000024;
+			remoteInfo = NeodexWidgetsExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AADE0000000000000000002C /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				AADE0000000000000000002D /* NeodexWidgetsExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		AADE00000000000000000003 /* Neodex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Neodex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AADE00000000000000000005 /* NeodexTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NeodexTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AADE00000000000000000021 /* NeodexWidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NeodexWidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		AADE00000000000000000031 /* Exceptions for "App" folder in "Neodex" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = AADE00000000000000000002 /* Neodex */;
+		};
+		AADE00000000000000000032 /* Exceptions for "Widgets" folder in "NeodexWidgetsExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = AADE00000000000000000024 /* NeodexWidgetsExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		AADE00000000000000000008 /* App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				AADE00000000000000000031 /* Exceptions for "App" folder in "Neodex" target */,
+			);
 			path = App;
 			sourceTree = "<group>";
 		};
 		AADE00000000000000000009 /* NeodexTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = NeodexTests;
+			sourceTree = "<group>";
+		};
+		AADE00000000000000000022 /* Widgets */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				AADE00000000000000000032 /* Exceptions for "Widgets" folder in "NeodexWidgetsExtension" target */,
+			);
+			path = Widgets;
+			sourceTree = "<group>";
+		};
+		AADE00000000000000000023 /* Shared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -56,6 +113,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AADE00000000000000000026 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AADE00000000000000000029 /* NeodexKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -63,6 +128,8 @@
 			isa = PBXGroup;
 			children = (
 				AADE00000000000000000008 /* App */,
+				AADE00000000000000000023 /* Shared */,
+				AADE00000000000000000022 /* Widgets */,
 				AADE00000000000000000009 /* NeodexTests */,
 				AADE00000000000000000007 /* Products */,
 			);
@@ -73,6 +140,7 @@
 			children = (
 				AADE00000000000000000003 /* Neodex.app */,
 				AADE00000000000000000005 /* NeodexTests.xctest */,
+				AADE00000000000000000021 /* NeodexWidgetsExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -87,13 +155,16 @@
 				AADE0000000000000000000B /* Sources */,
 				AADE0000000000000000000C /* Frameworks */,
 				AADE0000000000000000000D /* Resources */,
+				AADE0000000000000000002C /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				AADE0000000000000000002B /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				AADE00000000000000000008 /* App */,
+				AADE00000000000000000023 /* Shared */,
 			);
 			name = Neodex;
 			packageProductDependencies = (
@@ -127,6 +198,30 @@
 			productReference = AADE00000000000000000005 /* NeodexTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		AADE00000000000000000024 /* NeodexWidgetsExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AADE0000000000000000002E /* Build configuration list for PBXNativeTarget "NeodexWidgetsExtension" */;
+			buildPhases = (
+				AADE00000000000000000025 /* Sources */,
+				AADE00000000000000000026 /* Frameworks */,
+				AADE00000000000000000027 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				AADE00000000000000000022 /* Widgets */,
+				AADE00000000000000000023 /* Shared */,
+			);
+			name = NeodexWidgetsExtension;
+			packageProductDependencies = (
+				AADE00000000000000000028 /* NeodexKit */,
+			);
+			productName = NeodexWidgetsExtension;
+			productReference = AADE00000000000000000021 /* NeodexWidgetsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -143,6 +238,9 @@
 					AADE00000000000000000004 = {
 						CreatedOnToolsVersion = 27.0;
 						TestTargetID = AADE00000000000000000002;
+					};
+					AADE00000000000000000024 = {
+						CreatedOnToolsVersion = 27.0;
 					};
 				};
 			};
@@ -165,6 +263,7 @@
 			targets = (
 				AADE00000000000000000002 /* Neodex */,
 				AADE00000000000000000004 /* NeodexTests */,
+				AADE00000000000000000024 /* NeodexWidgetsExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -178,6 +277,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		AADE00000000000000000010 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AADE00000000000000000027 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -201,6 +307,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AADE00000000000000000025 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -208,6 +321,11 @@
 			isa = PBXTargetDependency;
 			target = AADE00000000000000000002 /* Neodex */;
 			targetProxy = AADE0000000000000000001A /* PBXContainerItemProxy */;
+		};
+		AADE0000000000000000002B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AADE00000000000000000024 /* NeodexWidgetsExtension */;
+			targetProxy = AADE0000000000000000002A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -350,12 +468,14 @@
 				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = DevIcon;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = App/Neodex.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"App/Preview Content\"";
 				DEVELOPMENT_TEAM = GUDZ7ALN9J;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Neodex;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
@@ -382,6 +502,7 @@
 				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = DevIcon;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = App/Neodex.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"App/Preview Content\"";
@@ -389,6 +510,7 @@
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_SOURCE_FILE_NAMES = "preview-*.json";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Neodex;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
@@ -445,6 +567,58 @@
 			};
 			name = Release;
 		};
+		AADE0000000000000000002F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = Widgets/NeodexWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = GUDZ7ALN9J;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Widgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Neodex;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Ethan.Neodex.Widgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AADE00000000000000000030 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = Widgets/NeodexWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = GUDZ7ALN9J;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Widgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Neodex;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Ethan.Neodex.Widgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -475,6 +649,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		AADE0000000000000000002E /* Build configuration list for PBXNativeTarget "NeodexWidgetsExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AADE0000000000000000002F /* Debug */,
+				AADE00000000000000000030 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
@@ -490,6 +673,10 @@
 			productName = NeodexKit;
 		};
 		AADE0000000000000000001F /* NeodexKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NeodexKit;
+		};
+		AADE00000000000000000028 /* NeodexKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = NeodexKit;
 		};

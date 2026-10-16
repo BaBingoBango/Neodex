@@ -208,6 +208,18 @@ final class UsageStatsModel {
 
     private let client = SmogonStatsClient.shared
     private var hasLoaded = false
+    /// A format requested by a deep link before the format list has loaded.
+    private var preferredFormatID: String?
+
+    /// Shows `formatID` as soon as possible: now if the formats are known, otherwise on the next load.
+    func prefer(formatID: String) async {
+        if let format = formats.first(where: { $0.id == formatID }) {
+            await select(format: format)
+        } else {
+            preferredFormatID = formatID
+            if hasLoaded { await reload() }
+        }
+    }
 
     init() {
         selection = Self.storedSelection()
@@ -239,6 +251,11 @@ final class UsageStatsModel {
             months = try await client.months()
             let month = selection?.month ?? months.first ?? ""
             formats = try await client.formats(for: month)
+            SharedContainer.defaults?.set(formats.map(\.id), forKey: SharedContainer.DefaultsKey.usageFormats)
+            if let preferredFormatID, formats.contains(where: { $0.id == preferredFormatID }) {
+                selection = UsageSelection(month: month, format: preferredFormatID, rating: 0)
+                self.preferredFormatID = nil
+            }
             let format = formats.first { $0.id == selection?.format } ?? formats.first { $0.id == "gen9ou" } ?? formats[0]
             let rating = selection.map { $0.rating } ?? Self.defaultRating(for: format)
             selection = UsageSelection(month: month, format: format.id, rating: format.ratingCutoffs.contains(rating) ? rating : Self.defaultRating(for: format))
@@ -297,21 +314,8 @@ final class UsageStatsModel {
         }
     }
 
-    /// Smogon's "standard" cutoff is 1695 for OU-style formats and 1630 elsewhere.
-    static func defaultRating(for format: UsageFormat) -> Int {
-        for preferred in [1695, 1630, 1760, 1500] where format.ratingCutoffs.contains(preferred) { return preferred }
-        return format.ratingCutoffs.first ?? 0
-    }
-
-    static func displayMonth(_ month: String) -> String {
-        let parts = month.split(separator: "-")
-        guard parts.count >= 2, let year = Int(parts[0]), let monthNumber = Int(parts[1]) else { return month }
-        var components = DateComponents()
-        components.year = year
-        components.month = monthNumber
-        guard let date = Calendar.current.date(from: components) else { return month }
-        return date.formatted(.dateTime.month(.wide).year())
-    }
+    static func defaultRating(for format: UsageFormat) -> Int { UsageDefaults.defaultRating(for: format) }
+    static func displayMonth(_ month: String) -> String { UsageDefaults.displayMonth(month) }
 }
 
 #if DEBUG

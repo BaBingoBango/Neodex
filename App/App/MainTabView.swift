@@ -6,6 +6,7 @@ import SwiftUI
 /// as a sheet.
 struct MainTabView: View {
     @Environment(\.horizontalSizeClass) private var sizeClass
+    @Environment(\.database) private var database
     @AppStorage(TabBarPreferences.customizationKey) private var customization = TabViewCustomization()
     @AppStorage(TabBarPreferences.storageKey) private var storedVisible = TabBarPreferences.encode(AppTab.defaultVisible)
     @State private var router = DeepLinkRouter.shared
@@ -64,6 +65,17 @@ struct MainTabView: View {
                         }
                     }
             }
+        }
+        .onChange(of: router.pendingPick, initial: true) { _, request in
+            guard let request else { return }
+            let species = database.species
+            let pick: Pokemon? = switch request {
+            case .random: species.randomElement()
+            case .today: DailyPick.pokemonOfTheDay(species)
+            case .mystery: DailyPick.mystery(species)
+            }
+            router.pendingPick = nil
+            if let pick { router.pendingRoute = .pokemon(pick.id) }
         }
         .onChange(of: storedVisible) { fallBackIfHidden() }
         .onChange(of: customization) { fallBackIfHidden() }

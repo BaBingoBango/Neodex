@@ -1,4 +1,5 @@
 import NeodexKit
+import SwiftData
 import SwiftUI
 
 /// Every screen that can be pushed onto a navigation stack. Using a single route type lets any
@@ -17,6 +18,8 @@ nonisolated enum AppRoute: Hashable, Identifiable {
     case usageDetail(UsageSelection, name: String)
     case damageCalculator(attacker: Pokemon.ID?, defender: Pokemon.ID?)
     case dexEntries(Pokemon.ID)
+    case team(UUID)
+    case usageStats(format: String?)
 
     var id: String { String(describing: self) }
 
@@ -79,11 +82,36 @@ struct AppRouteView: View {
             DamageCalculatorView(initialAttackerID: attacker, initialDefenderID: defender)
         case .dexEntries(let id):
             if let pokemon = database.pokemon(id: id) { PokedexEntriesView(pokemon: pokemon) } else { missing }
+        case .team(let id):
+            TeamRouteView(id: id)
+        case .usageStats(let format):
+            UsageStatsView()
+                .task {
+                    if let format { await UsageStatsModel.shared.prefer(formatID: format) }
+                }
         }
     }
 
     private var missing: some View {
         ContentUnavailableView("Not Found", systemImage: "questionmark.circle", description: Text("This entry isn't in the Pokédex."))
+    }
+}
+
+/// Finds a saved team by ID for deep links from the Team widget.
+struct TeamRouteView: View {
+    @Query private var teams: [SavedTeam]
+
+    init(id: UUID) {
+        _teams = Query(filter: #Predicate<SavedTeam> { $0.id == id })
+    }
+
+    var body: some View {
+        if let team = teams.first {
+            TeamDetailView(team: team)
+        } else {
+            ContentUnavailableView("Team Not Found", systemImage: "rectangle.stack.person.crop",
+                                   description: Text("This team has been deleted."))
+        }
     }
 }
 

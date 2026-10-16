@@ -1,6 +1,7 @@
 import Foundation
 import NeodexKit
 import SwiftData
+import WidgetKit
 
 /// A saved Teambuilder team. Members are stored as a value array so their order is preserved.
 @Model
@@ -22,7 +23,10 @@ final class SavedTeam {
         self.members = members
     }
 
-    func touch() { updatedAt = .now }
+    func touch() {
+        updatedAt = .now
+        WidgetCenter.shared.reloadTimelines(ofKind: WidgetKind.team)
+    }
 
     static let maximumMembers = 6
 }

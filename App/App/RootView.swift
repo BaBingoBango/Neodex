@@ -19,6 +19,7 @@ struct RootView: View {
                     .task(id: database.manifest?.generatedAt) {
                         await SpotlightIndexer.indexIfNeeded(database: database)
                         NeodexShortcuts.updateAppShortcutParameters()
+                        await WidgetBridge.refresh(database: database)
                     }
             case .failed(let error):
                 ContentUnavailableView {
@@ -32,6 +33,9 @@ struct RootView: View {
             }
         }
         .task { await appModel.loadIfNeeded() }
+        .onOpenURL { url in
+            DeepLinkRouter.shared.open(url: url)
+        }
         .onContinueUserActivity(CSSearchableItemActionType) { activity in
             guard let identifier = activity.userInfo?[CSSearchableItemActivityIdentifier] as? String,
                   let route = AppRoute(spotlightIdentifier: identifier) else { return }
