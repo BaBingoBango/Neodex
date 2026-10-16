@@ -78,3 +78,40 @@ final class BrowsingRecord {
         case pokemon, move, ability, item
     }
 }
+
+/// A Dexbot chat. Messages are stored as a value array so the whole conversation travels together.
+@Model
+final class DexbotConversation {
+    @Attribute(.unique) var id: UUID
+    var title: String
+    var createdAt: Date
+    var updatedAt: Date
+    var messages: [DexbotMessage]
+
+    init(title: String = "New Chat", messages: [DexbotMessage] = []) {
+        id = UUID()
+        self.title = title
+        createdAt = .now
+        updatedAt = .now
+        self.messages = messages
+    }
+
+    func touch() { updatedAt = .now }
+}
+
+/// One turn of a Dexbot chat. Plain data that crosses isolation boundaries (CarPlay, widgets), so nonisolated.
+nonisolated struct DexbotMessage: Codable, Hashable, Identifiable, Sendable {
+    enum Role: String, Codable {
+        case user, dexbot
+    }
+
+    var id = UUID()
+    var role: Role
+    var text: String
+    var date = Date()
+
+    init(role: Role, text: String) {
+        self.role = role
+        self.text = text
+    }
+}

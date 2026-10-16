@@ -49,7 +49,7 @@ extension View {
 enum PreviewStore {
     static let container: ModelContainer = {
         let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try! ModelContainer(for: SavedTeam.self, BrowsingRecord.self, configurations: configuration)
+        let container = try! ModelContainer(for: Schema(SharedSchema.models), configurations: configuration)
         let database = PokedexDatabase.preview
         let context = container.mainContext
 

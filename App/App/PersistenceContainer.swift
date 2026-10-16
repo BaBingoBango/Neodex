@@ -4,7 +4,7 @@ import SwiftData
 /// The app's SwiftData container, kept in the App Group so the Team widget can read teams.
 enum PersistenceContainer {
     static func make() -> ModelContainer {
-        let schema = Schema([SavedTeam.self, BrowsingRecord.self])
+        let schema = Schema(SharedSchema.models)
         if let shared = SharedContainer.storeURL {
             migrateLegacyStoreIfNeeded(to: shared)
             if let container = try? ModelContainer(for: schema, configurations: ModelConfiguration(url: shared)) {

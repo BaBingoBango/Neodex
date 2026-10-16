@@ -5,7 +5,7 @@ import SwiftUI
 /// Every top-level destination. On iPad all of them appear in the sidebar, grouped into sections;
 /// on iPhone the tab bar shows Home, Search and the tabs the user keeps visible.
 enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
-    case home, pokedex, moves, abilities, items, types, natures, teams, damageCalc, faceOff, usageStats, search
+    case home, dexbot, pokedex, moves, abilities, items, types, natures, teams, damageCalc, faceOff, usageStats, search
 
     var id: String { rawValue }
 
@@ -26,14 +26,14 @@ enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
     }
 
     /// Tabs that live in a sidebar section, in display order.
-    static let features: [AppTab] = [.pokedex, .moves, .abilities, .items, .types, .natures, .teams, .damageCalc, .faceOff, .usageStats]
+    static let features: [AppTab] = [.dexbot, .pokedex, .moves, .abilities, .items, .types, .natures, .teams, .damageCalc, .faceOff, .usageStats]
 
     /// Shown in the iPhone tab bar until the user changes the layout.
     static let defaultVisible: [AppTab] = [.pokedex, .teams, .damageCalc]
 
     var group: Group? {
         switch self {
-        case .pokedex, .moves, .abilities, .items, .types, .natures: .reference
+        case .dexbot, .pokedex, .moves, .abilities, .items, .types, .natures: .reference
         case .teams, .damageCalc, .faceOff, .usageStats: .battle
         case .home, .search: nil
         }
@@ -42,6 +42,7 @@ enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
     var title: String {
         switch self {
         case .home: "Home"
+        case .dexbot: "Dexbot"
         case .pokedex: "Pokédex"
         case .moves: "Moves"
         case .abilities: "Abilities"
@@ -70,6 +71,7 @@ enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
     var subtitle: String {
         switch self {
         case .home: "Jump back in"
+        case .dexbot: "Ask anything about Pokémon"
         case .pokedex: "Every species and form"
         case .moves: "Power, accuracy, learners"
         case .abilities: "What each Ability does"
@@ -87,6 +89,7 @@ enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
     var systemImage: String {
         switch self {
         case .home: "house.fill"
+        case .dexbot: "bubble.left.and.text.bubble.right.fill"
         case .pokedex: "person.fill"
         case .moves: "burst.fill"
         case .abilities: "sparkles"
@@ -104,6 +107,7 @@ enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
     var tint: Color {
         switch self {
         case .home: .accentColor
+        case .dexbot: .purple
         case .pokedex: .blue
         case .moves: .red
         case .abilities: .gold
@@ -138,6 +142,7 @@ enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
     @ViewBuilder
     var content: some View {
         switch self {
+        case .dexbot: DexbotView()
         case .pokedex: PokedexListContent()
         case .moves: MoveListContent()
         case .abilities: AbilityListView()

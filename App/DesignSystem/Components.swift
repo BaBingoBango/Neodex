@@ -126,7 +126,7 @@ struct MoveRow: View {
 }
 
 /// Measurement formatting shared by detail screens.
-enum Measurements {
+nonisolated enum Measurements {
     /// Feet and inches, rounding to the nearest inch first so 0.6 m is 2′00″ rather than 1′12″.
     static func feetAndInches(_ meters: Double) -> String {
         let totalInches = Int((meters * 39.3701).rounded())
