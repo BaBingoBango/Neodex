@@ -4,7 +4,7 @@ import SwiftUI
 /// Global Stats: Smogon usage rankings for any format and month.
 struct UsageStatsView: View {
     @Environment(\.database) private var database
-    @State private var model = UsageStatsModel()
+    @State private var model = UsageStatsModel.shared
     @State private var searchText = ""
     @State private var showingFormats = false
 
@@ -189,19 +189,39 @@ struct UsageFormatPicker: View {
     }
 }
 
-/// Drives the Global Stats screen.
+/// Drives the Global Stats screen. One shared instance keeps the loaded rankings and the chosen
+/// month, format and rating for the whole app session, and the selection is remembered across launches.
 @Observable
 @MainActor
 final class UsageStatsModel {
+    static let shared = UsageStatsModel()
+    static let selectionKey = "usageSelection"
+
     private(set) var months: [String] = []
     private(set) var formats: [UsageFormat] = []
-    private(set) var selection: UsageSelection?
+    private(set) var selection: UsageSelection? {
+        didSet { Self.store(selection) }
+    }
     private(set) var report: UsageRankingsReport?
     private(set) var isLoading = false
     private(set) var error: Error?
 
     private let client = SmogonStatsClient.shared
     private var hasLoaded = false
+
+    init() {
+        selection = Self.storedSelection()
+    }
+
+    private static func storedSelection() -> UsageSelection? {
+        guard let data = UserDefaults.standard.data(forKey: selectionKey) else { return nil }
+        return try? JSONDecoder().decode(UsageSelection.self, from: data)
+    }
+
+    private static func store(_ selection: UsageSelection?) {
+        guard let selection, let data = try? JSONEncoder().encode(selection) else { return }
+        UserDefaults.standard.set(data, forKey: selectionKey)
+    }
 
     var currentFormat: UsageFormat? { formats.first { $0.id == selection?.format } }
 

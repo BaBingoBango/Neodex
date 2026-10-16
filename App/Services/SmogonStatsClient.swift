@@ -2,7 +2,7 @@ import Foundation
 import NeodexKit
 
 /// Which month, format and rating cutoff of Smogon's usage statistics to show.
-nonisolated struct UsageSelection: Hashable, Sendable {
+nonisolated struct UsageSelection: Hashable, Sendable, Codable {
     var month: String
     var format: String
     var rating: Int
