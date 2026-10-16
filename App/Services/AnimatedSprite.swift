@@ -147,7 +147,7 @@ struct AnimatedSpriteView: View {
 
     private func frame(_ cgImage: CGImage, size: CGSize) -> some View {
         Image(decorative: cgImage, scale: 1)
-            .interpolation(.none)
+            .interpolation(scale(for: size) >= 1 ? .none : .medium)
             .resizable()
             .frame(width: size.width * scale(for: size), height: size.height * scale(for: size))
     }

@@ -18,6 +18,8 @@ struct TeamDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
                 nameSection
+                TeamSpriteLine(team: team)
+                    .padding(.horizontal)
                 membersSection
                 if !team.members.isEmpty {
                     summarySection
