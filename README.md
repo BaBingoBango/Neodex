@@ -15,14 +15,14 @@ An offline Pokédex for iPhone and iPad with [Pokémon Showdown](https://play.po
 
 ## Features
 
-- **Pokédex** — 1,025 species and 1,330 forms (Megas, Gigantamax, regional variants, Paradox Pokémon, the Legends: Z‑A Megas), with filters, sorting, a grid mode, and a detail screen covering Pokédex entries from every game, abilities, base stats, evolutions, forms, traits, type matchups, locations and the full learnset. Showdown's animated battle sprites, shinies and cries stream in on demand.
+- **Pokédex** — 1,025 species and 1,330 forms (Megas, Gigantamax, regional variants, Paradox Pokémon, the Legends: Z‑A Megas), with filters, sorting, a grid mode, and a detail screen covering Pokédex entries from every game, abilities, base stats, evolutions, forms, traits, type matchups, locations and the full learnset. Showdown's animated battle sprites, shinies and cries stream in on demand, and every Pokédex entry from every game is a tap away.
 - **Move, Ability and Item dexes** — in‑game descriptions alongside Showdown's competitive summaries, TM numbers, and reverse lookups (every Pokémon that learns a move or has an ability).
 - **Type‑O‑Matic** — combine up to two types and see exactly what they're weak to and resist.
 - **Teambuilder** — build teams of six with an editor that only offers legal moves, live stat calculation, EV/IV controls, natures and Tera Types. Import teams from Showdown's export text and export them back, byte‑for‑byte compatible. Teams are checked against the Smogon tier you pick, from Anything Goes to Little Cup, with every clause explained.
 - **Damage Calculator** — Showdown‑faithful Gen 9 damage calcs in both directions between any two sets: EVs, natures, stat stages, items, abilities, Terastallization, weather, terrain, screens and status, with KO chances and the exact calc line to copy.
 - **Face‑Off** — compare any two Pokémon side by side, then jump straight into a damage calc.
 - **Global Stats** — Smogon usage rankings for any format and month, with abilities, items, moves, spreads, teammates and checks for every Pokémon, plus a usage‑trend chart across recent months.
-- **Home** — jump back into what you were reading, picks based on your browsing, a Pokémon of the day and what's popular on Showdown, above every feature.
+- **Home** — jump back into what you were reading, picks based on your browsing (with one‑line reasons written on device by Apple Intelligence where available), a Pokémon of the day and what's popular on Showdown in the format you choose, above every feature.
 - **Spotlight** — every Pokémon, move, Ability, item and nature is searchable from the Home Screen and deep‑links into the app.
 - **Siri and Shortcuts** — ask what a Pokémon is weak to, have its Pokédex entry read aloud, open any Pokémon by name or get a random one; every species works in App Shortcuts phrases.
 - Fully offline except for Smogon statistics and the optional animated sprites and cries, which are cached after first use. Every feature is a tab: a grouped, customisable sidebar on iPad and a customisable tab bar on iPhone. Dynamic Type and dark mode throughout.

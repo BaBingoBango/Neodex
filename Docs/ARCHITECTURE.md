@@ -147,6 +147,10 @@ Key decisions:
 - **The damage calculator reuses `TeamMember`.** A calculator side is a Teambuilder set plus battle
   state (stat stages, status, HP, Tera, screens), so sets hand over from the editor unchanged and the
   same pickers edit both.
+- **On-device intelligence is optional.** `PickExplainer` asks the Foundation Models framework for one
+  sentence per Home pick, with guided generation (`@Generable`) so the output is always three strings.
+  It only runs when `SystemLanguageModel.default.availability` is `.available`, is given nothing but
+  the Pokémon's types, genus and egg groups, and the section simply doesn't appear otherwise.
 - **The dataset is versioned.** The pipeline writes a calendar version (`2026.10.9`) and "what's
   new" notes into the manifest; About shows them in an App Store-style card.
 - **Previews run on real data.** `App/Preview Content` holds a 0.7 MB slice of the generated dataset
