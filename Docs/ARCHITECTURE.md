@@ -108,7 +108,8 @@ App/
 │                          MainTabView, AppTab, AppRoute
 ├── Intents/               App Intents: PokemonEntity + query, Open / Random / Type Matchup /
 │                          Dex Entry intents, and the App Shortcuts phrases
-├── Features/              One folder per feature: Home, Pokedex, Moves, Abilities, Items, Types,
+├── CarPlay/               CPTemplateApplicationScene delegate: Dexbot as a voice-based conversation app
+├── Features/              One folder per feature: Home, Dexbot, Pokedex, Moves, Abilities, Items, Types,
 │                          Natures, Search, Teambuilder, DamageCalc, FaceOff, UsageStats, Settings,
 │                          About
 ├── DesignSystem/          Type palette, TypeBadge, PokemonImage, shared components
@@ -157,6 +158,25 @@ Key decisions:
   sentence per Home pick, with guided generation (`@Generable`) so the output is always three strings.
   It only runs when `SystemLanguageModel.default.availability` is `.available`, is given nothing but
   the Pokémon's types, genus and egg groups, and the section simply doesn't appear otherwise.
+- **Dexbot is tools first.** `DexbotEngine` builds a `LanguageModelSession` with ten `Tool`s over the
+  dataset (`DexbotTools`: Pokémon fact sheets, matchups, moves, abilities, items, learnsets, Smogon
+  usage, the damage calculator, the user's teams and legality). The instructions tell the model to use
+  them for every fact, so it phrases and reasons but never supplies data of its own. The chat screen
+  streams replies and persists them as `DexbotConversation`s in the shared store; Siri's
+  `AskNeodexIntent` and CarPlay use one-shot `answer` calls with spoken-style instructions. On iOS 27
+  the user can prefer Apple's Private Cloud Compute model. That model needs Apple's managed
+  `com.apple.developer.private-cloud-compute` entitlement, and without it the framework still reports
+  the model as available and then traps on the first request, so the cloud path is compiled in only
+  when the `PRIVATE_CLOUD_COMPUTE` Swift condition is set next to the entitlement; a network, quota or
+  service failure mid-chat falls back to the on-device model and says so. iOS 26 runs on device only.
+  Voice mode uses `SpeechAnalyzer`/`SpeechTranscriber` for on-device recognition and
+  `AVSpeechSynthesizer` for replies.
+- **CarPlay is a scene, not a second UI.** `CarPlaySceneDelegate` shows one `CPListTemplate` with
+  "Ask Dexbot" and recent chats; everything is spoken and the list only carries short status text. The
+  scene is declared in `App/Info.plist`; the `com.apple.developer.carplay-voice-based-conversation`
+  entitlement lives in a simulator-only entitlements file (`App/Neodex-Simulator.entitlements`, which
+  also claims the Private Cloud Compute entitlement so both can be exercised in the simulator) until
+  Apple grants them for devices.
 - **The dataset is versioned.** The pipeline writes a calendar version (`2026.10.9`) and "what's
   new" notes into the manifest; About shows them in an App Store-style card.
 - **Widgets read a snapshot, not the bundle.** An app extension cannot read the app's bundle, so
