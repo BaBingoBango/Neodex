@@ -79,11 +79,13 @@ struct DexEntryIntent: AppIntent {
 nonisolated enum NeodexIntentError: Error, CustomLocalizedStringResourceConvertible {
     case noData
     case unknownPokemon
+    case appleIntelligenceUnavailable
 
     var localizedStringResource: LocalizedStringResource {
         switch self {
         case .noData: "The Pokédex couldn't be loaded."
         case .unknownPokemon: "That Pokémon isn't in the Pokédex."
+        case .appleIntelligenceUnavailable: "Dexbot needs Apple Intelligence, which isn't available on this device."
         }
     }
 }
@@ -91,6 +93,11 @@ nonisolated enum NeodexIntentError: Error, CustomLocalizedStringResourceConverti
 /// Siri phrases that work out of the box; the Pokémon names come from `PokemonEntityQuery.suggestedEntities()`.
 nonisolated struct NeodexShortcuts: AppShortcutsProvider {
     static var appShortcuts: [AppShortcut] {
+        AppShortcut(intent: AskNeodexIntent(), phrases: [
+            "Ask \(.applicationName)",
+            "Ask Dexbot in \(.applicationName)",
+            "Talk to \(.applicationName)",
+        ], shortTitle: "Ask Dexbot", systemImageName: "bubble.left.and.text.bubble.right")
         AppShortcut(intent: OpenPokemonIntent(), phrases: [
             "Open \(\.$pokemon) in \(.applicationName)",
             "Show \(\.$pokemon) in \(.applicationName)",
