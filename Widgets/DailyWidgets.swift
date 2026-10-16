@@ -20,25 +20,26 @@ nonisolated struct DailyProvider: TimelineProvider {
     }
 
     func getSnapshot(in context: Context, completion: @escaping (DailyEntry) -> Void) {
-        completion(entry(for: .now, index: WidgetStore.index(), preview: context.isPreview))
+        completion(entry(for: .now, index: WidgetStore.index()))
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<DailyEntry>) -> Void) {
         let index = WidgetStore.index()
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: .now)
-        var entries = [entry(for: .now, index: index, preview: false)]
+        var entries = [entry(for: .now, index: index)]
         for offset in 1...7 {
             if let date = calendar.date(byAdding: .day, value: offset, to: today) {
-                entries.append(entry(for: date, index: index, preview: false))
+                entries.append(entry(for: date, index: index))
             }
         }
         completion(Timeline(entries: entries, policy: .atEnd))
     }
 
-    private func entry(for date: Date, index: [WidgetPokemon], preview: Bool) -> DailyEntry {
+    /// The gallery preview shows the silhouette too, so the widget never gives today's answer away.
+    private func entry(for date: Date, index: [WidgetPokemon]) -> DailyEntry {
         let pokemon = WidgetStore.pick(on: date, mystery: mystery, index: index)
-        let revealed = !mystery || preview || WidgetStore.isMysteryRevealed(on: date)
+        let revealed = !mystery || WidgetStore.isMysteryRevealed(on: date)
         return DailyEntry(date: date, pokemon: pokemon, revealed: revealed)
     }
 }
