@@ -235,6 +235,8 @@ struct CalcLineCard: View {
                     Text("\(result.minDamage)–\(result.maxDamage)")
                         .font(.system(.title2, design: .rounded).weight(.bold))
                         .monospacedDigit()
+                        .contentTransition(.numericText())
+                        .animation(.snappy, value: result.minDamage)
                     Text("\(percent(result.minPercent)) – \(percent(result.maxPercent))%")
                         .font(.subheadline.weight(.medium))
                         .foregroundStyle(.secondary)
@@ -247,6 +249,7 @@ struct CalcLineCard: View {
                     }
                 }
                 DamageBar(minPercent: result.minPercent, maxPercent: result.maxPercent)
+                    .animation(.snappy, value: result.maxPercent)
                 Text(result.koChance.text.prefix(1).uppercased() + result.koChance.text.dropFirst())
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(koColor)
