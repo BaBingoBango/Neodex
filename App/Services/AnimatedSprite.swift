@@ -100,6 +100,7 @@ struct AnimatedSpriteView: View {
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var media: SpriteMedia?
+    @State private var mediaKey = ""
 
     var body: some View {
         Group {
@@ -126,11 +127,16 @@ struct AnimatedSpriteView: View {
                     }
             }
         }
+        .animation(.easeInOut(duration: 0.3), value: mediaKey)
         .accessibilityLabel(shiny ? "Shiny \(pokemon.displayName)" : pokemon.displayName)
         .task(id: "\(pokemon.id)|\(shiny)") {
-            media = nil
+            // Keep showing the previous variant while the next one loads, then crossfade.
+            if mediaKey.hasPrefix(pokemon.id + "|") == false { media = nil }
             let loaded = await SpriteMediaStore.shared.sprite(for: pokemon, shiny: shiny)
-            if !Task.isCancelled { media = loaded }
+            if !Task.isCancelled {
+                media = loaded
+                mediaKey = "\(pokemon.id)|\(shiny)"
+            }
         }
     }
 

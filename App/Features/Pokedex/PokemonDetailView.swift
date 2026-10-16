@@ -62,13 +62,10 @@ struct PokemonDetailView: View {
                     Text(entries[index].gamesSummary.uppercased())
                         .font(.caption.weight(.semibold))
                         .foregroundStyle(.secondary)
+                        .contentTransition(.numericText())
                     Spacer()
                     if entries.count > 1 {
-                        Menu {
-                            ForEach(entries.indices, id: \.self) { i in
-                                Button(entries[i].gamesSummary) { selectedEntryIndex = i }
-                            }
-                        } label: {
+                        NavigationLink(value: AppRoute.dexEntries(pokemon.id)) {
                             Label("\(entries.count) entries", systemImage: "book.pages")
                                 .font(.caption.weight(.semibold))
                         }
@@ -77,8 +74,20 @@ struct PokemonDetailView: View {
                 Text(entries[index].text)
                     .font(.body)
                     .fixedSize(horizontal: false, vertical: true)
+                    .contentTransition(.opacity)
+                if entries.count > 1 {
+                    Text("Tap the entry for the next game, or browse them all.")
+                        .font(.caption2)
+                        .foregroundStyle(.tertiary)
+                }
             }
             .padding(.horizontal)
+            .contentShape(Rectangle())
+            .onTapGesture {
+                guard entries.count > 1 else { return }
+                withAnimation(.snappy) { selectedEntryIndex = (index + 1) % entries.count }
+            }
+            .animation(.snappy, value: selectedEntryIndex)
         }
     }
 
@@ -211,15 +220,18 @@ struct PokemonDetailView: View {
         VStack(alignment: .leading, spacing: 12) {
             SectionTitle("Characteristics")
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 160), spacing: 10)], spacing: 10) {
-                InfoTile(systemImage: "ruler", label: "Height", value: Measurements.height(pokemon.height), tint: .blue)
-                InfoTile(systemImage: "scalemass", label: "Weight", value: Measurements.weight(pokemon.weight), tint: .blue)
+                let height = Measurements.heightParts(pokemon.height)
+                let weight = Measurements.weightParts(pokemon.weight)
+                let gender = Measurements.genderParts(pokemon.maleRatio)
+                InfoTile(systemImage: "ruler", label: "Height", value: height.primary, detail: height.secondary, tint: .blue)
+                InfoTile(systemImage: "scalemass", label: "Weight", value: weight.primary, detail: weight.secondary, tint: .blue)
                 InfoTile(systemImage: "star", label: "EV Yield", value: Measurements.evYield(pokemon.evYield), tint: .green)
                 InfoTile(systemImage: "checkmark.seal", label: "Catch Rate", value: pokemon.catchRate.map(String.init) ?? "—", tint: .green)
                 InfoTile(systemImage: "heart", label: "Friendship", value: pokemon.baseFriendship.map(String.init) ?? "—", tint: .pink)
                 InfoTile(systemImage: "sparkles", label: "Base Exp.", value: pokemon.baseExperience.map(String.init) ?? "—", tint: .pink)
                 InfoTile(systemImage: "person.2", label: "Egg Groups", value: pokemon.eggGroups.isEmpty ? "—" : pokemon.eggGroups.joined(separator: " & "), tint: .yellow)
                 InfoTile(systemImage: "arrow.triangle.2.circlepath", label: "Egg Cycles", value: pokemon.hatchCycles.map(String.init) ?? "—", tint: .yellow)
-                InfoTile(systemImage: "figure.stand.dress.line.vertical.figure", label: "Gender", value: Measurements.genderRatio(pokemon.maleRatio), tint: .purple)
+                InfoTile(systemImage: "figure.stand.dress.line.vertical.figure", label: "Gender", value: gender.primary, detail: gender.secondary, tint: .purple)
                 InfoTile(systemImage: "chart.line.uptrend.xyaxis", label: "Growth Rate", value: pokemon.growthRate ?? "—", tint: .purple)
                 InfoTile(systemImage: "number", label: "Generation", value: "Gen \(pokemon.generation)", tint: .gray)
                 InfoTile(systemImage: "trophy", label: "Smogon Tier", value: pokemon.tier ?? "—", tint: .gray)
@@ -312,9 +324,9 @@ struct PokemonDetailView: View {
 
 // MARK: - Header
 
-/// The colourful banner: type-coloured background, dex number, artwork, name, types and genus.
-/// The hero header: a type-coloured gradient, official artwork or Showdown's animated sprite,
-/// the name and types, and controls for animation, shiny colouring and the Pokémon's cry.
+/// The hero header: a type-coloured gradient that stretches when you pull down, the dex number,
+/// official artwork or Showdown's animated sprite over slowly rippling rings, the name and types,
+/// and controls for animation, shiny colouring and the Pokémon's cry.
 struct PokemonHeader: View {
     var pokemon: Pokemon
 
@@ -322,33 +334,50 @@ struct PokemonHeader: View {
     @State private var shiny = false
     @State private var cryPlayer = CryPlayer()
 
+    private var primaryColor: Color { pokemon.primaryType.color }
+    private var secondaryColor: Color { (pokemon.secondaryType ?? pokemon.primaryType).color }
+
     var body: some View {
         ZStack(alignment: .bottom) {
-            LinearGradient(colors: [pokemon.primaryType.color, (pokemon.secondaryType ?? pokemon.primaryType).color.opacity(0.85)],
-                           startPoint: .topLeading, endPoint: .bottomTrailing)
-                .clipShape(UnevenRoundedRectangle(bottomLeadingRadius: 36, bottomTrailingRadius: 36, style: .continuous))
-                .ignoresSafeArea(edges: .top)
+            GeometryReader { proxy in
+                // Grow upward while the list is pulled down so the colour never runs out above.
+                let stretch = max(0, proxy.frame(in: .scrollView).minY)
+                LinearGradient(colors: [primaryColor, secondaryColor.opacity(0.85)], startPoint: .topLeading, endPoint: .bottomTrailing)
+                    .frame(width: proxy.size.width, height: proxy.size.height + stretch)
+                    .clipShape(UnevenRoundedRectangle(bottomLeadingRadius: 36, bottomTrailingRadius: 36, style: .continuous))
+                    .offset(y: -stretch)
+            }
+            .ignoresSafeArea(edges: .top)
             VStack(spacing: 0) {
-                HStack(alignment: .top) {
-                    Text(pokemon.formattedDexNumber)
-                        .font(.system(size: 72, weight: .heavy, design: .rounded))
-                        .foregroundStyle(.white.opacity(0.35))
-                        .minimumScaleFactor(0.5)
-                        .lineLimit(1)
+                HStack {
                     Spacer()
+                    Text(pokemon.formattedDexNumber)
+                        .font(.system(size: 56, weight: .heavy, design: .rounded))
+                        .foregroundStyle(.white.opacity(0.55))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
                 }
-                .padding(.horizontal)
-                .padding(.top, 72)
-                Group {
-                    if showsSprite {
-                        AnimatedSpriteView(pokemon: pokemon, shiny: shiny, maxHeight: 200)
-                    } else {
-                        PokemonImage(pokemon: pokemon, kind: .artwork)
+                .padding(.horizontal, 20)
+                .padding(.top, 104)
+                ZStack {
+                    HeaderRipples()
+                        .frame(width: 280, height: 280)
+                    Group {
+                        if showsSprite {
+                            AnimatedSpriteView(pokemon: pokemon, shiny: shiny, maxHeight: 200)
+                        } else {
+                            PokemonImage(pokemon: pokemon, kind: .artwork)
+                        }
                     }
+                    .frame(height: 220)
+                    .shadow(color: .black.opacity(0.25), radius: 16, y: 8)
+                    .animation(.easeInOut(duration: 0.3), value: showsSprite)
+                    SparkleBurst(isOn: shiny)
+                        .frame(width: 280, height: 280)
+                        .allowsHitTesting(false)
                 }
                 .frame(height: 220)
-                .shadow(color: .black.opacity(0.25), radius: 16, y: 8)
-                .padding(.top, -24)
+                .padding(.top, -40)
                 VStack(spacing: 8) {
                     Text(pokemon.displayName)
                         .font(.system(.largeTitle, design: .rounded).weight(.heavy))
@@ -372,20 +401,17 @@ struct PokemonHeader: View {
         .onDisappear { cryPlayer.stop() }
     }
 
-    private var cryIcon: String {
-        if cryPlayer.unavailableID == pokemon.id { return "speaker.slash.fill" }
-        return cryPlayer.isPlaying ? "speaker.wave.3.fill" : "speaker.wave.2.fill"
-    }
-
-    /// Animate / Shiny / Cry as Liquid Glass pills over the gradient.
+    /// Animate / Shiny / Cry as Liquid Glass pills. The symbols never change, so the pills keep
+    /// their width; state shows through tint and symbol effects instead.
     private var mediaControls: some View {
         GlassEffectContainer(spacing: 10) {
             HStack(spacing: 10) {
                 Toggle(isOn: $showsSprite.animation()) {
-                    Label("Animate", systemImage: showsSprite ? "figure.walk.motion" : "play.fill")
+                    Label("Animate", systemImage: "play.fill")
                 }
                 Toggle(isOn: $shiny) {
                     Label("Shiny", systemImage: "sparkles")
+                        .symbolEffect(.bounce, value: shiny)
                 }
                 .onChange(of: shiny) {
                     if shiny { showsSprite = true }
@@ -393,13 +419,84 @@ struct PokemonHeader: View {
                 Button {
                     cryPlayer.play(pokemon)
                 } label: {
-                    Label("Cry", systemImage: cryIcon)
+                    Label("Cry", systemImage: "speaker.wave.2.fill")
+                        .symbolEffect(.variableColor.iterative, isActive: cryPlayer.isPlaying)
                 }
                 .disabled(cryPlayer.isLoading || cryPlayer.unavailableID == pokemon.id)
             }
             .toggleStyle(.button)
             .buttonStyle(.glass)
             .font(.subheadline.weight(.semibold))
+        }
+    }
+}
+
+/// Soft rings that drift outward behind the artwork, like a Poké Ball's capture ripple.
+/// Still under Reduce Motion.
+struct HeaderRipples: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    var body: some View {
+        TimelineView(.animation(minimumInterval: 1.0 / 30, paused: reduceMotion)) { context in
+            let time = reduceMotion ? 0 : context.date.timeIntervalSinceReferenceDate
+            Canvas { graphics, size in
+                let center = CGPoint(x: size.width / 2, y: size.height / 2)
+                let maxRadius = size.width / 2
+                graphics.fill(Path(ellipseIn: CGRect(x: center.x - maxRadius * 0.6, y: center.y - maxRadius * 0.6,
+                                                       width: maxRadius * 1.2, height: maxRadius * 1.2)),
+                              with: .radialGradient(Gradient(colors: [.white.opacity(0.22), .clear]),
+                                                    center: center, startRadius: 0, endRadius: maxRadius * 0.6))
+                for ring in 0..<4 {
+                    let phase = (time / 7 + Double(ring) / 4).truncatingRemainder(dividingBy: 1)
+                    let radius = maxRadius * (0.35 + 0.65 * phase)
+                    let opacity = (1 - phase) * 0.3
+                    let rect = CGRect(x: center.x - radius, y: center.y - radius, width: radius * 2, height: radius * 2)
+                    graphics.stroke(Path(ellipseIn: rect), with: .color(.white.opacity(opacity)), lineWidth: 1.5)
+                }
+            }
+        }
+        .accessibilityHidden(true)
+    }
+}
+
+/// A short burst of sparkles when shiny is switched on. Skipped under Reduce Motion.
+struct SparkleBurst: View {
+    var isOn: Bool
+
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var startedAt: Date?
+
+    private let duration: TimeInterval = 0.9
+
+    var body: some View {
+        TimelineView(.animation(minimumInterval: 1.0 / 60, paused: startedAt == nil)) { context in
+            Canvas { graphics, size in
+                guard let startedAt else { return }
+                let progress = context.date.timeIntervalSince(startedAt) / duration
+                guard progress >= 0, progress < 1 else { return }
+                let center = CGPoint(x: size.width / 2, y: size.height / 2)
+                let eased = 1 - pow(1 - progress, 3)
+                for index in 0..<14 {
+                    let seed = Double(index)
+                    let angle = seed / 14 * 2 * .pi + sin(seed * 12.9898) * 0.35
+                    let reach = (0.28 + 0.14 * abs(sin(seed * 78.233))) * size.width
+                    let point = CGPoint(x: center.x + cos(angle) * reach * eased, y: center.y + sin(angle) * reach * eased)
+                    let side = 22 * sin(progress * .pi) * (0.55 + 0.45 * abs(cos(seed * 3.7)))
+                    var sparkle = graphics.resolve(Image(systemName: index.isMultiple(of: 3) ? "sparkle" : "star.fill"))
+                    sparkle.shading = .color(index.isMultiple(of: 2) ? .yellow : .white)
+                    graphics.opacity = 1 - progress
+                    graphics.draw(sparkle, in: CGRect(x: point.x - side / 2, y: point.y - side / 2, width: side, height: side))
+                }
+            }
+        }
+        .accessibilityHidden(true)
+        .onChange(of: isOn) { _, newValue in
+            if newValue, !reduceMotion { startedAt = .now }
+        }
+        .task(id: startedAt) {
+            guard startedAt != nil else { return }
+            try? await Task.sleep(for: .seconds(duration + 0.1))
+            startedAt = nil
         }
     }
 }

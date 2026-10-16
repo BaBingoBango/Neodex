@@ -11,16 +11,16 @@ struct TypeBadge: View {
 
         var font: Font {
             switch self {
-            case .small: .system(.caption2, design: .monospaced).weight(.semibold)
-            case .regular: .system(.footnote, design: .monospaced).weight(.semibold)
+            case .small: .system(.caption, design: .monospaced).weight(.semibold)
+            case .regular: .system(.subheadline, design: .monospaced).weight(.semibold)
             case .large: .system(.title3, design: .monospaced).weight(.semibold)
             }
         }
 
         var padding: EdgeInsets {
             switch self {
-            case .small: EdgeInsets(top: 2, leading: 6, bottom: 2, trailing: 6)
-            case .regular: EdgeInsets(top: 4, leading: 10, bottom: 4, trailing: 10)
+            case .small: EdgeInsets(top: 3, leading: 8, bottom: 3, trailing: 8)
+            case .regular: EdgeInsets(top: 5, leading: 12, bottom: 5, trailing: 12)
             case .large: EdgeInsets(top: 8, leading: 18, bottom: 8, trailing: 18)
             }
         }
