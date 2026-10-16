@@ -83,7 +83,7 @@ enum TeamConversion {
         return set
     }
 
-    static func exportText(for team: SavedTeam, database: PokedexDatabase, includeHeader: Bool = false) -> String {
+    static func exportText(for team: SavedTeam, database: PokedexDatabase, includeHeader: Bool = true) -> String {
         let sets = team.members.compactMap { showdownSet(for: $0, database: database) }
         return ShowdownTeamCodec.export(ShowdownTeam(name: team.name, format: team.format, sets: sets), includeHeader: includeHeader)
     }
