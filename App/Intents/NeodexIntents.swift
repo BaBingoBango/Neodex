@@ -2,21 +2,20 @@ import AppIntents
 import Foundation
 import NeodexKit
 
-/// Opens a Pokémon's page.
-struct OpenPokemonIntent: AppIntent {
+/// Opens a Pokémon's page. As an `OpenIntent` it also opens visual intelligence's search results.
+struct OpenPokemonIntent: OpenIntent {
     nonisolated static let title: LocalizedStringResource = "Open a Pokémon"
     nonisolated static let description = IntentDescription("Opens a Pokémon's Pokédex page in Neodex.")
-    nonisolated static let openAppWhenRun = true
 
     @Parameter(title: "Pokémon")
-    var pokemon: PokemonEntity
+    var target: PokemonEntity
 
     nonisolated static var parameterSummary: some ParameterSummary {
-        Summary("Open \(\.$pokemon)")
+        Summary("Open \(\.$target)")
     }
 
     func perform() async throws -> some IntentResult {
-        await DeepLinkRouter.shared.open(.pokemon(pokemon.id))
+        await DeepLinkRouter.shared.open(.pokemon(target.id))
         return .result()
     }
 }
@@ -111,9 +110,9 @@ nonisolated struct NeodexShortcuts: AppShortcutsProvider {
             "Talk to \(.applicationName)",
         ], shortTitle: "Ask Dexbot", systemImageName: "bubble.left.and.text.bubble.right")
         AppShortcut(intent: OpenPokemonIntent(), phrases: [
-            "Open \(\.$pokemon) in \(.applicationName)",
-            "Show \(\.$pokemon) in \(.applicationName)",
-            "Look up \(\.$pokemon) in \(.applicationName)",
+            "Open \(\.$target) in \(.applicationName)",
+            "Show \(\.$target) in \(.applicationName)",
+            "Look up \(\.$target) in \(.applicationName)",
         ], shortTitle: "Open a Pokémon", systemImageName: "book")
         AppShortcut(intent: ScanPokemonIntent(), phrases: [
             "Scan a Pokémon in \(.applicationName)",
