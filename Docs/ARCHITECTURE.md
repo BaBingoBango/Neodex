@@ -88,8 +88,24 @@ swift test                               # pipeline tests: CSV, JS evaluation, n
 
 Every full run also refreshes the preview fixture (below), so the two never drift apart.
 
-The whole bundle is ≈49 MB (5.5 MB JSON, 44 MB images) versus the 454 MB asset catalog of the
-original app.
+### The Pokémon recogniser
+
+`swift run neodex-data --train-classifier` builds the camera scanner's classifier. One class per form
+that has its own artwork (totems fold into their species); training images per class come from the
+bundled artwork and sprite, PokeAPI's official artwork and HOME renders (normal and shiny) and Dream
+World art, frames of Showdown's animated sprites (front, back, shiny; normalised onto one canvas),
+trading-card illustrations from [pokemontcg.io](https://pokemontcg.io) matched to forms by dex number
+and name, and composites of the cut-outs on generated backgrounds. Every image becomes Apple's
+768-value scene-print feature vector (Vision's `GenerateImageFeaturePrintRequest`, cached on disk),
+and a softmax head is trained on the standardised vectors with Adam and BLAS in a few seconds per
+epoch. One card in five is held out, so the reported validation accuracy means "cards the model
+never saw", which is as close to a photo as the sources get. The output is
+`App/Resources/PokemonClassifier.weights` (raw floats, about 4 MB) plus `Data/classifier.json` with
+the class list, the standardisation and the metrics. Create ML's image classifier was the first
+attempt; its revision-2 feature extractor leaks until it dies somewhere past 5,000 images, which is
+why the pipeline extracts the same features itself. `--limit`, `--cards-per-class`, `--synthetic`,
+`--iterations` and `--skip-cards` shape quick experiments; the download and feature caches make
+re-runs cheap.
 
 ## App (`App/`)
 
@@ -171,6 +187,16 @@ Key decisions:
   service failure mid-chat falls back to the on-device model and says so. iOS 26 runs on device only.
   Voice mode uses `SpeechAnalyzer`/`SpeechTranscriber` for on-device recognition and
   `AVSpeechSynthesizer` for replies.
+- **The scanner is one actor and one matrix.** `PokemonRecognizer` asks Vision for the image's
+  scene-print feature vector, standardises it with the manifest's statistics and multiplies it by the
+  bundled weights (Accelerate), then reads printed names with `RecognizeTextRequest` as a second
+  opinion (cards and screens). `CameraScanner` owns the capture session and hands a few frames a
+  second to `ScanModel`, which smooths the probabilities over time and locks when the same Pokémon
+  leads three frames in a row; photos are scanned once with both passes. The same recogniser answers
+  visual intelligence: `PokemonVisualSearchQuery` is the app's `IntentValueQuery` for a
+  `SemanticContentDescriptor`, `PokemonEntity` is an `IndexedEntity`, and `OpenPokemonIntent` is the
+  `OpenIntent` that opens a result. The framework only exists in the device SDK, so that query is
+  compiled out of simulator builds.
 - **CarPlay is a scene, not a second UI.** `CarPlaySceneDelegate` shows one `CPListTemplate` with
   "Ask Dexbot" and recent chats; everything is spoken and the list only carries short status text. The
   scene is declared in `App/Info.plist`; the `com.apple.developer.carplay-voice-based-conversation`
@@ -205,6 +231,8 @@ cd Tools/NeodexData && swift test       # pipeline: CSV, JS evaluation, name map
 # The widget extension builds with the app; the simulator ignores the App Group entitlement, so widgets
 # can be added to the simulator Home Screen and read the group container like on a device.
 xcodebuild -scheme Neodex -destination 'platform=iOS Simulator,name=iPhone 17 Pro' test   # + bundled-data and fixture smoke tests
+# The recogniser tests that run the Core ML model only execute on a device: Vision's scene-print
+# feature extractor can't create its inference context in the simulator.
 ```
 
 ## Known limitations

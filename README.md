@@ -25,6 +25,7 @@ An offline Pokédex for iPhone and iPad with [Pokémon Showdown](https://play.po
 - **Home** — jump back into what you were reading, picks based on your browsing (with one‑line reasons written on device by Apple Intelligence where available), a Pokémon of the day and what's popular on Showdown in the format you choose, above every feature.
 - **Spotlight** — every Pokémon, move, Ability, item and nature is searchable from the Home Screen and deep‑links into the app.
 - **Dexbot** — a Pokémon expert you can talk to. Powered by Apple Intelligence (on device, with Private Cloud Compute on iOS 27 once Apple grants the entitlement) with tools that only read Neodex's own data and Smogon's statistics, so it answers about matchups, movesets, usage, damage and your own teams without inventing anything. Type on Home or in its tab, or hold a hands‑free voice conversation. "Hey Siri, ask Neodex…" works anywhere Siri does, including CarPlay; the app also includes a CarPlay voice‑based conversation scene, pending Apple's entitlement.
+- **Pokédex Scanner** — point the camera at a Pokémon, a trading card or a screen and the entry lights up, cry and all, like the show. An on‑device classifier trained in the pipeline on artwork, 3D renders, animated sprites and card illustrations (Apple's Vision scene‑print features with a softmax head) does the recognising, with printed names read as a second opinion; scan a photo or screenshot instead when there's no camera. The same recogniser plugs into iOS 26 visual intelligence, so Neodex's matches appear in the system camera's search.
 - **Widgets and Controls** — Pokémon of the Day (Home Screen and Lock Screen), a daily *Who's That Pokémon?* silhouette you reveal in place, one of your teams lined up like a battle preview, and Smogon's most‑used Pokémon in a format you choose. Control Center and Action button controls open a random Pokémon or the Damage Calculator.
 - **Siri and Shortcuts** — ask what a Pokémon is weak to, have its Pokédex entry read aloud, open any Pokémon by name or get a random one; every species works in App Shortcuts phrases.
 - Fully offline except for Smogon statistics and the optional animated sprites and cries, which are cached after first use. Every feature is a tab: a grouped, customisable sidebar on iPad and a customisable tab bar on iPhone. Dynamic Type and dark mode throughout.
@@ -58,6 +59,7 @@ cd Tools/NeodexData
 swift run neodex-data                    # full refresh: data + images (about a minute)
 swift run neodex-data --skip-images      # data only
 swift run neodex-data --preview-fixture  # just the Xcode Previews fixture
+swift run neodex-data --train-classifier # retrain the scanner's classifier (downloads card art; takes a while)
 ```
 
 ### Tests
