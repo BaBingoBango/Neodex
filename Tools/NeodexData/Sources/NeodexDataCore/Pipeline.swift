@@ -50,15 +50,7 @@ package enum Pipeline {
 
         let imagesDirectory = options.outputDirectory.appendingPathComponent("Images")
         if options.skipImages {
-            // Keep image IDs consistent with whatever artwork already exists on disk.
-            let artwork = imagesDirectory.appendingPathComponent("artwork")
-            for index in dataset.pokemon.indices {
-                let entry = dataset.pokemon[index]
-                let own = artwork.appendingPathComponent("\(entry.id)-art.heic").path
-                if !FileManager.default.fileExists(atPath: own), !entry.isBaseForm {
-                    dataset.pokemon[index].imageID = entry.speciesID
-                }
-            }
+            reconcileImageIDs(&dataset.pokemon, imagesDirectory: imagesDirectory)
             log("Skipping images.")
         } else {
             log("Processing images (this downloads ~\(dataset.pokemon.count) artworks on a fresh cache)…")
@@ -89,5 +81,60 @@ package enum Pipeline {
         let downloads = await fetcher.downloads
         let hits = await fetcher.cacheHits
         log("Network: \(downloads) downloads, \(hits) cache hits")
+    }
+
+    /// Builds the training set for the Pokémon recogniser, trains it and writes the Core ML model.
+    package static func trainClassifier(_ options: PipelineOptions, training: TrainingOptions, log: Log) async throws {
+        let fetcher = Fetcher(cacheDirectory: options.cacheDirectory)
+
+        log("Loading Pokémon Showdown data…")
+        let showdown = try await ShowdownData.load(using: fetcher)
+        log("Loading PokeAPI data…")
+        let pokeapi = try await PokeAPIData.load(using: fetcher)
+        log("Building dataset…")
+        var builder = DatasetBuilder(showdown: showdown, pokeapi: pokeapi)
+        builder.limit = options.limit
+        var dataset = try builder.build()
+        let imagesDirectory = options.outputDirectory.appendingPathComponent("Images")
+        reconcileImageIDs(&dataset.pokemon, imagesDirectory: imagesDirectory)
+
+        log("Gathering training images…")
+        var set = TrainingSet(fetcher: fetcher, cacheDirectory: options.cacheDirectory, bundledImages: imagesDirectory, options: training)
+        set.concurrency = options.concurrency
+        let (trainingImages, validationImages, summary) = try await set.build(
+            pokemon: dataset.pokemon, pokeapiIDs: dataset.pokeapiPokemonIDs, spriteIDs: dataset.spriteIDs, log: log)
+        let sources = summary.sources.sorted { $0.key < $1.key }.map { "\($0.key) \($0.value)" }.joined(separator: ", ")
+        log("  \(summary.trainingImages) training images, \(summary.validationImages) validation images (\(sources))")
+        if summary.classesWithoutCards > 0 { log("  \(summary.classesWithoutCards) classes have no trading cards") }
+
+        let result = try await ClassifierTrainer.train(training: trainingImages, validation: validationImages,
+                                                       cacheDirectory: options.cacheDirectory, epochs: training.maxIterations,
+                                                       concurrency: options.concurrency, log: log)
+        log("  training accuracy \(ClassifierTrainer.percent(result.outcome.trainingAccuracy)) (best epoch \(result.outcome.epochs))")
+        if let accuracy = result.outcome.validationAccuracy { log("  validation accuracy \(ClassifierTrainer.percent(accuracy)) on held-out cards") }
+        for confusion in result.outcome.confusions {
+            log("  confused \(result.classes[confusion.label]) → \(result.classes[confusion.predicted]) ×\(confusion.count)")
+        }
+
+        let weightsURL = training.modelURL ?? options.outputDirectory.appendingPathComponent("PokemonClassifier.weights")
+        try ClassifierTrainer.write(result, summary: summary, version: DataManifest.calendarVersion(for: .now),
+                                    weightsURL: weightsURL, manifestDirectory: options.outputDirectory.appendingPathComponent("Data"))
+        let size = (try? FileManager.default.attributesOfItem(atPath: weightsURL.path)[.size] as? Int) ?? 0
+        log(String(format: "Wrote %@ (%.1f MB) and Data/classifier.json", weightsURL.lastPathComponent, Double(size) / 1_000_000))
+        let downloads = await fetcher.downloads
+        let hits = await fetcher.cacheHits
+        log("Network: \(downloads) downloads, \(hits) cache hits")
+    }
+
+    /// Keeps image IDs consistent with whatever artwork already exists on disk.
+    private static func reconcileImageIDs(_ pokemon: inout [Pokemon], imagesDirectory: URL) {
+        let artwork = imagesDirectory.appendingPathComponent("artwork")
+        for index in pokemon.indices {
+            let entry = pokemon[index]
+            let own = artwork.appendingPathComponent("\(entry.id)-art.heic").path
+            if !FileManager.default.fileExists(atPath: own), !entry.isBaseForm {
+                pokemon[index].imageID = entry.speciesID
+            }
+        }
     }
 }

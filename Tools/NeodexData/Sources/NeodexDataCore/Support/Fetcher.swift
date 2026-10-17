@@ -84,7 +84,23 @@ actor Fetcher {
 
     nonisolated static func cacheURL(for url: URL, in directory: URL) -> URL {
         let host = url.host ?? "unknown"
-        let path = url.path.split(separator: "/").map(String.init).joined(separator: "/")
-        return directory.appendingPathComponent(host).appendingPathComponent(path.isEmpty ? "index" : path)
+        var path = url.path.split(separator: "/").map(String.init).joined(separator: "/")
+        if path.isEmpty { path = "index" }
+        // Query strings tell paged API requests apart; keep them readable but filesystem-safe.
+        if let query = url.query, !query.isEmpty {
+            let safe = query.map { $0.isLetter || $0.isNumber || $0 == "-" || $0 == "_" ? $0 : "_" }
+            path += "~" + String(safe.prefix(64)) + "~" + stableHash(query)
+        }
+        return directory.appendingPathComponent(host).appendingPathComponent(path)
+    }
+
+    /// FNV-1a; Swift's `hashValue` is seeded per process, so it can't name cache files.
+    nonisolated static func stableHash(_ text: String) -> String {
+        var hash: UInt64 = 14_695_981_039_346_656_037
+        for byte in text.utf8 {
+            hash ^= UInt64(byte)
+            hash = hash &* 1_099_511_628_211
+        }
+        return String(hash, radix: 36)
     }
 }

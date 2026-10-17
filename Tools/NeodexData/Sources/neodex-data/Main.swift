@@ -5,11 +5,14 @@ import NeodexDataCore
 ///
 /// Usage: `swift run neodex-data [--output DIR] [--cache DIR] [--skip-images] [--force-images] [--limit N] [--pretty]`
 ///        `swift run neodex-data --preview-fixture` rebuilds only the Xcode Previews fixture from the existing data.
+///        `swift run neodex-data --train-classifier` trains the Pokémon recogniser from the existing data.
 @main
 struct NeodexDataTool {
     struct Arguments {
         var options: PipelineOptions
         var previewFixtureOnly = false
+        var trainClassifier = false
+        var training = TrainingOptions()
 
         static func parse(_ arguments: [String]) throws -> Arguments {
             // Main.swift lives at Tools/NeodexData/Sources/neodex-data/Main.swift → five levels up is the repository root.
@@ -32,6 +35,12 @@ struct NeodexDataTool {
                 case "--limit": parsed.options.limit = Int(try value(iterator.next(), for: argument))
                 case "--concurrency": parsed.options.concurrency = max(1, Int(try value(iterator.next(), for: argument)) ?? 8)
                 case "--preview-fixture": parsed.previewFixtureOnly = true
+                case "--train-classifier": parsed.trainClassifier = true
+                case "--cards-per-class": parsed.training.cardsPerClass = max(0, Int(try value(iterator.next(), for: argument)) ?? 40)
+                case "--synthetic": parsed.training.syntheticPerClass = max(0, Int(try value(iterator.next(), for: argument)) ?? 6)
+                case "--skip-cards": parsed.training.skipCards = true
+                case "--iterations": parsed.training.maxIterations = max(1, Int(try value(iterator.next(), for: argument)) ?? 40)
+                case "--model-output": parsed.training.modelURL = URL(fileURLWithPath: try value(iterator.next(), for: argument))
                 case "--help", "-h":
                     print(usage)
                     exit(0)
@@ -71,6 +80,14 @@ struct NeodexDataTool {
           --pretty              Pretty-print the JSON output
           --concurrency N       Parallel image downloads (default 8)
           --preview-fixture     Only rebuild the preview fixture from the existing generated data
+
+        Recogniser (Create ML):
+          --train-classifier    Gather training images and write App/Resources/PokemonClassifier.weights
+          --cards-per-class N   Trading cards per class, one in five held out for validation (default 40)
+          --synthetic N         Composites per class on generated backgrounds (default 6)
+          --skip-cards          Train without trading cards
+          --iterations N        Training epochs for the softmax head (default 40)
+          --model-output PATH   Where to write the weights file
         """
     }
 
@@ -78,7 +95,9 @@ struct NeodexDataTool {
         let start = Date()
         do {
             let arguments = try Arguments.parse(CommandLine.arguments)
-            if arguments.previewFixtureOnly {
+            if arguments.trainClassifier {
+                try await Pipeline.trainClassifier(arguments.options, training: arguments.training) { message in NeodexDataTool.log(message) }
+            } else if arguments.previewFixtureOnly {
                 let summary = try PreviewFixture.write(from: arguments.options.outputDirectory.appendingPathComponent("Data"),
                                                        to: arguments.options.previewDirectory, pretty: arguments.options.pretty)
                 log("Preview fixture: \(summary)")
