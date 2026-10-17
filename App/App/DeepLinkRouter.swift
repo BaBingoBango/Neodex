@@ -32,6 +32,8 @@ final class DeepLinkRouter {
             pendingRoute = .usageStats(format: argument)
         case "calc":
             pendingRoute = .damageCalculator(attacker: nil, defender: nil)
+        case "scan":
+            pendingRoute = .scan
         case "random":
             pendingPick = .random
         case "today":

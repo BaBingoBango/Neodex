@@ -480,6 +480,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Neodex;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
+				INFOPLIST_KEY_NSCameraUsageDescription = "The scanner points the camera at a Pokémon, a card or a screen to recognise it. Frames never leave your device.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Dexbot listens when you tap the microphone so you can ask questions by voice.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Your voice is turned into text on this device so Dexbot can answer.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = NO;
@@ -518,6 +519,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Neodex;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
+				INFOPLIST_KEY_NSCameraUsageDescription = "The scanner points the camera at a Pokémon, a card or a screen to recognise it. Frames never leave your device.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Dexbot listens when you tap the microphone so you can ask questions by voice.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Your voice is turned into text on this device so Dexbot can answer.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = NO;

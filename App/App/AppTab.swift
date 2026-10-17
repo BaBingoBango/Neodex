@@ -5,7 +5,7 @@ import SwiftUI
 /// Every top-level destination. On iPad all of them appear in the sidebar, grouped into sections;
 /// on iPhone the tab bar shows Home, Search and the tabs the user keeps visible.
 enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
-    case home, dexbot, pokedex, moves, abilities, items, types, natures, teams, damageCalc, faceOff, usageStats, search
+    case home, dexbot, pokedex, moves, abilities, items, types, natures, scan, teams, damageCalc, faceOff, usageStats, search
 
     var id: String { rawValue }
 
@@ -26,14 +26,14 @@ enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
     }
 
     /// Tabs that live in a sidebar section, in display order.
-    static let features: [AppTab] = [.dexbot, .pokedex, .moves, .abilities, .items, .types, .natures, .teams, .damageCalc, .faceOff, .usageStats]
+    static let features: [AppTab] = [.dexbot, .pokedex, .moves, .abilities, .items, .types, .natures, .scan, .teams, .damageCalc, .faceOff, .usageStats]
 
     /// Shown in the iPhone tab bar until the user changes the layout.
     static let defaultVisible: [AppTab] = [.pokedex, .teams, .damageCalc]
 
     var group: Group? {
         switch self {
-        case .dexbot, .pokedex, .moves, .abilities, .items, .types, .natures: .reference
+        case .dexbot, .pokedex, .moves, .abilities, .items, .types, .natures, .scan: .reference
         case .teams, .damageCalc, .faceOff, .usageStats: .battle
         case .home, .search: nil
         }
@@ -49,6 +49,7 @@ enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
         case .items: "Items"
         case .types: "Type-O-Matic"
         case .natures: "Natures"
+        case .scan: "Scanner"
         case .teams: "Teams"
         case .damageCalc: "Damage Calc"
         case .faceOff: "Face-Off"
@@ -78,6 +79,7 @@ enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
         case .items: "Held items and more"
         case .types: "Weaknesses and resistances"
         case .natures: "All 25 natures"
+        case .scan: "Point the camera at a Pokémon"
         case .teams: "Build and share Showdown teams"
         case .damageCalc: "Showdown-style damage calcs"
         case .faceOff: "Compare two Pokémon"
@@ -96,6 +98,7 @@ enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
         case .items: "cube.fill"
         case .types: "circle.grid.cross.fill"
         case .natures: "leaf.fill"
+        case .scan: "camera.viewfinder"
         case .teams: "rectangle.stack.person.crop.fill"
         case .damageCalc: "function"
         case .faceOff: "bolt.circle.fill"
@@ -114,6 +117,7 @@ enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
         case .items: PokemonType.flying.color
         case .types: PokemonType.psychic.color
         case .natures: .green
+        case .scan: .orange
         case .teams: PokemonType.ice.color
         case .damageCalc: PokemonType.fire.color
         case .faceOff: PokemonType.dragon.color
@@ -149,6 +153,7 @@ enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
         case .items: ItemListView()
         case .types: TypeMatchupView()
         case .natures: NatureListView()
+        case .scan: ScanView()
         case .teams: TeamsContent()
         case .damageCalc: DamageCalculatorView()
         case .faceOff: FaceOffView(initial: nil)

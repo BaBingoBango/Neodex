@@ -20,6 +20,7 @@ nonisolated enum AppRoute: Hashable, Identifiable {
     case dexEntries(Pokemon.ID)
     case team(UUID)
     case usageStats(format: String?)
+    case scan
 
     var id: String { String(describing: self) }
 
@@ -89,6 +90,8 @@ struct AppRouteView: View {
                 .task {
                     if let format { await UsageStatsModel.shared.prefer(formatID: format) }
                 }
+        case .scan:
+            ScanView()
         }
     }
 

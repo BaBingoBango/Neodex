@@ -21,6 +21,18 @@ struct OpenPokemonIntent: AppIntent {
     }
 }
 
+/// Opens the Pokédex scanner.
+nonisolated struct ScanPokemonIntent: AppIntent {
+    nonisolated static let title: LocalizedStringResource = "Scan a Pokémon"
+    nonisolated static let description = IntentDescription("Opens Neodex's camera scanner, which recognises Pokémon, cards and screens.")
+    nonisolated static let openAppWhenRun = true
+
+    func perform() async throws -> some IntentResult {
+        await DeepLinkRouter.shared.open(.scan)
+        return .result()
+    }
+}
+
 /// Opens a random species.
 nonisolated struct RandomPokemonIntent: AppIntent {
     nonisolated static let title: LocalizedStringResource = "Random Pokémon"
@@ -103,6 +115,10 @@ nonisolated struct NeodexShortcuts: AppShortcutsProvider {
             "Show \(\.$pokemon) in \(.applicationName)",
             "Look up \(\.$pokemon) in \(.applicationName)",
         ], shortTitle: "Open a Pokémon", systemImageName: "book")
+        AppShortcut(intent: ScanPokemonIntent(), phrases: [
+            "Scan a Pokémon in \(.applicationName)",
+            "Open the \(.applicationName) scanner",
+        ], shortTitle: "Scan a Pokémon", systemImageName: "camera.viewfinder")
         AppShortcut(intent: TypeMatchupIntent(), phrases: [
             "What is \(\.$pokemon) weak to in \(.applicationName)",
             "Check \(\.$pokemon) matchups in \(.applicationName)",

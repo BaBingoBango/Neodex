@@ -24,6 +24,13 @@ struct AboutView: View {
             } footer: {
                 Text("The Pokédex ships inside the app, so everything works offline. A fresh dataset arrives with each app update.")
             }
+            Section {
+                RecognizerCard()
+            } header: {
+                Text("Scanner")
+            } footer: {
+                Text("The camera scanner runs entirely on this device. Frames and photos never leave it.")
+            }
             if let manifest = database.manifest {
                 Section {
                     ForEach(manifest.sources) { source in
