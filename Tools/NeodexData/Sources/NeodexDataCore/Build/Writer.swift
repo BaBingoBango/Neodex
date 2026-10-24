@@ -27,6 +27,7 @@ enum Writer {
         try write(dataset.abilities, as: "abilities")
         try write(dataset.items, as: "items")
         try write(dataset.learnsets, as: "learnsets")
+        try write(dataset.pokemon.map(IndexEntry.init), as: "pokemon-index")
 
         let now = Date()
         let manifest = DataManifest(
@@ -44,6 +45,31 @@ enum Writer {
     }
 
     /// "What's new" lines for the app's dataset card, derived from the dataset itself.
+    /// The little a widget or complication needs about a Pokémon (mirrors the app's `WidgetPokemon`).
+    struct IndexEntry: Encodable {
+        var id: String
+        var name: String
+        var displayName: String
+        var dexNumber: Int
+        var types: [PokemonType]
+        var genus: String?
+        var entry: String?
+        var imageID: String
+        var isSpecies: Bool
+
+        init(_ pokemon: Pokemon) {
+            id = pokemon.id
+            name = pokemon.name
+            displayName = pokemon.displayName
+            dexNumber = pokemon.nationalDexNumber
+            types = pokemon.types
+            genus = pokemon.genus
+            entry = pokemon.dexEntries.first?.text
+            imageID = pokemon.imageID
+            isSpecies = pokemon.isBaseForm
+        }
+    }
+
     static func releaseNotes(for dataset: Dataset, generatedAt: Date) -> [String] {
         var notes: [String] = []
         let species = dataset.pokemon.filter(\.isBaseForm)

@@ -1,12 +1,14 @@
 import NeodexKit
 import SwiftUI
+import WidgetKit
 
 /// The same Pokémon of the Day and Who's That Pokémon? as the iPhone widgets, picked deterministically
 /// from the date so every device agrees.
 struct WatchTodayView: View {
     var database: PokedexDatabase
 
-    @AppStorage("mysteryRevealedDay") private var revealedDay = 0
+    /// Shared with the Who's That Pokémon? complication through the App Group.
+    @AppStorage(SharedContainer.DefaultsKey.mysteryRevealedDay, store: SharedContainer.defaults) private var revealedDay = 0
 
     private var today: Int { DailyPick.dayOrdinal() }
 
@@ -45,6 +47,7 @@ struct WatchTodayView: View {
                     let revealed = revealedDay == today
                     Button {
                         withAnimation(.snappy) { revealedDay = today }
+                        WidgetCenter.shared.reloadTimelines(ofKind: WatchComplicationKind.mystery)
                     } label: {
                         HStack(spacing: 10) {
                             WatchPokemonImage(pokemon: mystery, silhouette: !revealed)

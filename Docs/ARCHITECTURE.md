@@ -75,7 +75,8 @@ Steps, in order:
 4. Images: official artwork → 400 px HEIC (`-art`), 120 px HEIC thumbnail (`-thumb`), Showdown's
    96 px battle sprite (`-sprite`), and item icons sliced from Showdown's sprite sheet (`-item`).
    Forms without their own artwork borrow their species' images (recorded in `imageID`).
-5. Write `Data/*.json` and a `manifest.json` with counts, timestamp and source attribution.
+5. Write `Data/*.json`, a `pokemon-index.json` slice for widgets and complications, and a
+   `manifest.json` with counts, timestamp and source attribution.
 
 ```bash
 cd Tools/NeodexData
@@ -121,6 +122,9 @@ Widgets/                   WidgetKit extension: Pokémon of the Day, Who's That 
 Watch/                     The watchOS app: WatchRootView (vertical pages), WatchTodayView,
                            WatchTypeMatchupView, WatchPokedexView, WatchPokemonDetailView,
                            WatchPokemonImage (HEIC thumbnails from the bundle)
+WatchWidgets/              The watch complication extension: Pokémon of the Day, Who's That
+                           Pokémon? (with a Reveal button in the Smart Stack) and an Open Neodex
+                           Poké Ball, in the circular, rectangular, inline and corner families
 App/
 ├── NeodexApp.swift        @main; SwiftData container for teams and history (in the App Group)
 ├── App/                   AppModel (load state), DatabaseProvider, DeepLinkRouter, RootView,
@@ -208,7 +212,12 @@ Key decisions:
   page `TabView` with the long Pokédex list last, since you can't page past a thousand rows; the
   daily picks come from the same `DailyPick` arithmetic as the widgets, so every device agrees on the
   day's Pokémon. Thumbnails are decoded off the main thread into a `CGContext`, because watchOS has
-  no `preparingForDisplay()`.
+  no `preparingForDisplay()`. The complication extension can't read the app's bundle, so it carries
+  `pokemon-index.json` (a compact per-Pokémon index the pipeline now writes) and the thumbnails,
+  downsampled to 80 px before archiving: WidgetKit refuses images above 80 points in the small
+  families and fails the whole placeholder batch, after which `chronod` benches the extension for a
+  day. The reveal state lives in the App Group defaults so the Today page and the complication agree,
+  and complications deep-link into the watch app (`neodex://pokemon/<id>`, `neodex://mystery`).
 - **CarPlay is a scene, not a second UI.** `CarPlaySceneDelegate` shows one `CPListTemplate` with
   "Ask Dexbot" and recent chats; everything is spoken and the list only carries short status text. The
   scene is declared in `App/Info.plist`. Apple granted the

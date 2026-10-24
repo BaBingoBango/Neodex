@@ -7,6 +7,7 @@ struct WatchRootView: View {
     @Environment(WatchModel.self) private var model
 
     var body: some View {
+        @Bindable var model = model
         switch model.state {
         case .loading:
             VStack(spacing: 10) {
@@ -18,16 +19,19 @@ struct WatchRootView: View {
         case .failed(let message):
             ContentUnavailableView("Pokédex Unavailable", systemImage: "exclamationmark.triangle", description: Text(message))
         case .ready(let database):
-            TabView {
-                NavigationStack {
+            TabView(selection: $model.page) {
+                NavigationStack(path: $model.todayPath) {
                     WatchTodayView(database: database)
                 }
+                .tag(WatchModel.Page.today)
                 NavigationStack {
                     WatchTypeMatchupView()
                 }
+                .tag(WatchModel.Page.types)
                 NavigationStack {
                     WatchPokedexView(database: database)
                 }
+                .tag(WatchModel.Page.pokedex)
             }
             .tabViewStyle(.verticalPage)
         }
