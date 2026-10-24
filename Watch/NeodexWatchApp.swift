@@ -1,7 +1,8 @@
 import NeodexKit
 import SwiftUI
 
-/// Neodex on the wrist: the Pokédex, type matchups and the daily picks, all from the bundled dataset.
+/// Neodex on the wrist: the Pokédex, type matchups and the daily picks from the bundled dataset, plus
+/// your teams and Dexbot over the link to the iPhone.
 @main
 struct NeodexWatchApp: App {
     @State private var model = WatchModel()
@@ -10,7 +11,11 @@ struct NeodexWatchApp: App {
         WindowGroup {
             WatchRootView()
                 .environment(model)
-                .task { await model.load() }
+                .environment(PhoneLink.shared)
+                .task {
+                    PhoneLink.shared.activate()
+                    await model.load()
+                }
                 .onOpenURL { model.open($0) }
         }
     }
@@ -27,12 +32,25 @@ final class WatchModel {
     }
 
     enum Page: Hashable {
-        case today, types, pokedex
+        case today, dexbot, teams, types, pokedex
     }
 
     private(set) var state: State = .loading
     /// Which vertical page is showing; complications land on Today.
     var page: Page = .today
+
+    init() {
+        #if DEBUG
+        // `-watchStartPage teams` opens on a page, for driving the simulator without the crown.
+        switch UserDefaults.standard.string(forKey: "watchStartPage") {
+        case "dexbot": page = .dexbot
+        case "teams": page = .teams
+        case "types": page = .types
+        case "pokedex": page = .pokedex
+        default: break
+        }
+        #endif
+    }
     /// Today's navigation path, so a complication can open a Pokémon directly.
     var todayPath: [WatchRoute] = []
 
@@ -41,7 +59,8 @@ final class WatchModel {
         return nil
     }
 
-    /// Handles `neodex://pokemon/<id>`, `neodex://mystery` and `neodex://today` from complications.
+    /// Handles `neodex://pokemon/<id>`, `neodex://mystery` and `neodex://today` from complications, and
+    /// `neodex://dexbot` and `neodex://teams` for jumping straight to those pages.
     func open(_ url: URL) {
         guard url.scheme == SharedContainer.urlScheme else { return }
         let argument = url.pathComponents.dropFirst().first
@@ -53,6 +72,10 @@ final class WatchModel {
         case "mystery", "today":
             page = .today
             todayPath = []
+        case "dexbot":
+            page = .dexbot
+        case "teams":
+            page = .teams
         default:
             break
         }

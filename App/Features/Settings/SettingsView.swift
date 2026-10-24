@@ -53,6 +53,7 @@ struct SettingsView: View {
         NavigationStack {
             List {
                 tabBarSections
+                watchSection
                 dataSection
                 Section {
                     NavigationLink { AboutView() } label: { Label("About Neodex", systemImage: "info.circle") }
@@ -86,6 +87,30 @@ struct SettingsView: View {
             }
         }
     }
+
+    #if os(iOS)
+    /// What the watch has: teams travel over WatchConnectivity whenever they change.
+    @ViewBuilder
+    private var watchSection: some View {
+        let link = WatchLink.shared
+        if link.isPaired {
+            Section {
+                if link.isWatchAppInstalled {
+                    LabeledContent("Teams on your watch", value: link.lastTeamSync == nil ? "Not sent yet" : "\(link.lastTeamCount), \(link.lastTeamSync!.formatted(date: .omitted, time: .shortened))")
+                    Button("Send Teams Now", systemImage: "applewatch.radiowaves.left.and.right") { link.pushTeams() }
+                } else {
+                    Text("Install Neodex on your Apple Watch to see your teams and ask Dexbot from your wrist.")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
+            } header: {
+                Text("Apple Watch")
+            }
+        }
+    }
+    #else
+    private var watchSection: some View { EmptyView() }
+    #endif
 
     private var dataSection: some View {
         Section("Your Data") {

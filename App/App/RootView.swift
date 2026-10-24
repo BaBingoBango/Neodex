@@ -1,14 +1,20 @@
 import AppIntents
 import CoreSpotlight
 import NeodexKit
+import SwiftData
 import SwiftUI
 
 /// Shows a launch placeholder until the Pokédex has loaded, then the main interface.
 struct RootView: View {
+    @Environment(\.modelContext) private var modelContext
+
     var body: some View {
         DatabaseLoadingView { database in
             MainTabView()
                 .task(id: database.manifest?.generatedAt) {
+                    #if DEBUG && os(iOS)
+                    DebugSeeds.seedSampleTeamIfRequested(context: modelContext, database: database)
+                    #endif
                     await SpotlightIndexer.indexIfNeeded(database: database)
                     NeodexShortcuts.updateAppShortcutParameters()
                     #if os(iOS)

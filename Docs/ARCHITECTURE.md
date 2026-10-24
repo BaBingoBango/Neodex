@@ -119,12 +119,14 @@ adds only what the Mac needs.
 Shared/                    Compiled into the app and the widget extension: TypeStyle/TypeBadge,
                            PersistenceModels (SavedTeam, TeamMember, BrowsingRecord), SmogonStatsClient,
                            SharedContainer (App Group paths), WidgetModels (WidgetPokemon, snapshot,
-                           DailyPick), UsageDefaults, TeamReader, Shared.xcassets (type colours)
+                           DailyPick), UsageDefaults, TeamReader, WatchTeamSnapshot (the watch payload),
+                           Shared.xcassets (type colours)
 Widgets/                   WidgetKit extension: Pokémon of the Day, Who's That Pokémon?, Team,
                            Popular on Showdown, and two Control Center controls
 Watch/                     The watchOS app: WatchRootView (vertical pages), WatchTodayView,
-                           WatchTypeMatchupView, WatchPokedexView, WatchPokemonDetailView,
-                           WatchPokemonImage (HEIC thumbnails from the bundle)
+                           WatchDexbotView and WatchTeamsView (over the iPhone link), WatchTypeMatchupView,
+                           WatchPokedexView, WatchPokemonDetailView, WatchPokemonImage (HEIC thumbnails
+                           from the bundle), PhoneLink (the watch's end of WatchConnectivity)
 WatchWidgets/              The watch complication extension: Pokémon of the Day, Who's That
                            Pokémon? (with a Reveal button in the Smart Stack) and an Open Neodex
                            Poké Ball, in the circular, rectangular, inline and corner families
@@ -144,7 +146,8 @@ App/
 ├── DesignSystem/          Type palette, TypeBadge, PokemonImage, shared components, Platform (the
 │                          iOS/macOS shims) and ImageDecoding (ImageIO → CGImage)
 ├── Services/              SmogonStatsClient (actor, rankings + trends), MediaCache (actor),
-│                          AnimatedSprite, CryPlayer, SpotlightIndexer, History
+│                          AnimatedSprite, CryPlayer, SpotlightIndexer, History, WatchLink (the
+│                          iPhone's end of WatchConnectivity)
 ├── Persistence/           SwiftData models: SavedTeam, TeamMember, BrowsingRecord
 ├── Preview Content/       preview-*.json fixture for Xcode Previews  ← generated, debug builds only
 ├── PrivacyInfo.xcprivacy  Privacy manifest (UserDefaults access, no tracking, no data collection)
@@ -229,6 +232,22 @@ Key decisions:
   families and fails the whole placeholder batch, after which `chronod` benches the extension for a
   day. The reveal state lives in the App Group defaults so the Today page and the complication agree,
   and complications deep-link into the watch app (`neodex://pokemon/<id>`, `neodex://mystery`).
+- **The watch bridge is a pipe, not a sync service.** `Shared/WatchTeamSnapshot` is the payload both
+  sides share: the saved teams as the `TeamMember` values the Teambuilder stores. `WatchLink` (iOS)
+  activates `WCSession` in the app's `init`, so a question from the wrist can launch the app in the
+  background; it pushes the twenty most recent teams as the application context whenever SwiftData
+  saves (latest wins, delivered even while the watch sleeps) and answers questions with
+  `DexbotEngine.answer(spoken: true)` under a background task. `PhoneLink` (watchOS) keeps the last
+  snapshot on disk for offline use, publishes it to `WatchTeamsView`, and runs the ask for
+  `WatchDexbotView`, whose page offers one-tap questions so the first ask needs no dictation. A question
+  carries an id and goes out as an interactive message first (that is what wakes the iPhone app); if no
+  reply arrives within twelve seconds, or the iPhone isn't reachable, the same question is queued as a
+  user-info transfer and the answer comes back the same way, matched by id, with a ninety-second
+  timeout. The watch now has five pages (Today, Dexbot, Teams, Type-O-Matic, Pokédex); its `open(_:)`
+  also understands `neodex://dexbot` and `neodex://teams` for a future complication (watchOS apps can't
+  be opened by URL from outside). Development aids, DEBUG only: `-neodexSeedSampleTeam YES` on the
+  iPhone app seeds one team into an empty store, and `-watchStartPage teams` (or `dexbot`) opens the
+  watch app on a page, since the simulator offers no Digital Crown.
 - **The Mac is the same app with a sidebar and a menu bar.** `NeodexMac` compiles `App/` and
   `Shared/` for macOS 26 under App Sandbox and the hardened runtime; `Mac/` holds its Info.plist,
   entitlements and `NeodexCommands`. The platform differences are a handful of shims in
@@ -371,6 +390,12 @@ xcodebuild -scheme Neodex -destination 'platform=iOS Simulator,name=iPhone 17 Pr
   hazards, multi-turn moves, ally abilities or Dynamax.
 - The Mac app has no widgets or visual intelligence yet, and its camera scanner and voice mode have
   not been tried on a Mac; Home, the entry windows and the calculator have.
+- Dexbot on the watch needs the iPhone nearby: the watch has no Apple Intelligence of its own, so the
+  question travels over WatchConnectivity and comes back as a one-shot spoken-style answer. The paired
+  simulators deliver iPhone-to-watch payloads (teams arrive) but not watch-to-iPhone ones: the iPhone's
+  WatchConnectivity daemon receives the question, holds the app for ten seconds and drops it, on both
+  the interactive and the queued channel, so the relay's answer path still needs its first run on real
+  hardware; the teams channel and the watch's timeout and recovery were verified in the simulator.
 - Scope Lens needs a mirrored Pokémon Champions window (QuickTime iPhone mirror or a capture card)
   and Screen Recording permission, and its advisor is off until an Anthropic API key is saved in
   Settings. Leaving the Scope Lens tab or closing the Live Tracker window stops tracking, as it did in the

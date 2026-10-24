@@ -8,6 +8,13 @@ struct NeodexApp: App {
     @State private var appModel = AppModel()
     private let container = PersistenceContainer.make()
 
+    init() {
+        #if os(iOS)
+        // The watch bridge starts with the app, so a question from the wrist can wake us in the background.
+        WatchLink.shared.activate(container: container)
+        #endif
+    }
+
     var body: some Scene {
         WindowGroup {
             RootView()

@@ -9,6 +9,14 @@ enum WatchTheme {
     static let neutral = LinearGradient(colors: [Color(red: 0.10, green: 0.24, blue: 0.62), Color(red: 0.03, green: 0.06, blue: 0.16), .black],
                                         startPoint: .top, endPoint: .bottom)
 
+    /// Dexbot's purple, for the page that talks to the iPhone.
+    static let dexbot = LinearGradient(colors: [Color.purple.opacity(0.75), Color.purple.opacity(0.25), .black],
+                                       startPoint: .top, endPoint: .bottom)
+
+    /// The Teambuilder's ice blue, for the teams list.
+    static let teams = LinearGradient(colors: [PokemonType.ice.color.opacity(0.7), PokemonType.ice.color.opacity(0.2), .black],
+                                      startPoint: .top, endPoint: .bottom)
+
     /// A gradient from the types' colours down to black.
     static func background(_ types: [PokemonType]) -> LinearGradient {
         let colors: [Color]

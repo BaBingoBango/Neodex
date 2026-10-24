@@ -1,8 +1,8 @@
 import NeodexKit
 import SwiftUI
 
-/// Three pages, swiped vertically like a watch face stack: Today, the type calculator and the Pokédex.
-/// The long list goes last, so no page sits behind a thousand rows.
+/// Five pages, swiped vertically like a watch face stack: Today, Dexbot, your teams, the type
+/// calculator and the Pokédex. The long list goes last, so no page sits behind a thousand rows.
 struct WatchRootView: View {
     @Environment(WatchModel.self) private var model
 
@@ -24,6 +24,14 @@ struct WatchRootView: View {
                     WatchTodayView(database: database)
                 }
                 .tag(WatchModel.Page.today)
+                NavigationStack {
+                    WatchDexbotView(database: database)
+                }
+                .tag(WatchModel.Page.dexbot)
+                NavigationStack {
+                    WatchTeamsView(database: database)
+                }
+                .tag(WatchModel.Page.teams)
                 NavigationStack {
                     WatchTypeMatchupView()
                 }
@@ -55,6 +63,13 @@ extension View {
                 } else {
                     ContentUnavailableView("Not Found", systemImage: "questionmark.circle")
                 }
+            case .team(let id):
+                if let team = PhoneLink.shared.teams.first(where: { $0.id == id }) {
+                    WatchTeamDetailView(team: team, database: database)
+                } else {
+                    ContentUnavailableView("Team Not Found", systemImage: "rectangle.stack.person.crop",
+                                           description: Text("This team is no longer on your iPhone."))
+                }
             }
         }
     }
@@ -63,4 +78,5 @@ extension View {
 nonisolated enum WatchRoute: Hashable {
     case pokemon(String)
     case ability(String)
+    case team(UUID)
 }
