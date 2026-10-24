@@ -1,0 +1,57 @@
+{
+ "name": "burn infliction with '45 %' plate (battle 1, 07:21)",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "Archaludon",
+     "conf": 1.0,
+     "x": 0.66,
+     "y": 0.069,
+     "w": 0.061,
+     "h": 0.034
+    },
+    {
+     "text": "Sableye",
+     "conf": 1.0,
+     "x": 0.82,
+     "y": 0.073,
+     "w": 0.044,
+     "h": 0.032
+    },
+    {
+     "text": "57%",
+     "conf": 1.0,
+     "x": 0.712,
+     "y": 0.137,
+     "w": 0.038,
+     "h": 0.041
+    },
+    {
+     "text": "45 %",
+     "conf": 1.0,
+     "x": 0.882,
+     "y": 0.137,
+     "w": 0.039,
+     "h": 0.041
+    },
+    {
+     "text": "The opposing Sableye was burned!",
+     "conf": 1.0,
+     "x": 0.339,
+     "y": 0.716,
+     "w": 0.237,
+     "h": 0.051
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "statusInflicted",
+   "side": "opp",
+   "subject": "Sableye",
+   "detail": "brn"
+  }
+ ]
+}

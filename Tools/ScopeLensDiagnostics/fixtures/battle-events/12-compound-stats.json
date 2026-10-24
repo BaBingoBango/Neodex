@@ -1,0 +1,42 @@
+{
+ "name": "Defense and Sp. Def rose (battle 3, 06:47)",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "The opposing Staraptor's Defense and Sp. Def rose!",
+     "conf": 1.0,
+     "x": 0.396,
+     "y": 0.712,
+     "w": 0.35,
+     "h": 0.054
+    },
+    {
+     "text": "Rotom",
+     "conf": 1.0,
+     "x": 0.318,
+     "y": 0.872,
+     "w": 0.035,
+     "h": 0.028
+    },
+    {
+     "text": "37/157",
+     "conf": 1.0,
+     "x": 0.378,
+     "y": 0.94,
+     "w": 0.056,
+     "h": 0.041
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "statChange",
+   "side": "opp",
+   "subject": "Staraptor",
+   "detail": "Defense and Sp. Def",
+   "value": "+1"
+  }
+ ]
+}

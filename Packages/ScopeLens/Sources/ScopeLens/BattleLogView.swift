@@ -7,7 +7,7 @@
 //  observations reconcile into events and this window narrates the battle as
 //  it happens, with the running §4.5 state summarized up top.
 //
-//  Offline twin: Diagnostics/BattleReplayHarness `replay` (same code path,
+//  Offline twin: Tools/ScopeLensDiagnostics/BattleReplayHarness `replay` (same code path,
 //  recorded video instead of the mirror).
 //
 

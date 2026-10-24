@@ -1,0 +1,23 @@
+{
+ "name": "'You lost to Boss!' result narration (battle 3, 09:13)",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "You lost to Boss!",
+     "conf": 1.0,
+     "x": 0.278,
+     "y": 0.711,
+     "w": 0.115,
+     "h": 0.041
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "battleEnd",
+   "detail": "lost"
+  }
+ ]
+}

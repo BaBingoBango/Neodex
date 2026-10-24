@@ -1,0 +1,51 @@
+{
+ "name": "prefix-less ally-heal attributes to the known opponent (battle 1, 08:48)",
+ "notes": "Matcha Gotcha's drink-down line names the opponent's Archaludon with NO 'The opposing' prefix \u2014 must attach to the existing opp entity, not mint a you-side one.",
+ "frames": [
+  {
+   "t": 0.0,
+   "tokens": [
+    {
+     "text": "Pikanan sent out Archaludon!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.21,
+     "h": 0.05
+    }
+   ]
+  },
+  {
+   "t": 4.0,
+   "tokens": [
+    {
+     "text": "Archaludon drank down all the matcha that the opposing Matcha Latte made!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.52,
+     "h": 0.05
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "sendOut",
+   "side": "opp",
+   "subject": "Archaludon"
+  },
+  {
+   "kind": "healed",
+   "side": "opp",
+   "subject": "Archaludon",
+   "detail": "Matcha Gotcha"
+  }
+ ],
+ "forbidEvents": [
+  {
+   "kind": "healed",
+   "side": "you"
+  }
+ ]
+}

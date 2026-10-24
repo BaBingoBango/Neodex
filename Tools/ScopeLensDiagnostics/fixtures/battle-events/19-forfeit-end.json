@@ -1,0 +1,23 @@
+{
+ "name": "forfeit ending (battle 1, 09:55)",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "The battle has ended due to a forfeit.",
+     "conf": 1.0,
+     "x": 0.348,
+     "y": 0.707,
+     "w": 0.254,
+     "h": 0.045
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "battleEnd",
+   "detail": "forfeit"
+  }
+ ]
+}

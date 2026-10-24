@@ -5,12 +5,12 @@
 //  Phase 3, m11-C (pilot-requested): runtime meta refresh. Regulations
 //  rotate, so the bundled Reg M-B S3 snapshot (crawled 2026-07-02) will go
 //  stale; this manager owns an Application Support cache, the polite
-//  Pikalytics crawl (Swift port of Engine/fetch-meta.js), and CURRENT-
+//  Pikalytics crawl (Swift port of Tools/ScopeLensEngine/fetch-meta.js), and CURRENT-
 //  regulation discovery from the site's format selector. Engines hot-swap
 //  snapshots through ScopeEngine.setMeta — the seam m3 built exactly for
 //  this day.
 //
-//  The committed repo snapshot (Engine/data/meta-regmbs3.json) is NEVER
+//  The committed repo snapshot (Tools/ScopeLensEngine/data/meta-regmbs3.json) is NEVER
 //  touched: every CLI harness and the MCP parity test pin to it, so a
 //  refresh can't break verify-all. Only the running app prefers the cache.
 //
@@ -169,7 +169,7 @@ final class MetaStore: ObservableObject {
     }
 }
 
-// MARK: - The crawl (Swift port of Engine/fetch-meta.js)
+// MARK: - The crawl (Swift port of Tools/ScopeLensEngine/fetch-meta.js)
 
 nonisolated enum MetaFetcher {
 
@@ -180,7 +180,7 @@ nonisolated enum MetaFetcher {
     static let concurrency = 2
     static let spacingNanos: UInt64 = 200_000_000   // 200ms per worker
 
-    /// Same seed list as Engine/fetch-meta.js — a safety net under the
+    /// Same seed list as Tools/ScopeLensEngine/fetch-meta.js — a safety net under the
     /// index-page discovery (unranked seeds parse empty and are dropped).
     static let seeds = [
         "garchomp", "sinistcha", "basculegion", "whimsicott", "kingambit", "staraptor",

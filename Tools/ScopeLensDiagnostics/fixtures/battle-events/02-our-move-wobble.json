@@ -1,0 +1,25 @@
+{
+ "name": "our move with wobbled subject Jarchomp\u2192Garchomp (battle 3, 05:11)",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "Jarchomp used Rock Tomb!",
+     "conf": 1.0,
+     "x": 0.416,
+     "y": 0.718,
+     "w": 0.186,
+     "h": 0.048
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "moveUsed",
+   "side": "you",
+   "species": "Garchomp",
+   "detail": "Rock Tomb"
+  }
+ ]
+}

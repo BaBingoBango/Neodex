@@ -1,0 +1,56 @@
+{
+ "name": "Armor Tail chip then blocked Fake Out (battle 7 exact reads)",
+ "notes": "The chip reveals the opponent ability; the banner proves our Incineroar carries Fake Out even though the priority move FAILED. m11-B.",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "Farigiraf's",
+     "conf": 1.0,
+     "x": 0.838,
+     "y": 0.366,
+     "w": 0.066,
+     "h": 0.046
+    },
+    {
+     "text": "Armor Tail",
+     "conf": 1.0,
+     "x": 0.839,
+     "y": 0.405,
+     "w": 0.061,
+     "h": 0.037
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "Incineroar cannot use Fake Out!",
+     "conf": 1.0,
+     "x": 0.365,
+     "y": 0.707,
+     "w": 0.24,
+     "h": 0.05
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "abilityActivated",
+   "side": "opp",
+   "subject": "Farigiraf",
+   "detail": "Armor Tail"
+  },
+  {
+   "kind": "moveBlocked",
+   "side": "you",
+   "subject": "Incineroar",
+   "detail": "Fake Out"
+  }
+ ],
+ "forbidEventKinds": ["moveUsed"],
+ "expectExactKindCounts": {
+  "moveBlocked": 1
+ }
+}

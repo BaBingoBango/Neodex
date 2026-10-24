@@ -1,0 +1,13 @@
+{
+  "name": "battle5-t260-doomed-slot",
+  "description": "m14-B regression pin (the perish-trap board): Incineroar acts after Politoed, whose Weather Ball is in KO range — the doomed flag must fire for Incineroar (and only Incineroar; Charizard outspeeds Politoed), and the committed play must survive the lint. TIER NOTE (m15-D): the original 'guaranteed' tier was an artifact — the committed default paste has NO EV lines, so the old engine modeled the defender as a 0-SpD paper Incineroar; with modal ladder bulk the same line is honestly 'range'. The assertion pins the flag's existence, tier-agnostic; the pilot's app-side imported spreads always override modal.",
+  "source": {
+    "video": "Fixtures/screenshots/iPhone 17 Pro Max/Example Battle 5.mov",
+    "at": 260
+  },
+  "assertions": [
+    { "type": "doomedFlag", "species": "Incineroar" },
+    { "type": "commit" },
+    { "type": "lintClean" }
+  ]
+}

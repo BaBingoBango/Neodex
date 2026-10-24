@@ -1,0 +1,303 @@
+{
+ "name": "summary panel: boost sync ×1.5/×0.5 → Atk+1 Spe-2 + sun re-sync (kf124 geometry)",
+ "notes": "Multiplier values are synthetic flips on real kf124 tokens — replace with a real boosted-panel frame when one is captured. Stage map: ×1.5=+1, ×0.5=−2.",
+ "synthetic": true,
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "Attack",
+     "conf": 1.0,
+     "x": 0.19,
+     "y": 0.517,
+     "w": 0.039,
+     "h": 0.032
+    },
+    {
+     "text": "Defense",
+     "conf": 1.0,
+     "x": 0.195,
+     "y": 0.562,
+     "w": 0.049,
+     "h": 0.032
+    },
+    {
+     "text": "Sp. Atk",
+     "conf": 1.0,
+     "x": 0.192,
+     "y": 0.607,
+     "w": 0.047,
+     "h": 0.041
+    },
+    {
+     "text": "Sp. Def",
+     "conf": 1.0,
+     "x": 0.192,
+     "y": 0.655,
+     "w": 0.047,
+     "h": 0.042
+    },
+    {
+     "text": "Speed",
+     "conf": 1.0,
+     "x": 0.188,
+     "y": 0.699,
+     "w": 0.04,
+     "h": 0.044
+    },
+    {
+     "text": "Accuracy",
+     "conf": 1.0,
+     "x": 0.196,
+     "y": 0.766,
+     "w": 0.054,
+     "h": 0.041
+    },
+    {
+     "text": "Evasiveness",
+     "conf": 1.0,
+     "x": 0.203,
+     "y": 0.804,
+     "w": 0.067,
+     "h": 0.04
+    },
+    {
+     "text": "05:04",
+     "conf": 1.0,
+     "x": 0.169,
+     "y": 0.924,
+     "w": 0.039,
+     "h": 0.032
+    },
+    {
+     "text": "Venusaur",
+     "conf": 1.0,
+     "x": 0.282,
+     "y": 0.221,
+     "w": 0.055,
+     "h": 0.032
+    },
+    {
+     "text": "GRASS",
+     "conf": 1.0,
+     "x": 0.304,
+     "y": 0.331,
+     "w": 0.038,
+     "h": 0.026
+    },
+    {
+     "text": "Ability",
+     "conf": 1.0,
+     "x": 0.286,
+     "y": 0.39,
+     "w": 0.033,
+     "h": 0.035
+    },
+    {
+     "text": "91/156",
+     "conf": 1.0,
+     "x": 0.398,
+     "y": 0.278,
+     "w": 0.054,
+     "h": 0.032
+    },
+    {
+     "text": "POISON",
+     "conf": 1.0,
+     "x": 0.396,
+     "y": 0.331,
+     "w": 0.042,
+     "h": 0.026
+    },
+    {
+     "text": "Chlorophyll",
+     "conf": 1.0,
+     "x": 0.376,
+     "y": 0.39,
+     "w": 0.057,
+     "h": 0.036
+    },
+    {
+     "text": "Focus Sash",
+     "conf": 1.0,
+     "x": 0.36,
+     "y": 0.443,
+     "w": 0.054,
+     "h": 0.029
+    },
+    {
+     "text": "x1.5",
+     "conf": 1.0,
+     "x": 0.41,
+     "y": 0.516,
+     "w": 0.026,
+     "h": 0.028
+    },
+    {
+     "text": "x1.0",
+     "conf": 1.0,
+     "x": 0.41,
+     "y": 0.56,
+     "w": 0.026,
+     "h": 0.028
+    },
+    {
+     "text": "x1.0",
+     "conf": 1.0,
+     "x": 0.41,
+     "y": 0.604,
+     "w": 0.026,
+     "h": 0.029
+    },
+    {
+     "text": "x1.0",
+     "conf": 1.0,
+     "x": 0.41,
+     "y": 0.648,
+     "w": 0.026,
+     "h": 0.028
+    },
+    {
+     "text": "x0.5",
+     "conf": 1.0,
+     "x": 0.41,
+     "y": 0.694,
+     "w": 0.026,
+     "h": 0.025
+    },
+    {
+     "text": "x1.0",
+     "conf": 1.0,
+     "x": 0.409,
+     "y": 0.76,
+     "w": 0.028,
+     "h": 0.025
+    },
+    {
+     "text": "x1.0",
+     "conf": 1.0,
+     "x": 0.41,
+     "y": 0.806,
+     "w": 0.026,
+     "h": 0.028
+    },
+    {
+     "text": "MOVE TIME",
+     "conf": 1.0,
+     "x": 0.795,
+     "y": 0.093,
+     "w": 0.058,
+     "h": 0.041
+    },
+    {
+     "text": "43",
+     "conf": 1.0,
+     "x": 0.862,
+     "y": 0.098,
+     "w": 0.02,
+     "h": 0.032
+    },
+    {
+     "text": "Active Statuses & Effects",
+     "conf": 1.0,
+     "x": 0.563,
+     "y": 0.216,
+     "w": 0.116,
+     "h": 0.029
+    },
+    {
+     "text": "TOTAL TIME",
+     "conf": 1.0,
+     "x": 0.73,
+     "y": 0.218,
+     "w": 0.055,
+     "h": 0.026
+    },
+    {
+     "text": "14:25",
+     "conf": 1.0,
+     "x": 0.816,
+     "y": 0.219,
+     "w": 0.048,
+     "h": 0.035
+    },
+    {
+     "text": "Harsh Sunlight",
+     "conf": 1.0,
+     "x": 0.565,
+     "y": 0.32,
+     "w": 0.084,
+     "h": 0.041
+    },
+    {
+     "text": "4/5",
+     "conf": 1.0,
+     "x": 0.77,
+     "y": 0.314,
+     "w": 0.026,
+     "h": 0.035
+    },
+    {
+     "text": "Boosts the damage dealt by Fire-type moves",
+     "conf": 1.0,
+     "x": 0.651,
+     "y": 0.592,
+     "w": 0.256,
+     "h": 0.041
+    },
+    {
+     "text": "by 50% and halves the damage dealt by",
+     "conf": 1.0,
+     "x": 0.639,
+     "y": 0.634,
+     "w": 0.231,
+     "h": 0.044
+    },
+    {
+     "text": "Water-type moves.",
+     "conf": 1.0,
+     "x": 0.578,
+     "y": 0.679,
+     "w": 0.111,
+     "h": 0.039
+    },
+    {
+     "text": "Back",
+     "conf": 1.0,
+     "x": 0.786,
+     "y": 0.885,
+     "w": 0.025,
+     "h": 0.028
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "hpResync",
+   "detail": "weather re-sync: none → sun 4/5 (summary panel)"
+  },
+  {
+   "kind": "abilityActivated",
+   "side": "you",
+   "subject": "Venusaur",
+   "detail": "Chlorophyll (summary panel)"
+  },
+  {
+   "kind": "itemRevealed",
+   "side": "you",
+   "subject": "Venusaur",
+   "detail": "Focus Sash (summary panel)"
+  },
+  {
+   "kind": "boostSync",
+   "side": "you",
+   "subject": "Venusaur",
+   "value": "Atk+1 Spe-2",
+   "detail": "was neutral"
+  }
+ ],
+ "expectExactKindCounts": {
+  "boostSync": 1
+ }
+}

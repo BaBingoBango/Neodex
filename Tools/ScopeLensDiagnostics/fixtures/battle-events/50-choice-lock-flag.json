@@ -1,0 +1,68 @@
+{
+ "name": "m12-E: observed Choice item + committed move = choice-lock flag",
+ "synthetic": true,
+ "notes": "Gholdengo uses Make It Rain, then a right-anchor item chip reveals its Choice Specs (possessive stack, x≈0.84 — the m4 chip geometry). The final snapshot must flag it as locked into Make It Rain; its partner (no observed item) stays unflagged.",
+ "frames": [
+  {
+   "t": 0.0,
+   "tokens": [
+    {"text": "Go! Incineroar and Charizard!", "conf": 1.0, "x": 0.4, "y": 0.707, "w": 0.3, "h": 0.063}
+   ]
+  },
+  {
+   "t": 0.7,
+   "tokens": [
+    {"text": "Rival sent out Gholdengo and Farigiraf!", "conf": 1.0, "x": 0.4, "y": 0.707, "w": 0.32, "h": 0.063}
+   ]
+  },
+  {
+   "t": 3.0,
+   "tokens": [
+    {"text": "FIGHT", "conf": 1.0, "x": 0.88, "y": 0.66, "w": 0.06, "h": 0.03},
+    {"text": "POKÉMON", "conf": 1.0, "x": 0.85, "y": 0.85, "w": 0.08, "h": 0.03}
+   ]
+  },
+  {
+   "t": 3.6,
+   "tokens": [
+    {"text": "FIGHT", "conf": 1.0, "x": 0.88, "y": 0.66, "w": 0.06, "h": 0.03},
+    {"text": "POKÉMON", "conf": 1.0, "x": 0.85, "y": 0.85, "w": 0.08, "h": 0.03}
+   ]
+  },
+  {
+   "t": 8.0,
+   "tokens": [
+    {"text": "The opposing Gholdengo used Make It Rain!", "conf": 1.0, "x": 0.4, "y": 0.707, "w": 0.34, "h": 0.063}
+   ]
+  },
+  {
+   "t": 9.5,
+   "tokens": [
+    {"text": "Gholdengo's", "conf": 1.0, "x": 0.838, "y": 0.366, "w": 0.066, "h": 0.046},
+    {"text": "Choice Specs", "conf": 1.0, "x": 0.839, "y": 0.405, "w": 0.07, "h": 0.037}
+   ]
+  },
+  {
+   "t": 13.0,
+   "tokens": [
+    {"text": "FIGHT", "conf": 1.0, "x": 0.88, "y": 0.66, "w": 0.06, "h": 0.03},
+    {"text": "POKÉMON", "conf": 1.0, "x": 0.85, "y": 0.85, "w": 0.08, "h": 0.03}
+   ]
+  },
+  {
+   "t": 13.6,
+   "tokens": [
+    {"text": "FIGHT", "conf": 1.0, "x": 0.88, "y": 0.66, "w": 0.06, "h": 0.03},
+    {"text": "POKÉMON", "conf": 1.0, "x": 0.85, "y": 0.85, "w": 0.08, "h": 0.03}
+   ]
+  }
+ ],
+ "expectEvents": [
+  {"kind": "moveUsed", "side": "opp", "subject": "Gholdengo", "detail": "Make It Rain"},
+  {"kind": "itemActivated", "side": "opp", "subject": "Gholdengo", "detail": "Choice Specs"}
+ ],
+ "expectSnapshots": [
+  {"species": "Gholdengo", "choiceLockedMove": "Make It Rain"},
+  {"species": "Farigiraf", "protectedLastTurn": false}
+ ]
+}

@@ -1,0 +1,79 @@
+{
+ "name": "Intimidate: compound our-side Attack fall + opponent chip at right anchor (battle 3, 02:04)",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "Ransin",
+     "conf": 0.3,
+     "x": 0.055,
+     "y": 0.054,
+     "w": 0.065,
+     "h": 0.038
+    },
+    {
+     "text": "Ranew",
+     "conf": 0.3,
+     "x": 0.27,
+     "y": 0.057,
+     "w": 0.049,
+     "h": 0.032
+    },
+    {
+     "text": "R=bs\u00fcn",
+     "conf": 0.5,
+     "x": 0.474,
+     "y": 0.055,
+     "w": 0.055,
+     "h": 0.037
+    },
+    {
+     "text": "Charizard and Incineroar's Attack fell!",
+     "conf": 1.0,
+     "x": 0.348,
+     "y": 0.707,
+     "w": 0.262,
+     "h": 0.045
+    },
+    {
+     "text": "Staraptor's",
+     "conf": 1.0,
+     "x": 0.838,
+     "y": 0.366,
+     "w": 0.066,
+     "h": 0.046
+    },
+    {
+     "text": "Intimidate",
+     "conf": 1.0,
+     "x": 0.839,
+     "y": 0.405,
+     "w": 0.061,
+     "h": 0.037
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "statChange",
+   "side": "you",
+   "species": "Charizard",
+   "detail": "Attack",
+   "value": "-1"
+  },
+  {
+   "kind": "statChange",
+   "side": "you",
+   "species": "Incineroar",
+   "detail": "Attack",
+   "value": "-1"
+  },
+  {
+   "kind": "abilityActivated",
+   "side": "opp",
+   "subject": "Staraptor",
+   "detail": "Intimidate"
+  }
+ ]
+}

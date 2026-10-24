@@ -8,9 +8,9 @@
 //  to `ScopeEngine.scoutReportData` and decodes the structured report the
 //  scout window renders.
 //
-//  The engine bundle (Resources/Engine/engine.js) is built from Engine/src
-//  with the pinned esbuild (see Engine/package.json); meta priors are baked in
-//  at build time. Diagnostics/ScoutEngineHarness.swift proves this bridge
+//  The engine bundle (Resources/Engine/engine.js) is built from Tools/ScopeLensEngine/src
+//  with the pinned esbuild (see Tools/ScopeLensEngine/package.json); meta priors are baked in
+//  at build time. Tools/ScopeLensDiagnostics/ScoutEngineHarness.swift proves this bridge
 //  matches the Phase-1 CLI on identical inputs.
 //
 
@@ -229,10 +229,10 @@ nonisolated public final class ScoutEngine {
     /// Load from the app bundle (Resources/Engine/): engine.js + the meta
     /// data file (authoritative when present; baked snapshot is the fallback).
     public static func bundled() throws -> ScoutEngine {
-        guard let url = Bundle.module.url(forResource: "engine", withExtension: "js") else {
+        guard let url = Bundle.scopeLens.url(forResource: "engine", withExtension: "js") else {
             throw EngineError.loadFailed("bundled engine.js missing")
         }
-        let meta = Bundle.module.url(forResource: "meta-regmbs3", withExtension: "json")
+        let meta = Bundle.scopeLens.url(forResource: "meta-regmbs3", withExtension: "json")
             .flatMap { try? Data(contentsOf: $0) }
         return try ScoutEngine(engineSource: try String(contentsOf: url, encoding: .utf8),
                                metaJSON: meta)

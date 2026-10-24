@@ -1,0 +1,124 @@
+{
+ "name": "turns increment only after a resolution phase",
+ "synthetic": true,
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "FIGHT",
+     "conf": 1.0,
+     "x": 0.88,
+     "y": 0.66,
+     "w": 0.06,
+     "h": 0.035
+    },
+    {
+     "text": "POK\u00e9MON",
+     "conf": 1.0,
+     "x": 0.85,
+     "y": 0.85,
+     "w": 0.08,
+     "h": 0.03
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "FIGHT",
+     "conf": 1.0,
+     "x": 0.88,
+     "y": 0.66,
+     "w": 0.06,
+     "h": 0.035
+    },
+    {
+     "text": "POK\u00e9MON",
+     "conf": 1.0,
+     "x": 0.85,
+     "y": 0.85,
+     "w": 0.08,
+     "h": 0.03
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "Charizard used Protect!",
+     "conf": 1.0,
+     "x": 0.302,
+     "y": 0.711,
+     "w": 0.161,
+     "h": 0.041
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "Charizard used Protect!",
+     "conf": 1.0,
+     "x": 0.302,
+     "y": 0.711,
+     "w": 0.161,
+     "h": 0.041
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "FIGHT",
+     "conf": 1.0,
+     "x": 0.88,
+     "y": 0.66,
+     "w": 0.06,
+     "h": 0.035
+    },
+    {
+     "text": "POK\u00e9MON",
+     "conf": 1.0,
+     "x": 0.85,
+     "y": 0.85,
+     "w": 0.08,
+     "h": 0.03
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "FIGHT",
+     "conf": 1.0,
+     "x": 0.88,
+     "y": 0.66,
+     "w": 0.06,
+     "h": 0.035
+    },
+    {
+     "text": "POK\u00e9MON",
+     "conf": 1.0,
+     "x": 0.85,
+     "y": 0.85,
+     "w": 0.08,
+     "h": 0.03
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "turnStart"
+  },
+  {
+   "kind": "moveUsed",
+   "side": "you",
+   "species": "Charizard",
+   "detail": "Protect"
+  },
+  {
+   "kind": "turnStart"
+  }
+ ]
+}

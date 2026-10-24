@@ -1,0 +1,122 @@
+{
+ "name": "m12-B: both actives falling to one move = spread hit, no observation (battle-4 05:10 shape)",
+ "synthetic": true,
+ "notes": "Hyper Voice drops Incineroar AND Charizard off the same lastMove — per-target spread modifiers make single-hit inference dishonest, so both pendings are marked spread-suspect and finalize to nothing.",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "Incineroar",
+     "conf": 1.0,
+     "x": 0.158,
+     "y": 0.872,
+     "w": 0.055,
+     "h": 0.032
+    },
+    {
+     "text": "202/202",
+     "conf": 1.0,
+     "x": 0.208,
+     "y": 0.942,
+     "w": 0.055,
+     "h": 0.035
+    },
+    {
+     "text": "Charizard",
+     "conf": 1.0,
+     "x": 0.328,
+     "y": 0.872,
+     "w": 0.051,
+     "h": 0.029
+    },
+    {
+     "text": "154/154",
+     "conf": 1.0,
+     "x": 0.372,
+     "y": 0.938,
+     "w": 0.067,
+     "h": 0.043
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "The opposing Farigiraf used Hyper Voice!",
+     "conf": 1.0,
+     "x": 0.365,
+     "y": 0.707,
+     "w": 0.287,
+     "h": 0.063
+    }
+   ]
+  },
+  {
+   "t": 2.5,
+   "tokens": [
+    {
+     "text": "Incineroar",
+     "conf": 1.0,
+     "x": 0.158,
+     "y": 0.872,
+     "w": 0.055,
+     "h": 0.032
+    },
+    {
+     "text": "182/202",
+     "conf": 1.0,
+     "x": 0.208,
+     "y": 0.942,
+     "w": 0.055,
+     "h": 0.035
+    }
+   ]
+  },
+  {
+   "t": 3.0,
+   "tokens": [
+    {
+     "text": "Charizard",
+     "conf": 1.0,
+     "x": 0.328,
+     "y": 0.872,
+     "w": 0.051,
+     "h": 0.029
+    },
+    {
+     "text": "120/154",
+     "conf": 1.0,
+     "x": 0.372,
+     "y": 0.938,
+     "w": 0.067,
+     "h": 0.043
+    }
+   ]
+  },
+  {
+   "t": 7.0,
+   "tokens": []
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "moveUsed",
+   "side": "opp",
+   "subject": "Farigiraf",
+   "detail": "Hyper Voice"
+  },
+  {
+   "kind": "damageTaken",
+   "side": "you",
+   "species": "Incineroar"
+  },
+  {
+   "kind": "damageTaken",
+   "side": "you",
+   "species": "Charizard"
+  }
+ ],
+ "forbidEventKinds": [
+  "damageObserved"
+ ]
+}

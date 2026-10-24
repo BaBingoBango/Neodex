@@ -1,0 +1,108 @@
+{
+ "name": "fragment after unrelated banner keeps its side (battle 3, 05:04-05:12)",
+ "notes": "Real sequence: a long stat line, a short faint, then opp Rock Tomb whose mid-fade fragment drops 'The opposing' \u2014 the fragment must not become OUR Garchomp's move.",
+ "frames": [
+  {
+   "t": 305.03,
+   "tokens": [
+    {
+     "text": "The opposing Staraptor's Defense and Sp. Def rose!",
+     "conf": 1.0,
+     "x": 0.4,
+     "y": 0.712,
+     "w": 0.28,
+     "h": 0.05
+    }
+   ]
+  },
+  {
+   "t": 307.03,
+   "tokens": [
+    {
+     "text": "Incineroar fainted!",
+     "conf": 1.0,
+     "x": 0.4,
+     "y": 0.712,
+     "w": 0.28,
+     "h": 0.05
+    }
+   ]
+  },
+  {
+   "t": 308.03,
+   "tokens": [
+    {
+     "text": "Incineroar fainted!",
+     "conf": 1.0,
+     "x": 0.4,
+     "y": 0.712,
+     "w": 0.28,
+     "h": 0.05
+    }
+   ]
+  },
+  {
+   "t": 311.53,
+   "tokens": [
+    {
+     "text": "The opposing Garchomp used Rock Tomb!",
+     "conf": 1.0,
+     "x": 0.4,
+     "y": 0.712,
+     "w": 0.28,
+     "h": 0.05
+    }
+   ]
+  },
+  {
+   "t": 312.03,
+   "tokens": [
+    {
+     "text": "Garchomp used Rock Tomb!",
+     "conf": 1.0,
+     "x": 0.4,
+     "y": 0.712,
+     "w": 0.28,
+     "h": 0.05
+    }
+   ]
+  },
+  {
+   "t": 312.53,
+   "tokens": [
+    {
+     "text": "The opposing Garchomp used Rock Tomb!",
+     "conf": 1.0,
+     "x": 0.4,
+     "y": 0.712,
+     "w": 0.28,
+     "h": 0.05
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "statChange",
+   "side": "opp",
+   "subject": "Staraptor"
+  },
+  {
+   "kind": "fainted",
+   "side": "you",
+   "species": "Incineroar"
+  },
+  {
+   "kind": "moveUsed",
+   "side": "opp",
+   "subject": "Garchomp",
+   "detail": "Rock Tomb"
+  }
+ ],
+ "forbidEvents": [
+  {
+   "kind": "moveUsed",
+   "side": "you"
+  }
+ ]
+}

@@ -1,0 +1,53 @@
+{
+ "name": "sun starts + Drought chip (battle 3, 07:09)",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "Ex",
+     "conf": 1.0,
+     "x": 0.148,
+     "y": 0.074,
+     "w": 0.015,
+     "h": 0.035
+    },
+    {
+     "text": "Charizard's",
+     "conf": 1.0,
+     "x": 0.164,
+     "y": 0.498,
+     "w": 0.066,
+     "h": 0.04
+    },
+    {
+     "text": "Drought",
+     "conf": 1.0,
+     "x": 0.156,
+     "y": 0.544,
+     "w": 0.049,
+     "h": 0.041
+    },
+    {
+     "text": "The sunlight turned harsh!",
+     "conf": 1.0,
+     "x": 0.31,
+     "y": 0.716,
+     "w": 0.177,
+     "h": 0.051
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "weatherStart",
+   "detail": "sun"
+  },
+  {
+   "kind": "abilityActivated",
+   "side": "you",
+   "species": "Charizard",
+   "detail": "Drought"
+  }
+ ]
+}

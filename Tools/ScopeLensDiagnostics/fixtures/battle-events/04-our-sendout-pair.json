@@ -1,0 +1,29 @@
+{
+ "name": "our lead pair (battle 3, 02:00)",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "Go! Charizard and Incineroar!",
+     "conf": 1.0,
+     "x": 0.322,
+     "y": 0.711,
+     "w": 0.202,
+     "h": 0.041
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "sendOut",
+   "side": "you",
+   "species": "Charizard"
+  },
+  {
+   "kind": "sendOut",
+   "side": "you",
+   "species": "Incineroar"
+  }
+ ]
+}

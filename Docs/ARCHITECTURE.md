@@ -277,8 +277,11 @@ Scope Lens is a live observer and advisor for Pokémon Champions (VGC doubles) b
 as its own macOS app and was merged in on 2026-10-24 as a Swift package the Mac target links. It
 watches a mirrored game (an iPhone over QuickTime, or a capture card) with ScreenCaptureKit, reads
 the screen with Vision OCR and template matching, and advises with deterministic math; it never
-simulates the battle. The standalone repository (BaBingoBango/Scope-Lens) keeps the fixtures, the
-replay and eval harnesses and the design briefs; this package holds what the app runs.
+simulates the battle. This repository is its home now: the code here, the engine and its data in
+`Tools/ScopeLensEngine`, the diagnostics harnesses, verification gate and advisor eval in
+`Tools/ScopeLensDiagnostics`, and the spec, briefs and backlog in `Docs/ScopeLens`. Only the fixtures
+(real Champions screenshots and recordings, which carry other trainers' names) stay in the private
+standalone checkout; the scripts read them through `SCOPELENS_FIXTURES`.
 
 ```
 Packages/ScopeLens/Sources/ScopeLens/
@@ -302,6 +305,9 @@ Packages/ScopeLens/Sources/ScopeLens/
   Resources/                 engine.js, meta-regmbs3.json, vocab.json, dex-info.json,
                              tool-schemas.json, the icon sheet, templates, species index, features
 Tools/ScopeLensEngine/       engine.ts and its data bakers, the Pikalytics fetcher, the MCP server
+Tools/ScopeLensDiagnostics/  the CLI harnesses (classifier, preview pipeline, engine parity, battle
+                             replay, PlayLint, advisor eval), verify-all.sh, and the findings log
+Docs/ScopeLens/              the spec, the session briefs and the backlog
 ```
 
 - **It keeps its own compile settings.** The package is Swift 5 language mode with main-actor
@@ -322,7 +328,11 @@ Tools/ScopeLensEngine/       engine.ts and its data bakers, the Pikalytics fetch
   `ANTHROPIC_API_KEY` in the environment for development runs. The standalone app's container is
   separate, so nothing migrates automatically.
 - **Package tests** (`cd Packages/ScopeLens && swift test`) prove the engine, vocabulary, species
-  index and tool schemas load from the package bundle and that a scout report comes back.
+  index and tool schemas load from the package bundle and that a scout report comes back. The
+  heavier gate is `Tools/ScopeLensDiagnostics/verify-all.sh`: it compiles the package sources straight
+  into CLIs (hence `Bundle.scopeLens`, which is the package bundle in the app and the main bundle in
+  a CLI), replays recorded battles and stills from the private fixtures, checks PlayLint, builds the
+  Mac app and checks the MCP server against the engine.
 
 ## Testing
 

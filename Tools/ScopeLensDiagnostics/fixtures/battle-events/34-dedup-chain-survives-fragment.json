@@ -1,0 +1,51 @@
+{
+ "name": "unrecognized fragment between identical reads no longer breaks dedup (battle 5 \u00d73 mega)",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "The opposing Gengar has Mega Evolved into Mega Gengar!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.38,
+     "h": 0.05
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "ganr has Mega Evolvd inta Mega Gen",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.24,
+     "h": 0.05
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "The opposing Gengar has Mega Evolved into Mega Gengar!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.38,
+     "h": 0.05
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "megaEvolved",
+   "side": "opp",
+   "species": "Gengar-Mega"
+  }
+ ],
+ "expectExactKindCounts": {
+  "megaEvolved": 1
+ }
+}

@@ -1,0 +1,42 @@
+{
+ "name": "Champions-only Scraftinite snaps via the overrides vocab (battle 4)",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "The opposing Scrafty's Scraftinite is reacting to In's Omni Ring!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.4,
+     "h": 0.05
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "The opposing Scrafty has Mega Evolved into Mega Scrafty!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.38,
+     "h": 0.05
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "itemRevealed",
+   "side": "opp",
+   "subject": "Scrafty",
+   "detail": "Scraftinite"
+  },
+  {
+   "kind": "megaEvolved",
+   "side": "opp",
+   "species": "Scrafty-Mega"
+  }
+ ]
+}

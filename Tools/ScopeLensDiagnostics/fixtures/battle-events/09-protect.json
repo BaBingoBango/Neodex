@@ -1,0 +1,24 @@
+{
+ "name": "opponent protected itself (battle 3, 02:59)",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "The opposing Staraptor protected itself!",
+     "conf": 1.0,
+     "x": 0.356,
+     "y": 0.712,
+     "w": 0.279,
+     "h": 0.054
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "protected",
+   "side": "opp",
+   "subject": "Staraptor"
+  }
+ ]
+}

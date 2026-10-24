@@ -5,7 +5,7 @@
 //  Phase 2, milestone 3a: the team-preview reading pipeline, in the app target.
 //  Faithful port of the verified Phase-1 diagnostics (TeamPreviewReader →
 //  TypeIconClassifier → SpeciesIdentifier); the originals remain in
-//  Diagnostics/ as standalone CLIs, and Diagnostics/PreviewPipelineHarness.swift
+//  Tools/ScopeLensDiagnostics/ as standalone CLIs, and Tools/ScopeLensDiagnostics/PreviewPipelineHarness.swift
 //  proves this port reproduces their verified accuracy on the still fixtures
 //  (type holdout 12/12; species top-1 14/25, top-3 22/25).
 //
@@ -593,7 +593,7 @@ nonisolated public final class PreviewPipeline {
     /// builds of this file need no app-only symbols).
     public static func bundled(nativeOverlayJSON: Data? = nil) throws -> PreviewPipeline {
         func data(_ name: String, _ ext: String) throws -> Data {
-            guard let url = Bundle.module.url(forResource: name, withExtension: ext) else {
+            guard let url = Bundle.scopeLens.url(forResource: name, withExtension: ext) else {
                 throw NSError(domain: "PreviewPipeline", code: 3,
                               userInfo: [NSLocalizedDescriptionKey: "missing bundled resource \(name).\(ext)"])
             }
@@ -620,7 +620,7 @@ nonisolated public final class PreviewPipeline {
     /// index JSON only — no icon sheet, no feature tables. Empty outside
     /// the app bundle (diagnostics CLIs never call this).
     public static func bundledSpeciesNames() -> [String] {
-        guard let url = Bundle.module.url(forResource: "species-index", withExtension: "json"),
+        guard let url = Bundle.scopeLens.url(forResource: "species-index", withExtension: "json"),
               let data = try? Data(contentsOf: url),
               let idx = try? JSONSerialization.jsonObject(with: data) as? [[String: Any]]
         else { return [] }

@@ -9,7 +9,7 @@
 //  overlay JSON that PreviewPipeline merges on load — so the very next battle
 //  already benefits.
 //
-//  Offline twin: Diagnostics/NativeReferenceHarvest.swift (repo-side banking
+//  Offline twin: Tools/ScopeLensDiagnostics/NativeReferenceHarvest.swift (repo-side banking
 //  from truth tables + battle corroboration). Schema matches
 //  native-features.json: {Species: [{source, fg[576], color[1728]}]}.
 //

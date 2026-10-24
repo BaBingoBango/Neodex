@@ -1,0 +1,101 @@
+{
+ "name": "HP rise needs corroboration without a heal cause",
+ "synthetic": true,
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "Venusaur",
+     "conf": 1.0,
+     "x": 0.158,
+     "y": 0.872,
+     "w": 0.05,
+     "h": 0.032
+    },
+    {
+     "text": "91/156",
+     "conf": 1.0,
+     "x": 0.208,
+     "y": 0.942,
+     "w": 0.055,
+     "h": 0.035
+    },
+    {
+     "text": "Charizard used Protect!",
+     "conf": 1.0,
+     "x": 0.302,
+     "y": 0.711,
+     "w": 0.161,
+     "h": 0.041
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "Venusaur",
+     "conf": 1.0,
+     "x": 0.158,
+     "y": 0.872,
+     "w": 0.05,
+     "h": 0.032
+    },
+    {
+     "text": "120/156",
+     "conf": 1.0,
+     "x": 0.208,
+     "y": 0.942,
+     "w": 0.055,
+     "h": 0.035
+    },
+    {
+     "text": "Charizard used Protect!",
+     "conf": 1.0,
+     "x": 0.302,
+     "y": 0.711,
+     "w": 0.161,
+     "h": 0.041
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "Venusaur",
+     "conf": 1.0,
+     "x": 0.158,
+     "y": 0.872,
+     "w": 0.05,
+     "h": 0.032
+    },
+    {
+     "text": "120/156",
+     "conf": 1.0,
+     "x": 0.208,
+     "y": 0.942,
+     "w": 0.055,
+     "h": 0.035
+    },
+    {
+     "text": "Charizard used Protect!",
+     "conf": 1.0,
+     "x": 0.302,
+     "y": 0.711,
+     "w": 0.161,
+     "h": 0.041
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "hpResync",
+   "side": "you",
+   "species": "Venusaur",
+   "value": "91/156 \u2192 120/156"
+  }
+ ],
+ "forbidEventKinds": [
+  "healed"
+ ]
+}

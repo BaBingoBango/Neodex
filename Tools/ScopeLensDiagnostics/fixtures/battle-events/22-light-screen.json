@@ -1,0 +1,50 @@
+{
+ "name": "truncated move OCR snaps to Light Screen; side-scoped screen up (battle 1, 02:34/02:38)",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "E.",
+     "conf": 1.0,
+     "x": 0.15,
+     "y": 0.073,
+     "w": 0.017,
+     "h": 0.038
+    },
+    {
+     "text": "The opposing Sableye used Light Scree",
+     "conf": 1.0,
+     "x": 0.352,
+     "y": 0.712,
+     "w": 0.271,
+     "h": 0.054
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "Light Screen made the opposing side stronger against special moves!",
+     "conf": 1.0,
+     "x": 0.453,
+     "y": 0.716,
+     "w": 0.468,
+     "h": 0.051
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "moveUsed",
+   "side": "opp",
+   "subject": "Sableye",
+   "detail": "Light Screen"
+  },
+  {
+   "kind": "screenUp",
+   "side": "opp",
+   "detail": "Light Screen"
+  }
+ ]
+}

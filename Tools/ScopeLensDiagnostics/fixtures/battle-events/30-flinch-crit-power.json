@@ -1,0 +1,59 @@
+{
+ "name": "flinch, crit, and ability-flare flavor become labeled notes (battle 4)",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "Incineroar flinched and couldn't move!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.28,
+     "h": 0.05
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "A critical hit!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.12,
+     "h": 0.05
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "The power of the opposing Armarouge's Fire-type moves rose!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.42,
+     "h": 0.05
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "note",
+   "detail": "flinched",
+   "subject": "Incineroar"
+  },
+  {
+   "kind": "note",
+   "detail": "critical hit"
+  },
+  {
+   "kind": "note",
+   "detail": "move power rose (ability)"
+  }
+ ],
+ "forbidEventKinds": [
+  "statChange"
+ ]
+}

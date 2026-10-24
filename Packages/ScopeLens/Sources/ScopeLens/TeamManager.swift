@@ -76,7 +76,7 @@ final class TeamManager: ObservableObject {
     }
 
     private init() {
-        vocab = Bundle.module.url(forResource: "vocab", withExtension: "json")
+        vocab = Bundle.scopeLens.url(forResource: "vocab", withExtension: "json")
             .flatMap { try? Data(contentsOf: $0) }
             .flatMap { try? TeamVocab(vocabJSON: $0) }
 
@@ -93,7 +93,7 @@ final class TeamManager: ObservableObject {
     }
 
     private static func bundledDefault(vocab: TeamVocab?) -> Team? {
-        guard let url = Bundle.module.url(forResource: "default-team", withExtension: "txt"),
+        guard let url = Bundle.scopeLens.url(forResource: "default-team", withExtension: "txt"),
               let paste = try? String(contentsOf: url, encoding: .utf8) else { return nil }
         let parsed = ShowdownPaste.parse(paste)
         guard let vocab else { return parsed }

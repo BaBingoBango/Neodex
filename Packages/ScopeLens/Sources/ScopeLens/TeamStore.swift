@@ -12,7 +12,7 @@
 //  SHARED-FILE RULE (Diagnostics compile this outside the app): Foundation
 //  only — no SwiftUI, no Keychain, no sandbox assumptions. App-side
 //  persistence lives in TeamManager.swift (app-only); CLIs load the
-//  committed default paste at `Scope Lens/Resources/Team/default-team.txt`.
+//  committed default paste at `Packages/ScopeLens/Sources/ScopeLens/Resources/Team/default-team.txt`.
 //
 
 import Foundation
@@ -75,7 +75,7 @@ nonisolated public struct Team: Codable, Sendable, Equatable {
 
     /// Repo-side default paste — the parity source for every CLI harness and
     /// the app's bundled fallback. Path is a documented convention (m9).
-    public static let defaultPasteRepoPath = "Scope Lens/Resources/Team/default-team.txt"
+    public static let defaultPasteRepoPath = "Packages/ScopeLens/Sources/ScopeLens/Resources/Team/default-team.txt"
 
     /// Load + parse + canonicalize the committed default team from a repo
     /// checkout (CLI harnesses; the sandboxed app uses its bundle instead).
@@ -84,7 +84,7 @@ nonisolated public struct Team: Codable, Sendable, Equatable {
         throws -> (team: Team, vocab: TeamVocab, issues: [TeamIssue]) {
         let paste = try String(contentsOfFile: "\(root)/\(defaultPasteRepoPath)", encoding: .utf8)
         let vocab = try TeamVocab(vocabJSON: Data(contentsOf: URL(
-            fileURLWithPath: "\(root)/Engine/data/vocab.json")))
+            fileURLWithPath: "\(root)/Tools/ScopeLensEngine/data/vocab.json")))
         let (team, issues) = ShowdownPaste.parse(paste).canonicalized(with: vocab)
         return (team, vocab, issues)
     }

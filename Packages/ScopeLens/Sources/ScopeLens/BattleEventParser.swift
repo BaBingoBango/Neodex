@@ -7,7 +7,7 @@
 //  out; the reconciler owns time (dedup, legality, state mutation).
 //
 //  Every template here was derived from REAL narration banners in the three
-//  recorded battles (see Diagnostics/README.md m4 notes) — not from mainline
+//  recorded battles (see Tools/ScopeLensDiagnostics/README.md m4 notes) — not from mainline
 //  Pokémon lore. Wobble tolerance lives in the vocabulary snap, not in the
 //  templates: structure is matched loosely ("fainte[dr]", optional prefixes),
 //  names/moves are snapped to the closed vocab afterwards.

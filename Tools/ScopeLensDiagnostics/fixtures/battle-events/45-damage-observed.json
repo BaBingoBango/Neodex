@@ -1,0 +1,88 @@
+{
+ "name": "m12-B: single-target hit settles into a damage observation (battle-4 02:29 shape)",
+ "synthetic": true,
+ "notes": "Fake Out for exactly 20 HP: plate learns 202/202, the opp move opens the attribution window, the fall coalesces, and the observation finalizes only after the 2.5s settle window closes (frame at t=6).",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "Incineroar",
+     "conf": 1.0,
+     "x": 0.158,
+     "y": 0.872,
+     "w": 0.055,
+     "h": 0.032
+    },
+    {
+     "text": "202/202",
+     "conf": 1.0,
+     "x": 0.208,
+     "y": 0.942,
+     "w": 0.055,
+     "h": 0.035
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "The opposing Scrafty used Fake Out!",
+     "conf": 1.0,
+     "x": 0.365,
+     "y": 0.707,
+     "w": 0.287,
+     "h": 0.063
+    }
+   ]
+  },
+  {
+   "t": 2.5,
+   "tokens": [
+    {
+     "text": "Incineroar",
+     "conf": 1.0,
+     "x": 0.158,
+     "y": 0.872,
+     "w": 0.055,
+     "h": 0.032
+    },
+    {
+     "text": "182/202",
+     "conf": 1.0,
+     "x": 0.208,
+     "y": 0.942,
+     "w": 0.055,
+     "h": 0.035
+    }
+   ]
+  },
+  {
+   "t": 6.0,
+   "tokens": []
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "moveUsed",
+   "side": "opp",
+   "subject": "Scrafty",
+   "detail": "Fake Out"
+  },
+  {
+   "kind": "damageTaken",
+   "side": "you",
+   "species": "Incineroar",
+   "value": "202/202 → 182/202"
+  },
+  {
+   "kind": "damageObserved",
+   "side": "opp",
+   "subject": "Scrafty",
+   "detail": "Fake Out",
+   "value": "20 HP into Incineroar"
+  }
+ ],
+ "expectExactKindCounts": {
+  "damageObserved": 1
+ }
+}

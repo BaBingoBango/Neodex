@@ -1,0 +1,52 @@
+{
+ "name": "battle corroboration corrects a wrong preview read (Zygarde\u2192Garchomp)",
+ "previewSeeds": [
+  {
+   "row": 3,
+   "speciesTop": [
+    "Zygarde",
+    "Garchomp"
+   ],
+   "types": [
+    "Dragon",
+    "Ground"
+   ]
+  },
+  {
+   "row": 4,
+   "speciesTop": [
+    "Whimsicott"
+   ],
+   "types": [
+    "Grass",
+    "Fairy"
+   ]
+  }
+ ],
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "Boss sent out Garchomp!",
+     "conf": 1.0,
+     "x": 0.302,
+     "y": 0.707,
+     "w": 0.171,
+     "h": 0.045
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "identityResolved",
+   "side": "opp",
+   "species": "Garchomp"
+  },
+  {
+   "kind": "sendOut",
+   "side": "opp",
+   "subject": "Garchomp"
+  }
+ ]
+}

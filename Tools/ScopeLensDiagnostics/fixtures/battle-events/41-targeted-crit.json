@@ -1,0 +1,26 @@
+{
+ "name": "targeted crit note names the victim (battle 6 exact read)",
+ "notes": "\"A critical hit on the opposing X!\" — only the bare \"A critical hit!\" form was recognized before m11-B.",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "A critical hit on the opposing Oranguru!",
+     "conf": 1.0,
+     "x": 0.365,
+     "y": 0.707,
+     "w": 0.28,
+     "h": 0.05
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "note",
+   "side": "opp",
+   "subject": "Oranguru",
+   "detail": "critical hit"
+  }
+ ]
+}

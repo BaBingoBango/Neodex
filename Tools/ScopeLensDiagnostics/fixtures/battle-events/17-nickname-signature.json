@@ -1,0 +1,71 @@
+{
+ "name": "Matcha Latte \u2192 Sinistcha via Matcha Gotcha (send-out real, move synthetic)",
+ "synthetic": true,
+ "previewSeeds": [
+  {
+   "row": 0,
+   "speciesTop": [
+    "Dragonite"
+   ],
+   "types": [
+    "Dragon",
+    "Flying"
+   ]
+  },
+  {
+   "row": 1,
+   "speciesTop": [
+    "Sinistcha"
+   ],
+   "types": [
+    "Grass",
+    "Ghost"
+   ]
+  }
+ ],
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "Pikanan sent out Matcha Latte!",
+     "conf": 1.0,
+     "x": 0.326,
+     "y": 0.714,
+     "w": 0.211,
+     "h": 0.041
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "The opposing Matcha Latte used Matcha Gotcha!",
+     "conf": 1.0,
+     "x": 0.38,
+     "y": 0.712,
+     "w": 0.33,
+     "h": 0.054
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "sendOut",
+   "side": "opp",
+   "subject": "Matcha Latte"
+  },
+  {
+   "kind": "moveUsed",
+   "side": "opp",
+   "subject": "Matcha Latte",
+   "detail": "Matcha Gotcha"
+  },
+  {
+   "kind": "identityResolved",
+   "side": "opp",
+   "subject": "Matcha Latte",
+   "species": "Sinistcha"
+  }
+ ]
+}

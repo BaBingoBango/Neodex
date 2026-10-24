@@ -1,0 +1,42 @@
+{
+ "name": "Champions-only Staraptite reveal + Mega Staraptor (battle 3, 03:22/03:31)",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "The opposing Staraptor's Staraptite is reacting to Boss's Omni Ring!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.716,
+     "w": 0.458,
+     "h": 0.051
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "The opposing Staraptor has Mega Evolved into Mega Staraptor!",
+     "conf": 1.0,
+     "x": 0.437,
+     "y": 0.712,
+     "w": 0.425,
+     "h": 0.054
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "itemRevealed",
+   "side": "opp",
+   "subject": "Staraptor",
+   "detail": "Staraptite"
+  },
+  {
+   "kind": "megaEvolved",
+   "side": "opp",
+   "species": "Staraptor-Mega"
+  }
+ ]
+}

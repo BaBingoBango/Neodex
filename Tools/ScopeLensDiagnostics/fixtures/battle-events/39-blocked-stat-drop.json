@@ -1,0 +1,27 @@
+{
+ "name": "blocked stat drop stays a labeled note (battle 6 exact read)",
+ "notes": "\"was not lowered\" must not parse as a statChange and must not vanish as unrecognized — it signals a Clear Amulet / blocking ability. m11-B.",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "The opposing Oranguru's Attack was not lowered!",
+     "conf": 1.0,
+     "x": 0.365,
+     "y": 0.707,
+     "w": 0.31,
+     "h": 0.05
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "note",
+   "side": "opp",
+   "subject": "Oranguru",
+   "detail": "Attack drop blocked"
+  }
+ ],
+ "forbidEventKinds": ["statChange"]
+}

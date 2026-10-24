@@ -1,0 +1,74 @@
+{
+ "name": "m12-D: successful Protect flags the active for exactly the next turn",
+ "synthetic": true,
+ "notes": "Leads enter, turn 1 confirms, Incineroar Protects successfully, turn 2 confirms. The final snapshot must flag Incineroar (protected last turn, streak 1) and NOT its partner. The flag keys on the success banner ('protected itself'), not the attempt.",
+ "frames": [
+  {
+   "t": 0.0,
+   "tokens": [
+    {"text": "Go! Incineroar and Charizard!", "conf": 1.0, "x": 0.4, "y": 0.707, "w": 0.3, "h": 0.063}
+   ]
+  },
+  {
+   "t": 0.7,
+   "tokens": [
+    {"text": "Rival sent out Farigiraf and Oranguru!", "conf": 1.0, "x": 0.4, "y": 0.707, "w": 0.32, "h": 0.063}
+   ]
+  },
+  {
+   "t": 3.0,
+   "tokens": [
+    {"text": "FIGHT", "conf": 1.0, "x": 0.88, "y": 0.66, "w": 0.06, "h": 0.03},
+    {"text": "POKÉMON", "conf": 1.0, "x": 0.85, "y": 0.85, "w": 0.08, "h": 0.03}
+   ]
+  },
+  {
+   "t": 3.6,
+   "tokens": [
+    {"text": "FIGHT", "conf": 1.0, "x": 0.88, "y": 0.66, "w": 0.06, "h": 0.03},
+    {"text": "POKÉMON", "conf": 1.0, "x": 0.85, "y": 0.85, "w": 0.08, "h": 0.03}
+   ]
+  },
+  {
+   "t": 8.0,
+   "tokens": [
+    {"text": "Incineroar used Protect!", "conf": 1.0, "x": 0.4, "y": 0.707, "w": 0.24, "h": 0.063}
+   ]
+  },
+  {
+   "t": 9.0,
+   "tokens": [
+    {"text": "Incineroar protected itself!", "conf": 1.0, "x": 0.4, "y": 0.707, "w": 0.26, "h": 0.063}
+   ]
+  },
+  {
+   "t": 13.0,
+   "tokens": [
+    {"text": "FIGHT", "conf": 1.0, "x": 0.88, "y": 0.66, "w": 0.06, "h": 0.03},
+    {"text": "POKÉMON", "conf": 1.0, "x": 0.85, "y": 0.85, "w": 0.08, "h": 0.03}
+   ]
+  },
+  {
+   "t": 13.6,
+   "tokens": [
+    {"text": "FIGHT", "conf": 1.0, "x": 0.88, "y": 0.66, "w": 0.06, "h": 0.03},
+    {"text": "POKÉMON", "conf": 1.0, "x": 0.85, "y": 0.85, "w": 0.08, "h": 0.03}
+   ]
+  }
+ ],
+ "expectEvents": [
+  {"kind": "sendOut", "side": "you", "subject": "Incineroar"},
+  {"kind": "sendOut", "side": "you", "subject": "Charizard"},
+  {"kind": "sendOut", "side": "opp", "subject": "Farigiraf"},
+  {"kind": "sendOut", "side": "opp", "subject": "Oranguru"},
+  {"kind": "moveUsed", "side": "you", "subject": "Incineroar", "detail": "Protect"},
+  {"kind": "protected", "side": "you", "subject": "Incineroar"}
+ ],
+ "expectExactKindCounts": {
+  "protected": 1
+ },
+ "expectSnapshots": [
+  {"species": "Incineroar", "protectedLastTurn": true, "protectStreak": 1},
+  {"species": "Charizard", "protectedLastTurn": false, "protectStreak": 0}
+ ]
+}

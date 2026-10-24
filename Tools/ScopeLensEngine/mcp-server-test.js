@@ -147,7 +147,7 @@ async function main() {
     theirs: ['Whimsicott', 'Farigiraf', 'Charizard', 'Pelipper', 'Archaludon', 'Venusaur'],
   })).content[0].text;
   const sample = fs.readFileSync(
-    path.join(repoRoot, 'Fixtures', 'preview', 'Team_Preview_Initial_scout.md'), 'utf8');
+    path.join(process.env.SCOPELENS_FIXTURES || path.join(repoRoot, 'Fixtures'), 'preview', 'Team_Preview_Initial_scout.md'), 'utf8');
   const suggestion = sample.split('\n').find((l) => l.startsWith('**'));
   check('scout_report: bring-4 matches the committed sample',
     scout.includes(suggestion.split('—')[0].trim().replace(/\*/g, '').trim())

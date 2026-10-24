@@ -3,7 +3,7 @@
 //  Scope Lens
 //
 //  Phase 3, m11: the agentic advisor's tool surface. The six §4.3 engine
-//  tools (Engine/tool-schemas.json — the SAME definitions the MCP server
+//  tools (Tools/ScopeLensEngine/tool-schemas.json — the SAME definitions the MCP server
 //  lists) become Anthropic tool definitions, executed in-app against the
 //  same JavaScriptCore engine, so "run that damage calc" costs milliseconds
 //  and matches the scout CLI by construction.
@@ -100,7 +100,7 @@ nonisolated public enum AdvisorToolCatalog {
 
     /// App-bundle copy (Resources/Engine/tool-schemas.json).
     public static func bundled() throws -> [[String: Any]] {
-        guard let url = Bundle.module.url(forResource: "tool-schemas", withExtension: "json") else {
+        guard let url = Bundle.scopeLens.url(forResource: "tool-schemas", withExtension: "json") else {
             throw NSError(domain: "AdvisorTools", code: 2, userInfo: [
                 NSLocalizedDescriptionKey: "bundled tool-schemas.json missing"])
         }
@@ -110,7 +110,7 @@ nonisolated public enum AdvisorToolCatalog {
     /// Repo copy for diagnostics CLIs (run from the repo root).
     public static func fromRepo(root: String = ".") throws -> [[String: Any]] {
         try anthropicTools(from: Data(contentsOf:
-            URL(fileURLWithPath: "\(root)/Engine/tool-schemas.json")))
+            URL(fileURLWithPath: "\(root)/Tools/ScopeLensEngine/tool-schemas.json")))
     }
 }
 

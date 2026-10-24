@@ -1,0 +1,29 @@
+{
+ "name": "opponent lead pair with trainer name (battle 3, 01:56)",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "Boss sent out Staraptor and Whimsicott!",
+     "conf": 1.0,
+     "x": 0.356,
+     "y": 0.718,
+     "w": 0.27,
+     "h": 0.048
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "sendOut",
+   "side": "opp",
+   "subject": "Staraptor"
+  },
+  {
+   "kind": "sendOut",
+   "side": "opp",
+   "subject": "Whimsicott"
+  }
+ ]
+}

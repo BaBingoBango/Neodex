@@ -1,0 +1,63 @@
+{
+ "name": "our Intimidate: opposing pair Attack fall + left chip (battle 3, 02:07)",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "DuLO\u0424V\u0118CS",
+     "conf": 0.3,
+     "x": 0.421,
+     "y": 0.054,
+     "w": 0.08,
+     "h": 0.038
+    },
+    {
+     "text": "Incineroar's",
+     "conf": 1.0,
+     "x": 0.164,
+     "y": 0.497,
+     "w": 0.071,
+     "h": 0.042
+    },
+    {
+     "text": "Intimidate",
+     "conf": 1.0,
+     "x": 0.159,
+     "y": 0.538,
+     "w": 0.063,
+     "h": 0.036
+    },
+    {
+     "text": "The opposing Staraptor and the opposing Whimsicott's Attack fell",
+     "conf": 1.0,
+     "x": 0.442,
+     "y": 0.712,
+     "w": 0.45,
+     "h": 0.054
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "statChange",
+   "side": "opp",
+   "subject": "Staraptor",
+   "detail": "Attack",
+   "value": "-1"
+  },
+  {
+   "kind": "statChange",
+   "side": "opp",
+   "subject": "Whimsicott",
+   "detail": "Attack",
+   "value": "-1"
+  },
+  {
+   "kind": "abilityActivated",
+   "side": "you",
+   "species": "Incineroar",
+   "detail": "Intimidate"
+  }
+ ]
+}

@@ -1,0 +1,30 @@
+{
+ "name": "suffix-truncated subject resolves, no phantom (battle 7 exact read)",
+ "notes": "A fade-in ate the leading characters: \"cineroar used Fake Out!\" minted a duplicate entity beside Incineroar in battle 7. A unique ≥6-char SUFFIX of an existing name is that mon (the prefix rule's mirror). m11-B.",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "cineroar used Fake Out!",
+     "conf": 1.0,
+     "x": 0.4,
+     "y": 0.707,
+     "w": 0.20,
+     "h": 0.05
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "moveUsed",
+   "side": "you",
+   "subject": "Incineroar",
+   "species": "Incineroar",
+   "detail": "Fake Out"
+  }
+ ],
+ "expectExactKindCounts": {
+  "moveUsed": 1
+ }
+}

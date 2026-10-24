@@ -1,0 +1,40 @@
+{
+  "name": "clipped 'opposing' + truncated move both recover ('pposing Sneasler used Prote')",
+  "notes": "Battle 9's two truncation classes combined, on a read whose parts ARE recoverable: a fade-in clipped the side marker to 'pposing' (any ≥5-char suffix of 'opposing' now marks the opponent — the m12-G residue rule extended to the word itself) and clipped the move to 'Prote' (unique ≥5-char prefix of exactly one vocab move → Protect; battle 9's real 'Prote' polluted Kingambit's revealedMoves as a separate move).",
+  "synthetic": true,
+  "frames": [
+    {
+      "t": 0.0,
+      "tokens": [
+        {
+          "text": "BossSoffy sent out Aerodactyl and Sneasler!",
+          "conf": 1.0,
+          "x": 0.356,
+          "y": 0.718,
+          "w": 0.27,
+          "h": 0.048
+        }
+      ]
+    },
+    {
+      "t": 5.0,
+      "tokens": [
+        {
+          "text": "pposing Sneasler used Prote",
+          "conf": 1.0,
+          "x": 0.38,
+          "y": 0.718,
+          "w": 0.2,
+          "h": 0.048
+        }
+      ]
+    }
+  ],
+  "expectEvents": [
+    { "kind": "moveUsed", "side": "opp", "subject": "Sneasler", "detail": "Protect" }
+  ],
+  "expectExactKindCounts": { "moveUsed": 1 },
+  "forbidEvents": [
+    { "kind": "moveUsed", "side": "you" }
+  ]
+}

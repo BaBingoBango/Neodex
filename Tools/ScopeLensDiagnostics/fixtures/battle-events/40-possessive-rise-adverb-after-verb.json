@@ -1,0 +1,30 @@
+{
+ "name": "adverb-after-verb stat rise parses (+2) (battle 7 exact read)",
+ "notes": "\"rose sharply!\" (verb THEN adverb — Defiant proc) went unrecognized while the chip carried the event; the template now accepts the modifier on either side of the verb. m11-B.",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "The opposing Kingambit's Attack rose sharply!",
+     "conf": 1.0,
+     "x": 0.365,
+     "y": 0.707,
+     "w": 0.30,
+     "h": 0.05
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "statChange",
+   "side": "opp",
+   "species": "Kingambit",
+   "detail": "Attack",
+   "value": "+2"
+  }
+ ],
+ "expectExactKindCounts": {
+  "statChange": 1
+ }
+}

@@ -1,0 +1,49 @@
+{
+  "name": "pilot bind: 'Toucan sam' → Toucannon (2026-07-10 Charles battle)",
+  "notes": "Pilot-reported: a nicknamed opponent that never uses a signature move stays species-unknown ALL BATTLE (capsules/matchup/dossier blind to it) while its own preview row sits unclaimed. Elimination can't conclude automatically — the two unbrought preview rows stay unclaimed, so the candidate set never shrinks to one. m13-D: the pilot binds it by eye (Battle Log card); this fixture drives the same bindNickname path the card uses. Send-out banner shape from the verified battle-3 pair read; preview seeds are the exact rows from the pilot's pasted log.",
+  "synthetic": true,
+  "previewSeeds": [
+    { "row": 0, "speciesTop": ["Vileplume"], "types": ["Grass", "Poison"] },
+    { "row": 1, "speciesTop": ["Charizard"], "types": ["Fire", "Flying"] },
+    { "row": 2, "speciesTop": ["Toucannon"], "types": ["Flying", "Normal"] },
+    { "row": 3, "speciesTop": ["Stunfisk"], "types": ["Electric", "Ground"] },
+    { "row": 4, "speciesTop": ["Sableye"], "types": ["Dark", "Ghost"] },
+    { "row": 5, "speciesTop": ["Krookodile"], "types": ["Dark", "Ground"] }
+  ],
+  "frames": [
+    {
+      "t": 0.0,
+      "tokens": [
+        {
+          "text": "Charles sent out Sableye and Toucan sam!",
+          "conf": 1.0,
+          "x": 0.356,
+          "y": 0.718,
+          "w": 0.27,
+          "h": 0.048
+        }
+      ]
+    },
+    {
+      "t": 0.8,
+      "tokens": [],
+      "bindNickname": { "display": "Toucan sam", "species": "Toucannon" }
+    }
+  ],
+  "expectEvents": [
+    { "kind": "sendOut", "side": "opp", "subject": "Sableye" },
+    { "kind": "sendOut", "side": "opp", "subject": "Toucan sam" },
+    {
+      "kind": "identityResolved",
+      "side": "opp",
+      "subject": "Toucan sam",
+      "species": "Toucannon",
+      "detail": "pilot confirmed"
+    }
+  ],
+  "expectExactKindCounts": { "sendOut": 2, "identityResolved": 1 },
+  "expectSnapshots": [
+    { "species": "Sableye" },
+    { "species": "Toucannon" }
+  ]
+}

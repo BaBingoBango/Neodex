@@ -1,0 +1,53 @@
+{
+ "name": "type-misread row still binds via single shared type (battle 4 Scrafty)",
+ "notes": "Preview read Dark/Ground 'Krokorok' for a Dark/Fighting Scrafty (Fighting\u2192Ground icon misread). The narration-confirmed Scrafty must claim that row instead of leaving a ghost.",
+ "previewSeeds": [
+  {
+   "row": 1,
+   "speciesTop": [
+    "Mawile"
+   ],
+   "types": [
+    "Fairy",
+    "Steel"
+   ]
+  },
+  {
+   "row": 4,
+   "speciesTop": [
+    "Krokorok"
+   ],
+   "types": [
+    "Dark",
+    "Ground"
+   ]
+  }
+ ],
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "The opposing Scrafty used Fake Out!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.35,
+     "h": 0.05
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "identityResolved",
+   "side": "opp",
+   "species": "Scrafty"
+  },
+  {
+   "kind": "moveUsed",
+   "side": "opp",
+   "subject": "Scrafty",
+   "detail": "Fake Out"
+  }
+ ]
+}

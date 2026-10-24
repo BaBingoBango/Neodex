@@ -1,0 +1,53 @@
+{
+  "name": "unresolvable move rejects the parse (battle 9: 'pposing ArLodecad used Roda')",
+  "notes": "EXACT read from battle 9 (03:23.2): a mid-fade re-read of 'The opposing Aerodactyl used Rock Slide!' mangled beyond fuzzy tolerance. The old `?? raw` fallback accepted 'Roda' as a move, and with the clipped 'pposing' marker unrecognized the subject minted a YOU-side phantom entity ('pposing ArLodecad — moves: Roda' sat in the final state). Now: 'Roda' resolves to nothing → the parse is rejected → the line stays an unrecognized note, and only the clean read's event exists.",
+  "synthetic": true,
+  "frames": [
+    {
+      "t": 0.0,
+      "tokens": [
+        {
+          "text": "BossSoffy sent out Aerodactyl and Sneasler!",
+          "conf": 1.0,
+          "x": 0.356,
+          "y": 0.718,
+          "w": 0.27,
+          "h": 0.048
+        }
+      ]
+    },
+    {
+      "t": 5.0,
+      "tokens": [
+        {
+          "text": "The opposing Aerodactyl used Rock Slide!",
+          "conf": 1.0,
+          "x": 0.356,
+          "y": 0.718,
+          "w": 0.28,
+          "h": 0.048
+        }
+      ]
+    },
+    {
+      "t": 6.5,
+      "tokens": [
+        {
+          "text": "pposing ArLodecad used Roda",
+          "conf": 1.0,
+          "x": 0.38,
+          "y": 0.718,
+          "w": 0.2,
+          "h": 0.048
+        }
+      ]
+    }
+  ],
+  "expectEvents": [
+    { "kind": "moveUsed", "side": "opp", "subject": "Aerodactyl", "detail": "Rock Slide" }
+  ],
+  "expectExactKindCounts": { "moveUsed": 1 },
+  "forbidEvents": [
+    { "kind": "moveUsed", "side": "you" }
+  ]
+}

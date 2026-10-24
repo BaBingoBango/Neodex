@@ -1,0 +1,59 @@
+{
+ "name": "Wide Guard set + per-target block (battle 4, 03:12/03:36)",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "In sent out Armarouge and Scrafty!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.24,
+     "h": 0.05
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "Wide Guard now protects the opposing sid",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.3,
+     "h": 0.05
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "Wide Guard protected the opposing Armarouge!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.32,
+     "h": 0.05
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "sendOut",
+   "side": "opp",
+   "subject": "Armarouge"
+  },
+  {
+   "kind": "protected",
+   "side": "opp",
+   "detail": "Wide Guard"
+  },
+  {
+   "kind": "protected",
+   "side": "opp",
+   "subject": "Armarouge",
+   "detail": "Wide Guard"
+  }
+ ]
+}

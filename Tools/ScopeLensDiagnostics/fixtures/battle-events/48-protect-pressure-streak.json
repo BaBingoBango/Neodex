@@ -1,0 +1,95 @@
+{
+ "name": "m12-D: back-to-back successful Protects compound into a streak of 2",
+ "synthetic": true,
+ "notes": "Same opening as fixture 47, but Incineroar wins the ~33% repeat on the next turn too. The final snapshot carries streak 2 (another repeat ≈ 11%). Banners sit >3.5s apart so the semantic dedup window never eats the second attempt.",
+ "frames": [
+  {
+   "t": 0.0,
+   "tokens": [
+    {"text": "Go! Incineroar and Charizard!", "conf": 1.0, "x": 0.4, "y": 0.707, "w": 0.3, "h": 0.063}
+   ]
+  },
+  {
+   "t": 0.7,
+   "tokens": [
+    {"text": "Rival sent out Farigiraf and Oranguru!", "conf": 1.0, "x": 0.4, "y": 0.707, "w": 0.32, "h": 0.063}
+   ]
+  },
+  {
+   "t": 3.0,
+   "tokens": [
+    {"text": "FIGHT", "conf": 1.0, "x": 0.88, "y": 0.66, "w": 0.06, "h": 0.03},
+    {"text": "POKÉMON", "conf": 1.0, "x": 0.85, "y": 0.85, "w": 0.08, "h": 0.03}
+   ]
+  },
+  {
+   "t": 3.6,
+   "tokens": [
+    {"text": "FIGHT", "conf": 1.0, "x": 0.88, "y": 0.66, "w": 0.06, "h": 0.03},
+    {"text": "POKÉMON", "conf": 1.0, "x": 0.85, "y": 0.85, "w": 0.08, "h": 0.03}
+   ]
+  },
+  {
+   "t": 8.0,
+   "tokens": [
+    {"text": "Incineroar used Protect!", "conf": 1.0, "x": 0.4, "y": 0.707, "w": 0.24, "h": 0.063}
+   ]
+  },
+  {
+   "t": 9.0,
+   "tokens": [
+    {"text": "Incineroar protected itself!", "conf": 1.0, "x": 0.4, "y": 0.707, "w": 0.26, "h": 0.063}
+   ]
+  },
+  {
+   "t": 13.0,
+   "tokens": [
+    {"text": "FIGHT", "conf": 1.0, "x": 0.88, "y": 0.66, "w": 0.06, "h": 0.03},
+    {"text": "POKÉMON", "conf": 1.0, "x": 0.85, "y": 0.85, "w": 0.08, "h": 0.03}
+   ]
+  },
+  {
+   "t": 13.6,
+   "tokens": [
+    {"text": "FIGHT", "conf": 1.0, "x": 0.88, "y": 0.66, "w": 0.06, "h": 0.03},
+    {"text": "POKÉMON", "conf": 1.0, "x": 0.85, "y": 0.85, "w": 0.08, "h": 0.03}
+   ]
+  },
+  {
+   "t": 18.0,
+   "tokens": [
+    {"text": "Incineroar used Protect!", "conf": 1.0, "x": 0.4, "y": 0.707, "w": 0.24, "h": 0.063}
+   ]
+  },
+  {
+   "t": 19.0,
+   "tokens": [
+    {"text": "Incineroar protected itself!", "conf": 1.0, "x": 0.4, "y": 0.707, "w": 0.26, "h": 0.063}
+   ]
+  },
+  {
+   "t": 23.0,
+   "tokens": [
+    {"text": "FIGHT", "conf": 1.0, "x": 0.88, "y": 0.66, "w": 0.06, "h": 0.03},
+    {"text": "POKÉMON", "conf": 1.0, "x": 0.85, "y": 0.85, "w": 0.08, "h": 0.03}
+   ]
+  },
+  {
+   "t": 23.6,
+   "tokens": [
+    {"text": "FIGHT", "conf": 1.0, "x": 0.88, "y": 0.66, "w": 0.06, "h": 0.03},
+    {"text": "POKÉMON", "conf": 1.0, "x": 0.85, "y": 0.85, "w": 0.08, "h": 0.03}
+   ]
+  }
+ ],
+ "expectEvents": [
+  {"kind": "protected", "side": "you", "subject": "Incineroar"},
+  {"kind": "protected", "side": "you", "subject": "Incineroar"}
+ ],
+ "expectExactKindCounts": {
+  "protected": 2
+ },
+ "expectSnapshots": [
+  {"species": "Incineroar", "protectedLastTurn": true, "protectStreak": 2}
+ ]
+}

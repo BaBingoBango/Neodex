@@ -1,0 +1,121 @@
+{
+  "assertions" : [
+    {
+      "species" : "Charizard-Mega-Y",
+      "tier" : "guaranteed",
+      "type" : "doomedFlag"
+    },
+    {
+      "type" : "commit"
+    },
+    {
+      "type" : "lintClean"
+    },
+    {
+      "move" : "Solar Beam",
+      "pokemon" : "Charizard",
+      "type" : "forbid"
+    }
+  ],
+  "description" : "EVAL CASE #1 — the pilot's Solar Beam loss (2026-07-13 19:54 archive, ask 2, reconstructed board via Diagnostics\/eval\/GenerateSolarBeamCase.swift — the recorded invocation; battle log omitted). The advisor said 'Charizard is going to die… so I cash it in' and 'I outspeed with Charizard' — then Tyranitar's Rock Slide fired first and Solar Beam never happened. The ladder actually runs Excadrill at max speed (modal spread), so Charizard's slot is doomed (tier: guaranteed) and the committed play must NOT be the Solar Beam cash-in (pilot verdict).",
+  "name" : "solar-beam-cash-in",
+  "source" : {
+    "inline" : {
+      "lintContext" : {
+        "doomed" : [
+          {
+            "killer" : "Tyranitar",
+            "killerMove" : "Rock Slide",
+            "species" : "Charizard-Mega-Y",
+            "tier" : "guaranteed"
+          },
+          {
+            "killer" : "Excadrill",
+            "killerMove" : "Earthquake",
+            "species" : "Incineroar",
+            "tier" : "range"
+          }
+        ],
+        "oppActives" : [
+          {
+            "display" : "Tyranitar",
+            "fainted" : false,
+            "fakeOutLegal" : false,
+            "knownMoves" : [
+
+            ],
+            "species" : "Tyranitar"
+          },
+          {
+            "display" : "Excadrill",
+            "fainted" : false,
+            "fakeOutLegal" : false,
+            "item" : "Focus Sash",
+            "knownMoves" : [
+
+            ],
+            "species" : "Excadrill"
+          }
+        ],
+        "turn" : 2,
+        "weather" : "Sun",
+        "yourActives" : [
+          {
+            "display" : "Charizard",
+            "fainted" : false,
+            "fakeOutLegal" : false,
+            "item" : "Charizardite Y",
+            "knownMoves" : [
+              "Heat Wave",
+              "Solar Beam",
+              "Weather Ball",
+              "Protect"
+            ],
+            "species" : "Charizard-Mega-Y"
+          },
+          {
+            "display" : "Incineroar",
+            "fainted" : false,
+            "fakeOutLegal" : false,
+            "item" : "Sitrus Berry",
+            "knownMoves" : [
+              "Fake Out"
+            ],
+            "species" : "Incineroar"
+          }
+        ],
+        "yourBench" : [
+          {
+            "display" : "Garchomp",
+            "fainted" : false,
+            "species" : "Garchomp"
+          },
+          {
+            "display" : "Rotom-Wash",
+            "fainted" : false,
+            "species" : "Rotom-Wash"
+          }
+        ],
+        "yourGuaranteedKOs" : [
+          {
+            "attacker" : "Incineroar",
+            "defender" : "Excadrill",
+            "move" : "Flare Blitz"
+          },
+          {
+            "attacker" : "Charizard-Mega-Y",
+            "defender" : "Excadrill",
+            "move" : "Heat Wave"
+          },
+          {
+            "attacker" : "Charizard-Mega-Y",
+            "defender" : "Tyranitar",
+            "move" : "Solar Beam"
+          }
+        ]
+      },
+      "staticContext" : "REGULATION: Pokémon Champions ranked doubles (VGC-style), level 50.\n\nYOUR TEAM (configured — full sets, ground truth):\n- Charizard: @ Charizardite Y · Heat Wave \/ Solar Beam \/ Weather Ball \/ Protect\n- Venusaur: @ Focus Sash · Sleep Powder \/ Leaf Storm \/ Sludge Bomb \/ Protect\n- Garchomp: @ Choice Scarf\n- Rotom-Wash “Rotom”: @ Leftovers · Levitate · Hydro Pump \/ Thunderbolt \/ Will-O-Wisp \/ Protect\n- Sneasler: @ White Herb\n- Incineroar: @ Sitrus Berry\n\nOPPONENT META CAPSULES (all six preview mons, bench included — Reg M-B ranked usage priors, NOT observations):\n- Excadrill (Ground\/Steel) · winrate 49.3%\n  moves: Iron Head 96.8%, Protect 93.7%, Rock Slide 82.4%, Earthquake 63.7%\n  items: Focus Sash 74.4%, Life Orb 10.5% · ability: Sand Rush 84.4%\n  physical attacker · speed 108–154 · ladder-modal ~140 (39.5% spread) · weak: Fire, Water, Fighting, Ground · resists: Normal, Flying, Psychic, Bug, Dragon, Steel, Fairy, Rock · immune: Electric, Poison\n  usual partners: Tyranitar, Staraptor, Rotom-Wash\n- Houndstone (Ghost) · winrate 51.7%\n  moves: Last Respects 89.7%, Protect 79.4%, Will-O-Wisp 47.6%, Ally Switch 42.1%\n  items: Life Orb 47.6%, Leftovers 19.8% · ability: Sand Rush 76.2%\n  physical attacker · speed 88–132 · ladder-modal ~117 (34.9% spread) · weak: Ghost, Dark · resists: Poison, Bug · immune: Normal, Fighting\n  usual partners: Tyranitar, Staraptor, Excadrill\n- Rotom-Wash (Electric\/Water) · winrate 46.5%\n  moves: Hydro Pump 96.4%, Will-O-Wisp 77.9%, Thunderbolt 71.5%, Protect 54.2%\n  items: Sitrus Berry 39.1%, Leftovers 29.7% · ability: Levitate 100%\n  special attacker · speed 106–151 · ladder-modal ~138 (8% spread) (Scarf → 226) · weak: Grass, Ground · resists: Fire, Water, Ice, Flying, Steel\n  usual partners: Garchomp, Whimsicott, Sinistcha\n- Scovillain (Grass\/Fire) · winrate 57.6%\n  moves: Protect 98.9%, Rage Powder 96.5%, Overheat 77.7%, Leech Seed 53.6%\n  items: Scovillainite 99.3%, Kebia Berry 0.3% · ability: Moody 88.2%\n  special attacker · speed 95–139 · ladder-modal ~95 (27.8% spread) · weak: Poison, Flying, Rock · resists: Electric, Steel, Fairy, Grass\n  usual partners: Sneasler, Basculegion, Archaludon\n- Staraptor (Normal\/Flying) · winrate 45.1%\n  moves: Close Combat 98.2%, Protect 90.2%, Brave Bird 81.2%, Roost 71.5%\n  items: Staraptite 94.5%, Choice Scarf 5.4% · ability: Intimidate 97.1%\n  physical attacker · speed 120–167 · ladder-modal ~167 (20.1% spread) (Scarf → 250) · weak: Electric, Ice, Rock · resists: Grass, Bug · immune: Ground, Ghost\n  usual partners: Sinistcha, Garchomp, Whimsicott\n- Tyranitar (Rock\/Dark) · winrate 46.2%\n  moves: Rock Slide 98.8%, Knock Off 92.9%, Protect 91.9%, Low Kick 43.5%\n  items: Tyranitarite 69.9%, Chople Berry 7.2% · ability: Sand Stream 99.7%\n  physical attacker · speed 81–124 · ladder-modal ~113 (15% spread) (Scarf → 186) · 4× weak: Fighting · weak: Water, Grass, Ground, Bug, Steel, Fairy · resists: Normal, Fire, Poison, Flying, Ghost, Dark · immune: Psychic\n  usual partners: Sinistcha, Excadrill, Staraptor\nSpeed brackets are L50 ranges: 0-EV neutral floor → 252-EV +nature ceiling; \"ladder-modal\" is the top usage spread × nature — the single best speed estimate, and what the damage math assumes for unobserved sets. \"Outspeeds\" claims must respect the whole bracket (and Scarf where flagged).",
+      "turnContext" : "TURN 2.\nFIELD: weather: Sun (3 turns left)\n\nYOUR ACTIVES:\n- Charizard-Mega-Y “Charizard”: HP 14% · entered turn 0 (Fake Out ILLEGAL — not its first turn) · item: Charizardite Y (observed) · ability: Drought (observed) · revealed: Heat Wave, Solar Beam\n- Incineroar: HP 72% · entered turn 0 (Fake Out ILLEGAL — not its first turn) · ability: Intimidate (observed) · revealed: Fake Out\n\nOPPONENT ACTIVES:\n- Tyranitar: HP 57% · entered turn 0 (Fake Out ILLEGAL — not its first turn) · ability: Sand Stream (observed) · revealed: Rock Slide\n- Excadrill: HP 1% · entered turn 0 (Fake Out ILLEGAL — not its first turn) · item: Focus Sash (observed) · revealed: Rock Slide, Iron Head\n\nYOUR BENCH: Garchomp (184\/184), Rotom-Wash (155\/155)\nOPPONENT BENCH (preview-known): Houndstone, Staraptor, Scovillain, Rotom-Wash\n\nDAMAGE MATH (deterministic; Level 50; configured EVs\/natures where set (your team), else the MODAL ladder spread + nature from usage data, else 252 in the used offense vs 252 HP with neutral natures; observed moves\/items\/abilities\/boosts\/status where known, priors otherwise; speeds use configured spreads where set, modal ladder spreads otherwise (0-EV floor only for off-ladder species). KO flags compare against current HP.):\nIncoming threats:\n- Tyranitar Rock Slide → Charizard-Mega-Y: 164.3–196.8% [GUARANTEED KO] (set from usage)\n- Excadrill Rock Slide → Charizard-Mega-Y: 97.3–114.6% [GUARANTEED KO] (set from usage)\n- Excadrill Earthquake → Incineroar: 68.3–81.2% [KO RANGE] (set from usage)\n- Tyranitar Rock Slide → Incineroar: 60.4–72.3% [KO RANGE] (set from usage)\nYour answers:\n- Incineroar Flare Blitz → Excadrill: 123.0–145.5% [GUARANTEED KO]\n- Charizard-Mega-Y Heat Wave → Excadrill: 107.0–126.2% [GUARANTEED KO]\n- Charizard-Mega-Y Solar Beam → Tyranitar: 76.8–91.5% [GUARANTEED KO]\n- Incineroar Flare Blitz → Tyranitar: 15.3–18.1%\nSpeed order — your actives' speeds are exact, opponents' are estimates (see brackets): Excadrill(opp) 140 → Tyranitar(opp) 123 → Charizard-Mega-Y(you) 120 → Incineroar(you) 80\n⚠️ DOOMED SLOT: Charizard-Mega-Y acts AFTER Tyranitar, whose Rock Slide is a GUARANTEED KO — a non-priority move from Charizard-Mega-Y never executes. Do not spend it on a slower attack: switch it out, Protect, use priority, redirect with the partner, or play for the partner's best line.\n⚠️ DOOMED SLOT: Incineroar acts AFTER Excadrill, whose Earthquake is in KO range — a non-priority move from Incineroar likely never executes. Do not spend it on a slower attack: switch it out, Protect, use priority, redirect with the partner, or play for the partner's best line."
+    }
+  }
+}

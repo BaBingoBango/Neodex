@@ -1,0 +1,43 @@
+{
+ "name": "poison tick, \"its poisoning\" wording (battle 6 exact read)",
+ "notes": "Champions narrates the residual tick as \"was hurt by its poisoning!\" — the m4 map only knew \"was hurt by poison\". Ticks are lookup-only, so Sylveon enters first. m11-B.",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "Marc sent out Sylveon!",
+     "conf": 1.0,
+     "x": 0.365,
+     "y": 0.707,
+     "w": 0.20,
+     "h": 0.05
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "The opposing Sylveon was hurt by its poisoning!",
+     "conf": 1.0,
+     "x": 0.365,
+     "y": 0.707,
+     "w": 0.31,
+     "h": 0.05
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "sendOut",
+   "side": "opp",
+   "species": "Sylveon"
+  },
+  {
+   "kind": "statusTick",
+   "side": "opp",
+   "species": "Sylveon",
+   "detail": "psn"
+  }
+ ]
+}

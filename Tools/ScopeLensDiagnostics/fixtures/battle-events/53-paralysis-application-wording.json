@@ -1,0 +1,21 @@
+{
+ "name": "battle 8: Champions paralysis application wording sets the status",
+ "notes": "EXACT read: 'Venusaur is paralyzed, so it may be unable to move!' (Zap Cannon's 100% para). The m4 map only knew mainline's 'was paralyzed' application and 'is paralyzed! It can't move' tick — battle 8's Venusaur was never tracked as par, hiding the speed halving from the matchup and advisor.",
+ "frames": [
+  {
+   "t": 0.0,
+   "tokens": [
+    {"text": "Go! Venusaur and Rotom!", "conf": 1.0, "x": 0.4, "y": 0.707, "w": 0.28, "h": 0.063}
+   ]
+  },
+  {
+   "t": 0.7,
+   "tokens": [
+    {"text": "Venusaur is paralyzed, so it may be unable to move!", "conf": 1.0, "x": 0.4, "y": 0.707, "w": 0.36, "h": 0.063}
+   ]
+  }
+ ],
+ "expectEvents": [
+  {"kind": "statusInflicted", "side": "you", "species": "Venusaur", "detail": "par"}
+ ]
+}

@@ -1,0 +1,25 @@
+{
+ "name": "opp move used (battle 3, 03:52)",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "The opposing Garchomp used Rock Tomb!",
+     "conf": 1.0,
+     "x": 0.365,
+     "y": 0.707,
+     "w": 0.287,
+     "h": 0.063
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "moveUsed",
+   "side": "opp",
+   "subject": "Garchomp",
+   "detail": "Rock Tomb"
+  }
+ ]
+}

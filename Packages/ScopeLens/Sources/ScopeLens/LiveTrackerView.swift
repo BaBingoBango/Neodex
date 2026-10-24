@@ -7,7 +7,7 @@
 //  with ScreenStateClassifier, and shows the live state, overlays, confidence,
 //  a viewport preview, and a rolling transition log.
 //
-//  This panel is the app-side twin of Diagnostics/LiveCaptureProbe's `stream`
+//  This panel is the app-side twin of Tools/ScopeLensDiagnostics/LiveCaptureProbe's `stream`
 //  mode: raw per-sample truth, no debouncing — the BattleState layer will own
 //  smoothing when it lands.
 //

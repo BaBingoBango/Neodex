@@ -1,0 +1,18 @@
+{
+ "name": "battle 8: mangled 'The' before 'opposing' never mints a you-side phantom",
+ "notes": "EXACT read: 'le opposing Raichu used Focus Blast!' — the fade mangled 'The' to 'le', the old subjects() prefix only tolerated 'he opposing', and a phantom YOU-side entity ('le opposing Raichu') landed in battle 8's final state. 'opposing' anywhere at the phrase head is the load-bearing side marker.",
+ "frames": [
+  {
+   "t": 0.0,
+   "tokens": [
+    {"text": "le opposing Raichu used Focus Blast!", "conf": 1.0, "x": 0.4, "y": 0.707, "w": 0.3, "h": 0.063}
+   ]
+  }
+ ],
+ "expectEvents": [
+  {"kind": "moveUsed", "side": "opp", "subject": "Raichu", "detail": "Focus Blast"}
+ ],
+ "forbidEvents": [
+  {"kind": "moveUsed", "side": "you"}
+ ]
+}

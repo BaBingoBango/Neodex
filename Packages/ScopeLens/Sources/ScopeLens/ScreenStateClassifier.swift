@@ -10,7 +10,7 @@
 //  - `classify(tokens:)` is the pure, deterministic core: weighted positional
 //    text signatures → argmax over modes, with `unknown` below threshold.
 //    Signature positions come from the labeled fixture set (see
-//    Diagnostics/ClassifierHarness.swift) in normalized 0–1 coordinates,
+//    Tools/ScopeLensDiagnostics/ClassifierHarness.swift) in normalized 0–1 coordinates,
 //    origin top-left — never absolute pixels.
 //  - `FrameObserver` is the seam between "frame" and "tokens". v1 is full
 //    Vision OCR (`VisionFrameObserver`); a cheaper pixel-probe pass can slot

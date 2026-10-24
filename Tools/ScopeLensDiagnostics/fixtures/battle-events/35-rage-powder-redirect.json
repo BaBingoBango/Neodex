@@ -1,0 +1,41 @@
+{
+ "name": "Rage Powder redirect + 'used.' wobble (battle 5)",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "The opposing Sinistcha used.Rage Powder!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.3,
+     "h": 0.05
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "The opposing Sinistcha became the center of attention!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.38,
+     "h": 0.05
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "moveUsed",
+   "side": "opp",
+   "subject": "Sinistcha",
+   "detail": "Rage Powder"
+  },
+  {
+   "kind": "note",
+   "detail": "redirecting (Rage Powder / Follow Me)"
+  }
+ ]
+}

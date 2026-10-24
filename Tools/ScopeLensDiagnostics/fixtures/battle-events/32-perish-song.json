@@ -1,0 +1,118 @@
+{
+ "name": "Perish Song clocks all actives; counts tick with O-for-zero wobble (battle 5)",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "In sent out Gengar and Incineroar!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.26,
+     "h": 0.05
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "Go! Charizard and Incineroar!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.2,
+     "h": 0.05
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "The opposing Gengar used Perish Song!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.28,
+     "h": 0.05
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "All Pok\u00e9mon that heard the song will faint in three turns!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.44,
+     "h": 0.05
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "Charizard's perish count fell to 3!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.26,
+     "h": 0.05
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "The opposing Gengar's perish count fell to 3!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.34,
+     "h": 0.05
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "Charizard's perish count fell to O!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.26,
+     "h": 0.05
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "moveUsed",
+   "side": "opp",
+   "subject": "Gengar",
+   "detail": "Perish Song"
+  },
+  {
+   "kind": "perishCount",
+   "side": "you",
+   "species": "Charizard",
+   "value": "3"
+  },
+  {
+   "kind": "perishCount",
+   "side": "opp",
+   "subject": "Gengar",
+   "value": "3"
+  },
+  {
+   "kind": "perishCount",
+   "side": "you",
+   "species": "Charizard",
+   "value": "0"
+  }
+ ],
+ "expectExactKindCounts": {
+  "perishCount": 3
+ }
+}

@@ -15,8 +15,13 @@ cd Tools/ScopeLensEngine
 npm install
 node_modules/.bin/esbuild src/engine.ts --bundle --format=iife --global-name=ScopeEngine \
   --banner:js="var console={log:function(){},warn:function(){},error:function(){}};" \
-  --outfile=../../Packages/ScopeLens/Sources/ScopeLens/Resources/Engine/engine.js
+  --outfile=dist/engine.js
+cp dist/engine.js ../../Packages/ScopeLens/Sources/ScopeLens/Resources/Engine/engine.js
 ```
+
+`dist/engine.js` is what the MCP server and the diagnostics harnesses load; the copy in the
+package is what the app ships. Keep them identical (`verify-all.sh` stage 7 checks the server
+against the engine).
 
 `fetch-meta.js` refreshes the Pikalytics usage snapshot (politely: two connections, 200 ms
 spacing, only on demand), `build-vocab.js`, `build-dex-info.js` and `build-learnset-fallback.js`
@@ -24,6 +29,5 @@ bake the closed vocabulary and effect text from `@pkmn/dex`, and `champions-over
 small delta where Pokémon Champions differs from the mainline games. After changing any data file,
 copy it next to `engine.js` so the app sees it.
 
-The vision side of Scope Lens (fixtures, replay harnesses, the advisor eval) lives in the
-standalone Scope Lens repository; this folder holds only what the Mac app needs to rebuild its
-engine.
+The replay harnesses and the advisor eval are in `Tools/ScopeLensDiagnostics`; the fixtures they
+read stay in the private Scope Lens checkout (`SCOPELENS_FIXTURES`).

@@ -1,0 +1,83 @@
+{
+ "name": "faint locks HP at zero; later plate read discarded",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "Rotom used Thunderbolt!",
+     "conf": 1.0,
+     "x": 0.308,
+     "y": 0.711,
+     "w": 0.098,
+     "h": 0.043
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "Rotom fainted!",
+     "conf": 1.0,
+     "x": 0.272,
+     "y": 0.711,
+     "w": 0.105,
+     "h": 0.042
+    },
+    {
+     "text": "5CME",
+     "conf": 0.3,
+     "x": 0.229,
+     "y": 0.069,
+     "w": 0.188,
+     "h": 0.132
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "Rotom",
+     "conf": 1.0,
+     "x": 0.318,
+     "y": 0.872,
+     "w": 0.035,
+     "h": 0.028
+    },
+    {
+     "text": "37/157",
+     "conf": 1.0,
+     "x": 0.378,
+     "y": 0.94,
+     "w": 0.056,
+     "h": 0.041
+    },
+    {
+     "text": "The opposing Staraptor protected itself!",
+     "conf": 1.0,
+     "x": 0.356,
+     "y": 0.712,
+     "w": 0.279,
+     "h": 0.054
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "moveUsed",
+   "side": "you",
+   "species": "Rotom-Wash",
+   "detail": "Thunderbolt"
+  },
+  {
+   "kind": "fainted",
+   "side": "you",
+   "species": "Rotom-Wash"
+  }
+ ],
+ "expectAnomalyContains": "fainted stays fainted",
+ "forbidEventKinds": [
+  "healed",
+  "damageTaken"
+ ]
+}

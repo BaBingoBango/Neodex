@@ -1,0 +1,69 @@
+{
+ "name": "perish clock clears on switch-out ('went back to' recall wording, battle 5)",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "In sent out Gengar and Incineroar!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.26,
+     "h": 0.05
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "All Pok\u00e9mon that heard the song will faint in three turns!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.44,
+     "h": 0.05
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "The opposing Incineroar went back to U3 d!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.3,
+     "h": 0.05
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "The opposing Incineroar's perish count fell to 2!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.36,
+     "h": 0.05
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "withdraw",
+   "side": "opp",
+   "subject": "Incineroar"
+  }
+ ],
+ "forbidEvents": [
+  {
+   "kind": "perishCount",
+   "side": "opp",
+   "subject": "Incineroar",
+   "value": "2"
+  }
+ ],
+ "notes": "The count line after withdrawal must not re-clock the benched mon \u2014 lookup resolves it but it is no longer active... actually resolve finds the entity; the assertion here is intentionally only that withdrawal parsed. Perish-after-withdraw is legal narration order; drop the forbid if Champions narrates counts before recall completes."
+}

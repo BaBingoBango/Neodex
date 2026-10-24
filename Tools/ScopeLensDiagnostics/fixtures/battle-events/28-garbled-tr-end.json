@@ -1,0 +1,39 @@
+{
+ "name": "heavily garbled Trick Room end still parses (battle 4, 06:25)",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "The opposing Armarouge twisted the dimensions!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.33,
+     "h": 0.05
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "The wwisted dimensions-retuined to notge",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.3,
+     "h": 0.05
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "trickRoom",
+   "value": "on"
+  },
+  {
+   "kind": "trickRoom",
+   "value": "off"
+  }
+ ]
+}

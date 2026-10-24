@@ -1,0 +1,96 @@
+{
+ "name": "m12-D: the Protect flag decays after one full turn without a repeat",
+ "synthetic": true,
+ "notes": "Incineroar Protects on turn 1, does nothing notable on turn 2 (only the opponent moves), and turn 3 confirms. The final snapshot must NOT flag it — in-game, the odds counter is back to full and the advisor should not warn about a repeat.",
+ "frames": [
+  {
+   "t": 0.0,
+   "tokens": [
+    {"text": "Go! Incineroar and Charizard!", "conf": 1.0, "x": 0.4, "y": 0.707, "w": 0.3, "h": 0.063}
+   ]
+  },
+  {
+   "t": 0.7,
+   "tokens": [
+    {"text": "Rival sent out Farigiraf and Oranguru!", "conf": 1.0, "x": 0.4, "y": 0.707, "w": 0.32, "h": 0.063}
+   ]
+  },
+  {
+   "t": 3.0,
+   "tokens": [
+    {"text": "FIGHT", "conf": 1.0, "x": 0.88, "y": 0.66, "w": 0.06, "h": 0.03},
+    {"text": "POKÉMON", "conf": 1.0, "x": 0.85, "y": 0.85, "w": 0.08, "h": 0.03}
+   ]
+  },
+  {
+   "t": 3.6,
+   "tokens": [
+    {"text": "FIGHT", "conf": 1.0, "x": 0.88, "y": 0.66, "w": 0.06, "h": 0.03},
+    {"text": "POKÉMON", "conf": 1.0, "x": 0.85, "y": 0.85, "w": 0.08, "h": 0.03}
+   ]
+  },
+  {
+   "t": 8.0,
+   "tokens": [
+    {"text": "Incineroar used Protect!", "conf": 1.0, "x": 0.4, "y": 0.707, "w": 0.24, "h": 0.063}
+   ]
+  },
+  {
+   "t": 9.0,
+   "tokens": [
+    {"text": "Incineroar protected itself!", "conf": 1.0, "x": 0.4, "y": 0.707, "w": 0.26, "h": 0.063}
+   ]
+  },
+  {
+   "t": 13.0,
+   "tokens": [
+    {"text": "FIGHT", "conf": 1.0, "x": 0.88, "y": 0.66, "w": 0.06, "h": 0.03},
+    {"text": "POKÉMON", "conf": 1.0, "x": 0.85, "y": 0.85, "w": 0.08, "h": 0.03}
+   ]
+  },
+  {
+   "t": 13.6,
+   "tokens": [
+    {"text": "FIGHT", "conf": 1.0, "x": 0.88, "y": 0.66, "w": 0.06, "h": 0.03},
+    {"text": "POKÉMON", "conf": 1.0, "x": 0.85, "y": 0.85, "w": 0.08, "h": 0.03}
+   ]
+  },
+  {
+   "t": 18.0,
+   "tokens": [
+    {"text": "The opposing Farigiraf used Trick Room!", "conf": 1.0, "x": 0.4, "y": 0.707, "w": 0.34, "h": 0.063}
+   ]
+  },
+  {
+   "t": 19.0,
+   "tokens": [
+    {"text": "The opposing Farigiraf used Trick Room!", "conf": 1.0, "x": 0.4, "y": 0.707, "w": 0.34, "h": 0.063}
+   ]
+  },
+  {
+   "t": 23.0,
+   "tokens": [
+    {"text": "FIGHT", "conf": 1.0, "x": 0.88, "y": 0.66, "w": 0.06, "h": 0.03},
+    {"text": "POKÉMON", "conf": 1.0, "x": 0.85, "y": 0.85, "w": 0.08, "h": 0.03}
+   ]
+  },
+  {
+   "t": 23.6,
+   "tokens": [
+    {"text": "FIGHT", "conf": 1.0, "x": 0.88, "y": 0.66, "w": 0.06, "h": 0.03},
+    {"text": "POKÉMON", "conf": 1.0, "x": 0.85, "y": 0.85, "w": 0.08, "h": 0.03}
+   ]
+  }
+ ],
+ "expectEvents": [
+  {"kind": "protected", "side": "you", "subject": "Incineroar"},
+  {"kind": "moveUsed", "side": "opp", "subject": "Farigiraf", "detail": "Trick Room"}
+ ],
+ "expectExactKindCounts": {
+  "protected": 1,
+  "moveUsed": 2
+ },
+ "expectSnapshots": [
+  {"species": "Incineroar", "protectedLastTurn": false, "protectStreak": 0}
+ ]
+}

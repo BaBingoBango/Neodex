@@ -1,0 +1,25 @@
+{
+ "name": "'is reacting fo' wobble still reveals the stone (battle 4, 02:03)",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "Charizard's Charizardite Y is reacting fo Ethan's Omni.Ring!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.4,
+     "h": 0.05
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "itemRevealed",
+   "side": "you",
+   "species": "Charizard",
+   "detail": "Charizardite Y"
+  }
+ ]
+}

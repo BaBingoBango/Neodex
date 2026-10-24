@@ -1,0 +1,42 @@
+{
+ "name": "wobbled mega re-read dies on state legality (battle 7 ×2 shape)",
+ "notes": "Battle 7 logged megaEvolved twice, 1.5s apart: a near-full-length re-read with a wobbled tail is not a fragment (not shorter) and not a semantic dup (different detail) — only the reconciler's legality (already mega ⇒ stays mega) can kill it. Nickname subject, as in the live battle. m11-B.",
+ "frames": [
+  {
+   "t": 0.0,
+   "tokens": [
+    {
+     "text": "The opposing Laemo has Mega Evolved into Mega Laemo!",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.38,
+     "h": 0.05
+    }
+   ]
+  },
+  {
+   "t": 1.5,
+   "tokens": [
+    {
+     "text": "The opposing Laemo has Mega Evolved into Mega Laemol",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.38,
+     "h": 0.05
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "megaEvolved",
+   "side": "opp",
+   "subject": "Laemo"
+  }
+ ],
+ "expectExactKindCounts": {
+  "megaEvolved": 1
+ }
+}

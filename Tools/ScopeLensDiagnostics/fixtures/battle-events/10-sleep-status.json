@@ -1,0 +1,41 @@
+{
+ "name": "opponent falls asleep, plate HP learned (battle 3, 07:31)",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "Garchomp",
+     "conf": 1.0,
+     "x": 0.658,
+     "y": 0.071,
+     "w": 0.054,
+     "h": 0.035
+    },
+    {
+     "text": "100%",
+     "conf": 1.0,
+     "x": 0.709,
+     "y": 0.137,
+     "w": 0.048,
+     "h": 0.041
+    },
+    {
+     "text": "The opposing Garchomp fell asleep!",
+     "conf": 1.0,
+     "x": 0.344,
+     "y": 0.716,
+     "w": 0.247,
+     "h": 0.051
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "statusInflicted",
+   "side": "opp",
+   "subject": "Garchomp",
+   "detail": "slp"
+  }
+ ]
+}

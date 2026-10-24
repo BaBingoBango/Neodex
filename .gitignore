@@ -27,3 +27,9 @@ Tools/NeodexData/.cache/
 
 # Scope Lens engine dependencies
 Tools/ScopeLensEngine/node_modules/
+
+# Scope Lens: secrets for the diagnostics harnesses, OCR dumps and any local copy of the private fixtures
+.env
+.env.*
+ocr-dump.txt
+/Fixtures/

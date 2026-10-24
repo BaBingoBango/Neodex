@@ -1,0 +1,55 @@
+{
+  "name": "White Herb clears the drop (battle 9: Sneasler after Intimidate)",
+  "notes": "EXACT read: 'The opposing Sneasler returned its stats to normal using its White Herb!' — previously unrecognized, leaving a stale Atk-1 on Sneasler that fed wrong matchup math AND an '(at Atk-1)' damage inference on a restored attacker. Negative stages clear (positives would stay); the herb is also an item reveal when no chip fired first.",
+  "synthetic": true,
+  "frames": [
+    {
+      "t": 0.0,
+      "tokens": [
+        {
+          "text": "BossSoffy sent out Aerodactyl and Sneasler!",
+          "conf": 1.0,
+          "x": 0.356,
+          "y": 0.718,
+          "w": 0.27,
+          "h": 0.048
+        }
+      ]
+    },
+    {
+      "t": 5.0,
+      "tokens": [
+        {
+          "text": "The opposing Sneasler's Attack fell!",
+          "conf": 1.0,
+          "x": 0.356,
+          "y": 0.718,
+          "w": 0.25,
+          "h": 0.048
+        }
+      ]
+    },
+    {
+      "t": 10.0,
+      "tokens": [
+        {
+          "text": "The opposing Sneasler returned its stats to normal using its White Herb!",
+          "conf": 1.0,
+          "x": 0.356,
+          "y": 0.718,
+          "w": 0.34,
+          "h": 0.048
+        }
+      ]
+    }
+  ],
+  "expectEvents": [
+    { "kind": "statChange", "side": "opp", "subject": "Sneasler", "value": "-1" },
+    { "kind": "itemRevealed", "side": "opp", "subject": "Sneasler", "detail": "White Herb" },
+    { "kind": "boostsRestored", "side": "opp", "subject": "Sneasler" }
+  ],
+  "expectExactKindCounts": { "boostsRestored": 1 },
+  "expectSnapshots": [
+    { "species": "Sneasler", "boosts": {} }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+ "name": "mid-fade weather core still parses ('sunlight turned harsh', battle 4)",
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "sunlight turned harsh",
+     "conf": 1.0,
+     "x": 0.45,
+     "y": 0.712,
+     "w": 0.16,
+     "h": 0.05
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "weatherStart",
+   "detail": "sun"
+  }
+ ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "battle5-t190-dead-board",
+  "description": "m13-E regression pin: the perish-endgame board whose adaptive thinking outgrew max_tokens and killed every live ask in battle 9. The ask must COMPLETE with a committed play — the 4000-token budget plus the one budget-doubling retry are the doctrine under test. (Latency here feeds the m15-E effort A/B.)",
+  "source": {
+    "video": "Fixtures/screenshots/iPhone 17 Pro Max/Example Battle 5.mov",
+    "at": 190
+  },
+  "assertions": [
+    { "type": "commit" }
+  ]
+}

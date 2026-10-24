@@ -1,0 +1,24 @@
+{
+ "name": "battle 8: glued trainer + Champions epithet still parses the send-out",
+ "notes": "EXACT lost read: 'IDontPlayVGCsent out Garchomp of the Distant Past!' — the fade ate the trainer/verb space AND Champions titled the mon. Both defenses must hold: optional-space template + ' of the ' epithet strip in resolve(). The snapshot assert pins the pilot's actual loss (Garchomp must be ACTIVE — it spent battle 8 attacking from the 'bench').",
+ "frames": [
+  {
+   "t": 0.0,
+   "tokens": [
+    {"text": "IDontPlayVGCsent out Garchomp of the Distant Past!", "conf": 1.0, "x": 0.4, "y": 0.707, "w": 0.36, "h": 0.063}
+   ]
+  },
+  {
+   "t": 0.7,
+   "tokens": [
+    {"text": "Go! Incineroar and Charizard!", "conf": 1.0, "x": 0.4, "y": 0.707, "w": 0.3, "h": 0.063}
+   ]
+  }
+ ],
+ "expectEvents": [
+  {"kind": "sendOut", "side": "opp", "species": "Garchomp"}
+ ],
+ "expectSnapshots": [
+  {"species": "Garchomp"}
+ ]
+}

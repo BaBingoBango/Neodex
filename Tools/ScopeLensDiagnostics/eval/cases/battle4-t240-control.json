@@ -1,0 +1,13 @@
+{
+  "name": "battle4-t240-control",
+  "description": "m14-B control board: Intimidated Rock Slide only hits 56-67% into full-HP Charizard — NO slot is doomed, so no flag may fire (false-flag regression pin), and a normal ask must still commit a lint-clean play.",
+  "source": {
+    "video": "Fixtures/screenshots/iPhone 17 Pro Max/Example Battle 4.mov",
+    "at": 240
+  },
+  "assertions": [
+    { "type": "noDoomedFlag" },
+    { "type": "commit" },
+    { "type": "lintClean" }
+  ]
+}

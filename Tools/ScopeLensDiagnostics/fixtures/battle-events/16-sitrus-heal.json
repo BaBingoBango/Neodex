@@ -1,0 +1,88 @@
+{
+ "name": "item chip (Sitrus) makes the very next rise legal",
+ "synthetic": true,
+ "frames": [
+  {
+   "tokens": [
+    {
+     "text": "It's super effective on Incineroar!",
+     "conf": 1.0,
+     "x": 0.331,
+     "y": 0.718,
+     "w": 0.224,
+     "h": 0.048
+    },
+    {
+     "text": "Incineroar",
+     "conf": 1.0,
+     "x": 0.328,
+     "y": 0.874,
+     "w": 0.055,
+     "h": 0.027
+    },
+    {
+     "text": "28/202",
+     "conf": 1.0,
+     "x": 0.377,
+     "y": 0.942,
+     "w": 0.054,
+     "h": 0.035
+    }
+   ]
+  },
+  {
+   "tokens": [
+    {
+     "text": "Incineroar's",
+     "conf": 1.0,
+     "x": 0.164,
+     "y": 0.497,
+     "w": 0.071,
+     "h": 0.042
+    },
+    {
+     "text": "Sitrus Berry",
+     "conf": 1.0,
+     "x": 0.16,
+     "y": 0.54,
+     "w": 0.075,
+     "h": 0.036
+    },
+    {
+     "text": "Incineroar",
+     "conf": 1.0,
+     "x": 0.328,
+     "y": 0.874,
+     "w": 0.055,
+     "h": 0.027
+    },
+    {
+     "text": "78/202",
+     "conf": 1.0,
+     "x": 0.377,
+     "y": 0.942,
+     "w": 0.054,
+     "h": 0.035
+    }
+   ]
+  }
+ ],
+ "expectEvents": [
+  {
+   "kind": "effectiveness",
+   "detail": "2x"
+  },
+  {
+   "kind": "itemActivated",
+   "side": "you",
+   "species": "Incineroar",
+   "detail": "Sitrus Berry"
+  },
+  {
+   "kind": "healed",
+   "side": "you",
+   "species": "Incineroar",
+   "value": "28/202 \u2192 78/202"
+  }
+ ]
+}
