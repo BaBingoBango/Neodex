@@ -14,6 +14,8 @@ final class DeepLinkRouter {
 
     var pendingRoute: AppRoute?
     var pendingPick: PickRequest?
+    /// A sidebar destination to switch to (Scope Lens's "Ask Dexbot" lands on the Dexbot tab).
+    var pendingTab: AppTab?
 
     func open(_ route: AppRoute) {
         pendingRoute = route

@@ -25,4 +25,9 @@ struct BundledResourcesTests {
     @Test func advisorToolSchemasAreBundled() throws {
         #expect(try AdvisorToolCatalog.bundled().count >= 6)
     }
+
+    /// Dexbot's live-battle tool must get nil, not an empty board, when nothing is being tracked.
+    @Test func liveBattleSummaryIsNilWhenIdle() {
+        #expect(LiveTrackerModel.shared.liveBattleSummary() == nil)
+    }
 }

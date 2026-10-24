@@ -323,6 +323,18 @@ Docs/ScopeLens/              the spec, the session briefs and the backlog
   wrappers put the Champions Team, Advisor and Meta panes into the Settings window. `AppTab.scopeLens` exists only in
   `features` on macOS, so Home's cards and the Go menu pick it up there and iOS never sees it. The
   entitlements gain user-selected read-only files for the OCR inspector's open panel.
+- **The two halves talk.** `NeodexBridge` (in the package) is a pair of optional hooks Neodex fills
+  in on the Mac. `openEntry` turns every species, move, ability and item name in the dossier, the
+  scout report, the battle log and the tracker into a link that opens Neodex's entry in its own
+  window (`ScopeLensEntryResolver` maps the engine's spellings to Showdown-style ids, with a name
+  search as the fallback); `askDexbot` puts a question in front of Dexbot on the Dexbot tab. In the
+  standalone app both are nil and the names render as plain text. Dexbot gets a Mac-only `liveBattle`
+  tool that returns `LiveTrackerModel.liveBattleSummary()`: the board, the opponent's observed facts,
+  the usage-based likely sets, the live matchup and the recent log, in plain text sized for the
+  on-device model, so it can suggest the play without an API key. Teams flow the other way: "Use in
+  Scope Lens" on a Neodex team, or the Champions Team settings pane, exports the team in Showdown's
+  format and runs it through Scope Lens's own validation (`ScopeLensTeamBridge`), which also
+  remembers which Neodex team is linked.
 - **Where its data lives.** Team, meta cache and the battle archive are JSON in Neodex's
   Application Support (the sandbox container); the Anthropic key is in the Keychain, or
   `ANTHROPIC_API_KEY` in the environment for development runs. The standalone app's container is

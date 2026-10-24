@@ -62,9 +62,15 @@ public struct ScoutReportView: View {
                 Text("Your best answers")
                     .font(.title3.weight(.semibold))
                 ForEach(Array(report.answers.enumerated()), id: \.offset) { _, answer in
-                    Text("\(answer.mine): **\(answer.move)** vs \(answer.target) for "
-                         + "\(fmt(answer.minPct))–\(fmt(answer.maxPct))%")
-                        .font(.callout)
+                    HStack(spacing: 0) {
+                        EntryLink(name: answer.mine, kind: .species)
+                        Text(": ")
+                        EntryLink(name: answer.move, kind: .move, weight: .bold)
+                        Text(" vs ")
+                        EntryLink(name: answer.target, kind: .species)
+                        Text(" for \(fmt(answer.minPct))–\(fmt(answer.maxPct))%")
+                    }
+                    .font(.callout)
                 }
 
                 Text(report.assumptions)
@@ -268,6 +274,18 @@ public struct ScoutReportView: View {
                             .font(.caption2)
                             .foregroundStyle(.blue)
                     }
+                    if NeodexBridge.openEntry != nil {
+                        Button {
+                            NeodexBridge.openEntry?(.species, opp.species)
+                        } label: {
+                            Image(systemName: "book.pages")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                        .buttonStyle(.plain)
+                        .help("Open \(opp.species) in Neodex")
+                        .accessibilityLabel("Open \(opp.species) in Neodex")
+                    }
                     if !opp.hasMeta {
                         Text(opp.setSource == "learnset" ? "learnset guess" : "no meta data")
                             .font(.caption2)
@@ -278,18 +296,31 @@ public struct ScoutReportView: View {
                     }
                 }
                 if opp.item != nil || opp.ability != nil {
-                    Text([opp.item.map { "@ \($0)" }, opp.ability].compactMap(\.self).joined(separator: "  ·  ")
-                         + (opp.assumed ? "  (meta prior)" : ""))
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                    HStack(spacing: 6) {
+                        if let item = opp.item {
+                            Text("@")
+                            EntryLink(name: item, kind: .item, font: .caption)
+                        }
+                        if opp.item != nil, opp.ability != nil { Text("·").foregroundStyle(.tertiary) }
+                        if let ability = opp.ability {
+                            EntryLink(name: ability, kind: .ability, font: .caption)
+                        }
+                        if opp.assumed { Text("(meta prior)") }
+                    }
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
                 }
                 if !opp.moves.isEmpty {
                     HStack(spacing: 8) {
                         ForEach(opp.moves, id: \.name) { move in
-                            Text(move.pct != nil ? "\(move.name) \(fmt(move.pct!))%" : move.name)
-                                .font(.caption)
-                                .padding(.horizontal, 6).padding(.vertical, 2)
-                                .background(RoundedRectangle(cornerRadius: 4).fill(.purple.opacity(0.10)))
+                            HStack(spacing: 3) {
+                                EntryLink(name: move.name, kind: .move, font: .caption)
+                                if let pct = move.pct {
+                                    Text("\(fmt(pct))%").font(.caption)
+                                }
+                            }
+                            .padding(.horizontal, 6).padding(.vertical, 2)
+                            .background(RoundedRectangle(cornerRadius: 4).fill(.purple.opacity(0.10)))
                         }
                     }
                 }
@@ -302,9 +333,15 @@ public struct ScoutReportView: View {
 
     private func threatRow(_ threat: ScoutReportData.ThreatRead) -> some View {
         HStack(spacing: 6) {
-            Text("\(threat.attacker)'s **\(threat.move)** vs \(threat.defender): "
-                 + "\(fmt(threat.minPct))–\(fmt(threat.maxPct))%")
-                .font(.callout)
+            HStack(spacing: 0) {
+                EntryLink(name: threat.attacker, kind: .species)
+                Text("’s ")
+                EntryLink(name: threat.move, kind: .move, weight: .bold)
+                Text(" vs ")
+                EntryLink(name: threat.defender, kind: .species)
+                Text(": \(fmt(threat.minPct))–\(fmt(threat.maxPct))%")
+            }
+            .font(.callout)
             if threat.ko {
                 Text("KO range")
                     .font(.caption.weight(.bold))

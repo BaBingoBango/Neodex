@@ -115,6 +115,11 @@ struct MainTabView: View {
             router.pendingPick = nil
             if let pick { router.pendingRoute = .pokemon(pick.id) }
         }
+        .onChange(of: router.pendingTab) { _, tab in
+            guard let tab else { return }
+            router.pendingTab = nil
+            selection = tab
+        }
         .onChange(of: storedVisible) { fallBackIfHidden() }
         .onChange(of: customization) { fallBackIfHidden() }
     }

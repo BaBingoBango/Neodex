@@ -144,6 +144,17 @@ public struct BattleLogView: View {
                     .help("Ask automatically at the start of each turn (one API call per turn).")
                     .accessibilityLabel("Automatically advise every turn")
 
+                if NeodexBridge.askDexbot != nil {
+                    Button {
+                        NeodexBridge.askDexbot?("Look at the Pokémon Champions battle Scope Lens is tracking and tell me the play for this turn, with the one risk to watch.")
+                    } label: {
+                        Label("Ask Dexbot", systemImage: "bubble.left.and.text.bubble.right")
+                    }
+                    .disabled(model.battleEvents.isEmpty || model.battleOutcome != nil)
+                    .help("Ask Neodex's on-device Dexbot about this board. No API key needed.")
+                    .accessibilityLabel("Ask Dexbot about this turn")
+                }
+
                 if let status = model.adviceStatus {
                     Text(status)
                         .font(.caption)
@@ -485,9 +496,15 @@ private struct NotepadRow: View {
                     .font(.caption)
                     .frame(width: 14, alignment: .center)
                     .accessibilityHidden(true)
-                Text(name)
-                    .font(.callout.weight(mon.isActive ? .semibold : .regular))
-                    .italic(mon.previewGhost)
+                if mon.species != "unknown" {
+                    EntryLink(name: mon.species, kind: .species, font: .callout,
+                              weight: mon.isActive ? .semibold : .regular, display: name)
+                        .italic(mon.previewGhost)
+                } else {
+                    Text(name)
+                        .font(.callout.weight(mon.isActive ? .semibold : .regular))
+                        .italic(mon.previewGhost)
+                }
                 if mon.mega {
                     Text("mega")
                         .font(.caption2.weight(.bold))

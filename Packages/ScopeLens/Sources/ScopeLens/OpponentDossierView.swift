@@ -182,7 +182,7 @@ struct OpponentDossierCard: View {
             if let ability = capsule.topAbility {
                 section("Ability") {
                     VStack(alignment: .leading, spacing: 1) {
-                        statLine(name: ability.name, pct: ability.pct)
+                        statLine(name: ability.name, pct: ability.pct, kind: .ability)
                         effectText(dossier.abilityDesc)
                     }
                 }
@@ -197,9 +197,12 @@ struct OpponentDossierCard: View {
             if !dossier.items.isEmpty {
                 section("Items") {
                     VStack(alignment: .leading, spacing: 1) {
-                        Text(dossier.items.map { "\($0.name) \(fmt($0.pct))%" }
-                            .joined(separator: "  ·  "))
-                            .font(.callout)
+                        HStack(spacing: 6) {
+                            ForEach(Array(dossier.items.enumerated()), id: \.offset) { index, item in
+                                if index > 0 { Text("·").foregroundStyle(.tertiary) }
+                                statLine(name: item.name, pct: item.pct, kind: .item)
+                            }
+                        }
                         effectText(dossier.items.first?.shortDesc)
                     }
                 }
@@ -216,8 +219,7 @@ struct OpponentDossierCard: View {
 
     private var header: some View {
         HStack(spacing: 8) {
-            Text(capsule.species)
-                .font(.title3.weight(.bold))
+            EntryLink(name: capsule.species, kind: .species, font: .title3, weight: .bold)
             if !capsule.types.isEmpty {
                 Text(capsule.types.joined(separator: " / "))
                     .font(.caption.weight(.semibold))
@@ -261,17 +263,17 @@ struct OpponentDossierCard: View {
 
     private func moveRow(_ move: OpponentDossier.MoveLine) -> some View {
         VStack(alignment: .leading, spacing: 1) {
-            moveNameLine(move)
-                .font(.callout)
+            HStack(spacing: 8) {
+                statLine(name: move.name, pct: move.pct, kind: .move)
+                if let mech = mechanics(move.info) {
+                    Text(mech)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
             effectText(move.info?.shortDesc)
         }
         .accessibilityElement(children: .combine)
-    }
-
-    private func moveNameLine(_ move: OpponentDossier.MoveLine) -> Text {
-        let head = statText(name: move.name, pct: move.pct)
-        guard let mech = mechanics(move.info) else { return head }
-        return Text("\(head)   \(Text(mech).font(.caption).foregroundStyle(.secondary))")
     }
 
     /// "Fire · Physical · 120 BP · 90% · +1 priority" — accuracy omitted
@@ -319,13 +321,18 @@ struct OpponentDossierCard: View {
         .accessibilityElement(children: .combine)
     }
 
-    private func statLine(name: String, pct: Double) -> some View {
-        statText(name: name, pct: pct)
-            .font(.callout)
-    }
-
-    private func statText(name: String, pct: Double) -> Text {
-        Text("\(Text(name).fontWeight(.semibold))  \(Text("\(fmt(pct))%").foregroundStyle(.secondary))")
+    /// A name and its usage share; the name opens its Neodex entry when Neodex hosts Scope Lens.
+    private func statLine(name: String, pct: Double, kind: NeodexBridge.EntryKind? = nil) -> some View {
+        HStack(spacing: 6) {
+            if let kind {
+                EntryLink(name: name, kind: kind, font: .callout, weight: .semibold)
+            } else {
+                Text(name).font(.callout.weight(.semibold))
+            }
+            Text("\(fmt(pct))%")
+                .font(.callout)
+                .foregroundStyle(.secondary)
+        }
     }
 
     @ViewBuilder

@@ -19,19 +19,19 @@ import Foundation
 import Combine
 
 @MainActor
-final class TeamManager: ObservableObject {
+public final class TeamManager: ObservableObject {
 
-    static let shared = TeamManager()
+    public static let shared = TeamManager()
 
     /// Posted after the team changes (import or revert). The live tracker
     /// invalidates its scout/matchup caches; reconciler seeds naturally
     /// apply from the next battle.
     nonisolated static let teamChanged = Notification.Name("ScopeLensTeamChanged")
 
-    @Published private(set) var team: Team
-    @Published private(set) var lastIssues: [TeamIssue] = []
+    @Published public private(set) var team: Team
+    @Published public private(set) var lastIssues: [TeamIssue] = []
     /// Non-nil when persistence/bundle loading hit a real problem.
-    @Published private(set) var storageError: String?
+    @Published public private(set) var storageError: String?
 
     let vocab: TeamVocab?
 
@@ -105,7 +105,7 @@ final class TeamManager: ObservableObject {
     /// Parse + validate + (if error-free) adopt and persist a Showdown
     /// paste. Returns the issues either way so the UI can show them.
     @discardableResult
-    func importPaste(_ paste: String) -> [TeamIssue] {
+    public func importPaste(_ paste: String) -> [TeamIssue] {
         let parsed = ShowdownPaste.parse(paste)
         let (canonical, issues): (Team, [TeamIssue])
         if let vocab {
@@ -121,7 +121,7 @@ final class TeamManager: ObservableObject {
     }
 
     /// Throw away the saved team and return to the bundled default.
-    func revertToDefault() {
+    public func revertToDefault() {
         guard let bundled = Self.bundledDefault(vocab: vocab) else {
             storageError = "Bundled default team is missing."
             return

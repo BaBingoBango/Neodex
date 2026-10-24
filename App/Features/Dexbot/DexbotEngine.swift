@@ -74,8 +74,13 @@ nonisolated enum DexbotEngine {
 
     /// A fresh session with Dexbot's tools and persona.
     static func makeSession(database: PokedexDatabase, spoken: Bool, backend: Backend = activeBackend) -> LanguageModelSession {
-        let tools = DexbotTools.all(database: database)
-        let text = spoken ? spokenInstructions : instructions
+        var tools = DexbotTools.all(database: database)
+        var text = spoken ? spokenInstructions : instructions
+        #if os(macOS)
+        // Scope Lens lives in the Mac app; Dexbot can read the battle it is tracking.
+        tools.append(LiveBattleTool())
+        text += ScopeLensDexbot.instructions
+        #endif
         #if PRIVATE_CLOUD_COMPUTE
         if backend == .privateCloud, #available(iOS 27, *) {
             return LanguageModelSession(model: PrivateCloudComputeLanguageModel(), tools: tools, instructions: text)

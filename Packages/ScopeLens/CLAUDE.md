@@ -28,4 +28,8 @@ parsing, the reconciler or the advisor. These rules were all earned the hard way
   and are copied beside the engine too.
 - **Pikalytics is fetched politely and only on explicit action**; the committed snapshot is the
   fallback that every harness pins to.
+- **Neodex is a host, not a dependency.** This package never imports Neodex. Everything Neodex adds
+  (entry links, Ask Dexbot) arrives through `NeodexBridge`'s optional hooks, and every affordance that
+  uses them must render as plain text when they are nil, so the standalone app and the harnesses
+  keep working unchanged.
 - Findings go into the findings log as you go; deferred work goes into `Docs/ScopeLens/Backlog.md`.

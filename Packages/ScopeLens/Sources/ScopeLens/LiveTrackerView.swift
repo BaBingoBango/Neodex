@@ -108,12 +108,12 @@ actor ScoutEngineBox {
 }
 
 @MainActor
-final class LiveTrackerModel: ObservableObject {
+public final class LiveTrackerModel: ObservableObject {
 
     /// Shared instance so the Live Tracker and Scout Report windows observe
     /// the same live state. TODO: proper scene-level injection when the app
     /// grows beyond debug windows.
-    static let shared = LiveTrackerModel()
+    public static let shared = LiveTrackerModel()
 
     struct TransitionEntry: Identifiable {
         let id = UUID()
@@ -1327,8 +1327,12 @@ public struct LiveTrackerView: View {
                     }
                     VStack(alignment: .leading, spacing: 1) {
                         HStack(spacing: 6) {
-                            Text(row.speciesTop.first?.name ?? "?")
-                                .font(.callout.weight(.semibold))
+                            if let species = row.speciesTop.first?.name {
+                                EntryLink(name: species, kind: .species, font: .callout, weight: .semibold)
+                            } else {
+                                Text("?")
+                                    .font(.callout.weight(.semibold))
+                            }
                             Text(genderGlyph(row.gender))
                                 .font(.caption)
                                 .foregroundStyle(row.gender == "female" ? .pink : .blue)

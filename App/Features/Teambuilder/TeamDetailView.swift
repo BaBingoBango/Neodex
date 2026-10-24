@@ -11,6 +11,7 @@ struct TeamDetailView: View {
     @State private var pickingPokemon = false
     @State private var editingMemberID: UUID?
     @State private var showingExport = false
+    @State private var scopeLensMessage: String?
 
     private let columns = [GridItem(.adaptive(minimum: 160), spacing: 12)]
 
@@ -33,6 +34,17 @@ struct TeamDetailView: View {
         .navigationTitle(team.name)
         .inlineNavigationTitle()
         .toolbar {
+            #if os(macOS)
+            ToolbarItem(placement: .trailingBar) {
+                Button {
+                    scopeLensMessage = ScopeLensTeamBridge.summary(ScopeLensTeamBridge.use(team, database: database), team: team)
+                } label: {
+                    Label("Use in Scope Lens", systemImage: "scope")
+                }
+                .disabled(team.members.isEmpty)
+                .help("Make this the team Scope Lens follows in Pokémon Champions.")
+            }
+            #endif
             ToolbarItem(placement: .trailingBar) {
                 Button {
                     showingExport = true
@@ -41,6 +53,11 @@ struct TeamDetailView: View {
                 }
                 .disabled(team.members.isEmpty)
             }
+        }
+        .alert("Scope Lens", isPresented: Binding(get: { scopeLensMessage != nil }, set: { if !$0 { scopeLensMessage = nil } })) {
+            Button("OK") { scopeLensMessage = nil }
+        } message: {
+            Text(scopeLensMessage ?? "")
         }
         .sheet(isPresented: $pickingPokemon) {
             PokemonPickerSheet(title: "Add to Team") { pokemon in
