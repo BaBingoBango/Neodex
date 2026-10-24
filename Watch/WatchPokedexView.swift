@@ -28,6 +28,16 @@ struct WatchPokedexView: View {
             }
         }
         .navigationTitle("Pokédex")
+        .toolbar {
+            ToolbarItemGroup(placement: .bottomBar) {
+                Spacer()
+                NavigationLink(value: WatchRoute.pokemon(database.species.randomElement()?.id ?? "pikachu")) {
+                    Image(systemName: "dice")
+                }
+                .accessibilityLabel("Random Pokémon")
+            }
+        }
+        .containerBackground(WatchTheme.neutral, for: .navigation)
         .watchDestinations(database: database)
     }
 }

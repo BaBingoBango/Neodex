@@ -31,6 +31,7 @@ struct WatchPokemonDetailView: View {
         }
         .navigationTitle(pokemon.displayName)
         .navigationBarTitleDisplayMode(.inline)
+        .containerBackground(WatchTheme.background(pokemon.types), for: .navigation)
     }
 
     private var header: some View {
@@ -98,7 +99,7 @@ struct WatchPokemonDetailView: View {
             .buttonStyle(.plain)
             .padding(.vertical, 6)
             .padding(.horizontal, 10)
-            .background(.fill.tertiary, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
         }
     }
 
@@ -164,7 +165,7 @@ struct WatchPokemonDetailView: View {
         }
         .buttonStyle(.plain)
         .padding(6)
-        .background(.fill.tertiary, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
     }
 
     private func evolutionCaption(_ evolution: Evolution) -> String {
@@ -225,5 +226,6 @@ struct WatchAbilityView: View {
         }
         .navigationTitle(ability.name)
         .navigationBarTitleDisplayMode(.inline)
+        .containerBackground(WatchTheme.neutral, for: .navigation)
     }
 }

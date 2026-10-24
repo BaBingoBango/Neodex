@@ -209,9 +209,12 @@ Key decisions:
   (`WKRunsIndependentlyOfCompanionApp`). It ships the full `Data/` JSON and the 120 px thumbnails
   through Xcode folder references into `App/Resources`, so nothing is duplicated in the repository
   and the bundle has `Data/` and `thumbs/` subdirectories (about 23 MB). The screens are a vertical
-  page `TabView` with the long Pokédex list last, since you can't page past a thousand rows; the
-  daily picks come from the same `DailyPick` arithmetic as the widgets, so every device agrees on the
-  day's Pokémon. Thumbnails are decoded off the main thread into a `CGContext`, because watchOS has
+  page `TabView` (blur transition) with the long Pokédex list last, since you can't page past a
+  thousand rows; the daily picks come from the same `DailyPick` arithmetic as the widgets, so every
+  device agrees on the day's Pokémon. `WatchTheme` gives each screen the watchOS full-screen colour
+  wash (`containerBackground(_:for: .navigation)`): a gradient from the Pokémon's or chosen types'
+  colours down to black, with cards as material and the few actions (random Pokémon, swap types) as
+  glass buttons in the bottom corner of the toolbar. Thumbnails are decoded off the main thread into a `CGContext`, because watchOS has
   no `preparingForDisplay()`. The complication extension can't read the app's bundle, so it carries
   `pokemon-index.json` (a compact per-Pokémon index the pipeline now writes) and the thumbnails,
   downsampled to 80 px before archiving: WidgetKit refuses images above 80 points in the small

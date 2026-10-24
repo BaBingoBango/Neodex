@@ -33,7 +33,7 @@ struct WatchRootView: View {
                 }
                 .tag(WatchModel.Page.pokedex)
             }
-            .tabViewStyle(.verticalPage)
+            .tabViewStyle(.verticalPage(transitionStyle: .blur))
         }
     }
 }

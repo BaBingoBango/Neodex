@@ -39,6 +39,20 @@ struct WatchTypeMatchupView: View {
             .padding(.horizontal, 4)
         }
         .navigationTitle("Type-O-Matic")
+        .toolbar {
+            ToolbarItemGroup(placement: .bottomBar) {
+                Spacer()
+                Button {
+                    guard let other = second else { return }
+                    withAnimation(.snappy) { (first, second) = (other, first) }
+                } label: {
+                    Image(systemName: "arrow.left.arrow.right")
+                }
+                .disabled(second == nil)
+                .accessibilityLabel("Swap types")
+            }
+        }
+        .containerBackground(WatchTheme.background(types), for: .navigation)
     }
 
     @ViewBuilder

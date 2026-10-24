@@ -11,11 +11,12 @@ struct WatchTodayView: View {
     @AppStorage(SharedContainer.DefaultsKey.mysteryRevealedDay, store: SharedContainer.defaults) private var revealedDay = 0
 
     private var today: Int { DailyPick.dayOrdinal() }
+    private var pick: Pokemon? { DailyPick.pokemonOfTheDay(database.species) }
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 14) {
-                if let pick = DailyPick.pokemonOfTheDay(database.species) {
+                if let pick {
                     sectionTitle("Pokémon of the Day")
                     NavigationLink(value: WatchRoute.pokemon(pick.id)) {
                         HStack(spacing: 10) {
@@ -34,8 +35,7 @@ struct WatchTodayView: View {
                         }
                     }
                     .buttonStyle(.plain)
-                    .padding(10)
-                    .background(.fill.tertiary, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                    .watchCard()
                     if let entry = pick.dexEntries.first {
                         Text(entry.text)
                             .font(.footnote)
@@ -63,17 +63,18 @@ struct WatchTodayView: View {
                         }
                     }
                     .buttonStyle(.plain)
-                    .padding(10)
-                    .background(.fill.tertiary, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                    .watchCard()
                     if revealed {
                         NavigationLink("Open \(mystery.displayName)", value: WatchRoute.pokemon(mystery.id))
                             .font(.footnote)
+                            .buttonStyle(.glass)
                     }
                 }
             }
             .padding(.horizontal, 4)
         }
         .navigationTitle("Today")
+        .containerBackground(WatchTheme.background(pick?.types ?? []), for: .navigation)
         .watchDestinations(database: database)
     }
 
