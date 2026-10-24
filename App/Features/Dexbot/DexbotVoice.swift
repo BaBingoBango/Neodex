@@ -124,10 +124,16 @@ final class DexbotVoice {
                 fail("Speech recognition isn't available right now.")
                 return
             }
-            converter = AVAudioConverter(from: inputFormat, to: analyzerFormat)
-            input.installTap(onBus: 0, bufferSize: 4096, format: inputFormat) { [weak self] buffer, _ in
-                guard let self, let converter = self.converter else { return }
-                let ratio = analyzerFormat.sampleRate / inputFormat.sampleRate
+            guard let converter = AVAudioConverter(from: inputFormat, to: analyzerFormat) else {
+                fail("The microphone's audio format isn't supported.")
+                return
+            }
+            self.converter = converter
+            // The tap runs on the audio engine's realtime queue, so it must not touch main-actor
+            // state: it gets the converter, the format and the stream continuation handed in and
+            // nothing else. (Reading `self` here trapped the isolation check and crashed the app.)
+            let ratio = analyzerFormat.sampleRate / inputFormat.sampleRate
+            input.installTap(onBus: 0, bufferSize: 4096, format: inputFormat) { @Sendable buffer, _ in
                 let capacity = AVAudioFrameCount(Double(buffer.frameLength) * ratio) + 16
                 guard let converted = AVAudioPCMBuffer(pcmFormat: analyzerFormat, frameCapacity: capacity) else { return }
                 var consumed = false
@@ -142,7 +148,7 @@ final class DexbotVoice {
                     return buffer
                 }
                 guard conversionError == nil, converted.frameLength > 0 else { return }
-                self.inputContinuation?.yield(AnalyzerInput(buffer: converted))
+                continuation.yield(AnalyzerInput(buffer: converted))
             }
             engine.prepare()
             try engine.start()
