@@ -1,0 +1,195 @@
+{
+  "_comment": "ScopeLens engine tool schemas (m11) — the SINGLE source of truth for the six §4.3 tools. Consumed by Engine/mcp-server.js (MCP tools/list, `inputSchema` key) and by the app's agentic advisor (Scope Lens/Resources/Engine/tool-schemas.json, mapped to Anthropic `input_schema`). Keep the bundled copy in sync: cp Engine/tool-schemas.json 'Scope Lens/Resources/Engine/'.",
+  "tools": [
+    {
+      "name": "resolve_species",
+      "description": "Snap free-text Pokémon names to canonical species (case/punctuation-insensitive) and return their types. Use before other tools when a name might be misspelled or a forme is ambiguous.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "names": { "type": "array", "items": { "type": "string" } }
+        },
+        "required": ["names"]
+      }
+    },
+    {
+      "name": "meta_profile",
+      "description": "Usage-stats profile for one species from the Pokémon Champions Reg M-B ranked snapshot: move/item/ability usage percentages and winrate. The learning core — \"what does this Pokémon usually run?\"",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "species": { "type": "string" }
+        },
+        "required": ["species"]
+      }
+    },
+    {
+      "name": "type_calc",
+      "description": "Instant type-effectiveness multiplier of an attacking type into one or two defender types.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "moveType": { "type": "string", "description": "e.g. \"Fire\"" },
+          "defenderTypes": { "type": "array", "items": { "type": "string" }, "description": "One or two types" }
+        },
+        "required": ["moveType", "defenderTypes"]
+      }
+    },
+    {
+      "name": "damage_calc",
+      "description": "Exact @smogon/calc damage roll for ONE move: attacker vs defender under an optional field, with KO flags vs the defender's current HP. Level 50 doubles; real EVs/natures used when provided.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "attacker": {
+            "type": "object",
+            "description": "One Pokémon. Only species is required; unset fields fall back to Reg M-B usage priors (moves/item/ability) and synthetic 252-EV spreads.",
+            "properties": {
+              "species": { "type": "string", "description": "Species name, e.g. \"Incineroar\" or \"Rotom-Wash\"" },
+              "item": { "type": "string" },
+              "ability": { "type": "string" },
+              "moves": { "type": "array", "items": { "type": "string" }, "description": "Known moves; omit to use usage priors" },
+              "evs": { "type": "object", "description": "EV spread, keys hp/atk/def/spa/spd/spe (0–252)", "additionalProperties": { "type": "integer" } },
+              "ivs": { "type": "object", "description": "IVs, same keys (0–31)", "additionalProperties": { "type": "integer" } },
+              "nature": { "type": "string", "description": "e.g. \"Timid\"" },
+              "level": { "type": "integer", "description": "Default 50" },
+              "boosts": { "type": "object", "description": "Stat stages -6…+6, keys atk/def/spa/spd/spe", "additionalProperties": { "type": "integer" } },
+              "curPct": { "type": "number", "description": "Current HP % (for KO-now flags)" },
+              "status": { "type": "string", "description": "brn | par | psn | slp | frz" }
+            },
+            "required": ["species"]
+          },
+          "move": { "type": "string" },
+          "defender": {
+            "type": "object",
+            "description": "One Pokémon. Only species is required; unset fields fall back to Reg M-B usage priors (moves/item/ability) and synthetic 252-EV spreads.",
+            "properties": {
+              "species": { "type": "string", "description": "Species name, e.g. \"Incineroar\" or \"Rotom-Wash\"" },
+              "item": { "type": "string" },
+              "ability": { "type": "string" },
+              "moves": { "type": "array", "items": { "type": "string" }, "description": "Known moves; omit to use usage priors" },
+              "evs": { "type": "object", "description": "EV spread, keys hp/atk/def/spa/spd/spe (0–252)", "additionalProperties": { "type": "integer" } },
+              "ivs": { "type": "object", "description": "IVs, same keys (0–31)", "additionalProperties": { "type": "integer" } },
+              "nature": { "type": "string", "description": "e.g. \"Timid\"" },
+              "level": { "type": "integer", "description": "Default 50" },
+              "boosts": { "type": "object", "description": "Stat stages -6…+6, keys atk/def/spa/spd/spe", "additionalProperties": { "type": "integer" } },
+              "curPct": { "type": "number", "description": "Current HP % (for KO-now flags)" },
+              "status": { "type": "string", "description": "brn | par | psn | slp | frz" }
+            },
+            "required": ["species"]
+          },
+          "field": {
+            "type": "object",
+            "description": "Live field state; omit for a clear field.",
+            "properties": {
+              "weather": { "type": "string", "description": "sun | rain | sand | snow" },
+              "trickRoom": { "type": "boolean" },
+              "tailwindYou": { "type": "boolean" },
+              "tailwindOpp": { "type": "boolean" },
+              "screensYou": { "type": "array", "items": { "type": "string" }, "description": "Reflect / Light Screen / Aurora Veil" },
+              "screensOpp": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "required": ["attacker", "move", "defender"]
+      }
+    },
+    {
+      "name": "scout_report",
+      "description": "The team-preview scout report: opponent likely sets (usage %), biggest incoming threats and your best answers as damage ranges, and a heuristic bring-4 + leads. `theirs` is the opponent's six species; `mine` defaults to the pilot's configured team when omitted.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "theirs": { "type": "array", "items": { "type": "string" }, "description": "Opponent species (up to 6)" },
+          "mine": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "description": "One Pokémon. Only species is required; unset fields fall back to Reg M-B usage priors (moves/item/ability) and synthetic 252-EV spreads.",
+              "properties": {
+                "species": { "type": "string", "description": "Species name, e.g. \"Incineroar\" or \"Rotom-Wash\"" },
+                "item": { "type": "string" },
+                "ability": { "type": "string" },
+                "moves": { "type": "array", "items": { "type": "string" }, "description": "Known moves; omit to use usage priors" },
+                "evs": { "type": "object", "description": "EV spread, keys hp/atk/def/spa/spd/spe (0–252)", "additionalProperties": { "type": "integer" } },
+                "ivs": { "type": "object", "description": "IVs, same keys (0–31)", "additionalProperties": { "type": "integer" } },
+                "nature": { "type": "string", "description": "e.g. \"Timid\"" },
+                "level": { "type": "integer", "description": "Default 50" },
+                "boosts": { "type": "object", "description": "Stat stages -6…+6, keys atk/def/spa/spd/spe", "additionalProperties": { "type": "integer" } },
+                "curPct": { "type": "number", "description": "Current HP % (for KO-now flags)" },
+                "status": { "type": "string", "description": "brn | par | psn | slp | frz" }
+              },
+              "required": ["species"]
+            },
+            "description": "Your team; omit to use the configured ScopeLens team"
+          }
+        },
+        "required": ["theirs"]
+      }
+    },
+    {
+      "name": "live_matchup",
+      "description": "In-battle deterministic advisor: damage both directions for the CURRENT actives with everything observed (moves/items/abilities/boosts/status/current HP) plus the live field — KO-now flags and a Trick-Room-aware speed order.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "mine": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "description": "One Pokémon. Only species is required; unset fields fall back to Reg M-B usage priors (moves/item/ability) and synthetic 252-EV spreads.",
+              "properties": {
+                "species": { "type": "string", "description": "Species name, e.g. \"Incineroar\" or \"Rotom-Wash\"" },
+                "item": { "type": "string" },
+                "ability": { "type": "string" },
+                "moves": { "type": "array", "items": { "type": "string" }, "description": "Known moves; omit to use usage priors" },
+                "evs": { "type": "object", "description": "EV spread, keys hp/atk/def/spa/spd/spe (0–252)", "additionalProperties": { "type": "integer" } },
+                "ivs": { "type": "object", "description": "IVs, same keys (0–31)", "additionalProperties": { "type": "integer" } },
+                "nature": { "type": "string", "description": "e.g. \"Timid\"" },
+                "level": { "type": "integer", "description": "Default 50" },
+                "boosts": { "type": "object", "description": "Stat stages -6…+6, keys atk/def/spa/spd/spe", "additionalProperties": { "type": "integer" } },
+                "curPct": { "type": "number", "description": "Current HP % (for KO-now flags)" },
+                "status": { "type": "string", "description": "brn | par | psn | slp | frz" }
+              },
+              "required": ["species"]
+            }
+          },
+          "theirs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "description": "One Pokémon. Only species is required; unset fields fall back to Reg M-B usage priors (moves/item/ability) and synthetic 252-EV spreads.",
+              "properties": {
+                "species": { "type": "string", "description": "Species name, e.g. \"Incineroar\" or \"Rotom-Wash\"" },
+                "item": { "type": "string" },
+                "ability": { "type": "string" },
+                "moves": { "type": "array", "items": { "type": "string" }, "description": "Known moves; omit to use usage priors" },
+                "evs": { "type": "object", "description": "EV spread, keys hp/atk/def/spa/spd/spe (0–252)", "additionalProperties": { "type": "integer" } },
+                "ivs": { "type": "object", "description": "IVs, same keys (0–31)", "additionalProperties": { "type": "integer" } },
+                "nature": { "type": "string", "description": "e.g. \"Timid\"" },
+                "level": { "type": "integer", "description": "Default 50" },
+                "boosts": { "type": "object", "description": "Stat stages -6…+6, keys atk/def/spa/spd/spe", "additionalProperties": { "type": "integer" } },
+                "curPct": { "type": "number", "description": "Current HP % (for KO-now flags)" },
+                "status": { "type": "string", "description": "brn | par | psn | slp | frz" }
+              },
+              "required": ["species"]
+            }
+          },
+          "field": {
+            "type": "object",
+            "description": "Live field state; omit for a clear field.",
+            "properties": {
+              "weather": { "type": "string", "description": "sun | rain | sand | snow" },
+              "trickRoom": { "type": "boolean" },
+              "tailwindYou": { "type": "boolean" },
+              "tailwindOpp": { "type": "boolean" },
+              "screensYou": { "type": "array", "items": { "type": "string" }, "description": "Reflect / Light Screen / Aurora Veil" },
+              "screensOpp": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "required": ["mine", "theirs"]
+      }
+    }
+  ]
+}

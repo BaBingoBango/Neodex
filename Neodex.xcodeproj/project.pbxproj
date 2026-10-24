@@ -19,6 +19,7 @@
 		AADE0000000000000000001E /* NeodexKit in Frameworks */ = {isa = PBXBuildFile; productRef = AADE0000000000000000001D /* NeodexKit */; };
 		AADE00000000000000000020 /* NeodexKit in Frameworks */ = {isa = PBXBuildFile; productRef = AADE0000000000000000001F /* NeodexKit */; };
 		AADE00000000000000000065 /* NeodexKit in Frameworks */ = {isa = PBXBuildFile; productRef = AADE00000000000000000064 /* NeodexKit */; };
+		AADE0000000000000000006B /* ScopeLens in Frameworks */ = {isa = PBXBuildFile; productRef = AADE0000000000000000006A /* ScopeLens */; };
 		AADE00000000000000000029 /* NeodexKit in Frameworks */ = {isa = PBXBuildFile; productRef = AADE00000000000000000028 /* NeodexKit */; };
 		AADE0000000000000000002D /* NeodexWidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AADE00000000000000000021 /* NeodexWidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -248,6 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AADE00000000000000000065 /* NeodexKit in Frameworks */,
+				AADE0000000000000000006B /* ScopeLens in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +360,7 @@
 			name = NeodexMac;
 			packageProductDependencies = (
 				AADE00000000000000000064 /* NeodexKit */,
+				AADE0000000000000000006A /* ScopeLens */,
 			);
 			productName = NeodexMac;
 			productReference = AADE0000000000000000005D /* Neodex.app */;
@@ -481,6 +484,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				AADE0000000000000000001C /* XCLocalSwiftPackageReference "Packages/NeodexKit" */,
+				AADE00000000000000000069 /* XCLocalSwiftPackageReference "Packages/ScopeLens" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AADE00000000000000000007 /* Products */;
@@ -1195,6 +1199,10 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Packages/NeodexKit;
 		};
+		AADE00000000000000000069 /* XCLocalSwiftPackageReference "Packages/ScopeLens" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/ScopeLens;
+		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1221,6 +1229,10 @@
 		AADE00000000000000000064 /* NeodexKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = NeodexKit;
+		};
+		AADE0000000000000000006A /* ScopeLens */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ScopeLens;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

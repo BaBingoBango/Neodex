@@ -1,0 +1,4407 @@
+{
+ "garchomp": {
+  "winrate": 50.5,
+  "moves": {
+   "Dragon Claw": 89.4,
+   "Rock Slide": 82,
+   "Earthquake": 80.7,
+   "Protect": 70.2
+  },
+  "items": {
+   "Life Orb": 51.5,
+   "Sitrus Berry": 13.6,
+   "Choice Scarf": 12.7
+  },
+  "abilities": {
+   "Rough Skin": 98.5,
+   "Sand Veil": 1.5
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 32.7,
+   "0/32/2/0/0/32": 3.9,
+   "0/30/4/0/0/32": 3.2,
+   "6/25/3/0/0/32": 3
+  },
+  "natures": {
+   "Jolly": 60.5,
+   "Adamant": 38.9,
+   "Naughty": 0.2,
+   "Impish": 0.1
+  },
+  "teammates": [
+   "Whimsicott",
+   "Charizard",
+   "Basculegion",
+   "Kingambit",
+   "Staraptor",
+   "Sinistcha"
+  ]
+ },
+ "sinistcha": {
+  "winrate": 49.4,
+  "moves": {
+   "Rage Powder": 99.2,
+   "Matcha Gotcha": 98.8,
+   "Life Dew": 58.7,
+   "Trick Room": 58.6
+  },
+  "items": {
+   "Sitrus Berry": 35.2,
+   "Kasib Berry": 30.4,
+   "Colbur Berry": 14.3
+  },
+  "abilities": {
+   "Hospitality": 99.5,
+   "Heatproof": 0.5
+  },
+  "spreads": {
+   "32/0/14/0/20/0": 20.5,
+   "32/0/4/0/30/0": 8.7,
+   "32/0/24/0/10/0": 5.4,
+   "32/0/7/0/27/0": 4.7
+  },
+  "natures": {
+   "Bold": 45.7,
+   "Calm": 29.4,
+   "Relaxed": 12.9,
+   "Sassy": 6.2
+  },
+  "teammates": [
+   "Staraptor",
+   "Incineroar",
+   "Grimmsnarl",
+   "Garchomp",
+   "Pelipper",
+   "Archaludon"
+  ]
+ },
+ "basculegion": {
+  "winrate": 52.6,
+  "moves": {
+   "Last Respects": 100,
+   "Aqua Jet": 94.9,
+   "Wave Crash": 82.3,
+   "Protect": 53.8
+  },
+  "items": {
+   "Choice Scarf": 44.7,
+   "Mystic Water": 19.6,
+   "Focus Sash": 17.6
+  },
+  "abilities": {
+   "Adaptability": 93.2,
+   "Swift Swim": 6.8
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 33.3,
+   "0/32/2/0/0/32": 19.3,
+   "4/31/11/0/0/20": 4,
+   "0/32/0/0/2/32": 2.9
+  },
+  "natures": {
+   "Adamant": 57.8,
+   "Jolly": 41.7,
+   "Brave": 0.3,
+   "Naughty": 0.1
+  },
+  "teammates": [
+   "Garchomp",
+   "Whimsicott",
+   "Kingambit",
+   "Charizard",
+   "Staraptor",
+   "Floette-Eternal"
+  ]
+ },
+ "whimsicott": {
+  "winrate": 50.8,
+  "moves": {
+   "Tailwind": 98.5,
+   "Moonblast": 92,
+   "Encore": 74.1,
+   "Protect": 56.5
+  },
+  "items": {
+   "Focus Sash": 75.5,
+   "Fairy Feather": 11.4,
+   "Mental Herb": 3.6
+  },
+  "abilities": {
+   "Prankster": 99.4,
+   "Chlorophyll": 0.5
+  },
+  "spreads": {
+   "2/0/0/32/0/32": 50.7,
+   "0/0/0/32/2/32": 3.8,
+   "0/0/2/32/0/32": 3.7,
+   "14/0/0/32/0/20": 3.3
+  },
+  "natures": {
+   "Timid": 76.5,
+   "Modest": 10.6,
+   "Bold": 10.5,
+   "Calm": 1.7
+  },
+  "teammates": [
+   "Garchomp",
+   "Basculegion",
+   "Staraptor",
+   "Kingambit",
+   "Charizard",
+   "Floette-Eternal"
+  ]
+ },
+ "kingambit": {
+  "winrate": 54.3,
+  "moves": {
+   "Sucker Punch": 99.5,
+   "Kowtow Cleave": 97.9,
+   "Iron Head": 73.5,
+   "Protect": 68.6
+  },
+  "items": {
+   "Chople Berry": 42.9,
+   "Black Glasses": 31.8,
+   "Focus Sash": 12.8
+  },
+  "abilities": {
+   "Defiant": 96.1,
+   "Supreme Overlord": 3.9
+  },
+  "spreads": {
+   "32/32/0/0/2/0": 13.7,
+   "32/32/0/0/0/2": 8.8,
+   "32/32/2/0/0/0": 8.4,
+   "2/32/0/0/0/32": 6.1
+  },
+  "natures": {
+   "Adamant": 88,
+   "Brave": 10.6,
+   "Impish": 0.6,
+   "Jolly": 0.5
+  },
+  "teammates": [
+   "Garchomp",
+   "Basculegion",
+   "Whimsicott",
+   "Charizard",
+   "Sneasler",
+   "Floette-Eternal"
+  ]
+ },
+ "staraptor": {
+  "winrate": 45.1,
+  "moves": {
+   "Close Combat": 98.2,
+   "Protect": 90.2,
+   "Brave Bird": 81.2,
+   "Roost": 71.5
+  },
+  "items": {
+   "Staraptite": 94.5,
+   "Choice Scarf": 5.4,
+   "Life Orb": 0.1
+  },
+  "abilities": {
+   "Intimidate": 97.1,
+   "Reckless": 2.9
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 20.1,
+   "32/2/0/0/0/32": 9.4,
+   "31/6/1/0/0/28": 3.6,
+   "32/32/0/0/0/2": 2.8
+  },
+  "natures": {
+   "Jolly": 65.2,
+   "Adamant": 31.8,
+   "Careful": 2,
+   "Impish": 0.5
+  },
+  "teammates": [
+   "Sinistcha",
+   "Garchomp",
+   "Whimsicott",
+   "Grimmsnarl",
+   "Incineroar",
+   "Basculegion"
+  ]
+ },
+ "incineroar": {
+  "winrate": 51.1,
+  "moves": {
+   "Fake Out": 99.9,
+   "Parting Shot": 96.8,
+   "Flare Blitz": 92.6,
+   "Throat Chop": 53.7
+  },
+  "items": {
+   "Sitrus Berry": 59.8,
+   "Chople Berry": 15,
+   "Passho Berry": 12
+  },
+  "abilities": {
+   "Intimidate": 99.8,
+   "Blaze": 0.2
+  },
+  "spreads": {
+   "32/0/14/0/20/0": 6.2,
+   "32/0/20/0/14/0": 2.6,
+   "31/0/15/0/20/0": 2.2,
+   "32/32/2/0/0/0": 2
+  },
+  "natures": {
+   "Careful": 40.1,
+   "Impish": 25,
+   "Adamant": 18.8,
+   "Sassy": 6
+  },
+  "teammates": [
+   "Sinistcha",
+   "Garchomp",
+   "Staraptor",
+   "Whimsicott",
+   "Basculegion",
+   "Sneasler"
+  ]
+ },
+ "charizard": {
+  "winrate": 52.9,
+  "moves": {
+   "Protect": 98.4,
+   "Heat Wave": 95.4,
+   "Solar Beam": 92.2,
+   "Weather Ball": 83.9
+  },
+  "items": {
+   "Charizardite Y": 95.4,
+   "Charizardite X": 3.9,
+   "Focus Sash": 0.2
+  },
+  "abilities": {
+   "Blaze": 80.5,
+   "Solar Power": 19.5
+  },
+  "spreads": {
+   "2/0/0/32/0/32": 20.9,
+   "20/0/29/1/0/16": 5.8,
+   "16/0/25/12/0/13": 5.2,
+   "0/0/2/32/0/32": 3.4
+  },
+  "natures": {
+   "Modest": 77,
+   "Timid": 17.8,
+   "Adamant": 3.6,
+   "Jolly": 0.7
+  },
+  "teammates": [
+   "Garchomp",
+   "Whimsicott",
+   "Basculegion",
+   "Kingambit",
+   "Sylveon",
+   "Floette-Eternal"
+  ]
+ },
+ "raichu": {
+  "winrate": 44.4,
+  "moves": {
+   "Fake Out": 71.6,
+   "Protect": 66.4,
+   "Zap Cannon": 60.4,
+   "Focus Blast": 56.3
+  },
+  "items": {
+   "Raichunite Y": 60.5,
+   "Raichunite X": 18.2,
+   "Focus Sash": 14.7
+  },
+  "abilities": {
+   "Lightning Rod": 98.3,
+   "Static": 1.7
+  },
+  "spreads": {
+   "2/0/0/32/0/32": 43.3,
+   "0/0/2/32/0/32": 8.2,
+   "2/32/0/0/0/32": 7,
+   "32/0/2/0/0/32": 3.6
+  },
+  "natures": {
+   "Timid": 69.6,
+   "Jolly": 14,
+   "Modest": 13.3,
+   "Adamant": 1
+  },
+  "teammates": [
+   "Sinistcha",
+   "Garchomp",
+   "Basculegion",
+   "Staraptor",
+   "Whimsicott",
+   "Incineroar"
+  ]
+ },
+ "pelipper": {
+  "winrate": 49.8,
+  "moves": {
+   "Hurricane": 98.9,
+   "Weather Ball": 87.7,
+   "Tailwind": 86.5,
+   "Wide Guard": 51.2
+  },
+  "items": {
+   "Focus Sash": 45.3,
+   "Sitrus Berry": 31.4,
+   "Damp Rock": 13.1
+  },
+  "abilities": {
+   "Drizzle": 100,
+   "Keen Eye": 0
+  },
+  "spreads": {
+   "2/0/0/32/0/32": 30.6,
+   "31/0/2/0/32/1": 4.8,
+   "0/0/0/32/2/32": 3.1,
+   "0/0/2/32/0/32": 2.9
+  },
+  "natures": {
+   "Modest": 49.9,
+   "Timid": 23.1,
+   "Bold": 18.8,
+   "Calm": 5.8
+  },
+  "teammates": [
+   "Archaludon",
+   "Swampert",
+   "Sinistcha",
+   "Basculegion",
+   "Sableye",
+   "Grimmsnarl"
+  ]
+ },
+ "sneasler": {
+  "winrate": 51.8,
+  "moves": {
+   "Close Combat": 99.3,
+   "Fake Out": 94.4,
+   "Dire Claw": 93.6,
+   "Protect": 59.3
+  },
+  "items": {
+   "White Herb": 71.1,
+   "Focus Sash": 26,
+   "Sitrus Berry": 0.6
+  },
+  "abilities": {
+   "Unburden": 88.7,
+   "Poison Touch": 11.2
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 48.2,
+   "0/32/2/0/0/32": 12,
+   "0/32/0/0/2/32": 6.7,
+   "1/32/1/0/0/32": 5.5
+  },
+  "natures": {
+   "Jolly": 58.3,
+   "Adamant": 38.8,
+   "Naive": 1.8,
+   "Naughty": 0.3
+  },
+  "teammates": [
+   "Basculegion",
+   "Kingambit",
+   "Sinistcha",
+   "Garchomp",
+   "Whimsicott",
+   "Incineroar"
+  ]
+ },
+ "archaludon": {
+  "winrate": 50.8,
+  "moves": {
+   "Electro Shot": 96.7,
+   "Flash Cannon": 95.2,
+   "Protect": 94.3,
+   "Dragon Pulse": 73.5
+  },
+  "items": {
+   "Leftovers": 88.6,
+   "Choice Scarf": 2.4,
+   "White Herb": 2
+  },
+  "abilities": {
+   "Stamina": 93.4,
+   "Sturdy": 5.3
+  },
+  "spreads": {
+   "32/0/1/5/25/3": 8.2,
+   "2/0/0/32/0/32": 5,
+   "27/0/0/0/30/9": 3.6,
+   "32/0/0/32/0/2": 2.8
+  },
+  "natures": {
+   "Modest": 75.1,
+   "Calm": 12.5,
+   "Bold": 7.6,
+   "Timid": 3.6
+  },
+  "teammates": [
+   "Pelipper",
+   "Swampert",
+   "Sinistcha",
+   "Basculegion",
+   "Sableye",
+   "Grimmsnarl"
+  ]
+ },
+ "grimmsnarl": {
+  "winrate": 48.1,
+  "moves": {
+   "Light Screen": 87,
+   "Parting Shot": 82.8,
+   "Reflect": 81.8,
+   "Spirit Break": 61.9
+  },
+  "items": {
+   "Light Clay": 83,
+   "Roseli Berry": 9.3,
+   "Sitrus Berry": 3
+  },
+  "abilities": {
+   "Prankster": 99.6,
+   "Frisk": 0.3
+  },
+  "spreads": {
+   "32/0/19/0/15/0": 12.4,
+   "32/0/15/0/19/0": 4.4,
+   "32/0/32/0/2/0": 4.1,
+   "32/0/25/0/9/0": 3.8
+  },
+  "natures": {
+   "Careful": 51.1,
+   "Impish": 30.1,
+   "Calm": 5.7,
+   "Adamant": 5.1
+  },
+  "teammates": [
+   "Sinistcha",
+   "Staraptor",
+   "Garchomp",
+   "Pelipper",
+   "Incineroar",
+   "Archaludon"
+  ]
+ },
+ "sylveon": {
+  "winrate": 50.2,
+  "moves": {
+   "Hyper Voice": 99.9,
+   "Quick Attack": 81.6,
+   "Hyper Beam": 71.2,
+   "Detect": 61.1
+  },
+  "items": {
+   "Fairy Feather": 89.6,
+   "Life Orb": 5.1,
+   "Sitrus Berry": 1.5
+  },
+  "abilities": {
+   "Pixilate": 99.9,
+   "Cute Charm": 0.1
+  },
+  "spreads": {
+   "9/0/22/30/0/5": 10.5,
+   "32/0/2/32/0/0": 8.7,
+   "32/0/0/32/0/2": 5.7,
+   "9/0/22/20/0/15": 5.4
+  },
+  "natures": {
+   "Modest": 81.3,
+   "Quiet": 15.7,
+   "Bold": 1.6,
+   "Timid": 0.9
+  },
+  "teammates": [
+   "Garchomp",
+   "Charizard",
+   "Kingambit",
+   "Basculegion",
+   "Farigiraf",
+   "Aerodactyl"
+  ]
+ },
+ "swampert": {
+  "winrate": 50.3,
+  "moves": {
+   "Protect": 94.2,
+   "Wave Crash": 88.2,
+   "Earthquake": 66.2,
+   "Ice Punch": 57
+  },
+  "items": {
+   "Swampertite": 98.5,
+   "Life Orb": 0.7,
+   "Rindo Berry": 0.3
+  },
+  "abilities": {
+   "Torrent": 53.6,
+   "Damp": 46.4
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 30.6,
+   "12/32/0/0/0/22": 4.7,
+   "0/32/1/0/1/32": 3,
+   "18/30/0/0/0/18": 2.8
+  },
+  "natures": {
+   "Adamant": 89.9,
+   "Jolly": 8.6,
+   "Brave": 0.6,
+   "Naughty": 0.2
+  },
+  "teammates": [
+   "Pelipper",
+   "Archaludon",
+   "Sinistcha",
+   "Sableye",
+   "Basculegion",
+   "Grimmsnarl"
+  ]
+ },
+ "metagross": {
+  "winrate": 48.1,
+  "moves": {
+   "Protect": 89.8,
+   "Psychic Fangs": 86.7,
+   "Iron Head": 58.7,
+   "Bullet Punch": 38.5
+  },
+  "items": {
+   "Metagrossite": 94.5,
+   "Life Orb": 2.3,
+   "Metal Coat": 0.8
+  },
+  "abilities": {
+   "Clear Body": 99.5,
+   "Light Metal": 0.5
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 25.7,
+   "9/32/0/0/0/25": 5.1,
+   "32/32/0/0/2/0": 4.8,
+   "0/32/0/0/2/32": 4.2
+  },
+  "natures": {
+   "Adamant": 50.8,
+   "Jolly": 47.7,
+   "Careful": 0.6,
+   "Brave": 0.5
+  },
+  "teammates": [
+   "Garchomp",
+   "Sinistcha",
+   "Whimsicott",
+   "Basculegion",
+   "Sneasler",
+   "Incineroar"
+  ]
+ },
+ "farigiraf": {
+  "winrate": 49.9,
+  "moves": {
+   "Trick Room": 95.7,
+   "Psychic": 60.7,
+   "Helping Hand": 48.9,
+   "Protect": 39.1
+  },
+  "items": {
+   "Sitrus Berry": 62,
+   "Colbur Berry": 24.9,
+   "Mental Herb": 4.4
+  },
+  "abilities": {
+   "Armor Tail": 99.9,
+   "Cud Chew": 0
+  },
+  "spreads": {
+   "17/0/19/10/20/0": 7.4,
+   "32/0/20/0/14/0": 4.7,
+   "32/0/2/32/0/0": 3.6,
+   "32/0/23/0/11/0": 2.3
+  },
+  "natures": {
+   "Bold": 33.8,
+   "Modest": 18.3,
+   "Quiet": 16.9,
+   "Relaxed": 15.2
+  },
+  "teammates": [
+   "Sylveon",
+   "Kingambit",
+   "Torkoal",
+   "Garchomp",
+   "Basculegion",
+   "Mawile"
+  ]
+ },
+ "floette-eternal": {
+  "winrate": 55,
+  "moves": {
+   "Protect": 99.8,
+   "Dazzling Gleam": 97.1,
+   "Moonblast": 79,
+   "Light of Ruin": 58
+  },
+  "items": {
+   "Floettite": 99.4,
+   "Life Orb": 0.4,
+   "Fairy Feather": 0.1
+  },
+  "abilities": {
+   "Flower Veil": 98.9,
+   "Symbiosis": 1.1
+  },
+  "spreads": {
+   "2/0/0/32/0/32": 24.2,
+   "8/0/1/25/0/32": 9.7,
+   "0/0/2/32/0/32": 3.4,
+   "28/0/1/5/0/32": 3
+  },
+  "natures": {
+   "Modest": 78.3,
+   "Timid": 21,
+   "Bold": 0.4,
+   "Calm": 0.3
+  },
+  "teammates": [
+   "Garchomp",
+   "Basculegion",
+   "Whimsicott",
+   "Kingambit",
+   "Charizard",
+   "Sinistcha"
+  ]
+ },
+ "gholdengo": {
+  "winrate": 48.7,
+  "moves": {
+   "Make It Rain": 99,
+   "Shadow Ball": 99,
+   "Protect": 70.9,
+   "Nasty Plot": 58.5
+  },
+  "items": {
+   "Life Orb": 37.9,
+   "Choice Scarf": 27.1,
+   "Metal Coat": 11.3
+  },
+  "abilities": {
+   "Good as Gold": 100
+  },
+  "spreads": {
+   "2/0/0/32/0/32": 28.6,
+   "3/0/2/29/0/32": 6.5,
+   "32/0/0/32/0/2": 3.5,
+   "0/0/2/32/0/32": 3.3
+  },
+  "natures": {
+   "Modest": 67.5,
+   "Timid": 30.7,
+   "Bold": 0.5,
+   "Calm": 0.4
+  },
+  "teammates": [
+   "Staraptor",
+   "Garchomp",
+   "Whimsicott",
+   "Sinistcha",
+   "Raichu",
+   "Grimmsnarl"
+  ]
+ },
+ "aerodactyl": {
+  "winrate": 50.1,
+  "moves": {
+   "Rock Slide": 99.9,
+   "Tailwind": 92.7,
+   "Dual Wingbeat": 86.9,
+   "Protect": 56.8
+  },
+  "items": {
+   "Aerodactylite": 61.2,
+   "Focus Sash": 34.7,
+   "Passho Berry": 1.3
+  },
+  "abilities": {
+   "Unnerve": 95.7,
+   "Pressure": 2.2
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 39.5,
+   "0/32/2/0/0/32": 11.3,
+   "22/12/0/0/0/32": 5.3,
+   "22/10/2/0/0/32": 4.4
+  },
+  "natures": {
+   "Jolly": 94.7,
+   "Adamant": 4.8,
+   "Lonely": 0.2,
+   "Timid": 0.2
+  },
+  "teammates": [
+   "Garchomp",
+   "Kingambit",
+   "Sylveon",
+   "Charizard",
+   "Basculegion",
+   "Farigiraf"
+  ]
+ },
+ "maushold": {
+  "winrate": 48.7,
+  "moves": {
+   "Follow Me": 95.4,
+   "Protect": 89.4,
+   "Super Fang": 40.2,
+   "Population Bomb": 31.5
+  },
+  "items": {
+   "Chople Berry": 38.7,
+   "Wide Lens": 29.4,
+   "Focus Sash": 24.2
+  },
+  "abilities": {
+   "Friend Guard": 73.2,
+   "Technician": 26.3
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 16.5,
+   "32/0/2/0/0/32": 13,
+   "32/0/1/0/1/32": 5.3,
+   "32/0/0/0/2/32": 4.5
+  },
+  "natures": {
+   "Jolly": 56,
+   "Timid": 16.7,
+   "Impish": 11.3,
+   "Bold": 4
+  },
+  "teammates": [
+   "Annihilape",
+   "Sinistcha",
+   "Garchomp",
+   "Staraptor",
+   "Incineroar",
+   "Basculegion"
+  ]
+ },
+ "annihilape": {
+  "winrate": 44,
+  "moves": {
+   "Rage Fist": 93.2,
+   "Protect": 78.5,
+   "Drain Punch": 77.7,
+   "Bulk Up": 69.6
+  },
+  "items": {
+   "Leftovers": 50.7,
+   "Sitrus Berry": 17.5,
+   "Choice Scarf": 11.4
+  },
+  "abilities": {
+   "Defiant": 99.3,
+   "Inner Focus": 0.5
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 12.8,
+   "32/32/0/0/0/2": 5.9,
+   "32/32/2/0/0/0": 3.1,
+   "32/32/0/0/2/0": 2.1
+  },
+  "natures": {
+   "Adamant": 52.1,
+   "Jolly": 34.8,
+   "Careful": 10.4,
+   "Impish": 1.6
+  },
+  "teammates": [
+   "Sinistcha",
+   "Maushold",
+   "Metagross",
+   "Incineroar",
+   "Grimmsnarl",
+   "Whimsicott"
+  ]
+ },
+ "sableye": {
+  "winrate": 45.9,
+  "moves": {
+   "Rain Dance": 78.8,
+   "Light Screen": 67,
+   "Encore": 56.2,
+   "Reflect": 52.4
+  },
+  "items": {
+   "Roseli Berry": 48,
+   "Light Clay": 41.5,
+   "Sitrus Berry": 2.7
+  },
+  "abilities": {
+   "Prankster": 100,
+   "Stall": 0
+  },
+  "spreads": {
+   "32/0/9/0/25/0": 33.5,
+   "32/0/2/0/32/0": 12.7,
+   "32/0/15/0/19/0": 9.9,
+   "32/0/7/0/27/0": 4.7
+  },
+  "natures": {
+   "Careful": 30,
+   "Calm": 20.1,
+   "Sassy": 17.8,
+   "Bold": 11.3
+  },
+  "teammates": [
+   "Archaludon",
+   "Pelipper",
+   "Swampert",
+   "Sinistcha",
+   "Basculegion",
+   "Sneasler"
+  ]
+ },
+ "mawile": {
+  "winrate": 47.3,
+  "moves": {
+   "Play Rough": 97.2,
+   "Sucker Punch": 92.9,
+   "Protect": 89,
+   "Iron Head": 80.8
+  },
+  "items": {
+   "Mawilite": 100
+  },
+  "abilities": {
+   "Intimidate": 71.7,
+   "Hyper Cutter": 27.9
+  },
+  "spreads": {
+   "32/32/0/0/2/0": 45.8,
+   "32/32/2/0/0/0": 13.1,
+   "32/25/0/0/9/0": 3.1,
+   "32/32/1/0/1/0": 2.7
+  },
+  "natures": {
+   "Brave": 53.4,
+   "Adamant": 45.3,
+   "Careful": 0.5,
+   "Sassy": 0.4
+  },
+  "teammates": [
+   "Farigiraf",
+   "Sinistcha",
+   "Incineroar",
+   "Torkoal",
+   "Garchomp",
+   "Basculegion"
+  ]
+ },
+ "ninetales-alola": {
+  "winrate": 50,
+  "moves": {
+   "Blizzard": 95.2,
+   "Protect": 67.4,
+   "Freeze-Dry": 63.3,
+   "Aurora Veil": 63.1
+  },
+  "items": {
+   "Light Clay": 36.6,
+   "Focus Sash": 19.8,
+   "Choice Scarf": 18.4
+  },
+  "abilities": {
+   "Snow Warning": 99.9,
+   "Snow Cloak": 0.1
+  },
+  "spreads": {
+   "2/0/0/32/0/32": 33.8,
+   "1/0/1/32/0/32": 8.9,
+   "0/0/2/32/0/32": 7.2,
+   "0/0/0/32/2/32": 3.7
+  },
+  "natures": {
+   "Timid": 82.7,
+   "Modest": 16.7,
+   "Quiet": 0.6,
+   "Lonely": 0
+  },
+  "teammates": [
+   "Raichu",
+   "Garchomp",
+   "Incineroar",
+   "Sinistcha",
+   "Whimsicott",
+   "Kingambit"
+  ]
+ },
+ "venusaur": {
+  "winrate": 50.3,
+  "moves": {
+   "Sludge Bomb": 95.4,
+   "Protect": 83,
+   "Earth Power": 73.5,
+   "Giga Drain": 57.3
+  },
+  "items": {
+   "Venusaurite": 47.3,
+   "Focus Sash": 18.7,
+   "Life Orb": 10
+  },
+  "abilities": {
+   "Chlorophyll": 98.6,
+   "Overgrow": 1.4
+  },
+  "spreads": {
+   "2/0/0/32/0/32": 27.2,
+   "30/0/0/18/0/18": 9,
+   "32/0/1/28/1/4": 3.7,
+   "32/0/7/18/0/9": 3.5
+  },
+  "natures": {
+   "Modest": 74.3,
+   "Timid": 20.6,
+   "Bold": 2.3,
+   "Calm": 2
+  },
+  "teammates": [
+   "Charizard",
+   "Garchomp",
+   "Basculegion",
+   "Incineroar",
+   "Whimsicott",
+   "Archaludon"
+  ]
+ },
+ "excadrill": {
+  "winrate": 49.3,
+  "moves": {
+   "Iron Head": 96.8,
+   "Protect": 93.7,
+   "Rock Slide": 82.4,
+   "Earthquake": 63.7
+  },
+  "items": {
+   "Focus Sash": 74.4,
+   "Life Orb": 10.5,
+   "Choice Scarf": 4.9
+  },
+  "abilities": {
+   "Sand Rush": 84.4,
+   "Mold Breaker": 15.1
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 39.5,
+   "1/32/0/0/1/32": 14.6,
+   "0/32/0/0/1/32": 8.3,
+   "0/32/1/0/1/32": 6.4
+  },
+  "natures": {
+   "Adamant": 85.4,
+   "Jolly": 14.6
+  },
+  "teammates": [
+   "Tyranitar",
+   "Staraptor",
+   "Rotom-Wash",
+   "Sinistcha",
+   "Raichu",
+   "Basculegion"
+  ]
+ },
+ "milotic": {
+  "winrate": 48,
+  "moves": {
+   "Scald": 58.6,
+   "Protect": 54.1,
+   "Recover": 45,
+   "Muddy Water": 42
+  },
+  "items": {
+   "Leftovers": 74.5,
+   "Sitrus Berry": 18.2,
+   "Mystic Water": 2
+  },
+  "abilities": {
+   "Competitive": 99.1,
+   "Cute Charm": 0.7
+  },
+  "spreads": {
+   "32/0/32/0/2/0": 9.8,
+   "31/0/31/2/1/1": 4.4,
+   "32/0/21/10/1/2": 4.3,
+   "31/0/21/1/12/1": 3.8
+  },
+  "natures": {
+   "Modest": 39.5,
+   "Bold": 38.5,
+   "Calm": 12.1,
+   "Sassy": 6
+  },
+  "teammates": [
+   "Sinistcha",
+   "Garchomp",
+   "Incineroar",
+   "Sneasler",
+   "Staraptor",
+   "Whimsicott"
+  ]
+ },
+ "hydreigon": {
+  "winrate": 49.6,
+  "moves": {
+   "Dark Pulse": 96.9,
+   "Draco Meteor": 91.9,
+   "Snarl": 61.1,
+   "Earth Power": 56.4
+  },
+  "items": {
+   "Choice Scarf": 73.3,
+   "Life Orb": 18.2,
+   "Chople Berry": 1.7
+  },
+  "abilities": {
+   "Levitate": 100
+  },
+  "spreads": {
+   "2/0/0/32/0/32": 57.4,
+   "8/0/0/32/0/26": 5.4,
+   "0/0/0/32/0/32": 2.7,
+   "0/0/25/32/0/9": 2.3
+  },
+  "natures": {
+   "Modest": 65.6,
+   "Timid": 33,
+   "Mild": 0.6,
+   "Calm": 0.5
+  },
+  "teammates": [
+   "Metagross",
+   "Sinistcha",
+   "Sneasler",
+   "Whimsicott",
+   "Incineroar",
+   "Pelipper"
+  ]
+ },
+ "snorlax": {
+  "winrate": 49.8,
+  "moves": {
+   "Protect": 71.6,
+   "Fissure": 67.9,
+   "Yawn": 49.5,
+   "Stockpile": 28.4
+  },
+  "items": {
+   "Leftovers": 40.4,
+   "Chople Berry": 31.2,
+   "Sitrus Berry": 17.4
+  },
+  "abilities": {
+   "Thick Fat": 99.1,
+   "Immunity": 0.9
+  },
+  "spreads": {
+   "0/32/32/0/2/0": 23.9,
+   "25/5/32/0/4/0": 11,
+   "32/0/14/0/20/0": 10.1,
+   "32/0/25/0/9/0": 10.1
+  },
+  "natures": {
+   "Impish": 32.1,
+   "Relaxed": 22,
+   "Adamant": 21.1,
+   "Careful": 16.5
+  },
+  "teammates": [
+   "Hawlucha",
+   "Sinistcha",
+   "Basculegion",
+   "Whimsicott",
+   "Scovillain",
+   "Raichu"
+  ]
+ },
+ "dragonite": {
+  "winrate": 50.5,
+  "moves": {
+   "Protect": 67.6,
+   "Dragon Pulse": 46.6,
+   "Hurricane": 45.5,
+   "Extreme Speed": 39.1
+  },
+  "items": {
+   "Dragoninite": 67.7,
+   "Dragon Fang": 13.6,
+   "Life Orb": 4.7
+  },
+  "abilities": {
+   "Multiscale": 72.8,
+   "Inner Focus": 27.2
+  },
+  "spreads": {
+   "2/0/0/32/0/32": 31.9,
+   "1/0/1/32/0/32": 6.9,
+   "2/32/0/0/0/32": 4.5,
+   "21/32/0/0/0/13": 4.5
+  },
+  "natures": {
+   "Modest": 55,
+   "Adamant": 24.2,
+   "Timid": 17.1,
+   "Jolly": 1.4
+  },
+  "teammates": [
+   "Basculegion",
+   "Pelipper",
+   "Archaludon",
+   "Sneasler",
+   "Swampert",
+   "Kingambit"
+  ]
+ },
+ "toxapex": {
+  "winrate": 50.6,
+  "moves": {
+   "Infestation": 95.3,
+   "Toxic": 92.2,
+   "Baneful Bunker": 87.5,
+   "Wide Guard": 68
+  },
+  "items": {
+   "Leftovers": 92.2,
+   "Lum Berry": 3.1,
+   "Bright Powder": 2
+  },
+  "abilities": {
+   "Regenerator": 100
+  },
+  "spreads": {
+   "32/0/16/0/18/0": 22.7,
+   "32/0/20/0/14/0": 21.5,
+   "32/0/32/0/2/0": 12.1,
+   "32/0/18/0/16/0": 10.5
+  },
+  "natures": {
+   "Bold": 36.3,
+   "Relaxed": 27.7,
+   "Sassy": 16.4,
+   "Calm": 14.5
+  },
+  "teammates": [
+   "Incineroar",
+   "Grimmsnarl",
+   "Garchomp",
+   "Charizard",
+   "Staraptor",
+   "Hydreigon"
+  ]
+ },
+ "lycanroc": {
+  "winrate": 44.8,
+  "moves": {
+   "Protect": 84,
+   "Close Combat": 82,
+   "Rock Slide": 72,
+   "Accelerock": 58
+  },
+  "items": {
+   "Focus Sash": 88,
+   "Hard Stone": 10,
+   "King's Rock": 2
+  },
+  "abilities": {
+   "Sand Rush": 86,
+   "Steadfast": 14
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 42,
+   "1/32/1/0/0/32": 30,
+   "0/32/0/0/0/32": 10,
+   "0/32/1/0/1/32": 8
+  },
+  "natures": {
+   "Adamant": 58,
+   "Jolly": 28,
+   "Lax": 14
+  },
+  "teammates": [
+   "Tyranitar",
+   "Raichu",
+   "Gholdengo",
+   "Sinistcha",
+   "Whimsicott",
+   "Hydreigon"
+  ]
+ },
+ "mamoswine": {
+  "winrate": 52.4,
+  "moves": {
+   "Ice Shard": 85.5,
+   "Icicle Crash": 75.8,
+   "Protect": 66.6,
+   "High Horsepower": 63.7
+  },
+  "items": {
+   "Focus Sash": 39.3,
+   "Choice Scarf": 27.3,
+   "Life Orb": 15.6
+  },
+  "abilities": {
+   "Oblivious": 77.5,
+   "Thick Fat": 22.5
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 54.5,
+   "0/32/0/0/2/32": 9.7,
+   "0/32/1/10/0/23": 5.2,
+   "0/32/2/0/0/32": 3.8
+  },
+  "natures": {
+   "Adamant": 71.1,
+   "Jolly": 25.6,
+   "Lax": 3.3
+  },
+  "teammates": [
+   "Incineroar",
+   "Raichu",
+   "Sinistcha",
+   "Aerodactyl",
+   "Floette-Eternal",
+   "Whimsicott"
+  ]
+ },
+ "ninetales": {
+  "winrate": 49.7,
+  "moves": {
+   "Protect": 84.5,
+   "Heat Wave": 73.6,
+   "Overheat": 41.1,
+   "Will-O-Wisp": 30.2
+  },
+  "items": {
+   "Charcoal": 30.2,
+   "Life Orb": 20.2,
+   "Shuca Berry": 19.4
+  },
+  "abilities": {
+   "Drought": 100
+  },
+  "spreads": {
+   "2/0/2/32/0/30": 24,
+   "13/0/6/14/1/32": 18.6,
+   "2/0/0/32/0/32": 17.8,
+   "0/0/1/32/1/32": 10.1
+  },
+  "natures": {
+   "Timid": 65.9,
+   "Modest": 26.4,
+   "Brave": 7.8
+  },
+  "teammates": [
+   "Whimsicott",
+   "Pyroar",
+   "Aerodactyl",
+   "Raichu",
+   "Garchomp",
+   "Kingambit"
+  ]
+ },
+ "primarina": {
+  "winrate": 42.8,
+  "moves": {
+   "Hyper Voice": 97.1,
+   "Protect": 89.5,
+   "Moonblast": 83.9,
+   "Calm Mind": 37.1
+  },
+  "items": {
+   "Leftovers": 32.7,
+   "Life Orb": 18.9,
+   "Sitrus Berry": 15.8
+  },
+  "abilities": {
+   "Liquid Voice": 97.1,
+   "Torrent": 2.9
+  },
+  "spreads": {
+   "2/0/0/32/0/32": 8.4,
+   "32/0/2/32/0/0": 8.1,
+   "32/0/0/32/2/0": 6.9,
+   "28/0/15/22/1/0": 5.5
+  },
+  "natures": {
+   "Modest": 62,
+   "Quiet": 19.9,
+   "Timid": 8,
+   "Bold": 5.7
+  },
+  "teammates": [
+   "Incineroar",
+   "Sinistcha",
+   "Metagross",
+   "Garchomp",
+   "Sneasler",
+   "Raichu"
+  ]
+ },
+ "rotom-wash": {
+  "winrate": 46.5,
+  "moves": {
+   "Hydro Pump": 96.4,
+   "Will-O-Wisp": 77.9,
+   "Thunderbolt": 71.5,
+   "Protect": 54.2
+  },
+  "items": {
+   "Sitrus Berry": 39.1,
+   "Leftovers": 29.7,
+   "Choice Scarf": 21.6
+  },
+  "abilities": {
+   "Levitate": 100
+  },
+  "spreads": {
+   "2/0/0/32/0/32": 8,
+   "32/0/0/0/0/32": 3.8,
+   "32/0/0/32/0/2": 3.4,
+   "10/0/0/31/0/25": 2.6
+  },
+  "natures": {
+   "Modest": 52.2,
+   "Bold": 22.5,
+   "Timid": 17.7,
+   "Calm": 7
+  },
+  "teammates": [
+   "Garchomp",
+   "Whimsicott",
+   "Sinistcha",
+   "Sneasler",
+   "Incineroar",
+   "Metagross"
+  ]
+ },
+ "scizor": {
+  "winrate": 48.7,
+  "moves": {
+   "Bullet Punch": 100,
+   "Protect": 88.7,
+   "Swords Dance": 80.6,
+   "Bug Bite": 73.4
+  },
+  "items": {
+   "Scizorite": 53.5,
+   "Life Orb": 25,
+   "Metal Coat": 14
+  },
+  "abilities": {
+   "Technician": 100
+  },
+  "spreads": {
+   "32/32/0/0/2/0": 23.6,
+   "32/32/0/0/0/2": 11.3,
+   "32/32/2/0/0/0": 8.4,
+   "32/32/1/0/1/0": 8
+  },
+  "natures": {
+   "Adamant": 93.9,
+   "Impish": 3.3,
+   "Brave": 2.5,
+   "Careful": 0.3
+  },
+  "teammates": [
+   "Pelipper",
+   "Sinistcha",
+   "Basculegion",
+   "Archaludon",
+   "Staraptor",
+   "Raichu"
+  ]
+ },
+ "politoed": {
+  "winrate": 49.2,
+  "moves": {
+   "Weather Ball": 89.9,
+   "Protect": 86.8,
+   "Perish Song": 51.9,
+   "Ice Beam": 32.4
+  },
+  "items": {
+   "Sitrus Berry": 58.3,
+   "Damp Rock": 10,
+   "Leftovers": 9.4
+  },
+  "abilities": {
+   "Drizzle": 99.9,
+   "Damp": 0.1
+  },
+  "spreads": {
+   "31/0/23/0/12/0": 16.5,
+   "23/0/12/30/0/1": 7.1,
+   "32/0/32/0/2/0": 5.5,
+   "2/0/0/32/0/32": 4.2
+  },
+  "natures": {
+   "Calm": 42.9,
+   "Modest": 22.7,
+   "Bold": 18.6,
+   "Timid": 8.6
+  },
+  "teammates": [
+   "Archaludon",
+   "Sinistcha",
+   "Incineroar",
+   "Gengar",
+   "Swampert",
+   "Grimmsnarl"
+  ]
+ },
+ "falinks": {
+  "winrate": 38,
+  "moves": {
+   "Close Combat": 94.4,
+   "No Retreat": 88.9,
+   "Protect": 84.7,
+   "Rock Slide": 47.2
+  },
+  "items": {
+   "Falinksite": 95.8,
+   "Black Belt": 4.2
+  },
+  "abilities": {
+   "Defiant": 100
+  },
+  "spreads": {
+   "32/32/0/0/0/2": 22.2,
+   "32/20/0/0/0/14": 15.3,
+   "20/6/6/0/2/32": 6.9,
+   "32/5/0/0/15/14": 6.9
+  },
+  "natures": {
+   "Adamant": 73.6,
+   "Jolly": 12.5,
+   "Careful": 12.5,
+   "Sassy": 1.4
+  },
+  "teammates": [
+   "Sinistcha",
+   "Whimsicott",
+   "Incineroar",
+   "Raichu",
+   "Kingambit",
+   "Sylveon"
+  ]
+ },
+ "ceruledge": {
+  "winrate": 52.7,
+  "moves": {
+   "Bitter Blade": 100,
+   "Protect": 92,
+   "Shadow Sneak": 89.4,
+   "Bulk Up": 62
+  },
+  "items": {
+   "Colbur Berry": 32.4,
+   "Focus Sash": 22.6,
+   "Leftovers": 16.4
+  },
+  "abilities": {
+   "Flash Fire": 89.5,
+   "Weak Armor": 10.5
+  },
+  "spreads": {
+   "31/1/26/0/0/8": 16.4,
+   "1/32/0/0/1/32": 9.5,
+   "2/32/0/0/0/32": 8.2,
+   "31/15/12/0/0/8": 7.7
+  },
+  "natures": {
+   "Adamant": 78.7,
+   "Jolly": 20.3,
+   "Careful": 1
+  },
+  "teammates": [
+   "Sinistcha",
+   "Raichu",
+   "Staraptor",
+   "Kingambit",
+   "Incineroar",
+   "Garchomp"
+  ]
+ },
+ "typhlosion-hisui": {
+  "winrate": 45.4,
+  "moves": {
+   "Eruption": 99.5,
+   "Shadow Ball": 92.2,
+   "Heat Wave": 63.3,
+   "Protect": 43.8
+  },
+  "items": {
+   "Choice Scarf": 56.5,
+   "Charcoal": 22.5,
+   "Life Orb": 10.6
+  },
+  "abilities": {
+   "Frisk": 75.9,
+   "Blaze": 24.1
+  },
+  "spreads": {
+   "2/0/0/32/0/32": 72.4,
+   "5/0/0/32/0/29": 5.8,
+   "0/0/2/32/0/32": 4.6,
+   "0/0/0/32/2/32": 4.1
+  },
+  "natures": {
+   "Modest": 65.3,
+   "Timid": 34.7
+  },
+  "teammates": [
+   "Whimsicott",
+   "Garchomp",
+   "Farigiraf",
+   "Kingambit",
+   "Raichu",
+   "Staraptor"
+  ]
+ },
+ "azumarill": {
+  "winrate": 43.8,
+  "moves": {
+   "Play Rough": 100,
+   "Aqua Jet": 96.9,
+   "Protect": 80.9,
+   "Belly Drum": 50.6
+  },
+  "items": {
+   "Sitrus Berry": 71.6,
+   "Mystic Water": 9.3,
+   "Leftovers": 8
+  },
+  "abilities": {
+   "Huge Power": 83.3,
+   "Sap Sipper": 16.7
+  },
+  "spreads": {
+   "32/32/0/0/2/0": 22.8,
+   "32/0/32/0/2/0": 16.7,
+   "31/32/0/0/0/3": 16,
+   "32/32/0/0/0/2": 9.9
+  },
+  "natures": {
+   "Adamant": 58,
+   "Brave": 22.2,
+   "Relaxed": 16.7,
+   "Lonely": 3.1
+  },
+  "teammates": [
+   "Sinistcha",
+   "Raichu",
+   "Farigiraf",
+   "Incineroar",
+   "Sableye",
+   "Sylveon"
+  ]
+ },
+ "talonflame": {
+  "winrate": 45.9,
+  "moves": {
+   "Tailwind": 97.8,
+   "Protect": 63.3,
+   "Flare Blitz": 61,
+   "Brave Bird": 46.4
+  },
+  "items": {
+   "Sharp Beak": 30.9,
+   "Focus Sash": 17.5,
+   "Life Orb": 13.1
+  },
+  "abilities": {
+   "Gale Wings": 99.9,
+   "Flame Body": 0.1
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 52.1,
+   "7/32/0/0/0/27": 6.8,
+   "0/32/2/0/0/32": 4,
+   "0/32/0/0/2/32": 3.8
+  },
+  "natures": {
+   "Jolly": 72.8,
+   "Adamant": 20.6,
+   "Hasty": 2.3,
+   "Timid": 1.7
+  },
+  "teammates": [
+   "Garchomp",
+   "Basculegion",
+   "Sinistcha",
+   "Raichu",
+   "Kingambit",
+   "Sneasler"
+  ]
+ },
+ "overqwil": {
+  "winrate": 47.2,
+  "moves": {
+   "Protect": 77.8,
+   "Throat Chop": 61,
+   "Barb Barrage": 55.6,
+   "Aqua Jet": 37.1
+  },
+  "items": {
+   "Life Orb": 59,
+   "Sitrus Berry": 19.7,
+   "Shuca Berry": 9.8
+  },
+  "abilities": {
+   "Swift Swim": 73.3,
+   "Intimidate": 24.1
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 26.3,
+   "19/32/1/0/6/8": 21.9,
+   "32/32/0/0/0/0": 7.9,
+   "30/11/0/0/25/0": 7.3
+  },
+  "natures": {
+   "Adamant": 69.2,
+   "Jolly": 12.7,
+   "Careful": 9.8,
+   "Impish": 7.9
+  },
+  "teammates": [
+   "Swampert",
+   "Pelipper",
+   "Archaludon",
+   "Basculegion",
+   "Glimmora",
+   "Whimsicott"
+  ]
+ },
+ "aegislash": {
+  "winrate": 46.8,
+  "moves": {
+   "Poltergeist": 82,
+   "King's Shield": 80.6,
+   "Shadow Sneak": 72.1,
+   "Iron Head": 56
+  },
+  "items": {
+   "Spell Tag": 25.4,
+   "Focus Sash": 18.2,
+   "Life Orb": 15.9
+  },
+  "abilities": {
+   "Stance Change": 100
+  },
+  "spreads": {
+   "32/32/0/0/0/2": 11.6,
+   "2/32/0/0/0/32": 11,
+   "32/32/2/0/0/0": 7.6,
+   "32/10/11/0/13/0": 6.6
+  },
+  "natures": {
+   "Adamant": 64.9,
+   "Brave": 20,
+   "Quiet": 7.6,
+   "Modest": 4.3
+  },
+  "teammates": [
+   "Staraptor",
+   "Garchomp",
+   "Whimsicott",
+   "Sinistcha",
+   "Grimmsnarl",
+   "Pelipper"
+  ]
+ },
+ "tsareena": {
+  "winrate": 49.4,
+  "moves": {
+   "Triple Axel": 86.6,
+   "Trop Kick": 62,
+   "Protect": 52.5,
+   "Low Kick": 48.2
+  },
+  "items": {
+   "Choice Scarf": 27.6,
+   "Wide Lens": 23.3,
+   "Sitrus Berry": 19.3
+  },
+  "abilities": {
+   "Queenly Majesty": 99.9,
+   "Leaf Guard": 0.1
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 28.6,
+   "30/32/0/0/0/4": 5.1,
+   "10/30/6/0/0/20": 4.2,
+   "1/32/1/0/0/32": 3.5
+  },
+  "natures": {
+   "Adamant": 57.6,
+   "Jolly": 35.7,
+   "Careful": 3.9,
+   "Brave": 1.6
+  },
+  "teammates": [
+   "Raichu",
+   "Basculegion",
+   "Talonflame",
+   "Kingambit",
+   "Incineroar",
+   "Garchomp"
+  ]
+ },
+ "vanilluxe": {
+  "winrate": 44.9,
+  "moves": {
+   "Blizzard": 95.8,
+   "Freeze-Dry": 93.4,
+   "Icy Wind": 42.7,
+   "Aurora Veil": 36.4
+  },
+  "items": {
+   "Choice Scarf": 57,
+   "Never-Melt Ice": 14.7,
+   "Focus Sash": 11.2
+  },
+  "abilities": {
+   "Snow Warning": 99,
+   "Weak Armor": 1
+  },
+  "spreads": {
+   "2/0/0/32/0/32": 37.4,
+   "1/0/1/32/0/32": 13.6,
+   "0/0/2/32/0/32": 8,
+   "18/0/25/0/0/23": 7.7
+  },
+  "natures": {
+   "Timid": 50,
+   "Modest": 35,
+   "Bold": 10.5,
+   "Adamant": 3.8
+  },
+  "teammates": [
+   "Raichu",
+   "Whimsicott",
+   "Garchomp",
+   "Farigiraf",
+   "Basculegion",
+   "Incineroar"
+  ]
+ },
+ "torkoal": {
+  "winrate": 48.5,
+  "moves": {
+   "Eruption": 97.2,
+   "Protect": 86.2,
+   "Weather Ball": 62.8,
+   "Heat Wave": 52.7
+  },
+  "items": {
+   "Charcoal": 88.8,
+   "Life Orb": 4.6,
+   "Heat Rock": 2.6
+  },
+  "abilities": {
+   "Drought": 99.8,
+   "White Smoke": 0.1
+  },
+  "spreads": {
+   "32/0/0/32/2/0": 42.1,
+   "32/0/1/32/1/0": 18.8,
+   "32/0/2/32/0/0": 17.4,
+   "30/0/4/32/0/0": 3.4
+  },
+  "natures": {
+   "Quiet": 88.6,
+   "Modest": 9.7,
+   "Relaxed": 1,
+   "Bold": 0.6
+  },
+  "teammates": [
+   "Farigiraf",
+   "Sylveon",
+   "Mawile",
+   "Kangaskhan",
+   "Basculegion",
+   "Blastoise"
+  ]
+ },
+ "armarouge": {
+  "winrate": 46.2,
+  "moves": {
+   "Psychic": 61.3,
+   "Trick Room": 53.2,
+   "Heat Wave": 51.1,
+   "Protect": 45.7
+  },
+  "items": {
+   "Sitrus Berry": 31.2,
+   "Focus Sash": 15.6,
+   "Iron Ball": 12.9
+  },
+  "abilities": {
+   "Flash Fire": 94.1,
+   "Weak Armor": 5.9
+  },
+  "spreads": {
+   "17/0/26/5/18/0": 33.3,
+   "32/0/0/32/2/0": 19.4,
+   "2/0/0/32/0/32": 13.4,
+   "32/0/2/32/0/0": 12.4
+  },
+  "natures": {
+   "Modest": 33.9,
+   "Relaxed": 30.6,
+   "Quiet": 21,
+   "Bold": 12.4
+  },
+  "teammates": [
+   "Raichu",
+   "Torkoal",
+   "Vileplume",
+   "Meowscarada",
+   "Heliolisk",
+   "Blastoise"
+  ]
+ },
+ "beartic": {
+  "winrate": 45.5,
+  "moves": {
+   "Rock Slide": 100,
+   "Protect": 100,
+   "Close Combat": 100,
+   "Icicle Crash": 100
+  },
+  "items": {
+   "White Herb": 100
+  },
+  "abilities": {
+   "Swift Swim": 100
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 100
+  },
+  "natures": {
+   "Adamant": 100
+  },
+  "teammates": [
+   "Politoed",
+   "Swampert",
+   "Pelipper",
+   "Basculegion",
+   "Archaludon"
+  ]
+ },
+ "vivillon": {
+  "winrate": 49.3,
+  "moves": {
+   "Sleep Powder": 92.3,
+   "Hurricane": 81.2,
+   "Rage Powder": 75.6,
+   "Tailwind": 40.3
+  },
+  "items": {
+   "Choice Scarf": 54.8,
+   "Focus Sash": 41.1,
+   "Charti Berry": 4
+  },
+  "abilities": {
+   "Compound Eyes": 84.5,
+   "Friend Guard": 8.9
+  },
+  "spreads": {
+   "2/0/0/32/0/32": 28.1,
+   "0/0/24/5/5/32": 24.8,
+   "0/0/2/32/0/32": 8.1,
+   "0/0/1/32/1/32": 7.9
+  },
+  "natures": {
+   "Timid": 93.7,
+   "Bold": 4.1,
+   "Hasty": 1.3,
+   "Modest": 0.7
+  },
+  "teammates": [
+   "Basculegion",
+   "Blastoise",
+   "Farigiraf",
+   "Torkoal",
+   "Kangaskhan",
+   "Sinistcha"
+  ]
+ },
+ "gallade": {
+  "winrate": 46.9,
+  "moves": {
+   "Sacred Sword": 94.7,
+   "Psycho Cut": 87.3,
+   "Protect": 65.5,
+   "Leaf Blade": 54
+  },
+  "items": {
+   "Focus Sash": 31.8,
+   "Scope Lens": 13.8,
+   "Galladite": 10.5
+  },
+  "abilities": {
+   "Sharpness": 94.9,
+   "Justified": 5.1
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 41.7,
+   "32/32/2/0/0/0": 12.1,
+   "30/4/32/0/0/0": 7.4,
+   "24/32/0/0/0/10": 7.2
+  },
+  "natures": {
+   "Adamant": 42.9,
+   "Jolly": 31.6,
+   "Brave": 17.5,
+   "Impish": 8
+  },
+  "teammates": [
+   "Farigiraf",
+   "Metagross",
+   "Sinistcha",
+   "Whimsicott",
+   "Sylveon",
+   "Kingambit"
+  ]
+ },
+ "kangaskhan": {
+  "winrate": 49.9,
+  "moves": {
+   "Fake Out": 99.8,
+   "Last Resort": 49.6,
+   "Double-Edge": 45.3,
+   "Ice Punch": 32.4
+  },
+  "items": {
+   "Kangaskhanite": 52,
+   "Silk Scarf": 37.6,
+   "Life Orb": 2.8
+  },
+  "abilities": {
+   "Scrappy": 98.9,
+   "Inner Focus": 1.1
+  },
+  "spreads": {
+   "32/32/1/0/1/0": 37.2,
+   "32/32/2/0/0/0": 17.5,
+   "32/32/0/0/2/0": 8.8,
+   "2/32/0/0/0/32": 7.5
+  },
+  "natures": {
+   "Adamant": 68.1,
+   "Brave": 28.4,
+   "Jolly": 1.8,
+   "Careful": 1
+  },
+  "teammates": [
+   "Farigiraf",
+   "Torkoal",
+   "Blastoise",
+   "Basculegion",
+   "Vivillon",
+   "Sylveon"
+  ]
+ },
+ "glimmora": {
+  "winrate": 47.3,
+  "moves": {
+   "Power Gem": 99.7,
+   "Earth Power": 94.3,
+   "Sludge Bomb": 94.2,
+   "Spiky Shield": 84.5
+  },
+  "items": {
+   "Focus Sash": 76.5,
+   "Glimmoranite": 19,
+   "Choice Scarf": 2.5
+  },
+  "abilities": {
+   "Toxic Debris": 99.9,
+   "Corrosion": 0.1
+  },
+  "spreads": {
+   "2/0/0/32/0/32": 51.9,
+   "1/0/0/32/1/32": 20.6,
+   "0/0/0/32/2/32": 5.7,
+   "1/0/1/32/0/32": 4.3
+  },
+  "natures": {
+   "Modest": 54.7,
+   "Timid": 44.8,
+   "Quiet": 0.3,
+   "Calm": 0.1
+  },
+  "teammates": [
+   "Whimsicott",
+   "Basculegion",
+   "Garchomp",
+   "Staraptor",
+   "Kingambit",
+   "Charizard"
+  ]
+ },
+ "appletun": {
+  "winrate": 55.8,
+  "moves": {
+   "Sunny Day": 100,
+   "Apple Acid": 100,
+   "Protect": 50,
+   "Dragon Pulse": 50
+  },
+  "items": {
+   "Sitrus Berry": 50,
+   "Leftovers": 50
+  },
+  "abilities": {
+   "Thick Fat": 100
+  },
+  "spreads": {
+   "27/0/4/30/5/0": 50,
+   "31/0/15/0/20/0": 50
+  },
+  "natures": {
+   "Quiet": 50,
+   "Sassy": 50
+  },
+  "teammates": [
+   "Torkoal",
+   "Blastoise",
+   "Slowking-Galar",
+   "Tyranitar",
+   "Torterra",
+   "Aurorus"
+  ]
+ },
+ "clefable": {
+  "winrate": 42.5,
+  "moves": {
+   "Moonblast": 94.3,
+   "Follow Me": 92.1,
+   "Protect": 74.2,
+   "Helping Hand": 29.5
+  },
+  "items": {
+   "Sitrus Berry": 33.7,
+   "Leftovers": 21.6,
+   "Clefablite": 20.6
+  },
+  "abilities": {
+   "Unaware": 92.9,
+   "Magic Guard": 7.1
+  },
+  "spreads": {
+   "32/0/32/0/2/0": 20.1,
+   "32/0/27/0/7/0": 8.4,
+   "31/0/27/0/8/0": 5.4,
+   "32/0/17/0/17/0": 4.4
+  },
+  "natures": {
+   "Bold": 61.7,
+   "Modest": 11.1,
+   "Calm": 9.6,
+   "Relaxed": 8.6
+  },
+  "teammates": [
+   "Pelipper",
+   "Swampert",
+   "Archaludon",
+   "Garchomp",
+   "Staraptor",
+   "Torkoal"
+  ]
+ },
+ "espathra": {
+  "winrate": 51.2,
+  "moves": {
+   "Protect": 100,
+   "Calm Mind": 83.1,
+   "Lumina Crash": 80.4,
+   "Baton Pass": 77.3
+  },
+  "items": {
+   "Sitrus Berry": 32.7,
+   "Mental Herb": 27.7,
+   "Leftovers": 15
+  },
+  "abilities": {
+   "Speed Boost": 100
+  },
+  "spreads": {
+   "32/0/9/0/6/19": 21.2,
+   "32/0/0/2/0/32": 12.3,
+   "30/0/13/0/3/20": 8.1,
+   "25/0/0/32/0/9": 6.9
+  },
+  "natures": {
+   "Timid": 73.5,
+   "Bold": 11.5,
+   "Modest": 11.2,
+   "Calm": 3.8
+  },
+  "teammates": [
+   "Archaludon",
+   "Scovillain",
+   "Politoed",
+   "Incineroar",
+   "Sneasler",
+   "Sinistcha"
+  ]
+ },
+ "scrafty": {
+  "winrate": 46.9,
+  "moves": {
+   "Fake Out": 91.1,
+   "Knock Off": 87.3,
+   "Drain Punch": 51,
+   "Close Combat": 44.2
+  },
+  "items": {
+   "Scraftinite": 85.5,
+   "Sitrus Berry": 6.4,
+   "Lum Berry": 1.9
+  },
+  "abilities": {
+   "Intimidate": 98.8,
+   "Moxie": 0.8
+  },
+  "spreads": {
+   "32/32/0/0/2/0": 23.2,
+   "32/32/2/0/0/0": 8.8,
+   "32/32/1/0/1/0": 5.7,
+   "32/32/0/0/0/2": 3.7
+  },
+  "natures": {
+   "Adamant": 46.6,
+   "Brave": 31.9,
+   "Careful": 8.1,
+   "Impish": 6.8
+  },
+  "teammates": [
+   "Farigiraf",
+   "Sinistcha",
+   "Sylveon",
+   "Torkoal",
+   "Garchomp",
+   "Basculegion"
+  ]
+ },
+ "kleavor": {
+  "winrate": 46.4,
+  "moves": {
+   "Stone Axe": 97.9,
+   "X-Scissor": 66.5,
+   "Close Combat": 58.9,
+   "Protect": 37.5
+  },
+  "items": {
+   "Choice Scarf": 45,
+   "Focus Sash": 33.5,
+   "White Herb": 16.9
+  },
+  "abilities": {
+   "Sharpness": 97.9,
+   "Sheer Force": 2.1
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 61.3,
+   "0/32/0/0/2/32": 17.5,
+   "7/23/0/0/4/32": 6.3,
+   "32/32/0/0/2/0": 3.3
+  },
+  "natures": {
+   "Jolly": 69.8,
+   "Adamant": 29.6,
+   "Brave": 0.6
+  },
+  "teammates": [
+   "Whimsicott",
+   "Kingambit",
+   "Basculegion",
+   "Raichu",
+   "Sneasler",
+   "Froslass"
+  ]
+ },
+ "tyranitar": {
+  "winrate": 46.2,
+  "moves": {
+   "Rock Slide": 98.8,
+   "Knock Off": 92.9,
+   "Protect": 91.9,
+   "Low Kick": 43.5
+  },
+  "items": {
+   "Tyranitarite": 69.9,
+   "Chople Berry": 7.2,
+   "Choice Scarf": 5.8
+  },
+  "abilities": {
+   "Sand Stream": 99.7,
+   "Unnerve": 0.3
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 15,
+   "32/32/0/0/2/0": 7.7,
+   "32/32/2/0/0/0": 6.7,
+   "27/26/1/0/0/12": 4.8
+  },
+  "natures": {
+   "Adamant": 71.4,
+   "Jolly": 18.7,
+   "Brave": 7.6,
+   "Impish": 1.6
+  },
+  "teammates": [
+   "Sinistcha",
+   "Excadrill",
+   "Staraptor",
+   "Garchomp",
+   "Metagross",
+   "Sneasler"
+  ]
+ },
+ "corviknight": {
+  "winrate": 46.1,
+  "moves": {
+   "Brave Bird": 85.4,
+   "Tailwind": 61,
+   "Iron Head": 56.9,
+   "Bulk Up": 56.2
+  },
+  "items": {
+   "Leftovers": 71.3,
+   "Sitrus Berry": 13.2,
+   "Occa Berry": 11.3
+  },
+  "abilities": {
+   "Mirror Armor": 97.9,
+   "Unnerve": 2.1
+  },
+  "spreads": {
+   "32/0/32/0/2/0": 8.2,
+   "27/11/1/0/5/22": 6.6,
+   "32/0/2/0/32/0": 5.3,
+   "24/32/0/0/0/10": 4.9
+  },
+  "natures": {
+   "Careful": 31.8,
+   "Adamant": 31.1,
+   "Impish": 28.3,
+   "Jolly": 4.8
+  },
+  "teammates": [
+   "Garchomp",
+   "Tyranitar",
+   "Sinistcha",
+   "Incineroar",
+   "Raichu",
+   "Rotom-Wash"
+  ]
+ },
+ "houndstone": {
+  "winrate": 51.7,
+  "moves": {
+   "Last Respects": 89.7,
+   "Protect": 79.4,
+   "Will-O-Wisp": 47.6,
+   "Ally Switch": 42.1
+  },
+  "items": {
+   "Life Orb": 47.6,
+   "Leftovers": 19.8,
+   "Sitrus Berry": 7.1
+  },
+  "abilities": {
+   "Sand Rush": 76.2,
+   "Fluffy": 23.8
+  },
+  "spreads": {
+   "2/32/0/0/3/29": 34.9,
+   "16/32/2/0/0/16": 9.5,
+   "31/9/20/0/4/2": 9.5,
+   "32/9/10/0/14/1": 9.5
+  },
+  "natures": {
+   "Adamant": 73.8,
+   "Impish": 21.4,
+   "Jolly": 4.8
+  },
+  "teammates": [
+   "Tyranitar",
+   "Staraptor",
+   "Excadrill",
+   "Rotom-Wash",
+   "Sylveon",
+   "Gholdengo"
+  ]
+ },
+ "hawlucha": {
+  "winrate": 39.5,
+  "moves": {
+   "Entrainment": 65.4,
+   "Detect": 56.4,
+   "Close Combat": 55.1,
+   "Dual Wingbeat": 53.8
+  },
+  "items": {
+   "Hawluchanite": 97.4,
+   "White Herb": 1.3,
+   "Focus Sash": 1.3
+  },
+  "abilities": {
+   "Mold Breaker": 56.4,
+   "Unburden": 30.8
+  },
+  "spreads": {
+   "32/0/0/0/0/32": 24.4,
+   "32/0/0/0/2/32": 16.7,
+   "2/32/0/0/0/32": 12.8,
+   "10/25/0/0/0/31": 7.7
+  },
+  "natures": {
+   "Jolly": 87.2,
+   "Adamant": 11.5,
+   "Naive": 1.3
+  },
+  "teammates": [
+   "Snorlax",
+   "Raichu",
+   "Whimsicott",
+   "Mudsdale",
+   "Corviknight",
+   "Sinistcha"
+  ]
+ },
+ "scovillain": {
+  "winrate": 57.6,
+  "moves": {
+   "Protect": 98.9,
+   "Rage Powder": 96.5,
+   "Overheat": 77.7,
+   "Leech Seed": 53.6
+  },
+  "items": {
+   "Scovillainite": 99.3,
+   "Kebia Berry": 0.3,
+   "Sceptilite": 0.3
+  },
+  "abilities": {
+   "Moody": 88.2,
+   "Chlorophyll": 9.6
+  },
+  "spreads": {
+   "32/0/19/0/15/0": 27.8,
+   "32/0/15/0/19/0": 11,
+   "32/0/15/0/15/4": 5.6,
+   "31/0/15/0/20/0": 5.2
+  },
+  "natures": {
+   "Bold": 43.3,
+   "Calm": 39.1,
+   "Modest": 9.4,
+   "Relaxed": 6.6
+  },
+  "teammates": [
+   "Sneasler",
+   "Basculegion",
+   "Archaludon",
+   "Kingambit",
+   "Froslass",
+   "Lycanroc-Dusk"
+  ]
+ },
+ "mudsdale": {
+  "winrate": 44.1,
+  "moves": {
+   "Protect": 82.1,
+   "High Horsepower": 77.8,
+   "Rock Slide": 59.3,
+   "Earthquake": 55.6
+  },
+  "items": {
+   "Soft Sand": 35.2,
+   "Leftovers": 31.5,
+   "Quick Claw": 17.9
+  },
+  "abilities": {
+   "Stamina": 49.4,
+   "Inner Focus": 47.5
+  },
+  "spreads": {
+   "2/0/32/0/32/0": 17.9,
+   "32/0/15/0/19/0": 15.4,
+   "32/32/0/0/2/0": 15.4,
+   "32/32/2/0/0/0": 14.2
+  },
+  "natures": {
+   "Brave": 53.1,
+   "Sassy": 21,
+   "Careful": 15.4,
+   "Relaxed": 10.5
+  },
+  "teammates": [
+   "Sylveon",
+   "Torkoal",
+   "Oranguru",
+   "Glalie",
+   "Sinistcha",
+   "Raichu"
+  ]
+ },
+ "gengar": {
+  "winrate": 48.1,
+  "moves": {
+   "Shadow Ball": 94.4,
+   "Protect": 87.1,
+   "Perish Song": 66,
+   "Sludge Bomb": 55.4
+  },
+  "items": {
+   "Gengarite": 84.4,
+   "Focus Sash": 10.5,
+   "Choice Scarf": 2.1
+  },
+  "abilities": {
+   "Cursed Body": 100
+  },
+  "spreads": {
+   "2/0/0/32/0/32": 20.2,
+   "30/0/1/1/28/6": 10.4,
+   "32/0/11/0/0/23": 3.9,
+   "32/0/9/1/1/23": 3.5
+  },
+  "natures": {
+   "Timid": 51,
+   "Modest": 40.8,
+   "Bold": 3.2,
+   "Quiet": 2.9
+  },
+  "teammates": [
+   "Incineroar",
+   "Sinistcha",
+   "Politoed",
+   "Archaludon",
+   "Kingambit",
+   "Grimmsnarl"
+  ]
+ },
+ "arcanine": {
+  "winrate": 35.7,
+  "moves": {
+   "Protect": 92.5,
+   "Will-O-Wisp": 85.8,
+   "Flare Blitz": 60,
+   "Snarl": 53.3
+  },
+  "items": {
+   "Sitrus Berry": 46.7,
+   "Charcoal": 36.7,
+   "Wide Lens": 5.8
+  },
+  "abilities": {
+   "Intimidate": 89.2,
+   "Flash Fire": 10.8
+  },
+  "spreads": {
+   "31/0/12/7/13/3": 35.8,
+   "17/7/5/0/20/17": 18.3,
+   "31/3/0/0/0/32": 12.5,
+   "25/1/20/0/15/5": 10
+  },
+  "natures": {
+   "Modest": 36.7,
+   "Jolly": 25.8,
+   "Careful": 18.3,
+   "Adamant": 18.3
+  },
+  "teammates": [
+   "Sinistcha",
+   "Sneasler",
+   "Gardevoir",
+   "Staraptor",
+   "Samurott-Hisui",
+   "Talonflame"
+  ]
+ },
+ "pyroar": {
+  "winrate": 52.1,
+  "moves": {
+   "Heat Wave": 99.6,
+   "Protect": 99.2,
+   "Overheat": 72.9,
+   "Hyper Voice": 30.9
+  },
+  "items": {
+   "Pyroarite": 99.9
+  },
+  "abilities": {
+   "Unnerve": 88.5,
+   "Moxie": 6.4
+  },
+  "spreads": {
+   "2/0/0/32/0/32": 52,
+   "0/0/0/32/2/32": 7.9,
+   "7/0/0/32/0/27": 5.2,
+   "0/0/1/32/1/32": 2.5
+  },
+  "natures": {
+   "Timid": 57.3,
+   "Modest": 38.6,
+   "Rash": 2.4,
+   "Bold": 1.1
+  },
+  "teammates": [
+   "Whimsicott",
+   "Garchomp",
+   "Kingambit",
+   "Basculegion",
+   "Staraptor",
+   "Farigiraf"
+  ]
+ },
+ "delphox": {
+  "winrate": 52.2,
+  "moves": {
+   "Protect": 98.6,
+   "Heat Wave": 98.6,
+   "Nasty Plot": 74,
+   "Psychic": 52.5
+  },
+  "items": {
+   "Delphoxite": 99.9,
+   "Pyroarite": 0.1,
+   "Choice Scarf": 0.1
+  },
+  "abilities": {
+   "Blaze": 93.2,
+   "Magician": 6.8
+  },
+  "spreads": {
+   "2/0/0/32/0/32": 15.2,
+   "19/0/1/17/0/29": 11.3,
+   "11/0/4/19/0/32": 4.2,
+   "16/0/21/0/0/29": 4.2
+  },
+  "natures": {
+   "Timid": 86,
+   "Modest": 12.8,
+   "Bold": 1.2
+  },
+  "teammates": [
+   "Sinistcha",
+   "Incineroar",
+   "Staraptor",
+   "Garchomp",
+   "Grimmsnarl",
+   "Kingambit"
+  ]
+ },
+ "tauros-paldea-aqua": {
+  "winrate": 27.8,
+  "moves": {
+   "Protect": 98.2,
+   "Aqua Jet": 92.9,
+   "Close Combat": 75,
+   "Wave Crash": 54.5
+  },
+  "items": {
+   "Sitrus Berry": 26.8,
+   "Life Orb": 21.4,
+   "Mystic Water": 17.9
+  },
+  "abilities": {
+   "Intimidate": 78.6,
+   "Anger Point": 21.4
+  },
+  "spreads": {
+   "32/10/0/0/10/14": 21.4,
+   "5/32/0/0/0/29": 19.6,
+   "2/32/0/0/0/32": 17,
+   "1/32/1/0/0/32": 10.7
+  },
+  "natures": {
+   "Adamant": 75.9,
+   "Jolly": 11.6,
+   "Naughty": 10.7,
+   "Brave": 0.9
+  },
+  "teammates": [
+   "Raichu",
+   "Whimsicott",
+   "Farigiraf",
+   "Aerodactyl",
+   "Ninetales",
+   "Pinsir"
+  ]
+ },
+ "lucario": {
+  "winrate": 37,
+  "moves": {
+   "Close Combat": 42.3,
+   "Protect": 41.8,
+   "Final Gambit": 36.8,
+   "Bullet Punch": 31.8
+  },
+  "items": {
+   "Lucarionite": 44.1,
+   "Choice Scarf": 36.4,
+   "Expert Belt": 10
+  },
+  "abilities": {
+   "Inner Focus": 80.5,
+   "Steadfast": 10.5
+  },
+  "spreads": {
+   "32/0/0/2/0/32": 20.5,
+   "2/32/0/0/0/32": 10,
+   "2/15/18/0/0/31": 9.5,
+   "2/0/0/32/0/32": 9.1
+  },
+  "natures": {
+   "Timid": 40,
+   "Jolly": 40,
+   "Adamant": 7.3,
+   "Modest": 6.8
+  },
+  "teammates": [
+   "Sinistcha",
+   "Farigiraf",
+   "Staraptor",
+   "Sylveon",
+   "Sableye",
+   "Garchomp"
+  ]
+ },
+ "wyrdeer": {
+  "winrate": 42.7,
+  "moves": {
+   "Trick Room": 72.8,
+   "Psyshield Bash": 64.9,
+   "Skill Swap": 46.6,
+   "Hypnosis": 34.6
+  },
+  "items": {
+   "Colbur Berry": 34,
+   "Sitrus Berry": 31.9,
+   "Mental Herb": 27.7
+  },
+  "abilities": {
+   "Intimidate": 75.9,
+   "Sap Sipper": 24.1
+  },
+  "spreads": {
+   "28/2/8/0/21/7": 25.7,
+   "20/0/21/0/25/0": 12.6,
+   "22/0/18/10/16/0": 12,
+   "32/32/2/0/0/0": 12
+  },
+  "natures": {
+   "Careful": 30.9,
+   "Adamant": 23.6,
+   "Relaxed": 21.5,
+   "Calm": 12.6
+  },
+  "teammates": [
+   "Sneasler",
+   "Milotic",
+   "Kingambit",
+   "Sinistcha",
+   "Charizard",
+   "Sylveon"
+  ]
+ },
+ "victreebel": {
+  "winrate": 43,
+  "moves": {
+   "Protect": 100,
+   "Sucker Punch": 100,
+   "Poison Jab": 100,
+   "Power Whip": 100
+  },
+  "items": {
+   "Victreebelite": 100
+  },
+  "abilities": {
+   "Chlorophyll": 100
+  },
+  "spreads": {
+   "32/32/0/0/0/2": 100
+  },
+  "natures": {
+   "Naughty": 63,
+   "Lonely": 37
+  },
+  "teammates": [
+   "Azumarill",
+   "Sableye",
+   "Sharpedo",
+   "Lucario",
+   "Incineroar"
+  ]
+ },
+ "malamar": {
+  "winrate": 39.8,
+  "moves": {
+   "Superpower": 94.1,
+   "Protect": 78.9,
+   "Knock Off": 72.7,
+   "Psycho Cut": 46.3
+  },
+  "items": {
+   "Malamarite": 78.9,
+   "Mental Herb": 5.9,
+   "Roseli Berry": 5.7
+  },
+  "abilities": {
+   "Contrary": 100
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 16.4,
+   "32/32/2/0/0/0": 10.2,
+   "32/32/0/0/2/0": 8.8,
+   "32/0/2/0/32/0": 6.7
+  },
+  "natures": {
+   "Adamant": 37.1,
+   "Jolly": 19,
+   "Brave": 14.7,
+   "Careful": 9.5
+  },
+  "teammates": [
+   "Sinistcha",
+   "Grimmsnarl",
+   "Incineroar",
+   "Pelipper",
+   "Whimsicott",
+   "Basculegion"
+  ]
+ },
+ "blastoise": {
+  "winrate": 53.3,
+  "moves": {
+   "Water Spout": 93.4,
+   "Dark Pulse": 83.4,
+   "Aura Sphere": 60,
+   "Fake Out": 57.6
+  },
+  "items": {
+   "Blastoisinite": 96.2,
+   "Mystic Water": 2.4,
+   "Leftovers": 1
+  },
+  "abilities": {
+   "Rain Dish": 71.6,
+   "Torrent": 28.4
+  },
+  "spreads": {
+   "32/0/2/32/0/0": 21.4,
+   "2/0/0/32/0/32": 18.9,
+   "32/0/0/32/2/0": 7.1,
+   "32/0/1/32/1/0": 4.9
+  },
+  "natures": {
+   "Modest": 64.5,
+   "Quiet": 32.9,
+   "Timid": 2.4,
+   "Brave": 0.1
+  },
+  "teammates": [
+   "Farigiraf",
+   "Basculegion",
+   "Torkoal",
+   "Sinistcha",
+   "Sylveon",
+   "Vivillon"
+  ]
+ },
+ "vileplume": {
+  "winrate": 49,
+  "moves": {
+   "Sleep Powder": 78,
+   "Sludge Bomb": 73.8,
+   "After You": 60.7,
+   "Protect": 39.3
+  },
+  "items": {
+   "Wide Lens": 45,
+   "Life Orb": 26.2,
+   "Focus Sash": 18.3
+  },
+  "abilities": {
+   "Chlorophyll": 88.5,
+   "Effect Spore": 11.5
+  },
+  "spreads": {
+   "2/0/0/32/0/32": 55.5,
+   "32/0/0/0/20/14": 14.7,
+   "1/0/0/32/0/32": 8.4,
+   "32/0/25/0/9/0": 5.8
+  },
+  "natures": {
+   "Timid": 69.1,
+   "Calm": 14.7,
+   "Sassy": 5.8,
+   "Modest": 4.7
+  },
+  "teammates": [
+   "Torkoal",
+   "Raichu",
+   "Heliolisk",
+   "Farigiraf",
+   "Meowscarada",
+   "Armarouge"
+  ]
+ },
+ "meowscarada": {
+  "winrate": 41.4,
+  "moves": {
+   "Flower Trick": 97.4,
+   "Triple Axel": 85.2,
+   "Knock Off": 63,
+   "Sucker Punch": 37.3
+  },
+  "items": {
+   "Choice Scarf": 52.6,
+   "Focus Sash": 24.6,
+   "Life Orb": 13.9
+  },
+  "abilities": {
+   "Protean": 83.6,
+   "Overgrow": 16.4
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 45.2,
+   "0/32/2/0/2/30": 10,
+   "0/32/2/0/0/32": 8.5,
+   "0/32/1/0/1/32": 5.3
+  },
+  "natures": {
+   "Adamant": 53.2,
+   "Jolly": 38.7,
+   "Naive": 4,
+   "Modest": 2.6
+  },
+  "teammates": [
+   "Raichu",
+   "Sneasler",
+   "Whimsicott",
+   "Basculegion",
+   "Pelipper",
+   "Staraptor"
+  ]
+ },
+ "heliolisk": {
+  "winrate": 35.7,
+  "moves": {
+   "Protect": 73.2,
+   "Thunderbolt": 54,
+   "Dragon Pulse": 31.4,
+   "Hyper Voice": 31
+  },
+  "items": {
+   "Focus Sash": 36.4,
+   "Choice Scarf": 19.7,
+   "Life Orb": 14.2
+  },
+  "abilities": {
+   "Dry Skin": 77.8,
+   "Solar Power": 22.2
+  },
+  "spreads": {
+   "2/0/0/32/0/32": 64.4,
+   "0/0/0/32/1/32": 9.2,
+   "31/0/4/0/0/31": 7.1,
+   "8/0/0/32/0/26": 4.6
+  },
+  "natures": {
+   "Timid": 61.5,
+   "Modest": 38.5
+  },
+  "teammates": [
+   "Raichu",
+   "Vileplume",
+   "Pelipper",
+   "Sylveon",
+   "Torkoal",
+   "Froslass"
+  ]
+ },
+ "oranguru": {
+  "winrate": 40.9,
+  "moves": {
+   "Trick Room": 96.9,
+   "Instruct": 88.4,
+   "Protect": 47,
+   "Psychic": 39.2
+  },
+  "items": {
+   "Mental Herb": 56.7,
+   "Colbur Berry": 28.2,
+   "Sitrus Berry": 9.1
+  },
+  "abilities": {
+   "Inner Focus": 69.6,
+   "Telepathy": 30.4
+  },
+  "spreads": {
+   "32/0/32/0/0/2": 22.6,
+   "32/0/32/0/2/0": 14.4,
+   "29/0/6/29/2/0": 10.3,
+   "31/0/23/0/10/2": 8.2
+  },
+  "natures": {
+   "Relaxed": 35.7,
+   "Sassy": 30.1,
+   "Quiet": 11.3,
+   "Calm": 10
+  },
+  "teammates": [
+   "Torkoal",
+   "Sylveon",
+   "Glalie",
+   "Sinistcha",
+   "Mudsdale",
+   "Camerupt"
+  ]
+ },
+ "hatterene": {
+  "winrate": 36.6,
+  "moves": {
+   "Dazzling Gleam": 99.7,
+   "Trick Room": 87.2,
+   "Protect": 81.7,
+   "Psychic": 51.2
+  },
+  "items": {
+   "Life Orb": 48,
+   "Fairy Feather": 25.6,
+   "Focus Sash": 15.1
+  },
+  "abilities": {
+   "Magic Bounce": 98,
+   "Healer": 1.5
+  },
+  "spreads": {
+   "32/0/2/32/0/0": 37.8,
+   "32/0/0/32/2/0": 10.5,
+   "28/0/5/32/1/0": 8.4,
+   "27/0/3/32/4/0": 5.8
+  },
+  "natures": {
+   "Quiet": 91.6,
+   "Modest": 4.4,
+   "Relaxed": 1.7,
+   "Calm": 1.5
+  },
+  "teammates": [
+   "Farigiraf",
+   "Torkoal",
+   "Incineroar",
+   "Kingambit",
+   "Camerupt",
+   "Mawile"
+  ]
+ },
+ "araquanid": {
+  "winrate": 45.3,
+  "moves": {
+   "Liquidation": 93.3,
+   "Wide Guard": 86.7,
+   "Protect": 62.7,
+   "Leech Life": 29.3
+  },
+  "items": {
+   "Mystic Water": 64,
+   "Sitrus Berry": 14.7,
+   "Life Orb": 8
+  },
+  "abilities": {
+   "Water Bubble": 100
+  },
+  "spreads": {
+   "32/32/0/0/2/0": 26,
+   "32/32/2/0/0/0": 26,
+   "26/26/0/0/14/0": 8,
+   "15/32/13/0/6/0": 5.3
+  },
+  "natures": {
+   "Brave": 62,
+   "Adamant": 21.3,
+   "Sassy": 6.7,
+   "Quiet": 4.7
+  },
+  "teammates": [
+   "Farigiraf",
+   "Mawile",
+   "Kingambit",
+   "Sinistcha",
+   "Archaludon",
+   "Swampert"
+  ]
+ },
+ "hippowdon": {
+  "winrate": 43.4,
+  "moves": {
+   "Protect": 80.6,
+   "High Horsepower": 66.7,
+   "Rock Tomb": 65.3,
+   "Yawn": 50
+  },
+  "items": {
+   "Leftovers": 58.3,
+   "Sitrus Berry": 23.6,
+   "Zoom Lens": 18.1
+  },
+  "abilities": {
+   "Sand Stream": 100
+  },
+  "spreads": {
+   "32/0/2/0/32/0": 50,
+   "32/12/22/0/0/0": 22.2,
+   "32/2/32/0/0/0": 9.7,
+   "32/21/13/0/0/0": 9.7
+  },
+  "natures": {
+   "Impish": 75,
+   "Relaxed": 23.6,
+   "Careful": 1.4
+  },
+  "teammates": [
+   "Gengar",
+   "Dragonite",
+   "Incineroar",
+   "Kingambit",
+   "Annihilape",
+   "Raichu"
+  ]
+ },
+ "mimikyu": {
+  "winrate": 41.8,
+  "moves": {
+   "Play Rough": 88.8,
+   "Shadow Sneak": 81.3,
+   "Trick Room": 54.4,
+   "Shadow Claw": 42.5
+  },
+  "items": {
+   "Life Orb": 49.4,
+   "Mental Herb": 22.5,
+   "Spell Tag": 14.4
+  },
+  "abilities": {
+   "Disguise": 100
+  },
+  "spreads": {
+   "32/32/2/0/0/0": 28.1,
+   "2/32/0/0/0/32": 22.5,
+   "32/32/0/0/0/2": 13.1,
+   "1/32/1/0/0/32": 10.6
+  },
+  "natures": {
+   "Adamant": 75.6,
+   "Brave": 9.4,
+   "Sassy": 7.5,
+   "Modest": 3.1
+  },
+  "teammates": [
+   "Dragonite",
+   "Torkoal",
+   "Tyranitar",
+   "Mawile",
+   "Sylveon",
+   "Kingambit"
+  ]
+ },
+ "slowking-galar": {
+  "winrate": 43.7,
+  "moves": {
+   "Trick Room": 85.6,
+   "Acid Spray": 59.8,
+   "Psychic": 45.5,
+   "Rain Dance": 30.3
+  },
+  "items": {
+   "Mental Herb": 29.5,
+   "Colbur Berry": 25.8,
+   "Sitrus Berry": 25
+  },
+  "abilities": {
+   "Regenerator": 100
+  },
+  "spreads": {
+   "32/0/32/0/2/0": 22.7,
+   "32/0/31/0/3/0": 18.2,
+   "32/0/14/0/20/0": 17.4,
+   "32/0/0/32/2/0": 9.1
+  },
+  "natures": {
+   "Relaxed": 46.2,
+   "Sassy": 25.8,
+   "Quiet": 15.9,
+   "Bold": 10.6
+  },
+  "teammates": [
+   "Pelipper",
+   "Sinistcha",
+   "Archaludon",
+   "Blastoise",
+   "Malamar",
+   "Kingambit"
+  ]
+ },
+ "torterra": {
+  "winrate": 44,
+  "moves": {
+   "Headlong Rush": 78.1,
+   "Wide Guard": 76.6,
+   "Wood Hammer": 75,
+   "Stone Edge": 70.3
+  },
+  "items": {
+   "Life Orb": 70.3,
+   "White Herb": 21.9,
+   "Sitrus Berry": 4.7
+  },
+  "abilities": {
+   "Overgrow": 70.3,
+   "Shell Armor": 29.7
+  },
+  "spreads": {
+   "27/32/1/5/1/0": 70.3,
+   "11/0/0/28/0/27": 18.8,
+   "32/21/13/0/0/0": 6.3,
+   "32/0/2/0/32/0": 3.1
+  },
+  "natures": {
+   "Brave": 70.3,
+   "Modest": 18.8,
+   "Adamant": 7.8,
+   "Impish": 3.1
+  },
+  "teammates": [
+   "Farigiraf",
+   "Blastoise",
+   "Pelipper",
+   "Toxicroak",
+   "Sylveon",
+   "Sinistcha"
+  ]
+ },
+ "aurorus": {
+  "winrate": 40,
+  "moves": {
+   "Blizzard": 91.4,
+   "Freeze-Dry": 88.6,
+   "Ancient Power": 85.7,
+   "Protect": 51.4
+  },
+  "items": {
+   "Sitrus Berry": 45.7,
+   "Focus Sash": 40,
+   "Never-Melt Ice": 5.7
+  },
+  "abilities": {
+   "Snow Warning": 91.4,
+   "Refrigerate": 8.6
+  },
+  "spreads": {
+   "8/0/8/32/18/0": 45.7,
+   "2/0/0/32/32/0": 34.3,
+   "3/0/8/31/18/6": 5.7,
+   "32/0/3/31/0/0": 5.7
+  },
+  "natures": {
+   "Quiet": 91.4,
+   "Modest": 8.6
+  },
+  "teammates": [
+   "Sylveon",
+   "Farigiraf",
+   "Kingambit",
+   "Blastoise",
+   "Gengar",
+   "Gallade"
+  ]
+ },
+ "avalugg": {
+  "winrate": 16.7,
+  "moves": {
+   "Recover": 100,
+   "Wide Guard": 100,
+   "Body Press": 100,
+   "Ice Spinner": 100
+  },
+  "items": {
+   "Leftovers": 100
+  },
+  "abilities": {
+   "Sturdy": 100
+  },
+  "spreads": {
+   "32/0/6/0/28/0": 100
+  },
+  "natures": {
+   "Relaxed": 100
+  },
+  "teammates": [
+   "Blastoise",
+   "Slowking-Galar",
+   "Torkoal",
+   "Torterra",
+   "Appletun"
+  ]
+ },
+ "palafin": {
+  "winrate": 45.9,
+  "moves": {
+   "Jet Punch": 100,
+   "Wave Crash": 91.8,
+   "Protect": 74.7,
+   "Close Combat": 56
+  },
+  "items": {
+   "Mystic Water": 65,
+   "Leftovers": 16.7,
+   "Life Orb": 7.4
+  },
+  "abilities": {
+   "Zero to Hero": 100
+  },
+  "spreads": {
+   "32/32/0/0/0/2": 39.7,
+   "2/32/0/0/0/32": 9.7,
+   "32/32/2/0/0/0": 9.3,
+   "32/32/0/0/2/0": 7
+  },
+  "natures": {
+   "Adamant": 77.4,
+   "Jolly": 10.1,
+   "Naughty": 5.1,
+   "Brave": 4.7
+  },
+  "teammates": [
+   "Incineroar",
+   "Sinistcha",
+   "Sneasler",
+   "Kingambit",
+   "Froslass",
+   "Kommo-o"
+  ]
+ },
+ "froslass": {
+  "winrate": 54.3,
+  "moves": {
+   "Blizzard": 98.9,
+   "Protect": 96.3,
+   "Shadow Ball": 86,
+   "Aurora Veil": 80.2
+  },
+  "items": {
+   "Froslassite": 99.6,
+   "Focus Sash": 0.2,
+   "Never-Melt Ice": 0.1
+  },
+  "abilities": {
+   "Cursed Body": 79,
+   "Snow Cloak": 21
+  },
+  "spreads": {
+   "2/0/0/32/0/32": 21.5,
+   "32/0/0/2/0/32": 7.3,
+   "12/0/1/20/1/32": 4.3,
+   "0/0/0/32/0/32": 2.9
+  },
+  "natures": {
+   "Timid": 59.3,
+   "Modest": 39.3,
+   "Calm": 0.9,
+   "Mild": 0.2
+  },
+  "teammates": [
+   "Kingambit",
+   "Sneasler",
+   "Basculegion",
+   "Garchomp",
+   "Incineroar",
+   "Whimsicott"
+  ]
+ },
+ "lycanroc-dusk": {
+  "winrate": 58.6,
+  "moves": {
+   "Accelerock": 100,
+   "Protect": 94.6,
+   "Close Combat": 94.6,
+   "Rock Slide": 93.7
+  },
+  "items": {
+   "Focus Sash": 84.5,
+   "Hard Stone": 7.5,
+   "Life Orb": 5.1
+  },
+  "abilities": {
+   "Tough Claws": 100
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 47.5,
+   "0/32/0/0/2/32": 23.6,
+   "0/32/2/0/0/32": 11,
+   "0/32/1/0/1/32": 9
+  },
+  "natures": {
+   "Adamant": 83.3,
+   "Jolly": 15.2,
+   "Timid": 0.6,
+   "Naughty": 0.6
+  },
+  "teammates": [
+   "Sneasler",
+   "Froslass",
+   "Kingambit",
+   "Basculegion",
+   "Scovillain",
+   "Metagross"
+  ]
+ },
+ "glalie": {
+  "winrate": 51.3,
+  "moves": {
+   "Explosion": 100,
+   "Protect": 100,
+   "Taunt": 64.7,
+   "Body Slam": 54.1
+  },
+  "items": {
+   "Glalitite": 100
+  },
+  "abilities": {
+   "Inner Focus": 100
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 57.6,
+   "0/32/0/0/2/32": 42.4
+  },
+  "natures": {
+   "Jolly": 61.2,
+   "Adamant": 38.8
+  },
+  "teammates": [
+   "Oranguru",
+   "Sylveon",
+   "Torkoal",
+   "Mudsdale",
+   "Clefable",
+   "Rhyperior"
+  ]
+ },
+ "samurott-hisui": {
+  "winrate": 51.4,
+  "moves": {
+   "Sacred Sword": 75.1,
+   "Aqua Cutter": 70.3,
+   "Ceaseless Edge": 52.6,
+   "Night Slash": 49.8
+  },
+  "items": {
+   "Focus Sash": 31.1,
+   "Life Orb": 21.1,
+   "Black Glasses": 18.7
+  },
+  "abilities": {
+   "Sharpness": 100
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 39.2,
+   "0/32/0/0/28/6": 16.7,
+   "20/32/0/0/0/14": 14.8,
+   "0/32/0/0/2/32": 9.6
+  },
+  "natures": {
+   "Adamant": 78.9,
+   "Jolly": 20.6,
+   "Brave": 0.5
+  },
+  "teammates": [
+   "Sneasler",
+   "Talonflame",
+   "Sinistcha",
+   "Metagross",
+   "Staraptor",
+   "Gardevoir"
+  ]
+ },
+ "gardevoir": {
+  "winrate": 49.6,
+  "moves": {
+   "Hyper Voice": 89.6,
+   "Protect": 88.8,
+   "Psychic": 47.8,
+   "Psyshock": 42.4
+  },
+  "items": {
+   "Gardevoirite": 89.9,
+   "Choice Scarf": 7.3,
+   "Shell Bell": 0.9
+  },
+  "abilities": {
+   "Trace": 72.5,
+   "Telepathy": 25.8
+  },
+  "spreads": {
+   "2/0/0/32/0/32": 19.8,
+   "32/0/2/32/0/0": 10.6,
+   "32/0/1/32/0/1": 4.9,
+   "16/0/2/32/0/16": 3.8
+  },
+  "natures": {
+   "Modest": 85.2,
+   "Timid": 12.2,
+   "Quiet": 2.2,
+   "Calm": 0.2
+  },
+  "teammates": [
+   "Maushold",
+   "Basculegion",
+   "Garchomp",
+   "Incineroar",
+   "Talonflame",
+   "Pelipper"
+  ]
+ },
+ "pinsir": {
+  "winrate": 50,
+  "moves": {
+   "Protect": 100,
+   "Body Slam": 100,
+   "Feint": 100,
+   "Storm Throw": 59
+  },
+  "items": {
+   "Pinsirite": 100
+  },
+  "abilities": {
+   "Hyper Cutter": 89.7,
+   "Mold Breaker": 10.3
+  },
+  "spreads": {
+   "32/0/2/0/0/32": 56.4,
+   "3/32/0/0/0/31": 41,
+   "0/32/2/0/0/32": 2.6
+  },
+  "natures": {
+   "Jolly": 59,
+   "Adamant": 41
+  },
+  "teammates": [
+   "Tauros-Paldea-Aqua",
+   "Farigiraf",
+   "Whimsicott",
+   "Talonflame",
+   "Raichu",
+   "Garchomp"
+  ]
+ },
+ "goodra-hisui": {
+  "winrate": 39.6,
+  "moves": {
+   "Body Press": 63.6,
+   "Shelter": 63.6,
+   "Flash Cannon": 53.3,
+   "Protect": 47.7
+  },
+  "items": {
+   "Leftovers": 63.6,
+   "Expert Belt": 20.6,
+   "Scope Lens": 10.3
+  },
+  "abilities": {
+   "Sap Sipper": 35.5,
+   "Shell Armor": 32.7
+  },
+  "spreads": {
+   "32/0/32/0/2/0": 50.5,
+   "23/0/0/23/20/0": 20.6,
+   "32/0/19/0/14/1": 10.3,
+   "20/0/32/0/14/0": 8.4
+  },
+  "natures": {
+   "Relaxed": 32.7,
+   "Bold": 21.5,
+   "Calm": 20.6,
+   "Careful": 10.3
+  },
+  "teammates": [
+   "Raichu",
+   "Sinistcha",
+   "Incineroar",
+   "Staraptor",
+   "Sylveon",
+   "Mawile"
+  ]
+ },
+ "sharpedo": {
+  "winrate": 46.3,
+  "moves": {
+   "Protect": 100,
+   "Crunch": 94.1,
+   "Psychic Fangs": 70.3,
+   "Destiny Bond": 32.7
+  },
+  "items": {
+   "Sharpedonite": 71.3,
+   "Focus Sash": 28.7
+  },
+  "abilities": {
+   "Speed Boost": 100
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 39.6,
+   "7/32/0/0/0/27": 22.8,
+   "4/30/0/0/0/32": 15.8,
+   "0/32/0/0/0/32": 12.9
+  },
+  "natures": {
+   "Adamant": 66.3,
+   "Jolly": 28.7,
+   "Naughty": 5
+  },
+  "teammates": [
+   "Sableye",
+   "Sylveon",
+   "Incineroar",
+   "Charizard",
+   "Victreebel",
+   "Azumarill"
+  ]
+ },
+ "volcarona": {
+  "winrate": 49.3,
+  "moves": {
+   "Heat Wave": 65.5,
+   "Quiver Dance": 65.2,
+   "Protect": 61.8,
+   "Rage Powder": 51.9
+  },
+  "items": {
+   "Leftovers": 45.2,
+   "Sitrus Berry": 33.3,
+   "Charti Berry": 5.1
+  },
+  "abilities": {
+   "Flame Body": 99.3,
+   "Swarm": 0.7
+  },
+  "spreads": {
+   "32/0/32/1/0/1": 9.4,
+   "32/0/25/1/1/7": 6.3,
+   "31/0/32/0/0/3": 5.6,
+   "28/0/15/0/1/22": 5.3
+  },
+  "natures": {
+   "Bold": 39.4,
+   "Modest": 28,
+   "Timid": 24.6,
+   "Calm": 8
+  },
+  "teammates": [
+   "Garchomp",
+   "Basculegion",
+   "Raichu",
+   "Whimsicott",
+   "Staraptor",
+   "Grimmsnarl"
+  ]
+ },
+ "quaquaval": {
+  "winrate": 44.9,
+  "moves": {
+   "Close Combat": 100,
+   "Protect": 70,
+   "Aqua Step": 70,
+   "Triple Axel": 40
+  },
+  "items": {
+   "Life Orb": 60,
+   "Mystic Water": 30,
+   "Focus Sash": 10
+  },
+  "abilities": {
+   "Moxie": 100
+  },
+  "spreads": {
+   "2/32/32/0/0/0": 40,
+   "2/32/0/0/0/32": 30,
+   "32/10/5/0/10/9": 30
+  },
+  "natures": {
+   "Adamant": 70,
+   "Jolly": 30
+  },
+  "teammates": [
+   "Raichu",
+   "Incineroar",
+   "Pelipper",
+   "Archaludon",
+   "Swampert",
+   "Basculegion"
+  ]
+ },
+ "camerupt": {
+  "winrate": 47.1,
+  "moves": {
+   "Earth Power": 99.1,
+   "Protect": 86.8,
+   "Heat Wave": 68,
+   "Ancient Power": 66
+  },
+  "items": {
+   "Cameruptite": 97.5,
+   "Choice Scarf": 2.3,
+   "Wise Glasses": 0.2
+  },
+  "abilities": {
+   "Solid Rock": 96.6,
+   "Magma Armor": 2.3
+  },
+  "spreads": {
+   "32/0/2/32/0/0": 49,
+   "32/0/0/32/2/0": 12.2,
+   "30/0/4/32/0/0": 9.5,
+   "32/0/1/32/1/0": 9.5
+  },
+  "natures": {
+   "Quiet": 89.6,
+   "Modest": 7.9,
+   "Timid": 1.4,
+   "Jolly": 0.9
+  },
+  "teammates": [
+   "Farigiraf",
+   "Kingambit",
+   "Sylveon",
+   "Sinistcha",
+   "Incineroar",
+   "Blastoise"
+  ]
+ },
+ "medicham": {
+  "winrate": 41.7,
+  "moves": {
+   "Fake Out": 100,
+   "Close Combat": 100,
+   "Poison Jab": 73.7,
+   "Rock Slide": 61
+  },
+  "items": {
+   "Medichamite": 76.3,
+   "Focus Sash": 12.7,
+   "Iron Ball": 11
+  },
+  "abilities": {
+   "Pure Power": 98.3,
+   "Telepathy": 1.7
+  },
+  "spreads": {
+   "32/32/1/0/1/0": 42.4,
+   "2/32/0/0/0/32": 28,
+   "0/30/0/0/4/32": 14.4,
+   "16/32/0/0/0/18": 8.5
+  },
+  "natures": {
+   "Brave": 46.6,
+   "Jolly": 30.5,
+   "Adamant": 22.9
+  },
+  "teammates": [
+   "Torkoal",
+   "Farigiraf",
+   "Hatterene",
+   "Kingambit",
+   "Basculegion",
+   "Scrafty"
+  ]
+ },
+ "toxicroak": {
+  "winrate": 35,
+  "moves": {
+   "Fake Out": 100,
+   "Close Combat": 93.6,
+   "Sucker Punch": 82.1,
+   "Poison Jab": 60.3
+  },
+  "items": {
+   "Focus Sash": 75.6,
+   "White Herb": 11.5,
+   "Expert Belt": 10.3
+  },
+  "abilities": {
+   "Poison Touch": 51.3,
+   "Dry Skin": 48.7
+  },
+  "spreads": {
+   "27/32/1/0/1/5": 51.3,
+   "1/32/1/0/0/32": 29.5,
+   "32/32/1/0/1/0": 10.3,
+   "2/32/0/0/0/32": 5.1
+  },
+  "natures": {
+   "Adamant": 59,
+   "Jolly": 29.5,
+   "Brave": 10.3,
+   "Careful": 1.3
+  },
+  "teammates": [
+   "Blastoise",
+   "Farigiraf",
+   "Pelipper",
+   "Torterra",
+   "Mawile",
+   "Sylveon"
+  ]
+ },
+ "gyarados": {
+  "winrate": 48.6,
+  "moves": {
+   "Waterfall": 98.6,
+   "Protect": 79.7,
+   "Dragon Dance": 68.8,
+   "Crunch": 33.3
+  },
+  "items": {
+   "Gyaradosite": 61,
+   "Sitrus Berry": 28.8,
+   "Leftovers": 4.5
+  },
+  "abilities": {
+   "Intimidate": 99.4,
+   "Moxie": 0.6
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 18.7,
+   "19/15/1/0/1/30": 8,
+   "9/26/4/0/6/21": 5.8,
+   "19/24/1/0/1/21": 4.9
+  },
+  "natures": {
+   "Adamant": 52.4,
+   "Jolly": 30.4,
+   "Careful": 14.8,
+   "Lonely": 1
+  },
+  "teammates": [
+   "Sneasler",
+   "Garchomp",
+   "Sinistcha",
+   "Raichu",
+   "Kingambit",
+   "Metagross"
+  ]
+ },
+ "infernape": {
+  "winrate": 40.3,
+  "moves": {
+   "Fire Punch": 93.8,
+   "Drain Punch": 81.3,
+   "Thunder Punch": 81.3,
+   "Swords Dance": 75
+  },
+  "items": {
+   "Focus Sash": 81.3,
+   "Life Orb": 12.5,
+   "Choice Scarf": 6.3
+  },
+  "abilities": {
+   "Iron Fist": 93.8,
+   "Blaze": 6.3
+  },
+  "spreads": {
+   "1/32/0/0/0/32": 75,
+   "2/32/0/0/0/32": 12.5,
+   "2/0/0/32/0/32": 6.3,
+   "13/32/0/0/0/21": 6.3
+  },
+  "natures": {
+   "Jolly": 87.5,
+   "Modest": 6.3,
+   "Adamant": 6.3
+  },
+  "teammates": [
+   "Sinistcha",
+   "Gyarados",
+   "Torterra",
+   "Liepard",
+   "Malamar",
+   "Ninetales-Alola"
+  ]
+ },
+ "liepard": {
+  "winrate": 38.1,
+  "moves": {
+   "Fake Out": 98.6,
+   "Charm": 67.1,
+   "Encore": 59.4,
+   "Fake Tears": 43.4
+  },
+  "items": {
+   "Focus Sash": 63.6,
+   "Chople Berry": 34.3,
+   "Roseli Berry": 1.4
+  },
+  "abilities": {
+   "Prankster": 100
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 28.7,
+   "16/0/32/0/18/0": 21.7,
+   "32/0/1/0/1/32": 14,
+   "32/0/32/0/0/0": 8.4
+  },
+  "natures": {
+   "Jolly": 39.2,
+   "Bold": 21.7,
+   "Timid": 16.1,
+   "Impish": 9.1
+  },
+  "teammates": [
+   "Sinistcha",
+   "Staraptor",
+   "Basculegion",
+   "Raichu",
+   "Garchomp",
+   "Whimsicott"
+  ]
+ },
+ "chimecho": {
+  "winrate": 36.5,
+  "moves": {
+   "Psychic": 80,
+   "Trick Room": 68.6,
+   "Protect": 62.9,
+   "Flash Cannon": 62.9
+  },
+  "items": {
+   "Chimechite": 100
+  },
+  "abilities": {
+   "Levitate": 100
+  },
+  "spreads": {
+   "2/0/32/32/0/0": 42.9,
+   "32/0/22/0/12/0": 37.1,
+   "31/0/10/25/0/0": 20
+  },
+  "natures": {
+   "Modest": 62.9,
+   "Sassy": 37.1
+  },
+  "teammates": [
+   "Tyranitar",
+   "Rotom-Wash",
+   "Excadrill",
+   "Vanilluxe",
+   "Mimikyu",
+   "Raichu"
+  ]
+ },
+ "kommo-o": {
+  "winrate": 45.2,
+  "moves": {
+   "Clanging Scales": 95.7,
+   "Protect": 94.9,
+   "Clangorous Soul": 83.2,
+   "Aura Sphere": 79.2
+  },
+  "items": {
+   "Leftovers": 71.2,
+   "Dragon Fang": 14.1,
+   "Life Orb": 6.9
+  },
+  "abilities": {
+   "Soundproof": 80.6,
+   "Overcoat": 14.9
+  },
+  "spreads": {
+   "2/0/0/32/0/32": 11.1,
+   "1/3/0/30/0/32": 11,
+   "1/0/0/32/0/32": 9.4,
+   "30/0/2/10/0/24": 6.7
+  },
+  "natures": {
+   "Modest": 61.7,
+   "Timid": 22.3,
+   "Naive": 11,
+   "Impish": 3.6
+  },
+  "teammates": [
+   "Incineroar",
+   "Sinistcha",
+   "Metagross",
+   "Sneasler",
+   "Kingambit",
+   "Froslass"
+  ]
+ },
+ "rhyperior": {
+  "winrate": 36.2,
+  "moves": {
+   "Protect": 82.2,
+   "Rock Slide": 76.3,
+   "Earthquake": 63.2,
+   "High Horsepower": 46.7
+  },
+  "items": {
+   "Life Orb": 19.7,
+   "Quick Claw": 16.4,
+   "Metronome": 14.5
+  },
+  "abilities": {
+   "Lightning Rod": 52.6,
+   "Solid Rock": 46.7
+  },
+  "spreads": {
+   "32/32/0/0/2/0": 33.6,
+   "10/32/0/0/24/0": 14.5,
+   "31/10/0/0/25/0": 13.2,
+   "32/32/2/0/0/0": 11.8
+  },
+  "natures": {
+   "Brave": 61.8,
+   "Adamant": 29.6,
+   "Impish": 7.9,
+   "Sassy": 0.7
+  },
+  "teammates": [
+   "Staraptor",
+   "Charizard",
+   "Whimsicott",
+   "Sinistcha",
+   "Farigiraf",
+   "Torkoal"
+  ]
+ },
+ "klefki": {
+  "winrate": 47.5,
+  "moves": {
+   "Light Screen": 83.7,
+   "Reflect": 83.7,
+   "Rain Dance": 82.9,
+   "Foul Play": 37.4
+  },
+  "items": {
+   "Light Clay": 70.7,
+   "Mental Herb": 13.8,
+   "Wide Lens": 11.4
+  },
+  "abilities": {
+   "Prankster": 100
+  },
+  "spreads": {
+   "32/0/2/0/32/0": 25.2,
+   "32/0/9/1/23/1": 23.6,
+   "32/0/32/0/2/0": 11.4,
+   "32/0/9/0/25/0": 10.6
+  },
+  "natures": {
+   "Bold": 55.3,
+   "Calm": 44.7
+  },
+  "teammates": [
+   "Archaludon",
+   "Pelipper",
+   "Swampert",
+   "Sinistcha",
+   "Annihilape",
+   "Maushold"
+  ]
+ },
+ "empoleon": {
+  "winrate": 45.1,
+  "moves": {
+   "Protect": 97.6,
+   "Flash Cannon": 94,
+   "Ice Beam": 53,
+   "Hydro Pump": 41
+  },
+  "items": {
+   "Leftovers": 39.8,
+   "Mystic Water": 27.7,
+   "Sitrus Berry": 15.7
+  },
+  "abilities": {
+   "Competitive": 100
+  },
+  "spreads": {
+   "28/0/0/32/0/6": 27.7,
+   "32/0/0/19/0/15": 14.5,
+   "32/0/2/32/0/0": 13.3,
+   "21/0/0/32/3/10": 10.8
+  },
+  "natures": {
+   "Modest": 90.4,
+   "Quiet": 3.6,
+   "Bold": 3.6,
+   "Timid": 1.2
+  },
+  "teammates": [
+   "Raichu",
+   "Glimmora",
+   "Mawile",
+   "Toxicroak",
+   "Musharna",
+   "Whimsicott"
+  ]
+ },
+ "musharna": {
+  "winrate": 39,
+  "moves": {
+   "Trick Room": 100,
+   "Psychic": 100,
+   "Helping Hand": 90.5,
+   "Ally Switch": 81
+  },
+  "items": {
+   "Sitrus Berry": 64.3,
+   "Mental Herb": 26.2,
+   "Colbur Berry": 9.5
+  },
+  "abilities": {
+   "Telepathy": 92.9,
+   "Synchronize": 7.1
+  },
+  "spreads": {
+   "32/0/16/0/18/0": 85.7,
+   "2/0/0/32/32/0": 9.5,
+   "31/0/32/3/0/0": 4.8
+  },
+  "natures": {
+   "Relaxed": 90.5,
+   "Quiet": 9.5
+  },
+  "teammates": [
+   "Mawile",
+   "Tsareena",
+   "Empoleon",
+   "Toxicroak",
+   "Glimmora",
+   "Vileplume"
+  ]
+ },
+ "sceptile": {
+  "winrate": 36.9,
+  "moves": {
+   "Dragon Pulse": 99.1,
+   "Earth Power": 95.3,
+   "Detect": 57.3,
+   "Energy Ball": 46.3
+  },
+  "items": {
+   "Sceptilite": 98.2,
+   "Scovillainite": 0.7,
+   "White Herb": 0.4
+  },
+  "abilities": {
+   "Overgrow": 83.6,
+   "Unburden": 16.4
+  },
+  "spreads": {
+   "2/0/0/32/0/32": 50.1,
+   "0/0/2/32/0/32": 9.2,
+   "16/0/0/32/0/18": 6.7,
+   "2/0/8/24/0/32": 6.1
+  },
+  "natures": {
+   "Timid": 68.5,
+   "Modest": 31.2,
+   "Hasty": 0.2
+  },
+  "teammates": [
+   "Garchomp",
+   "Rotom-Heat",
+   "Rotom-Wash",
+   "Basculegion",
+   "Whimsicott",
+   "Aerodactyl"
+  ]
+ },
+ "greninja": {
+  "winrate": 34.3,
+  "moves": {
+   "Ice Beam": 73.8,
+   "Dark Pulse": 57.9,
+   "Protect": 56.3,
+   "Grass Knot": 26.2
+  },
+  "items": {
+   "Greninjite": 59.5,
+   "Life Orb": 22.2,
+   "Focus Sash": 11.1
+  },
+  "abilities": {
+   "Protean": 89.7,
+   "Torrent": 10.3
+  },
+  "spreads": {
+   "2/0/0/32/0/32": 38.1,
+   "3/0/0/32/0/31": 20.6,
+   "0/0/2/32/0/32": 4.8,
+   "8/0/0/32/0/26": 4.8
+  },
+  "natures": {
+   "Hasty": 28.6,
+   "Timid": 27.8,
+   "Naive": 23.8,
+   "Modest": 13.5
+  },
+  "teammates": [
+   "Whimsicott",
+   "Raichu",
+   "Kingambit",
+   "Scizor",
+   "Garchomp",
+   "Aerodactyl"
+  ]
+ },
+ "zoroark-hisui": {
+  "winrate": 40.9,
+  "moves": {
+   "Shadow Ball": 63.9,
+   "Hyper Voice": 54.5,
+   "Icy Wind": 52,
+   "Bitter Malice": 31
+  },
+  "items": {
+   "Choice Scarf": 46.2,
+   "Life Orb": 25.6,
+   "Focus Sash": 20.9
+  },
+  "abilities": {
+   "Illusion": 100
+  },
+  "spreads": {
+   "2/0/0/32/0/32": 60.6,
+   "0/0/1/32/1/32": 15.5,
+   "0/0/0/32/0/32": 5.4,
+   "1/0/1/32/0/32": 3.6
+  },
+  "natures": {
+   "Timid": 61,
+   "Modest": 33.6,
+   "Naive": 5.1,
+   "Hasty": 0.4
+  },
+  "teammates": [
+   "Whimsicott",
+   "Sneasler",
+   "Farigiraf",
+   "Aerodactyl",
+   "Garchomp",
+   "Kingambit"
+  ]
+ },
+ "decidueye-hisui": {
+  "winrate": 42.9,
+  "moves": {
+   "Protect": 98,
+   "Leaf Blade": 97.3,
+   "Triple Arrows": 96,
+   "Sucker Punch": 53
+  },
+  "items": {
+   "Scope Lens": 89.3,
+   "Sitrus Berry": 4.7,
+   "Life Orb": 3.4
+  },
+  "abilities": {
+   "Scrappy": 100
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 38.3,
+   "32/32/0/0/0/2": 27.5,
+   "0/32/2/0/0/32": 9.4,
+   "32/32/2/0/0/0": 9.4
+  },
+  "natures": {
+   "Adamant": 84.6,
+   "Brave": 11.4,
+   "Impish": 4
+  },
+  "teammates": [
+   "Whimsicott",
+   "Zoroark-Hisui",
+   "Aerodactyl",
+   "Charizard",
+   "Raichu",
+   "Maushold"
+  ]
+ },
+ "weavile": {
+  "winrate": 46.9,
+  "moves": {
+   "Fake Out": 98.1,
+   "Knock Off": 71.4,
+   "Triple Axel": 58.3,
+   "Protect": 38.3
+  },
+  "items": {
+   "Focus Sash": 65.5,
+   "Wide Lens": 17.5,
+   "King's Rock": 4.9
+  },
+  "abilities": {
+   "Pickpocket": 59.2,
+   "Pressure": 40.8
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 49.5,
+   "1/32/0/0/0/32": 13.6,
+   "0/32/2/0/0/32": 12.1,
+   "0/32/0/0/2/32": 5.3
+  },
+  "natures": {
+   "Jolly": 90.8,
+   "Adamant": 7.8,
+   "Naive": 1.5
+  },
+  "teammates": [
+   "Sinistcha",
+   "Whimsicott",
+   "Raichu",
+   "Archaludon",
+   "Garchomp",
+   "Pelipper"
+  ]
+ },
+ "rotom-heat": {
+  "winrate": 42.3,
+  "moves": {
+   "Overheat": 97.8,
+   "Volt Switch": 69.1,
+   "Will-O-Wisp": 48.6,
+   "Thunderbolt": 48.6
+  },
+  "items": {
+   "Choice Scarf": 69.5,
+   "Sitrus Berry": 20,
+   "Life Orb": 3.5
+  },
+  "abilities": {
+   "Levitate": 100
+  },
+  "spreads": {
+   "2/0/0/32/0/32": 33.8,
+   "12/0/0/29/0/25": 10,
+   "26/0/0/15/0/25": 7.4,
+   "0/0/4/30/0/32": 5.7
+  },
+  "natures": {
+   "Timid": 66.4,
+   "Modest": 26.6,
+   "Bold": 5.7,
+   "Calm": 1.3
+  },
+  "teammates": [
+   "Garchomp",
+   "Sceptile",
+   "Basculegion",
+   "Metagross",
+   "Sneasler",
+   "Staraptor"
+  ]
+ },
+ "blaziken": {
+  "winrate": 50.4,
+  "moves": {
+   "Close Combat": 72.5,
+   "Flare Blitz": 69.8,
+   "Protect": 50.7,
+   "Detect": 48.6
+  },
+  "items": {
+   "Blazikenite": 61.2,
+   "Focus Sash": 22.9,
+   "Life Orb": 7.6
+  },
+  "abilities": {
+   "Speed Boost": 96.9,
+   "Blaze": 3.1
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 39.3,
+   "2/0/0/32/0/32": 13.4,
+   "7/32/0/0/0/27": 5,
+   "0/32/2/0/0/32": 4.5
+  },
+  "natures": {
+   "Adamant": 69.6,
+   "Jolly": 11.5,
+   "Timid": 8.9,
+   "Modest": 7.9
+  },
+  "teammates": [
+   "Kingambit",
+   "Basculegion",
+   "Sinistcha",
+   "Whimsicott",
+   "Metagross",
+   "Garchomp"
+  ]
+ },
+ "starmie": {
+  "winrate": 42.1,
+  "moves": {
+   "Liquidation": 80.6,
+   "Aqua Jet": 66.3,
+   "Protect": 61.2,
+   "Psycho Cut": 40.8
+  },
+  "items": {
+   "Starminite": 83.7,
+   "Choice Scarf": 12.2,
+   "Leftovers": 4.1
+  },
+  "abilities": {
+   "Natural Cure": 86.7,
+   "Illuminate": 12.2
+  },
+  "spreads": {
+   "2/32/0/0/0/32": 80.6,
+   "13/0/0/32/0/21": 8.2,
+   "10/0/2/32/0/22": 4.1,
+   "32/0/18/1/15/0": 4.1
+  },
+  "natures": {
+   "Jolly": 54.1,
+   "Adamant": 28.6,
+   "Modest": 12.2,
+   "Calm": 4.1
+  },
+  "teammates": [
+   "Whimsicott",
+   "Kingambit",
+   "Raichu",
+   "Zoroark-Hisui",
+   "Kleavor",
+   "Decidueye-Hisui"
+  ]
+ }
+}

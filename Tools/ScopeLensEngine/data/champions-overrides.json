@@ -1,0 +1,13 @@
+{
+  "_note": "Champions-specific deltas vs the mainline dex (spec \u00a75 'Champions overrides layer'). ONLY entries genuinely missing from the pinned @pkmn/dex belong here \u2014 build-vocab.js merges them into vocab.json (dex entries win dedup). Cite the real footage that proved each entry.",
+  "_sightings": [
+    "Mega Staraptor + Staraptite \u2014 battle 3 (2026-07-02) narration. CONFIRMED ALREADY IN @pkmn/dex (Staraptor-Mega: Fighting/Flying, 140 Atk / 110 Spe) and @smogon/calc: Showdown carries Champions mega data, so no override needed. Early override entries (with guessed Normal/Flying types) were removed 2026-07-03 \u2014 dedup had harmlessly preferred the dex entries all along.",
+    "Mega Scrafty + Scraftinite \u2014 battle 4 (2026-07-03, first live Battle Log) narration. Also already in @pkmn/dex (Scrafty-Mega: Dark/Fighting, 130 Atk, Shed Skin) and @smogon/calc.",
+    "Mega Raichu Y + Raichunite Y \u2014 battle 8 (2026-07-10) live item reveal + mega evolution, tracked end-to-end. Also already in @pkmn/dex (verified), so calcs used real stats. No override needed.",
+    "Champions EPITHETS: send-out narrations can title a mon ('IDontPlayVGCsent out Garchomp of the Distant Past!' \u2014 battle 8). Not a vocab matter \u2014 the reconciler strips ' of the ...' at resolution (fixture 51); recorded here because more titles will appear."
+  ],
+  "species": [],
+  "items": [],
+  "moves": [],
+  "abilities": []
+}

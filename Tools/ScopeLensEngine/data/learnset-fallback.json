@@ -1,0 +1,7043 @@
+{
+ "bulbasaur": [
+  "Petal Dance",
+  "Sludge Bomb",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "ivysaur": [
+  "Petal Dance",
+  "Sludge Bomb",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "venusaur": [
+  "Petal Dance",
+  "Sludge Bomb",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "charmander": [
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "charmeleon": [
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "charizard": [
+  "Flare Blitz",
+  "Hurricane",
+  "Overheat",
+  "Protect"
+ ],
+ "squirtle": [
+  "Water Spout",
+  "Wave Crash",
+  "Protect"
+ ],
+ "wartortle": [
+  "Water Spout",
+  "Wave Crash",
+  "Protect"
+ ],
+ "blastoise": [
+  "Water Spout",
+  "Wave Crash",
+  "Protect"
+ ],
+ "caterpie": [
+  "Bug Bite",
+  "Electroweb"
+ ],
+ "metapod": [
+  "Bug Bite",
+  "Electroweb"
+ ],
+ "butterfree": [
+  "Bug Buzz",
+  "Hurricane",
+  "Pollen Puff",
+  "Protect"
+ ],
+ "weedle": [
+  "Bug Bite",
+  "Poison Sting",
+  "Electroweb"
+ ],
+ "kakuna": [
+  "Bug Bite",
+  "Poison Sting",
+  "Electroweb"
+ ],
+ "beedrill": [
+  "X-Scissor",
+  "Sludge Bomb",
+  "Double-Edge",
+  "Protect"
+ ],
+ "pidgey": [
+  "Double-Edge",
+  "Brave Bird",
+  "Uproar",
+  "Protect"
+ ],
+ "pidgeotto": [
+  "Double-Edge",
+  "Brave Bird",
+  "Uproar",
+  "Protect"
+ ],
+ "pidgeot": [
+  "Double-Edge",
+  "Brave Bird",
+  "Uproar",
+  "Protect"
+ ],
+ "rattata": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "rattata-alola": [
+  "Crunch",
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "raticate": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "raticate-alola": [
+  "Crunch",
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "raticate-alola-totem": [
+  "Crunch",
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "spearow": [
+  "Double-Edge",
+  "Drill Peck",
+  "Uproar",
+  "Protect"
+ ],
+ "fearow": [
+  "Double-Edge",
+  "Drill Peck",
+  "Uproar",
+  "Protect"
+ ],
+ "ekans": [
+  "Belch",
+  "Gunk Shot",
+  "Protect"
+ ],
+ "arbok": [
+  "Belch",
+  "Gunk Shot",
+  "Protect"
+ ],
+ "pikachu": [
+  "Volt Tackle",
+  "Focus Punch",
+  "Protect"
+ ],
+ "pikachu-cosplay": [
+  "Volt Tackle",
+  "Focus Punch",
+  "Protect"
+ ],
+ "pikachu-rock-star": [
+  "Volt Tackle",
+  "Focus Punch",
+  "Protect"
+ ],
+ "pikachu-belle": [
+  "Volt Tackle",
+  "Focus Punch",
+  "Protect"
+ ],
+ "pikachu-pop-star": [
+  "Volt Tackle",
+  "Focus Punch",
+  "Protect"
+ ],
+ "pikachu-phd": [
+  "Volt Tackle",
+  "Focus Punch",
+  "Protect"
+ ],
+ "pikachu-libre": [
+  "Volt Tackle",
+  "Focus Punch",
+  "Protect"
+ ],
+ "pikachu-original": [
+  "Volt Tackle",
+  "Focus Punch",
+  "Protect"
+ ],
+ "pikachu-hoenn": [
+  "Volt Tackle",
+  "Focus Punch",
+  "Protect"
+ ],
+ "pikachu-sinnoh": [
+  "Volt Tackle",
+  "Focus Punch",
+  "Protect"
+ ],
+ "pikachu-unova": [
+  "Volt Tackle",
+  "Focus Punch",
+  "Protect"
+ ],
+ "pikachu-kalos": [
+  "Volt Tackle",
+  "Focus Punch",
+  "Protect"
+ ],
+ "pikachu-alola": [
+  "Volt Tackle",
+  "Focus Punch",
+  "Protect"
+ ],
+ "pikachu-partner": [
+  "Volt Tackle",
+  "Focus Punch",
+  "Protect"
+ ],
+ "pikachu-starter": [
+  "Volt Tackle",
+  "Focus Punch",
+  "Protect"
+ ],
+ "pikachu-world": [
+  "Volt Tackle",
+  "Focus Punch",
+  "Protect"
+ ],
+ "raichu": [
+  "Volt Tackle",
+  "Focus Punch",
+  "Protect"
+ ],
+ "raichu-alola": [
+  "Volt Tackle",
+  "Future Sight",
+  "Focus Punch",
+  "Protect"
+ ],
+ "sandshrew": [
+  "Earthquake",
+  "Focus Punch",
+  "Protect"
+ ],
+ "sandshrew-alola": [
+  "Ice Beam",
+  "Steel Roller",
+  "Focus Punch",
+  "Protect"
+ ],
+ "sandslash": [
+  "Earthquake",
+  "Focus Punch",
+  "Protect"
+ ],
+ "sandslash-alola": [
+  "Ice Beam",
+  "Steel Roller",
+  "Focus Punch",
+  "Protect"
+ ],
+ "nidoran-f": [
+  "Sludge Bomb",
+  "Double-Edge",
+  "Protect"
+ ],
+ "nidorina": [
+  "Sludge Bomb",
+  "Double-Edge",
+  "Protect"
+ ],
+ "nidoqueen": [
+  "Sludge Wave",
+  "Earthquake",
+  "Focus Punch",
+  "Protect"
+ ],
+ "nidoran-m": [
+  "Sludge Bomb",
+  "Double-Edge",
+  "Protect"
+ ],
+ "nidorino": [
+  "Sludge Bomb",
+  "Double-Edge",
+  "Protect"
+ ],
+ "nidoking": [
+  "Sludge Wave",
+  "Earthquake",
+  "Focus Punch",
+  "Protect"
+ ],
+ "clefairy": [
+  "Moonblast",
+  "Focus Punch",
+  "Protect"
+ ],
+ "clefable": [
+  "Moonblast",
+  "Focus Punch",
+  "Protect"
+ ],
+ "vulpix": [
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "vulpix-alola": [
+  "Ice Beam",
+  "Double-Edge",
+  "Protect"
+ ],
+ "ninetales": [
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "ninetales-alola": [
+  "Ice Beam",
+  "Moonblast",
+  "Play Rough",
+  "Protect"
+ ],
+ "jigglypuff": [
+  "Last Resort",
+  "Play Rough",
+  "Double-Edge",
+  "Protect"
+ ],
+ "wigglytuff": [
+  "Last Resort",
+  "Play Rough",
+  "Double-Edge",
+  "Protect"
+ ],
+ "zubat": [
+  "Sludge Bomb",
+  "Brave Bird",
+  "Double-Edge",
+  "Protect"
+ ],
+ "golbat": [
+  "Sludge Bomb",
+  "Brave Bird",
+  "Double-Edge",
+  "Protect"
+ ],
+ "oddish": [
+  "Petal Dance",
+  "Sludge Bomb",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "gloom": [
+  "Petal Dance",
+  "Sludge Bomb",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "vileplume": [
+  "Petal Dance",
+  "Sludge Wave",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "paras": [
+  "Leech Life",
+  "Energy Ball",
+  "Double-Edge",
+  "Protect"
+ ],
+ "parasect": [
+  "Leech Life",
+  "Energy Ball",
+  "Double-Edge",
+  "Protect"
+ ],
+ "venonat": [
+  "Bug Buzz",
+  "Sludge Bomb",
+  "Double-Edge",
+  "Protect"
+ ],
+ "venomoth": [
+  "Bug Buzz",
+  "Sludge Wave",
+  "Sludge Bomb",
+  "Protect"
+ ],
+ "diglett": [
+  "Earthquake",
+  "Earth Power",
+  "Protect"
+ ],
+ "diglett-alola": [
+  "Earthquake",
+  "Flash Cannon",
+  "Earth Power",
+  "Protect"
+ ],
+ "dugtrio": [
+  "Earthquake",
+  "High Horsepower",
+  "Protect"
+ ],
+ "dugtrio-alola": [
+  "Earthquake",
+  "Flash Cannon",
+  "High Horsepower",
+  "Protect"
+ ],
+ "meowth": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "meowth-alola": [
+  "Foul Play",
+  "Last Resort",
+  "Protect"
+ ],
+ "meowth-galar": [
+  "Flash Cannon",
+  "Last Resort",
+  "Protect"
+ ],
+ "persian": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "persian-alola": [
+  "Foul Play",
+  "Last Resort",
+  "Protect"
+ ],
+ "psyduck": [
+  "Surf",
+  "Focus Punch",
+  "Protect"
+ ],
+ "golduck": [
+  "Surf",
+  "Focus Punch",
+  "Protect"
+ ],
+ "mankey": [
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "primeape": [
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "growlithe": [
+  "Burn Up",
+  "Flare Blitz",
+  "Protect"
+ ],
+ "growlithe-hisui": [
+  "Burn Up",
+  "Head Smash",
+  "Flare Blitz",
+  "Protect"
+ ],
+ "arcanine": [
+  "Burn Up",
+  "Flare Blitz",
+  "Protect"
+ ],
+ "arcanine-hisui": [
+  "Burn Up",
+  "Head Smash",
+  "Flare Blitz",
+  "Protect"
+ ],
+ "poliwag": [
+  "Surf",
+  "Focus Punch",
+  "Protect"
+ ],
+ "poliwhirl": [
+  "Surf",
+  "Focus Punch",
+  "Protect"
+ ],
+ "poliwrath": [
+  "Surf",
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "abra": [
+  "Dream Eater",
+  "Focus Punch",
+  "Protect"
+ ],
+ "kadabra": [
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "alakazam": [
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "machop": [
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "machoke": [
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "machamp": [
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "bellsprout": [
+  "Leaf Storm",
+  "Belch",
+  "Power Whip",
+  "Protect"
+ ],
+ "weepinbell": [
+  "Leaf Storm",
+  "Belch",
+  "Power Whip",
+  "Protect"
+ ],
+ "victreebel": [
+  "Leaf Storm",
+  "Belch",
+  "Power Whip",
+  "Protect"
+ ],
+ "tentacool": [
+  "Surf",
+  "Gunk Shot",
+  "Sludge Wave",
+  "Protect"
+ ],
+ "tentacruel": [
+  "Surf",
+  "Gunk Shot",
+  "Sludge Wave",
+  "Protect"
+ ],
+ "geodude": [
+  "Stone Edge",
+  "Earthquake",
+  "Focus Punch",
+  "Protect"
+ ],
+ "geodude-alola": [
+  "Stone Edge",
+  "Supercell Slam",
+  "Focus Punch",
+  "Protect"
+ ],
+ "graveler": [
+  "Stone Edge",
+  "Earthquake",
+  "Focus Punch",
+  "Protect"
+ ],
+ "graveler-alola": [
+  "Stone Edge",
+  "Supercell Slam",
+  "Focus Punch",
+  "Protect"
+ ],
+ "golem": [
+  "Stone Edge",
+  "Earthquake",
+  "Focus Punch",
+  "Protect"
+ ],
+ "golem-alola": [
+  "Stone Edge",
+  "Supercell Slam",
+  "Focus Punch",
+  "Protect"
+ ],
+ "ponyta": [
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "ponyta-galar": [
+  "Future Sight",
+  "Psychic",
+  "Protect"
+ ],
+ "rapidash": [
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "rapidash-galar": [
+  "Future Sight",
+  "Play Rough",
+  "Psychic",
+  "Protect"
+ ],
+ "slowpoke": [
+  "Surf",
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "slowpoke-galar": [
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "slowbro": [
+  "Surf",
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "slowbro-galar": [
+  "Belch",
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "magnemite": [
+  "Thunderbolt",
+  "Flash Cannon",
+  "Wild Charge",
+  "Protect"
+ ],
+ "magneton": [
+  "Thunderbolt",
+  "Flash Cannon",
+  "Wild Charge",
+  "Protect"
+ ],
+ "farfetch-d": [
+  "Last Resort",
+  "Brave Bird",
+  "Double-Edge",
+  "Protect"
+ ],
+ "farfetch-d-galar": [
+  "Close Combat",
+  "Superpower",
+  "Protect"
+ ],
+ "doduo": [
+  "Double-Edge",
+  "Brave Bird",
+  "Thrash",
+  "Protect"
+ ],
+ "dodrio": [
+  "Double-Edge",
+  "Brave Bird",
+  "Thrash",
+  "Protect"
+ ],
+ "seel": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "dewgong": [
+  "Surf",
+  "Ice Beam",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "grimer": [
+  "Belch",
+  "Gunk Shot",
+  "Protect"
+ ],
+ "grimer-alola": [
+  "Belch",
+  "Crunch",
+  "Gunk Shot",
+  "Protect"
+ ],
+ "muk": [
+  "Belch",
+  "Focus Punch",
+  "Protect"
+ ],
+ "muk-alola": [
+  "Belch",
+  "Foul Play",
+  "Focus Punch",
+  "Protect"
+ ],
+ "shellder": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "cloyster": [
+  "Surf",
+  "Ice Beam",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "gastly": [
+  "Poltergeist",
+  "Gunk Shot",
+  "Sludge Wave",
+  "Protect"
+ ],
+ "haunter": [
+  "Poltergeist",
+  "Gunk Shot",
+  "Sludge Wave",
+  "Protect"
+ ],
+ "gengar": [
+  "Poltergeist",
+  "Gunk Shot",
+  "Focus Punch",
+  "Protect"
+ ],
+ "onix": [
+  "Head Smash",
+  "Earthquake",
+  "High Horsepower",
+  "Protect"
+ ],
+ "drowzee": [
+  "Future Sight",
+  "Synchronoise",
+  "Protect"
+ ],
+ "hypno": [
+  "Future Sight",
+  "Synchronoise",
+  "Protect"
+ ],
+ "krabby": [
+  "Crabhammer",
+  "Surf",
+  "Protect"
+ ],
+ "kingler": [
+  "Crabhammer",
+  "Surf",
+  "Protect"
+ ],
+ "voltorb": [
+  "Thunderbolt",
+  "Wild Charge",
+  "Protect"
+ ],
+ "voltorb-hisui": [
+  "Thunderbolt",
+  "Leaf Storm",
+  "Energy Ball",
+  "Protect"
+ ],
+ "electrode": [
+  "Supercell Slam",
+  "Thunderbolt",
+  "Protect"
+ ],
+ "electrode-hisui": [
+  "Supercell Slam",
+  "Chloroblast",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "exeggcute": [
+  "Leaf Storm",
+  "Dream Eater",
+  "Energy Ball",
+  "Protect"
+ ],
+ "exeggutor": [
+  "Wood Hammer",
+  "Future Sight",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "exeggutor-alola": [
+  "Wood Hammer",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "cubone": [
+  "Earthquake",
+  "Focus Punch",
+  "Protect"
+ ],
+ "marowak": [
+  "Earthquake",
+  "Focus Punch",
+  "Protect"
+ ],
+ "marowak-alola": [
+  "Flare Blitz",
+  "Poltergeist",
+  "Focus Punch",
+  "Protect"
+ ],
+ "marowak-alola-totem": [
+  "Flare Blitz",
+  "Shadow Bone",
+  "Focus Punch",
+  "Protect"
+ ],
+ "hitmonlee": [
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "hitmonchan": [
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "lickitung": [
+  "Double-Edge",
+  "Thrash",
+  "Protect"
+ ],
+ "koffing": [
+  "Belch",
+  "Gunk Shot",
+  "Protect"
+ ],
+ "weezing": [
+  "Belch",
+  "Gunk Shot",
+  "Protect"
+ ],
+ "weezing-galar": [
+  "Belch",
+  "Strange Steam",
+  "Gunk Shot",
+  "Protect"
+ ],
+ "rhyhorn": [
+  "Earthquake",
+  "Stone Edge",
+  "High Horsepower",
+  "Protect"
+ ],
+ "rhydon": [
+  "Earthquake",
+  "Stone Edge",
+  "Focus Punch",
+  "Protect"
+ ],
+ "chansey": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "tangela": [
+  "Leaf Storm",
+  "Power Whip",
+  "Protect"
+ ],
+ "kangaskhan": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "horsea": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "seadra": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "goldeen": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "seaking": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "staryu": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "starmie": [
+  "Surf",
+  "Dream Eater",
+  "Psychic",
+  "Protect"
+ ],
+ "mr-mime": [
+  "Future Sight",
+  "Dazzling Gleam",
+  "Dream Eater",
+  "Protect"
+ ],
+ "mr-mime-galar": [
+  "Ice Beam",
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "scyther": [
+  "Bug Buzz",
+  "Air Slash",
+  "Close Combat",
+  "Protect"
+ ],
+ "jynx": [
+  "Ice Beam",
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "electabuzz": [
+  "Supercell Slam",
+  "Focus Punch",
+  "Protect"
+ ],
+ "magmar": [
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "pinsir": [
+  "X-Scissor",
+  "Focus Punch",
+  "Protect"
+ ],
+ "tauros": [
+  "Double-Edge",
+  "Thrash",
+  "Protect"
+ ],
+ "tauros-paldea-combat": [
+  "Close Combat",
+  "Body Press",
+  "Protect"
+ ],
+ "tauros-paldea-blaze": [
+  "Close Combat",
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "tauros-paldea-aqua": [
+  "Close Combat",
+  "Wave Crash",
+  "Surf",
+  "Protect"
+ ],
+ "magikarp": [
+  "Hydro Pump",
+  "Tackle"
+ ],
+ "gyarados": [
+  "Surf",
+  "Hurricane",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "lapras": [
+  "Sparkling Aria",
+  "Ice Beam",
+  "Surf",
+  "Protect"
+ ],
+ "eevee": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "eevee-starter": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "vaporeon": [
+  "Surf",
+  "Last Resort",
+  "Protect"
+ ],
+ "jolteon": [
+  "Thunderbolt",
+  "Last Resort",
+  "Protect"
+ ],
+ "flareon": [
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "porygon": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "omanyte": [
+  "Rock Slide",
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "omastar": [
+  "Stone Edge",
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "kabuto": [
+  "Stone Edge",
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "kabutops": [
+  "Stone Edge",
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "aerodactyl": [
+  "Stone Edge",
+  "Hurricane",
+  "Double-Edge",
+  "Protect"
+ ],
+ "snorlax": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "articuno": [
+  "Ice Beam",
+  "Brave Bird",
+  "Double-Edge",
+  "Protect"
+ ],
+ "articuno-galar": [
+  "Future Sight",
+  "Brave Bird",
+  "Dream Eater",
+  "Protect"
+ ],
+ "zapdos": [
+  "Supercell Slam",
+  "Brave Bird",
+  "Thunderbolt",
+  "Protect"
+ ],
+ "zapdos-galar": [
+  "Close Combat",
+  "Brave Bird",
+  "Superpower",
+  "Protect"
+ ],
+ "moltres": [
+  "Burn Up",
+  "Brave Bird",
+  "Flare Blitz",
+  "Protect"
+ ],
+ "moltres-galar": [
+  "Foul Play",
+  "Brave Bird",
+  "Fiery Wrath",
+  "Protect"
+ ],
+ "dratini": [
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "dragonair": [
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "dragonite": [
+  "Outrage",
+  "Hurricane",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "mewtwo": [
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "mew": [
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "chikorita": [
+  "Leaf Storm",
+  "Energy Ball",
+  "Protect"
+ ],
+ "bayleef": [
+  "Leaf Storm",
+  "Energy Ball",
+  "Protect"
+ ],
+ "meganium": [
+  "Petal Dance",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "cyndaquil": [
+  "Eruption",
+  "Burn Up",
+  "Protect"
+ ],
+ "quilava": [
+  "Eruption",
+  "Burn Up",
+  "Protect"
+ ],
+ "typhlosion": [
+  "Eruption",
+  "Burn Up",
+  "Protect"
+ ],
+ "typhlosion-hisui": [
+  "Eruption",
+  "Poltergeist",
+  "Burn Up",
+  "Protect"
+ ],
+ "totodile": [
+  "Surf",
+  "Focus Punch",
+  "Protect"
+ ],
+ "croconaw": [
+  "Surf",
+  "Focus Punch",
+  "Protect"
+ ],
+ "feraligatr": [
+  "Surf",
+  "Focus Punch",
+  "Protect"
+ ],
+ "sentret": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "furret": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "hoothoot": [
+  "Double-Edge",
+  "Brave Bird",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "noctowl": [
+  "Double-Edge",
+  "Brave Bird",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "ledyba": [
+  "Bug Buzz",
+  "Air Slash",
+  "Focus Punch",
+  "Protect"
+ ],
+ "ledian": [
+  "Bug Buzz",
+  "Air Slash",
+  "Focus Punch",
+  "Protect"
+ ],
+ "spinarak": [
+  "Megahorn",
+  "Sludge Wave",
+  "Bug Buzz",
+  "Protect"
+ ],
+ "ariados": [
+  "Megahorn",
+  "Sludge Wave",
+  "Bug Buzz",
+  "Protect"
+ ],
+ "crobat": [
+  "Sludge Bomb",
+  "Brave Bird",
+  "Double-Edge",
+  "Protect"
+ ],
+ "chinchou": [
+  "Surf",
+  "Thunderbolt",
+  "Wild Charge",
+  "Protect"
+ ],
+ "lanturn": [
+  "Surf",
+  "Thunderbolt",
+  "Wild Charge",
+  "Protect"
+ ],
+ "pichu": [
+  "Volt Tackle",
+  "Thunderbolt",
+  "Protect"
+ ],
+ "pichu-spiky-eared": [
+  "Volt Tackle",
+  "Thunderbolt",
+  "Protect"
+ ],
+ "cleffa": [
+  "Play Rough",
+  "Last Resort",
+  "Protect"
+ ],
+ "igglybuff": [
+  "Last Resort",
+  "Play Rough",
+  "Double-Edge",
+  "Protect"
+ ],
+ "togepi": [
+  "Play Rough",
+  "Last Resort",
+  "Protect"
+ ],
+ "togetic": [
+  "Play Rough",
+  "Aerial Ace",
+  "Focus Punch",
+  "Protect"
+ ],
+ "natu": [
+  "Future Sight",
+  "Drill Peck",
+  "Synchronoise",
+  "Protect"
+ ],
+ "xatu": [
+  "Future Sight",
+  "Drill Peck",
+  "Synchronoise",
+  "Protect"
+ ],
+ "mareep": [
+  "Thunderbolt",
+  "Wild Charge",
+  "Protect"
+ ],
+ "flaaffy": [
+  "Thunderbolt",
+  "Focus Punch",
+  "Protect"
+ ],
+ "ampharos": [
+  "Supercell Slam",
+  "Focus Punch",
+  "Protect"
+ ],
+ "bellossom": [
+  "Petal Dance",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "marill": [
+  "Surf",
+  "Play Rough",
+  "Focus Punch",
+  "Protect"
+ ],
+ "azumarill": [
+  "Surf",
+  "Play Rough",
+  "Focus Punch",
+  "Protect"
+ ],
+ "sudowoodo": [
+  "Head Smash",
+  "Focus Punch",
+  "Protect"
+ ],
+ "politoed": [
+  "Surf",
+  "Focus Punch",
+  "Protect"
+ ],
+ "hoppip": [
+  "Leaf Storm",
+  "Aerial Ace",
+  "Energy Ball",
+  "Protect"
+ ],
+ "skiploom": [
+  "Leaf Storm",
+  "Aerial Ace",
+  "Energy Ball",
+  "Protect"
+ ],
+ "jumpluff": [
+  "Leaf Storm",
+  "Aerial Ace",
+  "Energy Ball",
+  "Protect"
+ ],
+ "aipom": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "sunkern": [
+  "Leaf Storm",
+  "Energy Ball",
+  "Protect"
+ ],
+ "sunflora": [
+  "Petal Dance",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "yanma": [
+  "Bug Buzz",
+  "Air Slash",
+  "Double-Edge",
+  "Protect"
+ ],
+ "wooper": [
+  "Surf",
+  "Earthquake",
+  "Earth Power",
+  "Protect"
+ ],
+ "wooper-paldea": [
+  "Gunk Shot",
+  "Earthquake",
+  "Sludge Wave",
+  "Protect"
+ ],
+ "quagsire": [
+  "Surf",
+  "Earthquake",
+  "Focus Punch",
+  "Protect"
+ ],
+ "espeon": [
+  "Future Sight",
+  "Synchronoise",
+  "Protect"
+ ],
+ "umbreon": [
+  "Foul Play",
+  "Last Resort",
+  "Protect"
+ ],
+ "murkrow": [
+  "Foul Play",
+  "Brave Bird",
+  "Dark Pulse",
+  "Protect"
+ ],
+ "slowking": [
+  "Surf",
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "slowking-galar": [
+  "Belch",
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "misdreavus": [
+  "Poltergeist",
+  "Double-Edge",
+  "Protect"
+ ],
+ "unown": [
+  "Hidden Power"
+ ],
+ "girafarig": [
+  "Double-Edge",
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "pineco": [
+  "Bug Buzz",
+  "Double-Edge",
+  "Protect"
+ ],
+ "forretress": [
+  "Bug Buzz",
+  "Flash Cannon",
+  "Double-Edge",
+  "Protect"
+ ],
+ "dunsparce": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "gligar": [
+  "Earthquake",
+  "Aerial Ace",
+  "High Horsepower",
+  "Protect"
+ ],
+ "steelix": [
+  "Steel Roller",
+  "Earthquake",
+  "High Horsepower",
+  "Protect"
+ ],
+ "snubbull": [
+  "Play Rough",
+  "Focus Punch",
+  "Protect"
+ ],
+ "granbull": [
+  "Play Rough",
+  "Focus Punch",
+  "Protect"
+ ],
+ "qwilfish": [
+  "Surf",
+  "Gunk Shot",
+  "Sludge Wave",
+  "Protect"
+ ],
+ "qwilfish-hisui": [
+  "Crunch",
+  "Gunk Shot",
+  "Sludge Wave",
+  "Protect"
+ ],
+ "scizor": [
+  "Bug Buzz",
+  "Flash Cannon",
+  "Close Combat",
+  "Protect"
+ ],
+ "shuckle": [
+  "Skitter Smack",
+  "Stone Edge",
+  "Steel Roller",
+  "Protect"
+ ],
+ "heracross": [
+  "Megahorn",
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "sneasel": [
+  "Foul Play",
+  "Ice Beam",
+  "Focus Punch",
+  "Protect"
+ ],
+ "sneasel-hisui": [
+  "Focus Punch",
+  "Gunk Shot",
+  "Close Combat",
+  "Protect"
+ ],
+ "teddiursa": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "ursaring": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "slugma": [
+  "Overheat",
+  "Fire Blast",
+  "Protect"
+ ],
+ "magcargo": [
+  "Flare Blitz",
+  "Power Gem",
+  "Overheat",
+  "Protect"
+ ],
+ "swinub": [
+  "Ice Beam",
+  "Earthquake",
+  "High Horsepower",
+  "Protect"
+ ],
+ "piloswine": [
+  "Ice Beam",
+  "Earthquake",
+  "High Horsepower",
+  "Protect"
+ ],
+ "corsola": [
+  "Surf",
+  "Head Smash",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "corsola-galar": [
+  "Shadow Ball",
+  "Head Smash",
+  "Protect"
+ ],
+ "remoraid": [
+  "Water Spout",
+  "Surf",
+  "Protect"
+ ],
+ "octillery": [
+  "Water Spout",
+  "Surf",
+  "Protect"
+ ],
+ "delibird": [
+  "Ice Beam",
+  "Brave Bird",
+  "Focus Punch",
+  "Protect"
+ ],
+ "mantine": [
+  "Surf",
+  "Hurricane",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "skarmory": [
+  "Flash Cannon",
+  "Brave Bird",
+  "Double-Edge",
+  "Protect"
+ ],
+ "houndour": [
+  "Foul Play",
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "houndoom": [
+  "Foul Play",
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "kingdra": [
+  "Wave Crash",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "phanpy": [
+  "Earthquake",
+  "Last Resort",
+  "Protect"
+ ],
+ "donphan": [
+  "Earthquake",
+  "Last Resort",
+  "Protect"
+ ],
+ "porygon2": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "stantler": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "smeargle": [
+  "False Swipe",
+  "Flamethrower"
+ ],
+ "tyrogue": [
+  "High Jump Kick",
+  "Double-Edge",
+  "Protect"
+ ],
+ "hitmontop": [
+  "Close Combat",
+  "High Jump Kick",
+  "Protect"
+ ],
+ "smoochum": [
+  "Ice Beam",
+  "Dream Eater",
+  "Psychic",
+  "Protect"
+ ],
+ "elekid": [
+  "Supercell Slam",
+  "Focus Punch",
+  "Protect"
+ ],
+ "magby": [
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "miltank": [
+  "Double-Edge",
+  "Focus Punch",
+  "Protect"
+ ],
+ "blissey": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "raikou": [
+  "Supercell Slam",
+  "Thunderbolt",
+  "Protect"
+ ],
+ "entei": [
+  "Eruption",
+  "Flare Blitz",
+  "Protect"
+ ],
+ "suicune": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "larvitar": [
+  "Stone Edge",
+  "Earthquake",
+  "Earth Power",
+  "Protect"
+ ],
+ "pupitar": [
+  "Stone Edge",
+  "Earthquake",
+  "High Horsepower",
+  "Protect"
+ ],
+ "tyranitar": [
+  "Power Gem",
+  "Foul Play",
+  "Focus Punch",
+  "Protect"
+ ],
+ "lugia": [
+  "Psycho Boost",
+  "Brave Bird",
+  "Future Sight",
+  "Protect"
+ ],
+ "ho-oh": [
+  "Burn Up",
+  "Brave Bird",
+  "Flare Blitz",
+  "Protect"
+ ],
+ "celebi": [
+  "Future Sight",
+  "Leaf Storm",
+  "Dream Eater",
+  "Protect"
+ ],
+ "treecko": [
+  "Leaf Storm",
+  "Focus Punch",
+  "Protect"
+ ],
+ "grovyle": [
+  "Leaf Storm",
+  "Focus Punch",
+  "Protect"
+ ],
+ "sceptile": [
+  "Leaf Storm",
+  "Focus Punch",
+  "Protect"
+ ],
+ "torchic": [
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "combusken": [
+  "Flare Blitz",
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "blaziken": [
+  "Flare Blitz",
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "mudkip": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "marshtomp": [
+  "Surf",
+  "Earthquake",
+  "Focus Punch",
+  "Protect"
+ ],
+ "swampert": [
+  "Surf",
+  "Earthquake",
+  "Focus Punch",
+  "Protect"
+ ],
+ "poochyena": [
+  "Foul Play",
+  "Crunch",
+  "Protect"
+ ],
+ "mightyena": [
+  "Foul Play",
+  "Crunch",
+  "Protect"
+ ],
+ "zigzagoon": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "zigzagoon-galar": [
+  "Lash Out",
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "linoone": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "linoone-galar": [
+  "Throat Chop",
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "wurmple": [
+  "Bug Bite",
+  "Electroweb"
+ ],
+ "silcoon": [
+  "Bug Bite",
+  "Electroweb"
+ ],
+ "beautifly": [
+  "Bug Buzz",
+  "Aerial Ace",
+  "Double-Edge",
+  "Protect"
+ ],
+ "cascoon": [
+  "Bug Bite",
+  "Electroweb"
+ ],
+ "dustox": [
+  "Bug Buzz",
+  "Sludge Bomb",
+  "Double-Edge",
+  "Protect"
+ ],
+ "lotad": [
+  "Surf",
+  "Energy Ball",
+  "Double-Edge",
+  "Protect"
+ ],
+ "lombre": [
+  "Surf",
+  "Energy Ball",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "ludicolo": [
+  "Surf",
+  "Leaf Storm",
+  "Focus Punch",
+  "Protect"
+ ],
+ "seedot": [
+  "Leaf Storm",
+  "Energy Ball",
+  "Protect"
+ ],
+ "nuzleaf": [
+  "Leaf Storm",
+  "Foul Play",
+  "Energy Ball",
+  "Protect"
+ ],
+ "shiftry": [
+  "Leaf Storm",
+  "Foul Play",
+  "Energy Ball",
+  "Protect"
+ ],
+ "taillow": [
+  "Boomburst",
+  "Brave Bird",
+  "Double-Edge",
+  "Protect"
+ ],
+ "swellow": [
+  "Boomburst",
+  "Brave Bird",
+  "Double-Edge",
+  "Protect"
+ ],
+ "wingull": [
+  "Surf",
+  "Brave Bird",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "pelipper": [
+  "Surf",
+  "Brave Bird",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "ralts": [
+  "Future Sight",
+  "Alluring Voice",
+  "Synchronoise",
+  "Protect"
+ ],
+ "kirlia": [
+  "Future Sight",
+  "Alluring Voice",
+  "Synchronoise",
+  "Protect"
+ ],
+ "gardevoir": [
+  "Future Sight",
+  "Moonblast",
+  "Synchronoise",
+  "Protect"
+ ],
+ "surskit": [
+  "Bug Buzz",
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "masquerain": [
+  "Bug Buzz",
+  "Hurricane",
+  "Double-Edge",
+  "Protect"
+ ],
+ "shroomish": [
+  "Energy Ball",
+  "Focus Punch",
+  "Protect"
+ ],
+ "breloom": [
+  "Leaf Storm",
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "slakoth": [
+  "Double-Edge",
+  "Focus Punch",
+  "Protect"
+ ],
+ "vigoroth": [
+  "Double-Edge",
+  "Focus Punch",
+  "Protect"
+ ],
+ "slaking": [
+  "Double-Edge",
+  "Focus Punch",
+  "Protect"
+ ],
+ "nincada": [
+  "Bug Buzz",
+  "Mud-Slap",
+  "Double-Edge",
+  "Protect"
+ ],
+ "ninjask": [
+  "Bug Buzz",
+  "Air Slash",
+  "Double-Edge",
+  "Protect"
+ ],
+ "shedinja": [
+  "Bug Buzz",
+  "Poltergeist",
+  "Double-Edge",
+  "Protect"
+ ],
+ "whismur": [
+  "Double-Edge",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "loudred": [
+  "Double-Edge",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "exploud": [
+  "Boomburst",
+  "Double-Edge",
+  "Protect"
+ ],
+ "makuhita": [
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "hariyama": [
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "azurill": [
+  "Double-Edge",
+  "Alluring Voice",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "nosepass": [
+  "Head Smash",
+  "Double-Edge",
+  "Protect"
+ ],
+ "skitty": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "delcatty": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "sableye": [
+  "Foul Play",
+  "Poltergeist",
+  "Focus Punch",
+  "Protect"
+ ],
+ "mawile": [
+  "Flash Cannon",
+  "Play Rough",
+  "Focus Punch",
+  "Protect"
+ ],
+ "aron": [
+  "Steel Roller",
+  "Head Smash",
+  "Double-Edge",
+  "Protect"
+ ],
+ "lairon": [
+  "Steel Roller",
+  "Head Smash",
+  "Double-Edge",
+  "Protect"
+ ],
+ "aggron": [
+  "Steel Roller",
+  "Head Smash",
+  "Focus Punch",
+  "Protect"
+ ],
+ "meditite": [
+  "Focus Punch",
+  "Dream Eater",
+  "Close Combat",
+  "Protect"
+ ],
+ "medicham": [
+  "Focus Punch",
+  "Dream Eater",
+  "Close Combat",
+  "Protect"
+ ],
+ "electrike": [
+  "Thunderbolt",
+  "Wild Charge",
+  "Protect"
+ ],
+ "manectric": [
+  "Thunderbolt",
+  "Wild Charge",
+  "Protect"
+ ],
+ "plusle": [
+  "Thunderbolt",
+  "Last Resort",
+  "Protect"
+ ],
+ "minun": [
+  "Thunderbolt",
+  "Last Resort",
+  "Protect"
+ ],
+ "volbeat": [
+  "Bug Buzz",
+  "Focus Punch",
+  "Protect"
+ ],
+ "illumise": [
+  "Bug Buzz",
+  "Focus Punch",
+  "Protect"
+ ],
+ "roselia": [
+  "Petal Dance",
+  "Sludge Bomb",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "gulpin": [
+  "Belch",
+  "Gunk Shot",
+  "Protect"
+ ],
+ "swalot": [
+  "Belch",
+  "Gunk Shot",
+  "Protect"
+ ],
+ "carvanha": [
+  "Surf",
+  "Crunch",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "sharpedo": [
+  "Surf",
+  "Crunch",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "wailmer": [
+  "Water Spout",
+  "Surf",
+  "Protect"
+ ],
+ "wailord": [
+  "Water Spout",
+  "Surf",
+  "Protect"
+ ],
+ "numel": [
+  "Flare Blitz",
+  "Earthquake",
+  "Overheat",
+  "Protect"
+ ],
+ "camerupt": [
+  "Eruption",
+  "Earthquake",
+  "Flare Blitz",
+  "Protect"
+ ],
+ "torkoal": [
+  "Eruption",
+  "Flare Blitz",
+  "Protect"
+ ],
+ "spoink": [
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "grumpig": [
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "spinda": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "trapinch": [
+  "Earthquake",
+  "Earth Power",
+  "Protect"
+ ],
+ "vibrava": [
+  "Earthquake",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "flygon": [
+  "Earthquake",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "cacnea": [
+  "Leaf Storm",
+  "Focus Punch",
+  "Protect"
+ ],
+ "cacturne": [
+  "Leaf Storm",
+  "Foul Play",
+  "Focus Punch",
+  "Protect"
+ ],
+ "swablu": [
+  "Double-Edge",
+  "Brave Bird",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "altaria": [
+  "Outrage",
+  "Brave Bird",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "zangoose": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "seviper": [
+  "Belch",
+  "Gunk Shot",
+  "Protect"
+ ],
+ "lunatone": [
+  "Power Gem",
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "solrock": [
+  "Stone Edge",
+  "Dream Eater",
+  "Psychic",
+  "Protect"
+ ],
+ "barboach": [
+  "Surf",
+  "Earthquake",
+  "High Horsepower",
+  "Protect"
+ ],
+ "whiscash": [
+  "Surf",
+  "Earthquake",
+  "High Horsepower",
+  "Protect"
+ ],
+ "corphish": [
+  "Crabhammer",
+  "Surf",
+  "Protect"
+ ],
+ "crawdaunt": [
+  "Crabhammer",
+  "Crunch",
+  "Surf",
+  "Protect"
+ ],
+ "baltoy": [
+  "Earthquake",
+  "Dream Eater",
+  "Earth Power",
+  "Protect"
+ ],
+ "claydol": [
+  "Earthquake",
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "lileep": [
+  "Rock Slide",
+  "Energy Ball",
+  "Double-Edge",
+  "Protect"
+ ],
+ "cradily": [
+  "Stone Edge",
+  "Power Whip",
+  "Energy Ball",
+  "Protect"
+ ],
+ "anorith": [
+  "Rock Slide",
+  "X-Scissor",
+  "Double-Edge",
+  "Protect"
+ ],
+ "armaldo": [
+  "Stone Edge",
+  "X-Scissor",
+  "Double-Edge",
+  "Protect"
+ ],
+ "feebas": [
+  "Surf",
+  "Double-Edge",
+  "Protect"
+ ],
+ "milotic": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "castform": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "castform-sunny": [
+  "Fire Blast",
+  "Last Resort",
+  "Protect"
+ ],
+ "castform-rainy": [
+  "Hydro Pump",
+  "Last Resort",
+  "Protect"
+ ],
+ "castform-snowy": [
+  "Ice Beam",
+  "Last Resort",
+  "Protect"
+ ],
+ "kecleon": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "shuppet": [
+  "Poltergeist",
+  "Double-Edge",
+  "Protect"
+ ],
+ "banette": [
+  "Poltergeist",
+  "Double-Edge",
+  "Protect"
+ ],
+ "duskull": [
+  "Poltergeist",
+  "Double-Edge",
+  "Protect"
+ ],
+ "dusclops": [
+  "Poltergeist",
+  "Focus Punch",
+  "Protect"
+ ],
+ "tropius": [
+  "Leaf Storm",
+  "Hurricane",
+  "Energy Ball",
+  "Protect"
+ ],
+ "chimecho": [
+  "Future Sight",
+  "Synchronoise",
+  "Protect"
+ ],
+ "absol": [
+  "Foul Play",
+  "Close Combat",
+  "Protect"
+ ],
+ "snorunt": [
+  "Ice Beam",
+  "Double-Edge",
+  "Protect"
+ ],
+ "glalie": [
+  "Ice Beam",
+  "Steel Roller",
+  "Protect"
+ ],
+ "spheal": [
+  "Ice Beam",
+  "Surf",
+  "Steel Roller",
+  "Protect"
+ ],
+ "sealeo": [
+  "Ice Beam",
+  "Surf",
+  "Steel Roller",
+  "Protect"
+ ],
+ "walrein": [
+  "Ice Beam",
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "clamperl": [
+  "Surf",
+  "Double-Edge",
+  "Protect"
+ ],
+ "huntail": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "gorebyss": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "relicanth": [
+  "Surf",
+  "Head Smash",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "luvdisc": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "bagon": [
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "shelgon": [
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "salamence": [
+  "Outrage",
+  "Hurricane",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "beldum": [
+  "Iron Head",
+  "Zen Headbutt",
+  "Tera Blast"
+ ],
+ "metang": [
+  "Steel Roller",
+  "Future Sight",
+  "Focus Punch",
+  "Protect"
+ ],
+ "metagross": [
+  "Steel Roller",
+  "Future Sight",
+  "Focus Punch",
+  "Protect"
+ ],
+ "regirock": [
+  "Power Gem",
+  "Focus Punch",
+  "Protect"
+ ],
+ "regice": [
+  "Ice Beam",
+  "Focus Punch",
+  "Protect"
+ ],
+ "registeel": [
+  "Steel Roller",
+  "Focus Punch",
+  "Protect"
+ ],
+ "latias": [
+  "Outrage",
+  "Future Sight",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "latios": [
+  "Outrage",
+  "Future Sight",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "kyogre": [
+  "Water Spout",
+  "Origin Pulse",
+  "Protect"
+ ],
+ "kyogre-primal": [
+  "Water Spout",
+  "Origin Pulse",
+  "Protect"
+ ],
+ "groudon": [
+  "Precipice Blades",
+  "Earthquake",
+  "Protect"
+ ],
+ "groudon-primal": [
+  "Precipice Blades",
+  "Eruption",
+  "Overheat",
+  "Protect"
+ ],
+ "rayquaza": [
+  "Outrage",
+  "Dragon Ascent",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "jirachi": [
+  "Doom Desire",
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "deoxys": [
+  "Psycho Boost",
+  "Future Sight",
+  "Protect"
+ ],
+ "deoxys-attack": [
+  "Psycho Boost",
+  "Future Sight",
+  "Protect"
+ ],
+ "deoxys-defense": [
+  "Psycho Boost",
+  "Future Sight",
+  "Protect"
+ ],
+ "deoxys-speed": [
+  "Psycho Boost",
+  "Future Sight",
+  "Protect"
+ ],
+ "turtwig": [
+  "Leaf Storm",
+  "Energy Ball",
+  "Protect"
+ ],
+ "grotle": [
+  "Leaf Storm",
+  "Energy Ball",
+  "Protect"
+ ],
+ "torterra": [
+  "Wood Hammer",
+  "Headlong Rush",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "chimchar": [
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "monferno": [
+  "Flare Blitz",
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "infernape": [
+  "Flare Blitz",
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "piplup": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "prinplup": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "empoleon": [
+  "Wave Crash",
+  "Flash Cannon",
+  "Surf",
+  "Protect"
+ ],
+ "starly": [
+  "Double-Edge",
+  "Brave Bird",
+  "Uproar",
+  "Protect"
+ ],
+ "staravia": [
+  "Double-Edge",
+  "Brave Bird",
+  "Uproar",
+  "Protect"
+ ],
+ "staraptor": [
+  "Double-Edge",
+  "Brave Bird",
+  "Uproar",
+  "Protect"
+ ],
+ "bidoof": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "bibarel": [
+  "Last Resort",
+  "Surf",
+  "Double-Edge",
+  "Protect"
+ ],
+ "kricketot": [
+  "Lunge",
+  "Skitter Smack"
+ ],
+ "kricketune": [
+  "Bug Buzz",
+  "Leech Life",
+  "Protect"
+ ],
+ "shinx": [
+  "Thunderbolt",
+  "Wild Charge",
+  "Protect"
+ ],
+ "luxio": [
+  "Thunderbolt",
+  "Wild Charge",
+  "Protect"
+ ],
+ "luxray": [
+  "Supercell Slam",
+  "Thunderbolt",
+  "Protect"
+ ],
+ "budew": [
+  "Leaf Storm",
+  "Sludge Bomb",
+  "Energy Ball",
+  "Protect"
+ ],
+ "roserade": [
+  "Petal Dance",
+  "Sludge Bomb",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "cranidos": [
+  "Head Smash",
+  "Double-Edge",
+  "Protect"
+ ],
+ "rampardos": [
+  "Head Smash",
+  "Focus Punch",
+  "Protect"
+ ],
+ "shieldon": [
+  "Power Gem",
+  "Flash Cannon",
+  "Double-Edge",
+  "Protect"
+ ],
+ "bastiodon": [
+  "Power Gem",
+  "Flash Cannon",
+  "Double-Edge",
+  "Protect"
+ ],
+ "burmy": [
+  "Bug Bite",
+  "Hidden Power",
+  "Protect"
+ ],
+ "burmy-sandy": [
+  "Bug Bite",
+  "Hidden Power",
+  "Protect"
+ ],
+ "burmy-trash": [
+  "Bug Bite",
+  "Hidden Power",
+  "Protect"
+ ],
+ "wormadam": [
+  "Bug Buzz",
+  "Leaf Storm",
+  "Energy Ball",
+  "Protect"
+ ],
+ "wormadam-sandy": [
+  "Bug Buzz",
+  "Earthquake",
+  "Earth Power",
+  "Protect"
+ ],
+ "wormadam-trash": [
+  "Bug Buzz",
+  "Flash Cannon",
+  "Iron Head",
+  "Protect"
+ ],
+ "mothim": [
+  "Bug Buzz",
+  "Air Slash",
+  "Lunge",
+  "Protect"
+ ],
+ "combee": [
+  "Bug Buzz",
+  "Air Cutter",
+  "Lunge"
+ ],
+ "vespiquen": [
+  "Attack Order",
+  "Hurricane",
+  "Bug Buzz",
+  "Protect"
+ ],
+ "pachirisu": [
+  "Thunderbolt",
+  "Last Resort",
+  "Protect"
+ ],
+ "buizel": [
+  "Wave Crash",
+  "Focus Punch",
+  "Protect"
+ ],
+ "floatzel": [
+  "Wave Crash",
+  "Focus Punch",
+  "Protect"
+ ],
+ "cherubi": [
+  "Energy Ball",
+  "Petal Blizzard",
+  "Protect"
+ ],
+ "cherrim": [
+  "Petal Dance",
+  "Energy Ball",
+  "Protect"
+ ],
+ "cherrim-sunshine": [
+  "Petal Dance",
+  "Energy Ball",
+  "Protect"
+ ],
+ "shellos": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "shellos-east": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "gastrodon": [
+  "Surf",
+  "Earthquake",
+  "Earth Power",
+  "Protect"
+ ],
+ "gastrodon-east": [
+  "Surf",
+  "Earthquake",
+  "Earth Power",
+  "Protect"
+ ],
+ "ambipom": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "drifloon": [
+  "Shadow Ball",
+  "Aerial Ace",
+  "Dream Eater",
+  "Protect"
+ ],
+ "drifblim": [
+  "Shadow Ball",
+  "Air Slash",
+  "Dream Eater",
+  "Protect"
+ ],
+ "buneary": [
+  "Last Resort",
+  "Focus Punch",
+  "Protect"
+ ],
+ "lopunny": [
+  "Last Resort",
+  "Focus Punch",
+  "Protect"
+ ],
+ "mismagius": [
+  "Poltergeist",
+  "Future Sight",
+  "Protect"
+ ],
+ "honchkrow": [
+  "Foul Play",
+  "Brave Bird",
+  "Dark Pulse",
+  "Protect"
+ ],
+ "glameow": [
+  "Last Resort",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "purugly": [
+  "Last Resort",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "chingling": [
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "stunky": [
+  "Belch",
+  "Foul Play",
+  "Gunk Shot",
+  "Protect"
+ ],
+ "skuntank": [
+  "Belch",
+  "Foul Play",
+  "Gunk Shot",
+  "Protect"
+ ],
+ "bronzor": [
+  "Steel Roller",
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "bronzong": [
+  "Steel Roller",
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "bonsly": [
+  "Power Gem",
+  "Double-Edge",
+  "Protect"
+ ],
+ "mime-jr-": [
+  "Future Sight",
+  "Dazzling Gleam",
+  "Dream Eater",
+  "Protect"
+ ],
+ "happiny": [
+  "Last Resort",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "chatot": [
+  "Boomburst",
+  "Chatter",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "spiritomb": [
+  "Poltergeist",
+  "Foul Play",
+  "Dark Pulse",
+  "Protect"
+ ],
+ "gible": [
+  "Outrage",
+  "Earthquake",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "gabite": [
+  "Outrage",
+  "Earthquake",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "garchomp": [
+  "Outrage",
+  "Earthquake",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "munchlax": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "riolu": [
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "lucario": [
+  "Focus Punch",
+  "Meteor Mash",
+  "Close Combat",
+  "Protect"
+ ],
+ "hippopotas": [
+  "Earthquake",
+  "High Horsepower",
+  "Protect"
+ ],
+ "hippowdon": [
+  "Earthquake",
+  "High Horsepower",
+  "Protect"
+ ],
+ "skorupi": [
+  "Sludge Bomb",
+  "Bug Buzz",
+  "Poison Jab",
+  "Protect"
+ ],
+ "drapion": [
+  "Sludge Bomb",
+  "Crunch",
+  "Dark Pulse",
+  "Protect"
+ ],
+ "croagunk": [
+  "Belch",
+  "Focus Punch",
+  "Gunk Shot",
+  "Protect"
+ ],
+ "toxicroak": [
+  "Belch",
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "carnivine": [
+  "Power Whip",
+  "Energy Ball",
+  "Protect"
+ ],
+ "finneon": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "lumineon": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "mantyke": [
+  "Surf",
+  "Air Slash",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "snover": [
+  "Wood Hammer",
+  "Ice Beam",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "abomasnow": [
+  "Wood Hammer",
+  "Ice Beam",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "weavile": [
+  "Foul Play",
+  "Ice Beam",
+  "Focus Punch",
+  "Protect"
+ ],
+ "magnezone": [
+  "Supercell Slam",
+  "Steel Roller",
+  "Thunderbolt",
+  "Protect"
+ ],
+ "lickilicky": [
+  "Double-Edge",
+  "Thrash",
+  "Protect"
+ ],
+ "rhyperior": [
+  "Earthquake",
+  "Stone Edge",
+  "Focus Punch",
+  "Protect"
+ ],
+ "tangrowth": [
+  "Leaf Storm",
+  "Power Whip",
+  "Protect"
+ ],
+ "electivire": [
+  "Supercell Slam",
+  "Focus Punch",
+  "Protect"
+ ],
+ "magmortar": [
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "togekiss": [
+  "Play Rough",
+  "Air Slash",
+  "Focus Punch",
+  "Protect"
+ ],
+ "yanmega": [
+  "Bug Buzz",
+  "Air Slash",
+  "Double-Edge",
+  "Protect"
+ ],
+ "leafeon": [
+  "Leaf Storm",
+  "Last Resort",
+  "Protect"
+ ],
+ "glaceon": [
+  "Ice Beam",
+  "Last Resort",
+  "Protect"
+ ],
+ "gliscor": [
+  "Earthquake",
+  "Aerial Ace",
+  "High Horsepower",
+  "Protect"
+ ],
+ "mamoswine": [
+  "Ice Beam",
+  "Earthquake",
+  "High Horsepower",
+  "Protect"
+ ],
+ "porygon-z": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "gallade": [
+  "Future Sight",
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "probopass": [
+  "Head Smash",
+  "Flash Cannon",
+  "Double-Edge",
+  "Protect"
+ ],
+ "dusknoir": [
+  "Poltergeist",
+  "Focus Punch",
+  "Protect"
+ ],
+ "froslass": [
+  "Ice Beam",
+  "Poltergeist",
+  "Ice Spinner",
+  "Protect"
+ ],
+ "rotom": [
+  "Thunderbolt",
+  "Poltergeist",
+  "Discharge",
+  "Protect"
+ ],
+ "rotom-heat": [
+  "Thunderbolt",
+  "Overheat",
+  "Discharge",
+  "Protect"
+ ],
+ "rotom-wash": [
+  "Thunderbolt",
+  "Hydro Pump",
+  "Discharge",
+  "Protect"
+ ],
+ "rotom-frost": [
+  "Thunderbolt",
+  "Blizzard",
+  "Discharge",
+  "Protect"
+ ],
+ "rotom-fan": [
+  "Thunderbolt",
+  "Air Slash",
+  "Discharge",
+  "Protect"
+ ],
+ "rotom-mow": [
+  "Thunderbolt",
+  "Leaf Storm",
+  "Discharge",
+  "Protect"
+ ],
+ "uxie": [
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "mesprit": [
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "azelf": [
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "dialga": [
+  "Flash Cannon",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "dialga-origin": [
+  "Flash Cannon",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "palkia": [
+  "Surf",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "palkia-origin": [
+  "Surf",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "heatran": [
+  "Eruption",
+  "Steel Roller",
+  "Flare Blitz",
+  "Protect"
+ ],
+ "regigigas": [
+  "Double-Edge",
+  "Focus Punch",
+  "Protect"
+ ],
+ "giratina": [
+  "Poltergeist",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "giratina-origin": [
+  "Poltergeist",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "cresselia": [
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "phione": [
+  "Surf",
+  "Last Resort",
+  "Protect"
+ ],
+ "manaphy": [
+  "Surf",
+  "Last Resort",
+  "Protect"
+ ],
+ "darkrai": [
+  "Foul Play",
+  "Focus Punch",
+  "Protect"
+ ],
+ "shaymin": [
+  "Leaf Storm",
+  "Seed Flare",
+  "Protect"
+ ],
+ "shaymin-sky": [
+  "Leaf Storm",
+  "Air Slash",
+  "Seed Flare",
+  "Protect"
+ ],
+ "arceus": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "arceus-bug": [
+  "Bug Buzz",
+  "Last Resort",
+  "Protect"
+ ],
+ "arceus-dark": [
+  "Foul Play",
+  "Last Resort",
+  "Protect"
+ ],
+ "arceus-dragon": [
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "arceus-electric": [
+  "Supercell Slam",
+  "Last Resort",
+  "Protect"
+ ],
+ "arceus-fairy": [
+  "Dazzling Gleam",
+  "Last Resort",
+  "Protect"
+ ],
+ "arceus-fighting": [
+  "Focus Blast",
+  "Last Resort",
+  "Protect"
+ ],
+ "arceus-fire": [
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "arceus-flying": [
+  "Hurricane",
+  "Last Resort",
+  "Protect"
+ ],
+ "arceus-ghost": [
+  "Shadow Ball",
+  "Last Resort",
+  "Protect"
+ ],
+ "arceus-grass": [
+  "Energy Ball",
+  "Last Resort",
+  "Protect"
+ ],
+ "arceus-ground": [
+  "Earthquake",
+  "Last Resort",
+  "Protect"
+ ],
+ "arceus-ice": [
+  "Ice Beam",
+  "Last Resort",
+  "Protect"
+ ],
+ "arceus-poison": [
+  "Gunk Shot",
+  "Last Resort",
+  "Protect"
+ ],
+ "arceus-psychic": [
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "arceus-rock": [
+  "Power Gem",
+  "Last Resort",
+  "Protect"
+ ],
+ "arceus-steel": [
+  "Flash Cannon",
+  "Last Resort",
+  "Protect"
+ ],
+ "arceus-water": [
+  "Surf",
+  "Last Resort",
+  "Protect"
+ ],
+ "victini": [
+  "Future Sight",
+  "V-create",
+  "Flare Blitz",
+  "Protect"
+ ],
+ "snivy": [
+  "Leaf Storm",
+  "Energy Ball",
+  "Protect"
+ ],
+ "servine": [
+  "Leaf Storm",
+  "Energy Ball",
+  "Protect"
+ ],
+ "serperior": [
+  "Leaf Storm",
+  "Energy Ball",
+  "Protect"
+ ],
+ "tepig": [
+  "Burn Up",
+  "Flare Blitz",
+  "Protect"
+ ],
+ "pignite": [
+  "Burn Up",
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "emboar": [
+  "Burn Up",
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "oshawott": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "dewott": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "samurott": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "samurott-hisui": [
+  "Surf",
+  "Dark Pulse",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "patrat": [
+  "Last Resort",
+  "Hyper Fang",
+  "Protect"
+ ],
+ "watchog": [
+  "Last Resort",
+  "Focus Punch",
+  "Protect"
+ ],
+ "lillipup": [
+  "Last Resort",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "herdier": [
+  "Last Resort",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "stoutland": [
+  "Last Resort",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "purrloin": [
+  "Foul Play",
+  "Dark Pulse",
+  "Protect"
+ ],
+ "liepard": [
+  "Foul Play",
+  "Dark Pulse",
+  "Protect"
+ ],
+ "pansage": [
+  "Leaf Storm",
+  "Focus Punch",
+  "Protect"
+ ],
+ "simisage": [
+  "Leaf Storm",
+  "Focus Punch",
+  "Protect"
+ ],
+ "pansear": [
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "simisear": [
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "panpour": [
+  "Surf",
+  "Focus Punch",
+  "Protect"
+ ],
+ "simipour": [
+  "Surf",
+  "Focus Punch",
+  "Protect"
+ ],
+ "munna": [
+  "Future Sight",
+  "Synchronoise",
+  "Protect"
+ ],
+ "musharna": [
+  "Future Sight",
+  "Synchronoise",
+  "Protect"
+ ],
+ "pidove": [
+  "Uproar",
+  "Air Slash",
+  "Facade",
+  "Protect"
+ ],
+ "tranquill": [
+  "Uproar",
+  "Air Slash",
+  "Facade",
+  "Protect"
+ ],
+ "unfezant": [
+  "Uproar",
+  "Brave Bird",
+  "Hurricane",
+  "Protect"
+ ],
+ "blitzle": [
+  "Supercell Slam",
+  "Thunderbolt",
+  "Protect"
+ ],
+ "zebstrika": [
+  "Supercell Slam",
+  "Thunderbolt",
+  "Protect"
+ ],
+ "roggenrola": [
+  "Stone Edge",
+  "Rock Slide",
+  "Protect"
+ ],
+ "boldore": [
+  "Power Gem",
+  "Stone Edge",
+  "Protect"
+ ],
+ "gigalith": [
+  "Power Gem",
+  "Stone Edge",
+  "Protect"
+ ],
+ "woobat": [
+  "Future Sight",
+  "Air Slash",
+  "Synchronoise",
+  "Protect"
+ ],
+ "swoobat": [
+  "Future Sight",
+  "Air Slash",
+  "Synchronoise",
+  "Protect"
+ ],
+ "drilbur": [
+  "Earthquake",
+  "High Horsepower",
+  "Protect"
+ ],
+ "excadrill": [
+  "Earthquake",
+  "Iron Head",
+  "High Horsepower",
+  "Protect"
+ ],
+ "audino": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "timburr": [
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "gurdurr": [
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "conkeldurr": [
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "tympole": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "palpitoad": [
+  "Surf",
+  "Earth Power",
+  "Focus Punch",
+  "Protect"
+ ],
+ "seismitoad": [
+  "Surf",
+  "Earthquake",
+  "Focus Punch",
+  "Protect"
+ ],
+ "throh": [
+  "Focus Punch",
+  "Superpower",
+  "Protect"
+ ],
+ "sawk": [
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "sewaddle": [
+  "Bug Buzz",
+  "Energy Ball",
+  "Lunge",
+  "Protect"
+ ],
+ "swadloon": [
+  "Bug Buzz",
+  "Energy Ball",
+  "Lunge",
+  "Protect"
+ ],
+ "leavanny": [
+  "Bug Buzz",
+  "Leaf Storm",
+  "Energy Ball",
+  "Protect"
+ ],
+ "venipede": [
+  "Signal Beam",
+  "Sludge Bomb",
+  "Steel Roller",
+  "Protect"
+ ],
+ "whirlipede": [
+  "Signal Beam",
+  "Sludge Bomb",
+  "Steel Roller",
+  "Protect"
+ ],
+ "scolipede": [
+  "Megahorn",
+  "Sludge Bomb",
+  "Steel Roller",
+  "Protect"
+ ],
+ "cottonee": [
+  "Energy Ball",
+  "Dazzling Gleam",
+  "Seed Bomb",
+  "Protect"
+ ],
+ "whimsicott": [
+  "Energy Ball",
+  "Moonblast",
+  "Play Rough",
+  "Protect"
+ ],
+ "petilil": [
+  "Leaf Storm",
+  "Energy Ball",
+  "Protect"
+ ],
+ "lilligant": [
+  "Petal Dance",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "lilligant-hisui": [
+  "Leaf Storm",
+  "Close Combat",
+  "Axe Kick",
+  "Protect"
+ ],
+ "basculin": [
+  "Wave Crash",
+  "Surf",
+  "Protect"
+ ],
+ "basculin-blue-striped": [
+  "Wave Crash",
+  "Surf",
+  "Protect"
+ ],
+ "basculin-white-striped": [
+  "Wave Crash",
+  "Surf",
+  "Protect"
+ ],
+ "sandile": [
+  "Earthquake",
+  "Foul Play",
+  "Earth Power",
+  "Protect"
+ ],
+ "krokorok": [
+  "Earthquake",
+  "Foul Play",
+  "Focus Punch",
+  "Protect"
+ ],
+ "krookodile": [
+  "Earthquake",
+  "Foul Play",
+  "Focus Punch",
+  "Protect"
+ ],
+ "darumaka": [
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "darumaka-galar": [
+  "Ice Beam",
+  "Focus Punch",
+  "Protect"
+ ],
+ "darmanitan": [
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "darmanitan-zen": [
+  "Flare Blitz",
+  "Future Sight",
+  "Overheat",
+  "Protect"
+ ],
+ "darmanitan-galar": [
+  "Ice Beam",
+  "Focus Punch",
+  "Protect"
+ ],
+ "darmanitan-galar-zen": [
+  "Ice Beam",
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "maractus": [
+  "Petal Dance",
+  "Wood Hammer",
+  "Protect"
+ ],
+ "dwebble": [
+  "X-Scissor",
+  "Stone Edge",
+  "Rock Slide",
+  "Protect"
+ ],
+ "crustle": [
+  "X-Scissor",
+  "Stone Edge",
+  "Rock Slide",
+  "Protect"
+ ],
+ "scraggy": [
+  "Foul Play",
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "scrafty": [
+  "Foul Play",
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "sigilyph": [
+  "Future Sight",
+  "Air Slash",
+  "Synchronoise",
+  "Protect"
+ ],
+ "yamask": [
+  "Poltergeist",
+  "Shadow Ball",
+  "Protect"
+ ],
+ "yamask-galar": [
+  "Earthquake",
+  "Poltergeist",
+  "Earth Power",
+  "Protect"
+ ],
+ "cofagrigus": [
+  "Poltergeist",
+  "Shadow Ball",
+  "Protect"
+ ],
+ "tirtouga": [
+  "Surf",
+  "Stone Edge",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "carracosta": [
+  "Surf",
+  "Stone Edge",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "archen": [
+  "Head Smash",
+  "Aerial Ace",
+  "Stone Edge",
+  "Protect"
+ ],
+ "archeops": [
+  "Head Smash",
+  "Air Slash",
+  "Outrage",
+  "Protect"
+ ],
+ "trubbish": [
+  "Belch",
+  "Gunk Shot",
+  "Protect"
+ ],
+ "garbodor": [
+  "Belch",
+  "Gunk Shot",
+  "Protect"
+ ],
+ "zorua": [
+  "Foul Play",
+  "Night Daze",
+  "Protect"
+ ],
+ "zorua-hisui": [
+  "Hyper Voice",
+  "Shadow Ball",
+  "Focus Punch",
+  "Protect"
+ ],
+ "zoroark": [
+  "Foul Play",
+  "Night Daze",
+  "Protect"
+ ],
+ "zoroark-hisui": [
+  "Hyper Voice",
+  "Poltergeist",
+  "Focus Punch",
+  "Protect"
+ ],
+ "minccino": [
+  "Last Resort",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "cinccino": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "gothita": [
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "gothorita": [
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "gothitelle": [
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "solosis": [
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "duosion": [
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "reuniclus": [
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "ducklett": [
+  "Surf",
+  "Brave Bird",
+  "Liquidation",
+  "Protect"
+ ],
+ "swanna": [
+  "Surf",
+  "Brave Bird",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "vanillite": [
+  "Ice Beam",
+  "Blizzard",
+  "Protect"
+ ],
+ "vanillish": [
+  "Ice Beam",
+  "Blizzard",
+  "Protect"
+ ],
+ "vanilluxe": [
+  "Ice Beam",
+  "Blizzard",
+  "Protect"
+ ],
+ "deerling": [
+  "Last Resort",
+  "Leaf Storm",
+  "Double-Edge",
+  "Protect"
+ ],
+ "deerling-summer": [
+  "Last Resort",
+  "Leaf Storm",
+  "Double-Edge",
+  "Protect"
+ ],
+ "deerling-autumn": [
+  "Last Resort",
+  "Leaf Storm",
+  "Double-Edge",
+  "Protect"
+ ],
+ "deerling-winter": [
+  "Last Resort",
+  "Leaf Storm",
+  "Double-Edge",
+  "Protect"
+ ],
+ "sawsbuck": [
+  "Last Resort",
+  "Leaf Storm",
+  "Double-Edge",
+  "Protect"
+ ],
+ "emolga": [
+  "Thunderbolt",
+  "Air Slash",
+  "Last Resort",
+  "Protect"
+ ],
+ "karrablast": [
+  "Megahorn",
+  "Bug Buzz",
+  "Protect"
+ ],
+ "escavalier": [
+  "Megahorn",
+  "Iron Head",
+  "Bug Buzz",
+  "Protect"
+ ],
+ "foongus": [
+  "Leaf Storm",
+  "Sludge Bomb",
+  "Energy Ball",
+  "Protect"
+ ],
+ "amoonguss": [
+  "Leaf Storm",
+  "Sludge Bomb",
+  "Energy Ball",
+  "Protect"
+ ],
+ "frillish": [
+  "Water Spout",
+  "Poltergeist",
+  "Surf",
+  "Protect"
+ ],
+ "jellicent": [
+  "Water Spout",
+  "Poltergeist",
+  "Surf",
+  "Protect"
+ ],
+ "alomomola": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "joltik": [
+  "Bug Buzz",
+  "Thunderbolt",
+  "Wild Charge",
+  "Protect"
+ ],
+ "galvantula": [
+  "Bug Buzz",
+  "Thunderbolt",
+  "Wild Charge",
+  "Protect"
+ ],
+ "ferroseed": [
+  "Energy Ball",
+  "Steel Roller",
+  "Flash Cannon",
+  "Protect"
+ ],
+ "ferrothorn": [
+  "Power Whip",
+  "Steel Roller",
+  "Energy Ball",
+  "Protect"
+ ],
+ "klink": [
+  "Steel Roller",
+  "Flash Cannon",
+  "Protect"
+ ],
+ "klang": [
+  "Steel Roller",
+  "Flash Cannon",
+  "Protect"
+ ],
+ "klinklang": [
+  "Steel Roller",
+  "Flash Cannon",
+  "Protect"
+ ],
+ "tynamo": [
+  "Spark",
+  "Tera Blast"
+ ],
+ "eelektrik": [
+  "Thunderbolt",
+  "Wild Charge",
+  "Protect"
+ ],
+ "eelektross": [
+  "Supercell Slam",
+  "Focus Punch",
+  "Protect"
+ ],
+ "elgyem": [
+  "Synchronoise",
+  "Dream Eater",
+  "Protect"
+ ],
+ "beheeyem": [
+  "Future Sight",
+  "Synchronoise",
+  "Protect"
+ ],
+ "litwick": [
+  "Poltergeist",
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "lampent": [
+  "Poltergeist",
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "chandelure": [
+  "Poltergeist",
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "axew": [
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "fraxure": [
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "haxorus": [
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "cubchoo": [
+  "Ice Beam",
+  "Focus Punch",
+  "Protect"
+ ],
+ "beartic": [
+  "Ice Beam",
+  "Focus Punch",
+  "Protect"
+ ],
+ "cryogonal": [
+  "Ice Beam",
+  "Ice Spinner",
+  "Protect"
+ ],
+ "shelmet": [
+  "Bug Buzz",
+  "Double-Edge",
+  "Protect"
+ ],
+ "accelgor": [
+  "Bug Buzz",
+  "Leech Life",
+  "Protect"
+ ],
+ "stunfisk": [
+  "Earthquake",
+  "Thunderbolt",
+  "Earth Power",
+  "Protect"
+ ],
+ "stunfisk-galar": [
+  "Earthquake",
+  "Flash Cannon",
+  "Earth Power",
+  "Protect"
+ ],
+ "mienfoo": [
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "mienshao": [
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "druddigon": [
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "golett": [
+  "Earthquake",
+  "Poltergeist",
+  "Focus Punch",
+  "Protect"
+ ],
+ "golurk": [
+  "Earthquake",
+  "Poltergeist",
+  "Focus Punch",
+  "Protect"
+ ],
+ "pawniard": [
+  "Foul Play",
+  "Flash Cannon",
+  "Dark Pulse",
+  "Protect"
+ ],
+ "bisharp": [
+  "Foul Play",
+  "Flash Cannon",
+  "Dark Pulse",
+  "Protect"
+ ],
+ "bouffalant": [
+  "Head Charge",
+  "Thrash",
+  "Protect"
+ ],
+ "rufflet": [
+  "Double-Edge",
+  "Brave Bird",
+  "Thrash",
+  "Protect"
+ ],
+ "braviary": [
+  "Double-Edge",
+  "Brave Bird",
+  "Thrash",
+  "Protect"
+ ],
+ "braviary-hisui": [
+  "Future Sight",
+  "Brave Bird",
+  "Psychic",
+  "Protect"
+ ],
+ "vullaby": [
+  "Foul Play",
+  "Brave Bird",
+  "Dark Pulse",
+  "Protect"
+ ],
+ "mandibuzz": [
+  "Foul Play",
+  "Brave Bird",
+  "Dark Pulse",
+  "Protect"
+ ],
+ "heatmor": [
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "durant": [
+  "First Impression",
+  "Flash Cannon",
+  "Iron Head",
+  "Protect"
+ ],
+ "deino": [
+  "Crunch",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "zweilous": [
+  "Crunch",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "hydreigon": [
+  "Crunch",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "larvesta": [
+  "Bug Buzz",
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "volcarona": [
+  "Bug Buzz",
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "cobalion": [
+  "Flash Cannon",
+  "Close Combat",
+  "Superpower",
+  "Protect"
+ ],
+ "terrakion": [
+  "Stone Edge",
+  "Close Combat",
+  "Superpower",
+  "Protect"
+ ],
+ "virizion": [
+  "Leaf Storm",
+  "Close Combat",
+  "Superpower",
+  "Protect"
+ ],
+ "tornadus": [
+  "Bleakwind Storm",
+  "Superpower",
+  "Protect"
+ ],
+ "tornadus-therian": [
+  "Bleakwind Storm",
+  "Superpower",
+  "Protect"
+ ],
+ "thundurus": [
+  "Supercell Slam",
+  "Acrobatics",
+  "Thunderbolt",
+  "Protect"
+ ],
+ "thundurus-therian": [
+  "Supercell Slam",
+  "Acrobatics",
+  "Thunderbolt",
+  "Protect"
+ ],
+ "reshiram": [
+  "Outrage",
+  "Flare Blitz",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "zekrom": [
+  "Outrage",
+  "Bolt Strike",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "landorus": [
+  "Earthquake",
+  "Earth Power",
+  "Protect"
+ ],
+ "landorus-therian": [
+  "Earthquake",
+  "Earth Power",
+  "Protect"
+ ],
+ "kyurem": [
+  "Outrage",
+  "Ice Beam",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "kyurem-black": [
+  "Outrage",
+  "Ice Beam",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "kyurem-white": [
+  "Outrage",
+  "Ice Beam",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "keldeo": [
+  "Surf",
+  "Close Combat",
+  "Superpower",
+  "Protect"
+ ],
+ "keldeo-resolute": [
+  "Surf",
+  "Close Combat",
+  "Superpower",
+  "Protect"
+ ],
+ "meloetta": [
+  "Last Resort",
+  "Dream Eater",
+  "Focus Punch",
+  "Protect"
+ ],
+ "meloetta-pirouette": [
+  "Last Resort",
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "genesect": [
+  "Bug Buzz",
+  "Flash Cannon",
+  "Last Resort",
+  "Protect"
+ ],
+ "genesect-douse": [
+  "Bug Buzz",
+  "Flash Cannon",
+  "Last Resort",
+  "Protect"
+ ],
+ "genesect-shock": [
+  "Bug Buzz",
+  "Flash Cannon",
+  "Last Resort",
+  "Protect"
+ ],
+ "genesect-burn": [
+  "Bug Buzz",
+  "Flash Cannon",
+  "Last Resort",
+  "Protect"
+ ],
+ "genesect-chill": [
+  "Bug Buzz",
+  "Flash Cannon",
+  "Last Resort",
+  "Protect"
+ ],
+ "chespin": [
+  "Wood Hammer",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "quilladin": [
+  "Wood Hammer",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "chesnaught": [
+  "Wood Hammer",
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "fennekin": [
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "braixen": [
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "delphox": [
+  "Flare Blitz",
+  "Future Sight",
+  "Overheat",
+  "Protect"
+ ],
+ "froakie": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "frogadier": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "greninja": [
+  "Surf",
+  "Dark Pulse",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "greninja-bond": [
+  "Surf",
+  "Dark Pulse",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "greninja-ash": [
+  "Surf",
+  "Dark Pulse",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "bunnelby": [
+  "Last Resort",
+  "Strength",
+  "Protect"
+ ],
+ "diggersby": [
+  "Last Resort",
+  "Earthquake",
+  "Focus Punch",
+  "Protect"
+ ],
+ "fletchling": [
+  "Double-Edge",
+  "Brave Bird",
+  "Flare Blitz",
+  "Protect"
+ ],
+ "fletchinder": [
+  "Flare Blitz",
+  "Brave Bird",
+  "Overheat",
+  "Protect"
+ ],
+ "talonflame": [
+  "Flare Blitz",
+  "Brave Bird",
+  "Overheat",
+  "Protect"
+ ],
+ "scatterbug": [
+  "Bug Bite",
+  "Tera Blast"
+ ],
+ "spewpa": [
+  "Bug Bite",
+  "Tera Blast",
+  "Protect"
+ ],
+ "vivillon": [
+  "Bug Buzz",
+  "Hurricane",
+  "Pollen Puff",
+  "Protect"
+ ],
+ "vivillon-icy-snow": [
+  "Bug Bite",
+  "Tera Blast",
+  "Protect"
+ ],
+ "vivillon-polar": [
+  "Bug Bite",
+  "Tera Blast",
+  "Protect"
+ ],
+ "vivillon-tundra": [
+  "Bug Bite",
+  "Tera Blast",
+  "Protect"
+ ],
+ "vivillon-continental": [
+  "Bug Bite",
+  "Tera Blast",
+  "Protect"
+ ],
+ "vivillon-garden": [
+  "Bug Bite",
+  "Tera Blast",
+  "Protect"
+ ],
+ "vivillon-elegant": [
+  "Bug Bite",
+  "Tera Blast",
+  "Protect"
+ ],
+ "vivillon-modern": [
+  "Bug Bite",
+  "Tera Blast",
+  "Protect"
+ ],
+ "vivillon-marine": [
+  "Bug Bite",
+  "Tera Blast",
+  "Protect"
+ ],
+ "vivillon-archipelago": [
+  "Bug Bite",
+  "Tera Blast",
+  "Protect"
+ ],
+ "vivillon-high-plains": [
+  "Bug Bite",
+  "Tera Blast",
+  "Protect"
+ ],
+ "vivillon-sandstorm": [
+  "Bug Bite",
+  "Tera Blast",
+  "Protect"
+ ],
+ "vivillon-river": [
+  "Bug Bite",
+  "Tera Blast",
+  "Protect"
+ ],
+ "vivillon-monsoon": [
+  "Bug Bite",
+  "Tera Blast",
+  "Protect"
+ ],
+ "vivillon-savanna": [
+  "Bug Bite",
+  "Tera Blast",
+  "Protect"
+ ],
+ "vivillon-sun": [
+  "Bug Bite",
+  "Tera Blast",
+  "Protect"
+ ],
+ "vivillon-ocean": [
+  "Bug Bite",
+  "Tera Blast",
+  "Protect"
+ ],
+ "vivillon-jungle": [
+  "Bug Bite",
+  "Tera Blast",
+  "Protect"
+ ],
+ "vivillon-fancy": [
+  "Bug Buzz",
+  "Hurricane",
+  "Pollen Puff",
+  "Protect"
+ ],
+ "vivillon-pokeball": [
+  "Bug Buzz",
+  "Hurricane",
+  "Pollen Puff",
+  "Protect"
+ ],
+ "litleo": [
+  "Flare Blitz",
+  "Double-Edge",
+  "Overheat",
+  "Protect"
+ ],
+ "pyroar": [
+  "Flare Blitz",
+  "Double-Edge",
+  "Overheat",
+  "Protect"
+ ],
+ "flabe-be-": [
+  "Moonblast",
+  "Alluring Voice",
+  "Protect"
+ ],
+ "floette": [
+  "Moonblast",
+  "Alluring Voice",
+  "Protect"
+ ],
+ "floette-eternal": [
+  "Light of Ruin",
+  "Moonblast",
+  "Protect"
+ ],
+ "florges": [
+  "Moonblast",
+  "Alluring Voice",
+  "Protect"
+ ],
+ "skiddo": [
+  "Leaf Storm",
+  "Energy Ball",
+  "Protect"
+ ],
+ "gogoat": [
+  "Leaf Storm",
+  "Energy Ball",
+  "Protect"
+ ],
+ "pancham": [
+  "Focus Punch",
+  "Superpower",
+  "Protect"
+ ],
+ "pangoro": [
+  "Focus Punch",
+  "Foul Play",
+  "Close Combat",
+  "Protect"
+ ],
+ "furfrou": [
+  "Last Resort",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "espurr": [
+  "Dream Eater",
+  "Psychic",
+  "Protect"
+ ],
+ "meowstic": [
+  "Dream Eater",
+  "Psychic",
+  "Protect"
+ ],
+ "meowstic-f": [
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "honedge": [
+  "Flash Cannon",
+  "Shadow Claw",
+  "Close Combat",
+  "Protect"
+ ],
+ "doublade": [
+  "Flash Cannon",
+  "Shadow Claw",
+  "Close Combat",
+  "Protect"
+ ],
+ "aegislash": [
+  "Flash Cannon",
+  "Shadow Ball",
+  "Close Combat",
+  "Protect"
+ ],
+ "aegislash-blade": [
+  "Flash Cannon",
+  "Shadow Ball",
+  "Close Combat",
+  "Protect"
+ ],
+ "spritzee": [
+  "Moonblast",
+  "Dazzling Gleam",
+  "Protect"
+ ],
+ "aromatisse": [
+  "Moonblast",
+  "Dazzling Gleam",
+  "Protect"
+ ],
+ "swirlix": [
+  "Play Rough",
+  "Dazzling Gleam",
+  "Protect"
+ ],
+ "slurpuff": [
+  "Play Rough",
+  "Dazzling Gleam",
+  "Protect"
+ ],
+ "inkay": [
+  "Foul Play",
+  "Future Sight",
+  "Psychic",
+  "Protect"
+ ],
+ "malamar": [
+  "Foul Play",
+  "Future Sight",
+  "Psychic",
+  "Protect"
+ ],
+ "binacle": [
+  "Stone Edge",
+  "Surf",
+  "Liquidation",
+  "Protect"
+ ],
+ "barbaracle": [
+  "Stone Edge",
+  "Surf",
+  "Liquidation",
+  "Protect"
+ ],
+ "skrelp": [
+  "Gunk Shot",
+  "Surf",
+  "Sludge Wave",
+  "Protect"
+ ],
+ "dragalge": [
+  "Gunk Shot",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "clauncher": [
+  "Crabhammer",
+  "Surf",
+  "Protect"
+ ],
+ "clawitzer": [
+  "Crabhammer",
+  "Surf",
+  "Protect"
+ ],
+ "helioptile": [
+  "Thunderbolt",
+  "Facade",
+  "Wild Charge",
+  "Protect"
+ ],
+ "heliolisk": [
+  "Thunderbolt",
+  "Hyper Voice",
+  "Mega Kick",
+  "Protect"
+ ],
+ "tyrunt": [
+  "Stone Edge",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "tyrantrum": [
+  "Head Smash",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "amaura": [
+  "Stone Edge",
+  "Ice Beam",
+  "Outrage",
+  "Protect"
+ ],
+ "aurorus": [
+  "Stone Edge",
+  "Ice Beam",
+  "Outrage",
+  "Protect"
+ ],
+ "sylveon": [
+  "Moonblast",
+  "Last Resort",
+  "Protect"
+ ],
+ "hawlucha": [
+  "Focus Punch",
+  "Brave Bird",
+  "Close Combat",
+  "Protect"
+ ],
+ "dedenne": [
+  "Thunderbolt",
+  "Play Rough",
+  "Last Resort",
+  "Protect"
+ ],
+ "carbink": [
+  "Power Gem",
+  "Moonblast",
+  "Dazzling Gleam",
+  "Protect"
+ ],
+ "goomy": [
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "sliggoo": [
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "sliggoo-hisui": [
+  "Flash Cannon",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "goodra": [
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "goodra-hisui": [
+  "Flash Cannon",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "klefki": [
+  "Flash Cannon",
+  "Play Rough",
+  "Last Resort",
+  "Protect"
+ ],
+ "phantump": [
+  "Poltergeist",
+  "Wood Hammer",
+  "Energy Ball",
+  "Protect"
+ ],
+ "trevenant": [
+  "Poltergeist",
+  "Wood Hammer",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "pumpkaboo": [
+  "Poltergeist",
+  "Energy Ball",
+  "Seed Bomb",
+  "Protect"
+ ],
+ "pumpkaboo-small": [
+  "Poltergeist",
+  "Energy Ball",
+  "Seed Bomb",
+  "Protect"
+ ],
+ "pumpkaboo-large": [
+  "Poltergeist",
+  "Energy Ball",
+  "Seed Bomb",
+  "Protect"
+ ],
+ "pumpkaboo-super": [
+  "Poltergeist",
+  "Energy Ball",
+  "Seed Bomb",
+  "Protect"
+ ],
+ "gourgeist": [
+  "Poltergeist",
+  "Power Whip",
+  "Energy Ball",
+  "Protect"
+ ],
+ "gourgeist-small": [
+  "Poltergeist",
+  "Energy Ball",
+  "Seed Bomb",
+  "Protect"
+ ],
+ "gourgeist-large": [
+  "Poltergeist",
+  "Energy Ball",
+  "Seed Bomb",
+  "Protect"
+ ],
+ "gourgeist-super": [
+  "Poltergeist",
+  "Power Whip",
+  "Energy Ball",
+  "Protect"
+ ],
+ "bergmite": [
+  "Ice Beam",
+  "Double-Edge",
+  "Protect"
+ ],
+ "avalugg": [
+  "Ice Beam",
+  "Double-Edge",
+  "Protect"
+ ],
+ "avalugg-hisui": [
+  "Ice Beam",
+  "Stone Edge",
+  "Mountain Gale",
+  "Protect"
+ ],
+ "noibat": [
+  "Hurricane",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "noivern": [
+  "Hurricane",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "xerneas": [
+  "Moonblast",
+  "Play Rough",
+  "Protect"
+ ],
+ "yveltal": [
+  "Foul Play",
+  "Oblivion Wing",
+  "Dark Pulse",
+  "Protect"
+ ],
+ "zygarde": [
+  "Outrage",
+  "Earthquake",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "zygarde-10-": [
+  "Outrage",
+  "Earthquake",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "zygarde-complete": [
+  "Outrage",
+  "Earthquake",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "diancie": [
+  "Diamond Storm",
+  "Moonblast",
+  "Last Resort",
+  "Protect"
+ ],
+ "hoopa": [
+  "Future Sight",
+  "Shadow Ball",
+  "Dream Eater",
+  "Protect"
+ ],
+ "hoopa-unbound": [
+  "Future Sight",
+  "Hyperspace Fury",
+  "Dream Eater",
+  "Protect"
+ ],
+ "volcanion": [
+  "Flare Blitz",
+  "Steam Eruption",
+  "Overheat",
+  "Protect"
+ ],
+ "rowlet": [
+  "Leaf Storm",
+  "Brave Bird",
+  "Energy Ball",
+  "Protect"
+ ],
+ "dartrix": [
+  "Leaf Storm",
+  "Brave Bird",
+  "Energy Ball",
+  "Protect"
+ ],
+ "decidueye": [
+  "Leaf Storm",
+  "Poltergeist",
+  "Energy Ball",
+  "Protect"
+ ],
+ "decidueye-hisui": [
+  "Leaf Storm",
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "litten": [
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "torracat": [
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "incineroar": [
+  "Flare Blitz",
+  "Darkest Lariat",
+  "Overheat",
+  "Protect"
+ ],
+ "popplio": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "brionne": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "primarina": [
+  "Sparkling Aria",
+  "Moonblast",
+  "Surf",
+  "Protect"
+ ],
+ "pikipek": [
+  "Boomburst",
+  "Brave Bird",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "trumbeak": [
+  "Boomburst",
+  "Brave Bird",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "toucannon": [
+  "Boomburst",
+  "Brave Bird",
+  "Beak Blast",
+  "Protect"
+ ],
+ "yungoos": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "gumshoos": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "gumshoos-totem": [
+  "Last Resort",
+  "Thrash",
+  "Protect"
+ ],
+ "grubbin": [
+  "Lunge",
+  "X-Scissor",
+  "Protect"
+ ],
+ "charjabug": [
+  "Lunge",
+  "Thunderbolt",
+  "Wild Charge",
+  "Protect"
+ ],
+ "vikavolt": [
+  "Bug Buzz",
+  "Supercell Slam",
+  "Thunderbolt",
+  "Protect"
+ ],
+ "vikavolt-totem": [
+  "Bug Buzz",
+  "Supercell Slam",
+  "Thunderbolt",
+  "Protect"
+ ],
+ "crabrawler": [
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "crabominable": [
+  "Focus Punch",
+  "Ice Beam",
+  "Close Combat",
+  "Protect"
+ ],
+ "oricorio": [
+  "Hurricane",
+  "Air Slash",
+  "Protect"
+ ],
+ "oricorio-pom-pom": [
+  "Hurricane",
+  "Air Slash",
+  "Protect"
+ ],
+ "oricorio-pa-u": [
+  "Hurricane",
+  "Air Slash",
+  "Protect"
+ ],
+ "oricorio-sensu": [
+  "Hurricane",
+  "Air Slash",
+  "Protect"
+ ],
+ "cutiefly": [
+  "Bug Buzz",
+  "Moonblast",
+  "Last Resort",
+  "Protect"
+ ],
+ "ribombee": [
+  "Bug Buzz",
+  "Moonblast",
+  "Last Resort",
+  "Protect"
+ ],
+ "ribombee-totem": [
+  "Bug Buzz",
+  "Moonblast",
+  "Last Resort",
+  "Protect"
+ ],
+ "rockruff": [
+  "Stone Edge",
+  "Last Resort",
+  "Protect"
+ ],
+ "rockruff-dusk": [
+  "Stone Edge",
+  "Last Resort",
+  "Protect"
+ ],
+ "lycanroc": [
+  "Stone Edge",
+  "Last Resort",
+  "Protect"
+ ],
+ "lycanroc-midnight": [
+  "Stone Edge",
+  "Focus Punch",
+  "Protect"
+ ],
+ "lycanroc-dusk": [
+  "Stone Edge",
+  "Last Resort",
+  "Protect"
+ ],
+ "wishiwashi": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "wishiwashi-school": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "mareanie": [
+  "Gunk Shot",
+  "Surf",
+  "Sludge Wave",
+  "Protect"
+ ],
+ "toxapex": [
+  "Gunk Shot",
+  "Surf",
+  "Sludge Wave",
+  "Protect"
+ ],
+ "mudbray": [
+  "Earthquake",
+  "High Horsepower",
+  "Protect"
+ ],
+ "mudsdale": [
+  "Earthquake",
+  "High Horsepower",
+  "Protect"
+ ],
+ "dewpider": [
+  "Surf",
+  "Bug Buzz",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "araquanid": [
+  "Surf",
+  "Bug Buzz",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "araquanid-totem": [
+  "Surf",
+  "Bug Buzz",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "fomantis": [
+  "Leaf Storm",
+  "Energy Ball",
+  "Protect"
+ ],
+ "lurantis": [
+  "Leaf Storm",
+  "Energy Ball",
+  "Protect"
+ ],
+ "lurantis-totem": [
+  "Leaf Storm",
+  "Energy Ball",
+  "Protect"
+ ],
+ "morelull": [
+  "Energy Ball",
+  "Moonblast",
+  "Dazzling Gleam",
+  "Protect"
+ ],
+ "shiinotic": [
+  "Energy Ball",
+  "Moonblast",
+  "Dazzling Gleam",
+  "Protect"
+ ],
+ "salandit": [
+  "Belch",
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "salazzle": [
+  "Belch",
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "salazzle-totem": [
+  "Belch",
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "stufful": [
+  "Double-Edge",
+  "Focus Punch",
+  "Superpower",
+  "Protect"
+ ],
+ "bewear": [
+  "Double-Edge",
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "bounsweet": [
+  "Leaf Storm",
+  "Energy Ball",
+  "Protect"
+ ],
+ "steenee": [
+  "Leaf Storm",
+  "Energy Ball",
+  "Protect"
+ ],
+ "tsareena": [
+  "Leaf Storm",
+  "Power Whip",
+  "Protect"
+ ],
+ "comfey": [
+  "Play Rough",
+  "Alluring Voice",
+  "Protect"
+ ],
+ "oranguru": [
+  "Last Resort",
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "passimian": [
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "wimpod": [
+  "Bug Buzz",
+  "Surf",
+  "Leech Life",
+  "Protect"
+ ],
+ "golisopod": [
+  "Bug Buzz",
+  "Surf",
+  "First Impression",
+  "Protect"
+ ],
+ "sandygast": [
+  "Poltergeist",
+  "Earthquake",
+  "Earth Power",
+  "Protect"
+ ],
+ "palossand": [
+  "Poltergeist",
+  "Earthquake",
+  "Earth Power",
+  "Protect"
+ ],
+ "type-null": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "silvally": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "silvally-bug": [
+  "X-Scissor",
+  "Last Resort",
+  "Protect"
+ ],
+ "silvally-dark": [
+  "Crunch",
+  "Last Resort",
+  "Protect"
+ ],
+ "silvally-dragon": [
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "silvally-electric": [
+  "Thunderbolt",
+  "Last Resort",
+  "Protect"
+ ],
+ "silvally-fairy": [
+  "Last Resort",
+  "Protect"
+ ],
+ "silvally-fighting": [
+  "Last Resort",
+  "Protect"
+ ],
+ "silvally-fire": [
+  "Flamethrower",
+  "Last Resort",
+  "Protect"
+ ],
+ "silvally-flying": [
+  "Air Slash",
+  "Last Resort",
+  "Protect"
+ ],
+ "silvally-ghost": [
+  "Shadow Ball",
+  "Last Resort",
+  "Protect"
+ ],
+ "silvally-grass": [
+  "Grass Pledge",
+  "Last Resort",
+  "Protect"
+ ],
+ "silvally-ground": [
+  "Last Resort",
+  "Protect"
+ ],
+ "silvally-ice": [
+  "Ice Beam",
+  "Last Resort",
+  "Protect"
+ ],
+ "silvally-poison": [
+  "Poison Fang",
+  "Last Resort",
+  "Protect"
+ ],
+ "silvally-psychic": [
+  "Psychic Fangs",
+  "Last Resort",
+  "Protect"
+ ],
+ "silvally-rock": [
+  "Rock Slide",
+  "Last Resort",
+  "Protect"
+ ],
+ "silvally-steel": [
+  "Flash Cannon",
+  "Last Resort",
+  "Protect"
+ ],
+ "silvally-water": [
+  "Surf",
+  "Last Resort",
+  "Protect"
+ ],
+ "minior": [
+  "Power Gem",
+  "Acrobatics",
+  "Last Resort",
+  "Protect"
+ ],
+ "minior-orange": [
+  "Power Gem",
+  "Acrobatics",
+  "Last Resort",
+  "Protect"
+ ],
+ "minior-yellow": [
+  "Power Gem",
+  "Acrobatics",
+  "Last Resort",
+  "Protect"
+ ],
+ "minior-green": [
+  "Power Gem",
+  "Acrobatics",
+  "Last Resort",
+  "Protect"
+ ],
+ "minior-blue": [
+  "Power Gem",
+  "Acrobatics",
+  "Last Resort",
+  "Protect"
+ ],
+ "minior-indigo": [
+  "Power Gem",
+  "Acrobatics",
+  "Last Resort",
+  "Protect"
+ ],
+ "minior-violet": [
+  "Power Gem",
+  "Acrobatics",
+  "Last Resort",
+  "Protect"
+ ],
+ "minior-meteor": [
+  "Power Gem",
+  "Acrobatics",
+  "Last Resort",
+  "Protect"
+ ],
+ "komala": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "turtonator": [
+  "Shell Trap",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "togedemaru": [
+  "Thunderbolt",
+  "Steel Roller",
+  "Last Resort",
+  "Protect"
+ ],
+ "togedemaru-totem": [
+  "Thunderbolt",
+  "Steel Roller",
+  "Last Resort",
+  "Protect"
+ ],
+ "mimikyu": [
+  "Shadow Ball",
+  "Play Rough",
+  "Last Resort",
+  "Protect"
+ ],
+ "mimikyu-busted": [
+  "Shadow Ball",
+  "Play Rough",
+  "Last Resort",
+  "Protect"
+ ],
+ "mimikyu-totem": [
+  "Shadow Ball",
+  "Play Rough",
+  "Last Resort",
+  "Protect"
+ ],
+ "mimikyu-busted-totem": [
+  "Shadow Ball",
+  "Play Rough",
+  "Last Resort",
+  "Protect"
+ ],
+ "bruxish": [
+  "Wave Crash",
+  "Synchronoise",
+  "Dream Eater",
+  "Protect"
+ ],
+ "drampa": [
+  "Hyper Voice",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "dhelmise": [
+  "Poltergeist",
+  "Power Whip",
+  "Energy Ball",
+  "Protect"
+ ],
+ "jangmo-o": [
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "hakamo-o": [
+  "Outrage",
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "kommo-o": [
+  "Outrage",
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "kommo-o-totem": [
+  "Outrage",
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "tapu-koko": [
+  "Thunderbolt",
+  "Dazzling Gleam",
+  "Wild Charge",
+  "Protect"
+ ],
+ "tapu-lele": [
+  "Future Sight",
+  "Moonblast",
+  "Psychic",
+  "Protect"
+ ],
+ "tapu-bulu": [
+  "Wood Hammer",
+  "Dazzling Gleam",
+  "Focus Punch",
+  "Protect"
+ ],
+ "tapu-fini": [
+  "Surf",
+  "Moonblast",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "solgaleo": [
+  "Future Sight",
+  "Steel Roller",
+  "Sunsteel Strike",
+  "Protect"
+ ],
+ "lunala": [
+  "Future Sight",
+  "Moongeist Beam",
+  "Dream Eater",
+  "Protect"
+ ],
+ "nihilego": [
+  "Head Smash",
+  "Gunk Shot",
+  "Sludge Wave",
+  "Protect"
+ ],
+ "buzzwole": [
+  "Leech Life",
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "pheromosa": [
+  "Bug Buzz",
+  "Close Combat",
+  "High Jump Kick",
+  "Protect"
+ ],
+ "xurkitree": [
+  "Thunderbolt",
+  "Wild Charge",
+  "Protect"
+ ],
+ "celesteela": [
+  "Steel Roller",
+  "Air Slash",
+  "Double-Edge",
+  "Protect"
+ ],
+ "kartana": [
+  "Leaf Blade",
+  "Smart Strike",
+  "Last Resort",
+  "Protect"
+ ],
+ "guzzlord": [
+  "Crunch",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "necrozma": [
+  "Future Sight",
+  "Photon Geyser",
+  "Protect"
+ ],
+ "necrozma-dusk-mane": [
+  "Future Sight",
+  "Sunsteel Strike",
+  "Photon Geyser",
+  "Protect"
+ ],
+ "necrozma-dawn-wings": [
+  "Future Sight",
+  "Moongeist Beam",
+  "Photon Geyser",
+  "Protect"
+ ],
+ "necrozma-ultra": [
+  "Future Sight",
+  "Outrage",
+  "Photon Geyser",
+  "Protect"
+ ],
+ "magearna": [
+  "Steel Roller",
+  "Fleur Cannon",
+  "Last Resort",
+  "Protect"
+ ],
+ "magearna-original": [
+  "Steel Roller",
+  "Fleur Cannon",
+  "Last Resort",
+  "Protect"
+ ],
+ "marshadow": [
+  "Focus Punch",
+  "Poltergeist",
+  "Close Combat",
+  "Protect"
+ ],
+ "poipole": [
+  "Gunk Shot",
+  "Sludge Wave",
+  "Protect"
+ ],
+ "naganadel": [
+  "Gunk Shot",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "stakataka": [
+  "Stone Edge",
+  "Steel Roller",
+  "Double-Edge",
+  "Protect"
+ ],
+ "blacephalon": [
+  "Overheat",
+  "Shadow Ball",
+  "Fire Blast",
+  "Protect"
+ ],
+ "zeraora": [
+  "Plasma Fists",
+  "Focus Punch",
+  "Protect"
+ ],
+ "meltan": [
+  "Flash Cannon",
+  "Thunderbolt",
+  "Protect"
+ ],
+ "melmetal": [
+  "Steel Roller",
+  "Flash Cannon",
+  "Protect"
+ ],
+ "grookey": [
+  "Wood Hammer",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "thwackey": [
+  "Wood Hammer",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "rillaboom": [
+  "Wood Hammer",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "scorbunny": [
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "raboot": [
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "cinderace": [
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "sobble": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "drizzile": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "inteleon": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "skwovet": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "greedent": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "rookidee": [
+  "Brave Bird",
+  "Drill Peck",
+  "Protect"
+ ],
+ "corvisquire": [
+  "Brave Bird",
+  "Drill Peck",
+  "Protect"
+ ],
+ "corviknight": [
+  "Brave Bird",
+  "Flash Cannon",
+  "Double-Edge",
+  "Protect"
+ ],
+ "blipbug": [
+  "Struggle Bug",
+  "Infestation"
+ ],
+ "dottler": [
+  "Bug Buzz",
+  "Future Sight",
+  "Psychic",
+  "Protect"
+ ],
+ "orbeetle": [
+  "Bug Buzz",
+  "Future Sight",
+  "Psychic",
+  "Protect"
+ ],
+ "nickit": [
+  "Foul Play",
+  "Lash Out",
+  "Protect"
+ ],
+ "thievul": [
+  "Foul Play",
+  "Crunch",
+  "Protect"
+ ],
+ "gossifleur": [
+  "Leaf Storm",
+  "Energy Ball",
+  "Protect"
+ ],
+ "eldegoss": [
+  "Leaf Storm",
+  "Energy Ball",
+  "Protect"
+ ],
+ "wooloo": [
+  "Double-Edge",
+  "Take Down",
+  "Protect"
+ ],
+ "dubwool": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "chewtle": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "drednaw": [
+  "Surf",
+  "Head Smash",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "yamper": [
+  "Thunderbolt",
+  "Wild Charge",
+  "Protect"
+ ],
+ "boltund": [
+  "Thunderbolt",
+  "Wild Charge",
+  "Protect"
+ ],
+ "rolycoly": [
+  "Power Gem",
+  "Stone Edge",
+  "Protect"
+ ],
+ "carkol": [
+  "Power Gem",
+  "Burn Up",
+  "Flare Blitz",
+  "Protect"
+ ],
+ "coalossal": [
+  "Power Gem",
+  "Burn Up",
+  "Flare Blitz",
+  "Protect"
+ ],
+ "applin": [
+  "Grassy Glide",
+  "Draco Meteor",
+  "Tera Blast"
+ ],
+ "flapple": [
+  "Leaf Storm",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "appletun": [
+  "Leaf Storm",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "silicobra": [
+  "Earthquake",
+  "Last Resort",
+  "Protect"
+ ],
+ "sandaconda": [
+  "Earthquake",
+  "Last Resort",
+  "Protect"
+ ],
+ "cramorant": [
+  "Brave Bird",
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "cramorant-gulping": [
+  "Brave Bird",
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "cramorant-gorging": [
+  "Brave Bird",
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "arrokuda": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "barraskewda": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "toxel": [
+  "Nuzzle",
+  "Belch",
+  "Tera Blast",
+  "Protect"
+ ],
+ "toxtricity": [
+  "Thunderbolt",
+  "Belch",
+  "Gunk Shot",
+  "Protect"
+ ],
+ "toxtricity-low-key": [
+  "Thunderbolt",
+  "Belch",
+  "Gunk Shot",
+  "Protect"
+ ],
+ "toxtricity-low-key-gmax": [
+  "Thunderbolt",
+  "Belch",
+  "Gunk Shot",
+  "Protect"
+ ],
+ "sizzlipede": [
+  "Burn Up",
+  "Bug Buzz",
+  "Heat Wave",
+  "Protect"
+ ],
+ "centiskorch": [
+  "Burn Up",
+  "Bug Buzz",
+  "Flare Blitz",
+  "Protect"
+ ],
+ "clobbopus": [
+  "Close Combat",
+  "Superpower",
+  "Protect"
+ ],
+ "grapploct": [
+  "Close Combat",
+  "Superpower",
+  "Protect"
+ ],
+ "sinistea": [
+  "Poltergeist",
+  "Shadow Ball",
+  "Protect"
+ ],
+ "sinistea-antique": [
+  "Poltergeist",
+  "Shadow Ball",
+  "Protect"
+ ],
+ "polteageist": [
+  "Poltergeist",
+  "Shadow Ball",
+  "Protect"
+ ],
+ "polteageist-antique": [
+  "Poltergeist",
+  "Shadow Ball",
+  "Protect"
+ ],
+ "hatenna": [
+  "Future Sight",
+  "Psychic",
+  "Protect"
+ ],
+ "hattrem": [
+  "Future Sight",
+  "Psychic",
+  "Protect"
+ ],
+ "hatterene": [
+  "Future Sight",
+  "Play Rough",
+  "Psychic",
+  "Protect"
+ ],
+ "impidimp": [
+  "Foul Play",
+  "Play Rough",
+  "Dark Pulse",
+  "Protect"
+ ],
+ "morgrem": [
+  "Foul Play",
+  "Play Rough",
+  "Dark Pulse",
+  "Protect"
+ ],
+ "grimmsnarl": [
+  "Foul Play",
+  "Play Rough",
+  "Focus Punch",
+  "Protect"
+ ],
+ "obstagoon": [
+  "Throat Chop",
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "perrserker": [
+  "Flash Cannon",
+  "Last Resort",
+  "Protect"
+ ],
+ "cursola": [
+  "Poltergeist",
+  "Shadow Ball",
+  "Protect"
+ ],
+ "sirfetch-d": [
+  "Close Combat",
+  "Superpower",
+  "Protect"
+ ],
+ "mr-rime": [
+  "Ice Beam",
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "runerigus": [
+  "Earthquake",
+  "Poltergeist",
+  "Earth Power",
+  "Protect"
+ ],
+ "milcery": [
+  "Dazzling Gleam",
+  "Last Resort",
+  "Protect"
+ ],
+ "alcremie": [
+  "Play Rough",
+  "Last Resort",
+  "Protect"
+ ],
+ "alcremie-ruby-cream": [
+  "Dazzling Gleam",
+  "Last Resort",
+  "Protect"
+ ],
+ "alcremie-matcha-cream": [
+  "Dazzling Gleam",
+  "Last Resort",
+  "Protect"
+ ],
+ "alcremie-mint-cream": [
+  "Dazzling Gleam",
+  "Last Resort",
+  "Protect"
+ ],
+ "alcremie-lemon-cream": [
+  "Dazzling Gleam",
+  "Last Resort",
+  "Protect"
+ ],
+ "alcremie-ruby-swirl": [
+  "Dazzling Gleam",
+  "Last Resort",
+  "Protect"
+ ],
+ "alcremie-caramel-swirl": [
+  "Dazzling Gleam",
+  "Last Resort",
+  "Protect"
+ ],
+ "alcremie-rainbow-swirl": [
+  "Dazzling Gleam",
+  "Last Resort",
+  "Protect"
+ ],
+ "falinks": [
+  "Close Combat",
+  "Superpower",
+  "Protect"
+ ],
+ "pincurchin": [
+  "Supercell Slam",
+  "Thunderbolt",
+  "Protect"
+ ],
+ "snom": [
+  "Icy Wind",
+  "Bug Buzz",
+  "Lunge",
+  "Protect"
+ ],
+ "frosmoth": [
+  "Ice Beam",
+  "Bug Buzz",
+  "Ice Spinner",
+  "Protect"
+ ],
+ "stonjourner": [
+  "Power Gem",
+  "Stone Edge",
+  "Protect"
+ ],
+ "eiscue": [
+  "Ice Beam",
+  "Double-Edge",
+  "Protect"
+ ],
+ "eiscue-noice": [
+  "Ice Beam",
+  "Double-Edge",
+  "Protect"
+ ],
+ "indeedee": [
+  "Future Sight",
+  "Last Resort",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "indeedee-f": [
+  "Future Sight",
+  "Last Resort",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "morpeko": [
+  "Aura Wheel",
+  "Foul Play",
+  "Thunderbolt",
+  "Protect"
+ ],
+ "morpeko-hangry": [
+  "Aura Wheel",
+  "Foul Play",
+  "Thunderbolt",
+  "Protect"
+ ],
+ "cufant": [
+  "Steel Roller",
+  "Double-Edge",
+  "Protect"
+ ],
+ "copperajah": [
+  "Steel Roller",
+  "Double-Edge",
+  "Protect"
+ ],
+ "dracozolt": [
+  "Thunderbolt",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "arctozolt": [
+  "Thunderbolt",
+  "Ice Beam",
+  "Wild Charge",
+  "Protect"
+ ],
+ "dracovish": [
+  "Surf",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "arctovish": [
+  "Surf",
+  "Ice Beam",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "duraludon": [
+  "Steel Roller",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "dreepy": [
+  "Draco Meteor",
+  "Astonish",
+  "Dragon Tail",
+  "Protect"
+ ],
+ "drakloak": [
+  "Outrage",
+  "Shadow Ball",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "dragapult": [
+  "Outrage",
+  "Shadow Ball",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "zacian": [
+  "Moonblast",
+  "Play Rough",
+  "Protect"
+ ],
+ "zacian-crowned": [
+  "Moonblast",
+  "Behemoth Blade",
+  "Play Rough",
+  "Protect"
+ ],
+ "zamazenta": [
+  "Close Combat",
+  "Focus Blast",
+  "Protect"
+ ],
+ "zamazenta-crowned": [
+  "Close Combat",
+  "Behemoth Bash",
+  "Focus Blast",
+  "Protect"
+ ],
+ "eternatus": [
+  "Gunk Shot",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "eternatus-eternamax": [
+  "Gunk Shot",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "kubfu": [
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "urshifu": [
+  "Focus Punch",
+  "Foul Play",
+  "Close Combat",
+  "Protect"
+ ],
+ "urshifu-rapid-strike": [
+  "Focus Punch",
+  "Liquidation",
+  "Close Combat",
+  "Protect"
+ ],
+ "urshifu-rapid-strike-gmax": [
+  "Focus Punch",
+  "Liquidation",
+  "Close Combat",
+  "Protect"
+ ],
+ "zarude": [
+  "Darkest Lariat",
+  "Leaf Storm",
+  "Power Whip",
+  "Protect"
+ ],
+ "zarude-dada": [
+  "Darkest Lariat",
+  "Leaf Storm",
+  "Power Whip",
+  "Protect"
+ ],
+ "regieleki": [
+  "Supercell Slam",
+  "Thunderbolt",
+  "Protect"
+ ],
+ "regidrago": [
+  "Dragon Energy",
+  "Outrage",
+  "Protect"
+ ],
+ "glastrier": [
+  "Ice Beam",
+  "Close Combat",
+  "Protect"
+ ],
+ "spectrier": [
+  "Poltergeist",
+  "Double-Edge",
+  "Protect"
+ ],
+ "calyrex": [
+  "Future Sight",
+  "Leaf Storm",
+  "Energy Ball",
+  "Protect"
+ ],
+ "calyrex-ice": [
+  "Future Sight",
+  "Glacial Lance",
+  "Ice Beam",
+  "Protect"
+ ],
+ "calyrex-shadow": [
+  "Future Sight",
+  "Astral Barrage",
+  "Psychic",
+  "Protect"
+ ],
+ "wyrdeer": [
+  "Last Resort",
+  "Future Sight",
+  "Double-Edge",
+  "Protect"
+ ],
+ "kleavor": [
+  "Bug Buzz",
+  "Stone Edge",
+  "Close Combat",
+  "Protect"
+ ],
+ "ursaluna": [
+  "Headlong Rush",
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "ursaluna-bloodmoon": [
+  "Headlong Rush",
+  "Blood Moon",
+  "Last Resort",
+  "Protect"
+ ],
+ "basculegion": [
+  "Wave Crash",
+  "Shadow Ball",
+  "Surf",
+  "Protect"
+ ],
+ "basculegion-f": [
+  "Wave Crash",
+  "Shadow Ball",
+  "Surf",
+  "Protect"
+ ],
+ "sneasler": [
+  "Focus Punch",
+  "Gunk Shot",
+  "Close Combat",
+  "Protect"
+ ],
+ "overqwil": [
+  "Crunch",
+  "Gunk Shot",
+  "Sludge Wave",
+  "Protect"
+ ],
+ "enamorus": [
+  "Moonblast",
+  "Play Rough",
+  "Protect"
+ ],
+ "enamorus-therian": [
+  "Moonblast",
+  "Play Rough",
+  "Protect"
+ ],
+ "sprigatito": [
+  "Leaf Storm",
+  "Energy Ball",
+  "Protect"
+ ],
+ "floragato": [
+  "Leaf Storm",
+  "Energy Ball",
+  "Protect"
+ ],
+ "meowscarada": [
+  "Leaf Storm",
+  "Foul Play",
+  "Energy Ball",
+  "Protect"
+ ],
+ "fuecoco": [
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "crocalor": [
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "skeledirge": [
+  "Flare Blitz",
+  "Poltergeist",
+  "Overheat",
+  "Protect"
+ ],
+ "quaxly": [
+  "Surf",
+  "Last Resort",
+  "Protect"
+ ],
+ "quaxwell": [
+  "Surf",
+  "Last Resort",
+  "Protect"
+ ],
+ "quaquaval": [
+  "Wave Crash",
+  "Close Combat",
+  "Last Resort",
+  "Protect"
+ ],
+ "lechonk": [
+  "Double-Edge",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "oinkologne": [
+  "Double-Edge",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "oinkologne-f": [
+  "Double-Edge",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "tarountula": [
+  "Bug Buzz",
+  "First Impression",
+  "Protect"
+ ],
+ "spidops": [
+  "Bug Buzz",
+  "First Impression",
+  "Protect"
+ ],
+ "nymble": [
+  "Bug Buzz",
+  "First Impression",
+  "Protect"
+ ],
+ "lokix": [
+  "Bug Buzz",
+  "Dark Pulse",
+  "First Impression",
+  "Protect"
+ ],
+ "pawmi": [
+  "Thunderbolt",
+  "Wild Charge",
+  "Protect"
+ ],
+ "pawmo": [
+  "Thunderbolt",
+  "Focus Punch",
+  "Wild Charge",
+  "Protect"
+ ],
+ "pawmot": [
+  "Double Shock",
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "tandemaus": [
+  "Double-Edge",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "maushold": [
+  "Double-Edge",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "maushold-four": [
+  "Double-Edge",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "fidough": [
+  "Play Rough",
+  "Last Resort",
+  "Protect"
+ ],
+ "dachsbun": [
+  "Play Rough",
+  "Last Resort",
+  "Protect"
+ ],
+ "smoliv": [
+  "Leaf Storm",
+  "Tera Blast",
+  "Energy Ball",
+  "Protect"
+ ],
+ "dolliv": [
+  "Leaf Storm",
+  "Tera Blast",
+  "Energy Ball",
+  "Protect"
+ ],
+ "arboliva": [
+  "Petal Dance",
+  "Hyper Voice",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "squawkabilly": [
+  "Double-Edge",
+  "Brave Bird",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "squawkabilly-blue": [
+  "Double-Edge",
+  "Brave Bird",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "squawkabilly-yellow": [
+  "Double-Edge",
+  "Brave Bird",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "squawkabilly-white": [
+  "Double-Edge",
+  "Brave Bird",
+  "Hyper Voice",
+  "Protect"
+ ],
+ "nacli": [
+  "Power Gem",
+  "Stone Edge",
+  "Protect"
+ ],
+ "naclstack": [
+  "Power Gem",
+  "Double-Edge",
+  "Protect"
+ ],
+ "garganacl": [
+  "Power Gem",
+  "Focus Punch",
+  "Protect"
+ ],
+ "charcadet": [
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "armarouge": [
+  "Armor Cannon",
+  "Psychic",
+  "Flare Blitz",
+  "Protect"
+ ],
+ "ceruledge": [
+  "Flare Blitz",
+  "Poltergeist",
+  "Overheat",
+  "Protect"
+ ],
+ "tadbulb": [
+  "Thunderbolt",
+  "Wild Charge",
+  "Protect"
+ ],
+ "bellibolt": [
+  "Supercell Slam",
+  "Thunderbolt",
+  "Protect"
+ ],
+ "wattrel": [
+  "Thunderbolt",
+  "Brave Bird",
+  "Wild Charge",
+  "Protect"
+ ],
+ "kilowattrel": [
+  "Supercell Slam",
+  "Brave Bird",
+  "Thunderbolt",
+  "Protect"
+ ],
+ "maschiff": [
+  "Crunch",
+  "Dark Pulse",
+  "Protect"
+ ],
+ "mabosstiff": [
+  "Crunch",
+  "Dark Pulse",
+  "Protect"
+ ],
+ "shroodle": [
+  "Gunk Shot",
+  "Double-Edge",
+  "Sludge Wave",
+  "Protect"
+ ],
+ "grafaiai": [
+  "Gunk Shot",
+  "Double-Edge",
+  "Sludge Wave",
+  "Protect"
+ ],
+ "bramblin": [
+  "Leaf Storm",
+  "Poltergeist",
+  "Power Whip",
+  "Protect"
+ ],
+ "brambleghast": [
+  "Leaf Storm",
+  "Poltergeist",
+  "Power Whip",
+  "Protect"
+ ],
+ "toedscool": [
+  "Earth Power",
+  "Leaf Storm",
+  "Power Whip",
+  "Protect"
+ ],
+ "toedscruel": [
+  "Earth Power",
+  "Leaf Storm",
+  "Power Whip",
+  "Protect"
+ ],
+ "klawf": [
+  "Power Gem",
+  "Stone Edge",
+  "Protect"
+ ],
+ "capsakid": [
+  "Leaf Storm",
+  "Energy Ball",
+  "Protect"
+ ],
+ "scovillain": [
+  "Leaf Storm",
+  "Overheat",
+  "Fire Blast",
+  "Protect"
+ ],
+ "rellor": [
+  "Bug Buzz",
+  "Leech Life",
+  "Protect"
+ ],
+ "rabsca": [
+  "Bug Buzz",
+  "Future Sight",
+  "Psychic",
+  "Protect"
+ ],
+ "flittle": [
+  "Psychic",
+  "Psyshock",
+  "Protect"
+ ],
+ "espathra": [
+  "Psychic",
+  "Last Resort",
+  "Protect"
+ ],
+ "tinkatink": [
+  "Play Rough",
+  "Flash Cannon",
+  "Foul Play",
+  "Protect"
+ ],
+ "tinkatuff": [
+  "Play Rough",
+  "Flash Cannon",
+  "Foul Play",
+  "Protect"
+ ],
+ "tinkaton": [
+  "Play Rough",
+  "Gigaton Hammer",
+  "Flash Cannon",
+  "Protect"
+ ],
+ "wiglett": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "wugtrio": [
+  "Surf",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "bombirdier": [
+  "Brave Bird",
+  "Foul Play",
+  "Dark Pulse",
+  "Protect"
+ ],
+ "finizen": [
+  "Surf",
+  "Boomburst",
+  "Protect"
+ ],
+ "palafin": [
+  "Wave Crash",
+  "Focus Punch",
+  "Protect"
+ ],
+ "palafin-hero": [
+  "Wave Crash",
+  "Focus Punch",
+  "Protect"
+ ],
+ "varoom": [
+  "Spin Out",
+  "Gunk Shot",
+  "Sludge Wave",
+  "Protect"
+ ],
+ "revavroom": [
+  "Spin Out",
+  "Gunk Shot",
+  "Sludge Wave",
+  "Protect"
+ ],
+ "cyclizar": [
+  "Outrage",
+  "Double-Edge",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "orthworm": [
+  "Flash Cannon",
+  "Double-Edge",
+  "Protect"
+ ],
+ "glimmet": [
+  "Power Gem",
+  "Gunk Shot",
+  "Sludge Wave",
+  "Protect"
+ ],
+ "glimmora": [
+  "Power Gem",
+  "Gunk Shot",
+  "Sludge Wave",
+  "Protect"
+ ],
+ "greavard": [
+  "Poltergeist",
+  "Double-Edge",
+  "Protect"
+ ],
+ "houndstone": [
+  "Poltergeist",
+  "Double-Edge",
+  "Protect"
+ ],
+ "flamigo": [
+  "Brave Bird",
+  "Close Combat",
+  "Hurricane",
+  "Protect"
+ ],
+ "cetoddle": [
+  "Ice Beam",
+  "Double-Edge",
+  "Protect"
+ ],
+ "cetitan": [
+  "Ice Beam",
+  "Double-Edge",
+  "Protect"
+ ],
+ "veluza": [
+  "Surf",
+  "Psychic",
+  "Hydro Pump",
+  "Protect"
+ ],
+ "dondozo": [
+  "Wave Crash",
+  "Surf",
+  "Protect"
+ ],
+ "tatsugiri": [
+  "Outrage",
+  "Surf",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "tatsugiri-droopy": [
+  "Outrage",
+  "Surf",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "tatsugiri-stretchy": [
+  "Outrage",
+  "Surf",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "annihilape": [
+  "Focus Punch",
+  "Shadow Ball",
+  "Close Combat",
+  "Protect"
+ ],
+ "clodsire": [
+  "Gunk Shot",
+  "Earthquake",
+  "Sludge Wave",
+  "Protect"
+ ],
+ "farigiraf": [
+  "Double-Edge",
+  "Future Sight",
+  "Dream Eater",
+  "Protect"
+ ],
+ "dudunsparce": [
+  "Boomburst",
+  "Last Resort",
+  "Protect"
+ ],
+ "dudunsparce-three-segment": [
+  "Last Resort",
+  "Double-Edge",
+  "Protect"
+ ],
+ "kingambit": [
+  "Foul Play",
+  "Flash Cannon",
+  "Kowtow Cleave",
+  "Protect"
+ ],
+ "great-tusk": [
+  "Headlong Rush",
+  "Close Combat",
+  "Earthquake",
+  "Protect"
+ ],
+ "scream-tail": [
+  "Play Rough",
+  "Psychic",
+  "Boomburst",
+  "Protect"
+ ],
+ "brute-bonnet": [
+  "Leaf Storm",
+  "Crunch",
+  "Energy Ball",
+  "Protect"
+ ],
+ "flutter-mane": [
+  "Poltergeist",
+  "Moonblast",
+  "Dazzling Gleam",
+  "Protect"
+ ],
+ "slither-wing": [
+  "Bug Buzz",
+  "Close Combat",
+  "Superpower",
+  "Protect"
+ ],
+ "sandy-shocks": [
+  "Supercell Slam",
+  "Earthquake",
+  "High Horsepower",
+  "Protect"
+ ],
+ "iron-treads": [
+  "Earthquake",
+  "Steel Roller",
+  "High Horsepower",
+  "Protect"
+ ],
+ "iron-bundle": [
+  "Ice Beam",
+  "Hydro Pump",
+  "Ice Spinner",
+  "Protect"
+ ],
+ "iron-hands": [
+  "Focus Punch",
+  "Supercell Slam",
+  "Close Combat",
+  "Protect"
+ ],
+ "iron-jugulis": [
+  "Crunch",
+  "Hurricane",
+  "Dark Pulse",
+  "Protect"
+ ],
+ "iron-moth": [
+  "Flare Blitz",
+  "Sludge Wave",
+  "Overheat",
+  "Protect"
+ ],
+ "iron-thorns": [
+  "Power Gem",
+  "Supercell Slam",
+  "Thunderbolt",
+  "Protect"
+ ],
+ "frigibax": [
+  "Outrage",
+  "Ice Beam",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "arctibax": [
+  "Outrage",
+  "Ice Beam",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "baxcalibur": [
+  "Glaive Rush",
+  "Ice Beam",
+  "Outrage",
+  "Protect"
+ ],
+ "gimmighoul": [
+  "Shadow Ball",
+  "Hex",
+  "Protect"
+ ],
+ "gimmighoul-roaming": [
+  "Shadow Ball",
+  "Hex",
+  "Protect"
+ ],
+ "gholdengo": [
+  "Make It Rain",
+  "Poltergeist",
+  "Focus Punch",
+  "Protect"
+ ],
+ "wo-chien": [
+  "Foul Play",
+  "Leaf Storm",
+  "Power Whip",
+  "Protect"
+ ],
+ "chien-pao": [
+  "Crunch",
+  "Ice Spinner",
+  "Dark Pulse",
+  "Protect"
+ ],
+ "ting-lu": [
+  "Dark Pulse",
+  "Earthquake",
+  "Earth Power",
+  "Protect"
+ ],
+ "chi-yu": [
+  "Crunch",
+  "Flare Blitz",
+  "Overheat",
+  "Protect"
+ ],
+ "roaring-moon": [
+  "Outrage",
+  "Crunch",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "iron-valiant": [
+  "Moonblast",
+  "Close Combat",
+  "Focus Blast",
+  "Protect"
+ ],
+ "koraidon": [
+  "Focus Punch",
+  "Outrage",
+  "Close Combat",
+  "Protect"
+ ],
+ "miraidon": [
+  "Electro Drift",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "walking-wake": [
+  "Surf",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "iron-leaves": [
+  "Leaf Storm",
+  "Psyblade",
+  "Energy Ball",
+  "Protect"
+ ],
+ "dipplin": [
+  "Leaf Storm",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "poltchageist": [
+  "Leaf Storm",
+  "Poltergeist",
+  "Energy Ball",
+  "Protect"
+ ],
+ "poltchageist-artisan": [
+  "Leaf Storm",
+  "Poltergeist",
+  "Energy Ball",
+  "Protect"
+ ],
+ "sinistcha": [
+  "Leaf Storm",
+  "Poltergeist",
+  "Energy Ball",
+  "Protect"
+ ],
+ "sinistcha-masterpiece": [
+  "Leaf Storm",
+  "Poltergeist",
+  "Energy Ball",
+  "Protect"
+ ],
+ "okidogi": [
+  "Gunk Shot",
+  "Focus Punch",
+  "Close Combat",
+  "Protect"
+ ],
+ "munkidori": [
+  "Gunk Shot",
+  "Future Sight",
+  "Sludge Wave",
+  "Protect"
+ ],
+ "fezandipiti": [
+  "Gunk Shot",
+  "Moonblast",
+  "Sludge Bomb",
+  "Protect"
+ ],
+ "ogerpon": [
+  "Wood Hammer",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "ogerpon-wellspring": [
+  "Wood Hammer",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "ogerpon-hearthflame": [
+  "Wood Hammer",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "ogerpon-cornerstone": [
+  "Wood Hammer",
+  "Rock Tomb",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "ogerpon-teal-tera": [
+  "Wood Hammer",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "ogerpon-wellspring-tera": [
+  "Wood Hammer",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "ogerpon-hearthflame-tera": [
+  "Wood Hammer",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "ogerpon-cornerstone-tera": [
+  "Wood Hammer",
+  "Rock Tomb",
+  "Leaf Storm",
+  "Protect"
+ ],
+ "archaludon": [
+  "Steel Roller",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "hydrapple": [
+  "Leaf Storm",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "gouging-fire": [
+  "Flare Blitz",
+  "Outrage",
+  "Raging Fury",
+  "Protect"
+ ],
+ "raging-bolt": [
+  "Supercell Slam",
+  "Outrage",
+  "Draco Meteor",
+  "Protect"
+ ],
+ "iron-boulder": [
+  "Mighty Cleave",
+  "Psychic",
+  "Close Combat",
+  "Protect"
+ ],
+ "iron-crown": [
+  "Flash Cannon",
+  "Future Sight",
+  "Psychic",
+  "Protect"
+ ],
+ "terapagos": [
+  "Double-Edge",
+  "Tera Starstorm",
+  "Protect"
+ ],
+ "terapagos-terastal": [
+  "Double-Edge",
+  "Tera Starstorm",
+  "Protect"
+ ],
+ "terapagos-stellar": [
+  "Double-Edge",
+  "Tera Starstorm",
+  "Protect"
+ ],
+ "pecharunt": [
+  "Malignant Chain",
+  "Poltergeist",
+  "Gunk Shot",
+  "Protect"
+ ]
+}

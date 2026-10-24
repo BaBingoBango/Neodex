@@ -5,7 +5,7 @@ import SwiftUI
 /// Every top-level destination. On iPad all of them appear in the sidebar, grouped into sections;
 /// on iPhone the tab bar shows Home, Search and the tabs the user keeps visible.
 enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
-    case home, dexbot, pokedex, moves, abilities, items, types, natures, scan, teams, damageCalc, faceOff, usageStats, search
+    case home, dexbot, pokedex, moves, abilities, items, types, natures, scan, teams, damageCalc, faceOff, usageStats, scopeLens, search
 
     var id: String { rawValue }
 
@@ -25,8 +25,15 @@ enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
         var tabs: [AppTab] { AppTab.features.filter { $0.group == self } }
     }
 
-    /// Tabs that live in a sidebar section, in display order.
-    static let features: [AppTab] = [.dexbot, .pokedex, .moves, .abilities, .items, .types, .natures, .scan, .teams, .damageCalc, .faceOff, .usageStats]
+    /// Tabs that live in a sidebar section, in display order. Scope Lens watches a mirrored
+    /// Pokémon Champions battle through ScreenCaptureKit, so it exists only on the Mac.
+    static let features: [AppTab] = {
+        var tabs: [AppTab] = [.dexbot, .pokedex, .moves, .abilities, .items, .types, .natures, .scan, .teams, .damageCalc, .faceOff, .usageStats]
+        #if os(macOS)
+        tabs.append(.scopeLens)
+        #endif
+        return tabs
+    }()
 
     /// Shown in the iPhone tab bar until the user changes the layout.
     static let defaultVisible: [AppTab] = [.pokedex, .teams, .damageCalc]
@@ -34,7 +41,7 @@ enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
     var group: Group? {
         switch self {
         case .dexbot, .pokedex, .moves, .abilities, .items, .types, .natures, .scan: .reference
-        case .teams, .damageCalc, .faceOff, .usageStats: .battle
+        case .teams, .damageCalc, .faceOff, .usageStats, .scopeLens: .battle
         case .home, .search: nil
         }
     }
@@ -54,6 +61,7 @@ enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
         case .damageCalc: "Damage Calc"
         case .faceOff: "Face-Off"
         case .usageStats: "Global Stats"
+        case .scopeLens: "Scope Lens"
         case .search: "Search"
         }
     }
@@ -84,6 +92,7 @@ enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
         case .damageCalc: "Showdown-style damage calcs"
         case .faceOff: "Compare two Pokémon"
         case .usageStats: "Smogon usage statistics"
+        case .scopeLens: "Live Champions battle advisor"
         case .search: "Find anything"
         }
     }
@@ -103,6 +112,7 @@ enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
         case .damageCalc: "function"
         case .faceOff: "bolt.circle.fill"
         case .usageStats: "network"
+        case .scopeLens: "scope"
         case .search: "magnifyingglass"
         }
     }
@@ -122,6 +132,7 @@ enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
         case .damageCalc: PokemonType.fire.color
         case .faceOff: PokemonType.dragon.color
         case .usageStats: .blue
+        case .scopeLens: .indigo
         case .search: .gray
         }
     }
@@ -158,6 +169,12 @@ enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
         case .damageCalc: DamageCalculatorView()
         case .faceOff: FaceOffView(initial: nil)
         case .usageStats: UsageStatsView()
+        case .scopeLens:
+            #if os(macOS)
+            ScopeLensContent()
+            #else
+            EmptyView()
+            #endif
         case .home, .search: EmptyView()
         }
     }

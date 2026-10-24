@@ -24,3 +24,6 @@ Tools/NeodexData/.cache/
 
 # macOS
 .DS_Store
+
+# Scope Lens engine dependencies
+Tools/ScopeLensEngine/node_modules/

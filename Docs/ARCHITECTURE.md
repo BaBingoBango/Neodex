@@ -1,6 +1,7 @@
 # Neodex architecture
 
-Neodex is split into three pieces that share one set of Swift types:
+Neodex is split into three pieces that share one set of Swift types, plus Scope Lens, a fourth piece
+the Mac app links (see its section below):
 
 ```
 ┌─────────────────────────┐     generates      ┌──────────────────────────────┐
@@ -270,11 +271,65 @@ Key decisions:
   it plus an in-memory SwiftData store seeded with a sample team. The folder is a development asset,
   so archives never ship it.
 
+## Scope Lens (`Packages/ScopeLens`)
+
+Scope Lens is a live observer and advisor for Pokémon Champions (VGC doubles) battles that grew up
+as its own macOS app and was merged in on 2026-10-24 as a Swift package the Mac target links. It
+watches a mirrored game (an iPhone over QuickTime, or a capture card) with ScreenCaptureKit, reads
+the screen with Vision OCR and template matching, and advises with deterministic math; it never
+simulates the battle. The standalone repository (BaBingoBango/Scope-Lens) keeps the fixtures, the
+replay and eval harnesses and the design briefs; this package holds what the app runs.
+
+```
+Packages/ScopeLens/Sources/ScopeLens/
+  MirrorCaptureSource        ScreenCaptureKit window discovery, viewport detection, throttled frames
+  ScreenStateClassifier      which screen the frame shows (team preview, command, move select, …)
+  OCRService                 Vision text recognition with normalized boxes
+  PreviewPipeline            the team-preview reader: type-icon classifier + species identifier
+                             (pixel icon sheet + HOME renders, rank-fused), confirm taps
+  BattleEventParser,         the battle narration → events → running BattleState, with the rules
+  BattleReconciler,          that reject illegal readings
+  BattleState, BattleVocabulary
+  ScoutEngine                the TypeScript engine (engine.js) in JavaScriptCore: type math, meta
+                             priors, @smogon/calc rolls, the scout report
+  TeamStore, TeamManager     the player's team from a Showdown paste, validated against the vocab
+  MetaStore                  the Pikalytics usage snapshot and its on-demand refresh
+  AdvisorClient, AdvisorContext, AdvisorTools, PlayLint
+                             the opt-in Claude advisor: an agentic tool loop over the engine's six
+                             tools, prompt caching, and a lint that bounces illegal plays
+  LiveTrackerView, ScoutReportView, BattleLogView, OpponentDossierView, BattleArchiveView,
+  OverlayHUD, *SettingsView  the windows
+  Resources/                 engine.js, meta-regmbs3.json, vocab.json, dex-info.json,
+                             tool-schemas.json, the icon sheet, templates, species index, features
+Tools/ScopeLensEngine/       engine.ts and its data bakers, the Pikalytics fetcher, the MCP server
+```
+
+- **It keeps its own compile settings.** The package is Swift 5 language mode with main-actor
+  default isolation and the approachable-concurrency features, exactly as the standalone app was
+  built, so the sources stay byte-for-byte shareable with that project and its diagnostics CLIs.
+  The only edits on the way in: `Bundle.main` became `Bundle.module` for the seven resource loads,
+  the eight windows and the overlay controller became `public`, and the standalone `@main` entry
+  point was left behind (a library must not define `main`).
+- **The Mac app wraps, never reaches in.** `Mac/ScopeLensScenes.swift` is the only file that
+  imports the package: `ScopeLensContent` is the sidebar's Scope Lens tab (the live tracker),
+  `ScopeLensWindows` declares the Live Tracker, Scout Report, Battle Log, Scouting Dex and Battle
+  Archive windows with the ids and ⇧⌘L/R/B/K/A shortcuts the tracker's buttons already use, and three
+  wrappers put the Champions Team, Advisor and Meta panes into the Settings window. `AppTab.scopeLens` exists only in
+  `features` on macOS, so Home's cards and the Go menu pick it up there and iOS never sees it. The
+  entitlements gain user-selected read-only files for the OCR inspector's open panel.
+- **Where its data lives.** Team, meta cache and the battle archive are JSON in Neodex's
+  Application Support (the sandbox container); the Anthropic key is in the Keychain, or
+  `ANTHROPIC_API_KEY` in the environment for development runs. The standalone app's container is
+  separate, so nothing migrates automatically.
+- **Package tests** (`cd Packages/ScopeLens && swift test`) prove the engine, vocabulary, species
+  index and tool schemas load from the package bundle and that a scout report comes back.
+
 ## Testing
 
 ```bash
 cd Packages/NeodexKit && swift test     # logic, codec, parsers, database (fast, macOS)
 cd Tools/NeodexData && swift test       # pipeline: CSV, JS evaluation, name mapping, join rules, fixture
+cd Packages/ScopeLens && swift test     # Scope Lens: engine, vocabulary, templates load from the package bundle
 # The widget extension builds with the app; the simulator ignores the App Group entitlement, so widgets
 # can be added to the simulator Home Screen and read the group container like on a device.
 xcodebuild -scheme Neodex -destination 'platform=iOS Simulator,name=iPhone 17 Pro' test   # + bundled-data and fixture smoke tests
@@ -294,3 +349,7 @@ xcodebuild -scheme Neodex -destination 'platform=iOS Simulator,name=iPhone 17 Pr
   hazards, multi-turn moves, ally abilities or Dynamax.
 - The Mac app has no widgets or visual intelligence yet, and its camera scanner and voice mode have
   not been tried on a Mac; Home, the entry windows and the calculator have.
+- Scope Lens needs a mirrored Pokémon Champions window (QuickTime iPhone mirror or a capture card)
+  and Screen Recording permission, and its advisor is off until an Anthropic API key is saved in
+  Settings. Leaving the Scope Lens tab or closing the Live Tracker window stops tracking, as it did in the
+  standalone app.

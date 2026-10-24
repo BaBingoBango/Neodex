@@ -31,6 +31,17 @@ struct AboutView: View {
             } footer: {
                 Text("The camera scanner runs entirely on this device. Frames and photos never leave it.")
             }
+            #if os(macOS)
+            Section {
+                Text("Scope Lens watches a mirrored Pokémon Champions battle through ScreenCaptureKit, reads it with on-device OCR and image matching, and advises with deterministic type and damage math. The optional “what's the play” advisor sends the battle state to the Claude API with your own key; nothing else leaves the Mac.")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            } header: {
+                Text("Scope Lens")
+            } footer: {
+                Text("Usage priors come from Pikalytics' Pokémon Champions ranked data; damage math from the community @smogon/calc.")
+            }
+            #endif
             if let manifest = database.manifest {
                 Section {
                     ForEach(manifest.sources) { source in

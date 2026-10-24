@@ -1,0 +1,32 @@
+=== Zheng's Sun ===
+
+Charizard @ Charizardite Y
+Level: 50
+- Heat Wave
+- Solar Beam
+- Weather Ball
+- Protect
+
+Venusaur @ Focus Sash
+Level: 50
+- Sleep Powder
+- Leaf Storm
+- Sludge Bomb
+- Protect
+
+Garchomp @ Choice Scarf
+Level: 50
+
+Rotom-Wash @ Leftovers
+Ability: Levitate
+Level: 50
+- Hydro Pump
+- Thunderbolt
+- Will-O-Wisp
+- Protect
+
+Sneasler @ White Herb
+Level: 50
+
+Incineroar @ Sitrus Berry
+Level: 50

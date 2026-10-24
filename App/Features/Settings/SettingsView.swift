@@ -33,12 +33,22 @@ struct SettingsView: View {
             Tab("General", systemImage: "gearshape") {
                 Form { dataSection }
                     .formStyle(.grouped)
+                    .frame(width: 560, height: 300)
+            }
+            Tab("Champions Team", systemImage: "person.3") {
+                ScopeLensTeamSettings()
+            }
+            Tab("Advisor", systemImage: "sparkles") {
+                ScopeLensAdvisorSettings()
+            }
+            Tab("Meta", systemImage: "chart.bar.doc.horizontal") {
+                ScopeLensMetaSettings()
             }
             Tab("About", systemImage: "info.circle") {
                 AboutView()
+                    .frame(width: 560, height: 480)
             }
         }
-        .frame(width: 560, height: 480)
         #else
         NavigationStack {
             List {

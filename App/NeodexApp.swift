@@ -44,6 +44,8 @@ struct NeodexApp: App {
                 .environment(appModel)
         }
         .modelContainer(container)
+
+        ScopeLensWindows()
         #endif
     }
 }

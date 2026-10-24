@@ -14,7 +14,19 @@ struct MainTabView: View {
     @AppStorage(TabBarPreferences.customizationKey) private var customization = TabViewCustomization()
     @AppStorage(TabBarPreferences.storageKey) private var storedVisible = TabBarPreferences.encode(AppTab.defaultVisible)
     @State private var router = DeepLinkRouter.shared
-    @State private var selection: AppTab = .home
+    @State private var selection: AppTab
+
+    init() {
+        // The Mac reopens on the sidebar item you left; iPhone and iPad start on Home.
+        #if os(macOS)
+        let remembered = UserDefaults.standard.string(forKey: Self.selectionKey).flatMap(AppTab.init(rawValue:))
+        _selection = State(initialValue: remembered.flatMap { AppTab.features.contains($0) || $0 == .search ? $0 : nil } ?? .home)
+        #else
+        _selection = State(initialValue: .home)
+        #endif
+    }
+
+    private static let selectionKey = "selectedTab"
 
     private var visibleTabs: [AppTab] { TabBarPreferences.decode(storedVisible) }
 
@@ -72,6 +84,7 @@ struct MainTabView: View {
         .tabViewCustomization($customization)
         .focusedSceneValue(\.tabSelection, $selection)
         #if os(macOS)
+        .onChange(of: selection) { _, tab in UserDefaults.standard.set(tab.rawValue, forKey: Self.selectionKey) }
         .onChange(of: router.pendingRoute) { _, route in
             // A requested entry gets its own window, so the main window keeps its place.
             guard let route else { return }
