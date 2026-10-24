@@ -64,7 +64,7 @@ struct TypeMatchupView: View {
         .navigationTitle("Type-O-Matic")
         .toolbar {
             if !selected.isEmpty {
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItem(placement: .trailingBar) {
                     Button("Clear") { selected.removeAll() }
                 }
             }

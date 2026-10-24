@@ -29,11 +29,11 @@ struct TeamDetailView: View {
             }
             .padding(.bottom, 32)
         }
-        .background(Color(.systemGroupedBackground))
+        .background(Color.groupedBackground)
         .navigationTitle(team.name)
-        .navigationBarTitleDisplayMode(.inline)
+        .inlineNavigationTitle()
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
+            ToolbarItem(placement: .trailingBar) {
                 Button {
                     showingExport = true
                 } label: {
@@ -66,7 +66,7 @@ struct TeamDetailView: View {
                 .onSubmit { team.touch() }
             TextField("Format (e.g. gen9ou)", text: Binding(get: { team.format ?? "" }, set: { team.format = $0.isEmpty ? nil : $0; team.touch() }))
                 .font(.subheadline)
-                .textInputAutocapitalization(.never)
+                .neverAutocapitalized()
                 .autocorrectionDisabled()
                 .foregroundStyle(.secondary)
         }
@@ -103,7 +103,7 @@ struct TeamDetailView: View {
                     }
                     .frame(maxWidth: .infinity, minHeight: 150)
                     .foregroundStyle(.tint)
-                    .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+                    .background(Color.secondaryGroupedBackground, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
                 }
                 .buttonStyle(.plain)
             }
@@ -197,7 +197,7 @@ struct TeamMemberCard: View {
             }
             .frame(maxWidth: .infinity, minHeight: 150, alignment: .topLeading)
             .padding(12)
-            .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+            .background(Color.secondaryGroupedBackground, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
             .overlay(alignment: .topTrailing) {
                 HStack(spacing: 4) {
                     if issueCount > 0 {
@@ -240,7 +240,7 @@ struct TeamCoverageGrid: View {
                 }
                 .font(.caption.weight(.semibold))
                 .padding(8)
-                .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .background(Color.secondaryGroupedBackground, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
                 .accessibilityLabel("\(attacker.name): \(weak) weak, \(resist) resist")
             }
         }
@@ -263,10 +263,10 @@ struct TeamExportSheet: View {
                     .textSelection(.enabled)
             }
             .navigationTitle("Showdown Export")
-            .navigationBarTitleDisplayMode(.inline)
+            .inlineNavigationTitle()
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) { Button("Done") { dismiss() } }
-                ToolbarItemGroup(placement: .topBarTrailing) {
+                ToolbarItemGroup(placement: .trailingBar) {
                     Button(copied ? "Copied" : "Copy", systemImage: copied ? "checkmark" : "doc.on.doc") {
                         TeamConversion.copyToPasteboard(text)
                         copied = true
@@ -305,7 +305,7 @@ struct PokemonPickerSheet: View {
             .listStyle(.plain)
             .searchable(text: $searchText, prompt: "Name or number")
             .navigationTitle(title)
-            .navigationBarTitleDisplayMode(.inline)
+            .inlineNavigationTitle()
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } }
             }

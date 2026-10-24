@@ -18,7 +18,7 @@ struct MoveDetailView: View {
             .padding(.bottom, 32)
         }
         .navigationTitle(move.name)
-        .navigationBarTitleDisplayMode(.inline)
+        .inlineNavigationTitle()
         .recordsHistory(.move, id: move.id)
     }
 
@@ -189,7 +189,7 @@ struct MoveLearnersView: View {
         .listStyle(.plain)
         .searchable(text: $searchText, prompt: "Filter Pokémon")
         .navigationTitle("\(move.name) Learners")
-        .navigationBarTitleDisplayMode(.inline)
+        .inlineNavigationTitle()
     }
 }
 

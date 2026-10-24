@@ -20,11 +20,10 @@ struct ScanView: View {
             overlay
         }
         .navigationTitle("Scanner")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbarBackground(.hidden, for: .navigationBar)
-        .toolbarColorScheme(.dark, for: .navigationBar)
+        .inlineNavigationTitle()
+        .transparentNavigationBar()
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
+            ToolbarItem(placement: .trailingBar) {
                 if scanner.hasTorch {
                     Button(scanner.isTorchOn ? "Torch Off" : "Torch On", systemImage: scanner.isTorchOn ? "flashlight.on.fill" : "flashlight.off.fill") {
                         scanner.toggleTorch()
@@ -100,7 +99,7 @@ struct ScanView: View {
             } else {
                 switch scanner.availability {
                 case .denied where model.photo == nil:
-                    message("Camera Access Needed", "Allow the camera in Settings, or scan a photo instead.", systemImage: "camera.badge.ellipsis")
+                    message("Camera Access Needed", cameraDeniedText, systemImage: "camera.badge.ellipsis")
                 case .noCamera where model.photo == nil:
                     message("No Camera Here", "Scan a photo or screenshot instead.", systemImage: "video.slash")
                 default:
@@ -186,6 +185,14 @@ struct ScanView: View {
             }
         }
         .controlSize(.large)
+    }
+
+    private var cameraDeniedText: LocalizedStringKey {
+        #if os(macOS)
+        "Allow the camera in System Settings › Privacy & Security, or scan a photo instead."
+        #else
+        "Allow the camera in Settings, or scan a photo instead."
+        #endif
     }
 
     private func message(_ title: LocalizedStringKey, _ detail: LocalizedStringKey, systemImage: String) -> some View {
@@ -301,13 +308,13 @@ final class ScanModel {
     /// A picked photo: the whole image is classified and any printed names are read.
     func scan(_ item: PhotosPickerItem) async {
         guard let database, let data = try? await item.loadTransferable(type: Data.self),
-              let image = UIImage(data: data), let cgImage = image.cgImage else { return }
+              let cgImage = CGImage.decoded(data) else { return }
         isBusy = true
         photo = cgImage
         locked = nil
         smoothed = [:]
         defer { isBusy = false }
-        let orientation = CGImagePropertyOrientation(image.imageOrientation)
+        let orientation = CGImage.orientation(of: data)
         var matches: [PokemonRecognizer.Match] = []
         do {
             matches = try await PokemonRecognizer.shared.combinedMatches(in: cgImage, orientation: orientation, database: database, limit: 5)

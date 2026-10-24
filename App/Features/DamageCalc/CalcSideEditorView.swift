@@ -21,9 +21,9 @@ struct CalcSideEditorView: View {
                 statsSection(pokemon, member)
             }
             .navigationTitle(role.title)
-            .navigationBarTitleDisplayMode(.inline)
+            .inlineNavigationTitle()
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItem(placement: .trailingBar) {
                     Menu {
                         Button("Paste Showdown Set", systemImage: "doc.on.clipboard") { showingPaste = true }
                         Button("Reset Battle State", systemImage: "arrow.counterclockwise") {
@@ -246,7 +246,7 @@ struct CalcSideEditorView: View {
     }
 
     private func pasteSet() {
-        guard let text = UIPasteboard.general.string, let set = ShowdownTeamCodec.parseSet(text),
+        guard let text = Clipboard.string, let set = ShowdownTeamCodec.parseSet(text),
               let pokemon = database.pokemon(named: set.species) else { return }
         var warnings: [String] = []
         side.member = TeamConversion.member(from: set, pokemon: pokemon, database: database, warnings: &warnings)

@@ -49,7 +49,7 @@ struct UsageDetailView: View {
             }
         }
         .navigationTitle(pokemon?.displayName ?? name)
-        .navigationBarTitleDisplayMode(.inline)
+        .inlineNavigationTitle()
         .overlay {
             if isLoading {
                 ProgressView("Loading details…")

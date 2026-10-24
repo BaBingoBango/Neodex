@@ -42,7 +42,7 @@ struct HomeView: View {
             }
             .background {
                 ZStack(alignment: .top) {
-                    Color(.systemGroupedBackground)
+                    Color.groupedBackground
                     AmbientBackground(colors: ambientColors)
                         .frame(height: 440)
                 }
@@ -53,13 +53,15 @@ struct HomeView: View {
             .navigationDestination(item: $dexbotPrompt) { prompt in DexbotView(initialPrompt: prompt.question) }
             .appDestinations()
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
+                #if os(iOS)
+                ToolbarItem(placement: .trailingBar) {
                     Button {
                         showingSettings = true
                     } label: {
                         Label("Settings", systemImage: "gearshape")
                     }
                 }
+                #endif
             }
             .sheet(isPresented: $showingSettings) {
                 SettingsView()
@@ -105,7 +107,7 @@ struct HomeView: View {
                     .foregroundStyle(.tertiary)
             }
             .padding(14)
-            .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+            .background(Color.secondaryGroupedBackground, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
             .overlay {
                 RoundedRectangle(cornerRadius: 18, style: .continuous)
                     .strokeBorder(LinearGradient(colors: [.purple.opacity(0.5), .blue.opacity(0.4), .orange.opacity(0.4)],
@@ -204,7 +206,7 @@ struct HomeView: View {
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 10)
-        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 22, style: .continuous))
+        .background(Color.secondaryGroupedBackground, in: RoundedRectangle(cornerRadius: 22, style: .continuous))
         .overlay {
             RoundedRectangle(cornerRadius: 22, style: .continuous)
                 .strokeBorder(LinearGradient(colors: [.purple.opacity(0.6), .blue.opacity(0.5)], startPoint: .leading, endPoint: .trailing), lineWidth: 1)
@@ -414,7 +416,7 @@ struct FeatureCard: View {
         }
         .padding(10)
         .frame(maxWidth: .infinity, minHeight: 60, alignment: .leading)
-        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .background(Color.secondaryGroupedBackground, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
         .accessibilityElement(children: .combine)
     }
 }
@@ -437,7 +439,7 @@ struct PokemonShelfCard: View {
         }
         .padding(10)
         .frame(width: 130)
-        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .background(Color.secondaryGroupedBackground, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
         .overlay(alignment: .topLeading) {
             if let badge {
                 Text(badge)
@@ -470,7 +472,7 @@ struct RecentPokemonCard: View {
         .padding(.leading, 8)
         .padding(.trailing, 12)
         .padding(.vertical, 8)
-        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .background(Color.secondaryGroupedBackground, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
     }
 }
 
@@ -495,7 +497,7 @@ struct RecentMoveCard: View {
         .padding(.leading, 8)
         .padding(.trailing, 12)
         .padding(.vertical, 8)
-        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .background(Color.secondaryGroupedBackground, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
     }
 }
 

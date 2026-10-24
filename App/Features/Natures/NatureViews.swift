@@ -79,7 +79,7 @@ struct NatureDetailView: View {
             }
         }
         .navigationTitle(nature.name)
-        .navigationBarTitleDisplayMode(.inline)
+        .inlineNavigationTitle()
     }
 }
 

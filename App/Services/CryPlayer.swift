@@ -30,9 +30,11 @@ final class CryPlayer {
                 unavailableID = pokemon.id
                 return
             }
+            #if os(iOS)
             let session = AVAudioSession.sharedInstance()
             try? session.setCategory(.ambient, options: [.mixWithOthers])
             try? session.setActive(true)
+            #endif
             guard let player = try? AVAudioPlayer(data: data) else {
                 unavailableID = pokemon.id
                 return

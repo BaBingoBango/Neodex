@@ -94,7 +94,7 @@ struct AbilityDetailView: View {
             }
         }
         .navigationTitle(ability.name)
-        .navigationBarTitleDisplayMode(.inline)
+        .inlineNavigationTitle()
         .recordsHistory(.ability, id: ability.id)
     }
 }

@@ -1,6 +1,5 @@
 import NeodexKit
 import SwiftUI
-import UIKit
 
 /// Which bundled image of a Pokémon to show.
 enum PokemonImageKind: String {
@@ -15,24 +14,25 @@ enum PokemonImageKind: String {
 }
 
 /// Loads bundled Pokémon and item images, decoding them off the main actor and caching the result.
+/// Images are kept as `CGImage`, which both platforms draw directly.
 @MainActor
 final class BundledImageStore {
     static let shared = BundledImageStore()
 
-    private let cache = NSCache<NSString, UIImage>()
-    private var inFlight: [NSString: Task<UIImage?, Never>] = [:]
+    private let cache = NSCache<NSString, CGImage>()
+    private var inFlight: [NSString: Task<CGImage?, Never>] = [:]
 
     private init() {
         cache.countLimit = 800
     }
 
     /// An already-decoded image, if one is cached.
-    func cachedPokemonImage(_ imageID: String, kind: PokemonImageKind) -> UIImage? {
+    func cachedPokemonImage(_ imageID: String, kind: PokemonImageKind) -> CGImage? {
         cache.object(forKey: key(imageID, kind))
     }
 
     /// Loads and decodes a Pokémon image. Concurrent requests for the same image share one decode.
-    func pokemonImage(_ imageID: String, kind: PokemonImageKind) async -> UIImage? {
+    func pokemonImage(_ imageID: String, kind: PokemonImageKind) async -> CGImage? {
         let key = key(imageID, kind)
         if let cached = cache.object(forKey: key) { return cached }
         if let task = inFlight[key] { return await task.value }
@@ -46,11 +46,11 @@ final class BundledImageStore {
     }
 
     /// Item icons are tiny PNGs; decoding them inline is fine.
-    func itemImage(_ itemID: String) -> UIImage? {
+    func itemImage(_ itemID: String) -> CGImage? {
         let key = "\(itemID)-item.png" as NSString
         if let cached = cache.object(forKey: key) { return cached }
         guard let url = Bundle.main.url(forResource: "\(itemID)-item", withExtension: "png"),
-              let image = UIImage(contentsOfFile: url.path) else { return nil }
+              let image = CGImage.decoded(contentsOf: url) else { return nil }
         cache.setObject(image, forKey: key)
         return image
     }
@@ -60,9 +60,8 @@ final class BundledImageStore {
     }
 
     @concurrent
-    nonisolated private static func decode(_ url: URL) async -> UIImage? {
-        guard let image = UIImage(contentsOfFile: url.path) else { return nil }
-        return await image.byPreparingForDisplay() ?? image
+    nonisolated private static func decode(_ url: URL) async -> CGImage? {
+        CGImage.decoded(contentsOf: url)
     }
 }
 
@@ -71,17 +70,17 @@ struct PokemonImage: View {
     var pokemon: Pokemon
     var kind: PokemonImageKind = .artwork
 
-    @State private var loaded: UIImage?
+    @State private var loaded: CGImage?
     @State private var failed = false
 
-    private var image: UIImage? {
+    private var image: CGImage? {
         loaded ?? BundledImageStore.shared.cachedPokemonImage(pokemon.imageID, kind: kind)
     }
 
     var body: some View {
         Group {
             if let image {
-                Image(uiImage: image)
+                Image(image, scale: 1, label: Text(pokemon.displayName))
                     .interpolation(kind == .sprite ? .none : .high)
                     .resizable()
                     .scaledToFit()
@@ -120,7 +119,7 @@ struct ItemImage: View {
 
     var body: some View {
         if let image = BundledImageStore.shared.itemImage(item.id) {
-            Image(uiImage: image)
+            Image(image, scale: 1, label: Text(item.name))
                 .interpolation(.none)
                 .resizable()
                 .scaledToFit()

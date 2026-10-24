@@ -35,7 +35,7 @@ struct TeamsContent: View {
         .listStyle(.plain)
         .navigationTitle("Teams")
         .toolbar {
-            ToolbarItemGroup(placement: .topBarTrailing) {
+            ToolbarItemGroup(placement: .trailingBar) {
                 Button {
                     showingImport = true
                 } label: {
@@ -132,7 +132,7 @@ struct TeamImportSheet: View {
                         .font(.system(.footnote, design: .monospaced))
                         .frame(minHeight: 220)
                         .autocorrectionDisabled()
-                        .textInputAutocapitalization(.never)
+                        .neverAutocapitalized()
                     PasteButton(payloadType: String.self) { strings in
                         if let pasted = strings.first { text = pasted }
                     }
@@ -155,7 +155,7 @@ struct TeamImportSheet: View {
                 }
             }
             .navigationTitle("Import Team")
-            .navigationBarTitleDisplayMode(.inline)
+            .inlineNavigationTitle()
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } }
                 ToolbarItem(placement: .confirmationAction) {

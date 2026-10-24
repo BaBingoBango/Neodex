@@ -33,7 +33,7 @@ struct FaceOffView: View {
             }
             .padding(.vertical)
         }
-        .background(Color(.systemGroupedBackground))
+        .background(Color.groupedBackground)
         .navigationTitle("Face-Off")
         .sheet(item: $picking) { side in
             PokemonPickerSheet(title: side == .left ? "First Pokémon" : "Second Pokémon") { pokemon in
@@ -42,7 +42,7 @@ struct FaceOffView: View {
         }
         .toolbar {
             if left != nil || right != nil {
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItem(placement: .trailingBar) {
                     Button("Swap", systemImage: "arrow.left.arrow.right") { swap(&left, &right) }
                 }
             }

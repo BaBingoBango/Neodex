@@ -11,7 +11,7 @@ struct AboutView: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Neodex")
                         .font(.system(.largeTitle, design: .rounded).weight(.heavy))
-                    Text("An offline Pokédex for iPhone and iPad with Pokémon Showdown teambuilding. Browse every Pokémon, move, Ability and item, check type matchups, build and share teams, and follow Smogon's usage statistics.")
+                    Text("An offline Pokédex for iPhone, iPad, Mac and Apple Watch with Pokémon Showdown teambuilding. Browse every Pokémon, move, Ability and item, check type matchups, build and share teams, and follow Smogon's usage statistics.")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }

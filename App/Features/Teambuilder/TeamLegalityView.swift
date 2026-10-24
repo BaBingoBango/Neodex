@@ -52,7 +52,7 @@ struct TeamLegalityView: View {
                         .foregroundStyle(.green)
                         .padding(12)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                        .background(Color.secondaryGroupedBackground, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
                 } else {
                     VStack(alignment: .leading, spacing: 10) {
                         ForEach(groupedIssues, id: \.title) { group in
@@ -69,7 +69,7 @@ struct TeamLegalityView: View {
                     }
                     .padding(12)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                    .background(Color.secondaryGroupedBackground, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
                 }
             } else {
                 Text("Pick a Smogon tier to check tiers, moves, items and clauses. Other formats, like VGC, can still be typed above but aren't checked.")

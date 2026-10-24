@@ -2,7 +2,8 @@ import NeodexKit
 import SwiftData
 import SwiftUI
 
-/// Settings: tab bar layout, history, Spotlight and about.
+/// Settings: the iPhone tab bar layout, history, Spotlight and about. On the Mac this is the
+/// Settings window (⌘,), without the tab bar section.
 struct SettingsView: View {
     @Environment(\.database) private var database
     @Environment(\.modelContext) private var modelContext
@@ -17,59 +18,83 @@ struct SettingsView: View {
     }
 
     var body: some View {
-        NavigationStack {
-            List {
-                ForEach(AppTab.Group.allCases) { group in
-                    Section {
-                        ForEach(group.tabs) { tab in
-                            let isVisible = visibleTabs.contains(tab)
-                            Toggle(isOn: Binding(get: { isVisible }, set: { set(tab, visible: $0) })) {
-                                Label(tab.title, systemImage: tab.systemImage)
-                            }
-                            .disabled(!isVisible && visibleTabs.count >= TabBarPreferences.maximumVisible)
-                        }
-                    } header: {
-                        Text(group == .reference ? "Tab Bar · Reference" : "Tab Bar · Battle")
-                    } footer: {
-                        if group == .battle {
-                            Text("Keep up to \(TabBarPreferences.maximumVisible) features in the tab bar alongside Home and Search. Everything is always on Home, and on iPad the sidebar lists every feature.")
-                        }
-                    }
-                }
-
-                Section("Your Data") {
-                    Button("Clear Browsing History", systemImage: "clock.arrow.circlepath", role: .destructive) {
-                        confirmingHistoryClear = true
-                    }
-                    Button {
-                        reindexing = true
-                        Task {
-                            await SpotlightIndexer.reindex(database: database)
-                            reindexing = false
-                        }
-                    } label: {
-                        HStack {
-                            Label("Rebuild Spotlight Index", systemImage: "magnifyingglass.circle")
-                            if reindexing { Spacer(); ProgressView() }
-                        }
-                    }
-                    .disabled(reindexing)
-                }
-
-                Section {
-                    NavigationLink { AboutView() } label: { Label("About Neodex", systemImage: "info.circle") }
-                }
-            }
-            .navigationTitle("Settings")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } }
-            }
+        content
             .confirmationDialog("Clear your browsing history?", isPresented: $confirmingHistoryClear, titleVisibility: .visible) {
                 Button("Clear History", role: .destructive) { History.clear(in: modelContext) }
             } message: {
                 Text("Explore's recently viewed and personalised picks will start over.")
             }
+    }
+
+    @ViewBuilder
+    private var content: some View {
+        #if os(macOS)
+        TabView {
+            Tab("General", systemImage: "gearshape") {
+                Form { dataSection }
+                    .formStyle(.grouped)
+            }
+            Tab("About", systemImage: "info.circle") {
+                AboutView()
+            }
+        }
+        .frame(width: 560, height: 480)
+        #else
+        NavigationStack {
+            List {
+                tabBarSections
+                dataSection
+                Section {
+                    NavigationLink { AboutView() } label: { Label("About Neodex", systemImage: "info.circle") }
+                }
+            }
+            .navigationTitle("Settings")
+            .inlineNavigationTitle()
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } }
+            }
+        }
+        #endif
+    }
+
+    private var tabBarSections: some View {
+        ForEach(AppTab.Group.allCases) { group in
+            Section {
+                ForEach(group.tabs) { tab in
+                    let isVisible = visibleTabs.contains(tab)
+                    Toggle(isOn: Binding(get: { isVisible }, set: { set(tab, visible: $0) })) {
+                        Label(tab.title, systemImage: tab.systemImage)
+                    }
+                    .disabled(!isVisible && visibleTabs.count >= TabBarPreferences.maximumVisible)
+                }
+            } header: {
+                Text(group == .reference ? "Tab Bar · Reference" : "Tab Bar · Battle")
+            } footer: {
+                if group == .battle {
+                    Text("Keep up to \(TabBarPreferences.maximumVisible) features in the tab bar alongside Home and Search. Everything is always on Home, and on iPad the sidebar lists every feature.")
+                }
+            }
+        }
+    }
+
+    private var dataSection: some View {
+        Section("Your Data") {
+            Button("Clear Browsing History", systemImage: "clock.arrow.circlepath", role: .destructive) {
+                confirmingHistoryClear = true
+            }
+            Button {
+                reindexing = true
+                Task {
+                    await SpotlightIndexer.reindex(database: database)
+                    reindexing = false
+                }
+            } label: {
+                HStack {
+                    Label("Rebuild Spotlight Index", systemImage: "magnifyingglass.circle")
+                    if reindexing { Spacer(); ProgressView() }
+                }
+            }
+            .disabled(reindexing)
         }
     }
 

@@ -25,7 +25,7 @@ struct DexbotView: View {
             }
         }
         .navigationTitle("Dexbot")
-        .navigationBarTitleDisplayMode(.inline)
+        .inlineNavigationTitle()
         .toolbar { toolbarContent }
         .confirmationDialog("Delete this chat?", isPresented: $confirmingDelete, titleVisibility: .visible) {
             Button("Delete Chat", role: .destructive) { model.deleteConversation() }
@@ -73,7 +73,7 @@ struct DexbotView: View {
         // Keeps the newest bubble in view as a reply streams in, without scrolling by hand on every token.
         .defaultScrollAnchor(.bottom, for: .initialOffset)
         .defaultScrollAnchor(.bottom, for: .sizeChanges)
-        .background(Color(.systemGroupedBackground))
+        .background(Color.groupedBackground)
         .safeAreaInset(edge: .bottom, spacing: 0) { inputBar }
     }
 
@@ -134,7 +134,7 @@ struct DexbotView: View {
                     .focused($inputFocused)
                     .padding(.horizontal, 14)
                     .padding(.vertical, 10)
-                    .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 22, style: .continuous))
+                    .background(Color.secondaryGroupedBackground, in: RoundedRectangle(cornerRadius: 22, style: .continuous))
                     .onSubmit(sendDraft)
                     .submitLabel(.send)
                 if draft.trimmingCharacters(in: .whitespaces).isEmpty {
@@ -177,7 +177,7 @@ struct DexbotView: View {
 
     @ToolbarContentBuilder
     private var toolbarContent: some ToolbarContent {
-        ToolbarItem(placement: .topBarTrailing) {
+        ToolbarItem(placement: .trailingBar) {
             Menu {
                 Button("New Chat", systemImage: "plus.bubble") { model.startNewChat() }
                 if !conversations.isEmpty {
@@ -249,13 +249,13 @@ struct DexbotBubble: View {
             }
             .padding(.horizontal, 14)
             .padding(.vertical, 10)
-            .background(isUser ? AnyShapeStyle(Color.accentColor) : AnyShapeStyle(Color(.secondarySystemGroupedBackground)),
+            .background(isUser ? AnyShapeStyle(Color.accentColor) : AnyShapeStyle(Color.secondaryGroupedBackground),
                         in: RoundedRectangle(cornerRadius: 18, style: .continuous))
             .foregroundStyle(isUser ? .white : .primary)
             if !isUser { Spacer(minLength: 32) }
         }
         .contextMenu {
-            Button("Copy", systemImage: "doc.on.doc") { UIPasteboard.general.string = message.text }
+            Button("Copy", systemImage: "doc.on.doc") { Clipboard.string = message.text }
         }
     }
 

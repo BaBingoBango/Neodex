@@ -64,7 +64,7 @@ struct PokedexListContent: View {
         .navigationTitle("Pokédex")
         .searchable(text: $searchText, prompt: "Name or number")
         .toolbar {
-            ToolbarItemGroup(placement: .topBarTrailing) {
+            ToolbarItemGroup(placement: .trailingBar) {
                 Button {
                     layout = layout == .list ? .grid : .list
                 } label: {

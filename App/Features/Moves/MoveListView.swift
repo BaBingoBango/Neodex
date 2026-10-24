@@ -55,7 +55,7 @@ struct MoveListContent: View {
         .navigationTitle("Moves")
         .searchable(text: $searchText, prompt: "Move name")
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
+            ToolbarItem(placement: .trailingBar) {
                 Menu {
                     Picker("Sort", selection: $sort) {
                         ForEach(MoveSort.allCases) { Text($0.rawValue).tag($0) }

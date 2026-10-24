@@ -27,7 +27,7 @@ struct AmbientBackground: View {
     /// Pastel versions of the palette: each colour is mixed most of the way into the background so
     /// the wash reads as a tint, not a block of colour. The background itself fills the gaps.
     private var meshColors: [Color] {
-        let background = Color(.systemGroupedBackground)
+        let background = Color.groupedBackground
         let palette = (colors.isEmpty ? [Color.accentColor] : colors).map { $0.mix(with: background, by: colorScheme == .dark ? 0.78 : 0.72) }
         return (0..<9).map { index in index == 4 || index.isMultiple(of: 2) ? palette[index % palette.count] : background }
     }
@@ -84,7 +84,7 @@ extension View {
 
 #Preview {
     ZStack(alignment: .top) {
-        Color(.systemGroupedBackground).ignoresSafeArea()
+        Color.groupedBackground.ignoresSafeArea()
         AmbientBackground(colors: [.blue, .purple, .orange]).frame(height: 420).ignoresSafeArea()
         Text("Neodex").font(.largeTitle.bold()).padding(.top, 80)
     }

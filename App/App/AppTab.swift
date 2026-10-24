@@ -185,10 +185,15 @@ enum TabBarPreferences {
 
     /// An explicit choice made in iPad's sidebar wins; otherwise the stored set decides.
     static func isVisible(_ tab: AppTab, stored: [AppTab], customization: TabViewCustomization) -> Bool {
+        #if os(iOS)
         switch customization[tab: tab.customizationID].tabBarVisibility {
         case .visible: true
         case .hidden: false
         case .automatic: stored.contains(tab)
         }
+        #else
+        // The Mac has no tab bar; the sidebar lists everything.
+        stored.contains(tab)
+        #endif
     }
 }

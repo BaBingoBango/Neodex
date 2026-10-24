@@ -1,3 +1,4 @@
+#if canImport(CarPlay)
 import CarPlay
 import NeodexKit
 import SwiftData
@@ -107,3 +108,4 @@ final class CarPlayDexbot {
         voice.speak(lastAnswer)
     }
 }
+#endif

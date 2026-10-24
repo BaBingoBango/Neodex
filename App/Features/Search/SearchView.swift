@@ -51,7 +51,7 @@ struct SearchView: View {
                     }
                 }
             }
-            .listStyle(.insetGrouped)
+            .groupedListStyle()
             .navigationTitle("Search")
             .appDestinations()
             .searchable(text: $searchText, prompt: "Pokémon, moves, abilities, items…")

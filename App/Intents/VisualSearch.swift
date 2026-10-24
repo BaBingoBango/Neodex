@@ -4,11 +4,11 @@ import CoreSpotlight
 import CoreVideo
 import Foundation
 import NeodexKit
-#if canImport(VisualIntelligence)
+#if canImport(VisualIntelligence) && os(iOS)
 import VisualIntelligence
 #endif
 
-#if canImport(VisualIntelligence)
+#if canImport(VisualIntelligence) && os(iOS)
 /// Visual intelligence shows Neodex's matches when someone points the camera at a Pokémon, a card
 /// or a screen and searches. The system hands over a frame; the on-device recogniser does the rest.
 /// (The framework ships only in the device SDK, so simulator builds leave this out.)

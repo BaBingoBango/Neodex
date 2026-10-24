@@ -62,7 +62,7 @@ struct TypeDetailView: View {
             .padding(.vertical)
         }
         .navigationTitle(types.map(\.name).joined(separator: " / "))
-        .navigationBarTitleDisplayMode(.inline)
+        .inlineNavigationTitle()
     }
 }
 
@@ -118,7 +118,7 @@ struct TypePokemonListView: View {
         }
         .listStyle(.plain)
         .navigationTitle("\(type.name) Pokémon")
-        .navigationBarTitleDisplayMode(.inline)
+        .inlineNavigationTitle()
     }
 }
 
@@ -132,7 +132,7 @@ struct TypeMoveListView: View {
         }
         .listStyle(.plain)
         .navigationTitle("\(type.name) Moves")
-        .navigationBarTitleDisplayMode(.inline)
+        .inlineNavigationTitle()
     }
 }
 

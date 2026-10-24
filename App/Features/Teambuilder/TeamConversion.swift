@@ -1,6 +1,5 @@
 import Foundation
 import NeodexKit
-import UIKit
 
 /// Converts between stored team members and Showdown's text format using the loaded database.
 enum TeamConversion {
@@ -93,7 +92,7 @@ enum TeamConversion {
     }
 
     static func copyToPasteboard(_ text: String) {
-        UIPasteboard.general.string = text
+        Clipboard.string = text
     }
 
     private static func clamp(_ block: StatBlock, max maximum: Int) -> StatBlock {

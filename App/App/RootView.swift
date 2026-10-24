@@ -5,7 +5,39 @@ import SwiftUI
 
 /// Shows a launch placeholder until the Pokédex has loaded, then the main interface.
 struct RootView: View {
+    var body: some View {
+        DatabaseLoadingView { database in
+            MainTabView()
+                .task(id: database.manifest?.generatedAt) {
+                    await SpotlightIndexer.indexIfNeeded(database: database)
+                    NeodexShortcuts.updateAppShortcutParameters()
+                    #if os(iOS)
+                    // The Mac has no widgets yet, so it skips copying sprites into the group container.
+                    await WidgetBridge.refresh(database: database)
+                    #endif
+                }
+        }
+        #if os(macOS)
+        .frame(minWidth: 900, minHeight: 600)
+        // An open main window takes incoming URLs itself instead of SwiftUI opening another one.
+        .handlesExternalEvents(preferring: ["*"], allowing: ["*"])
+        #endif
+        .onOpenURL { url in
+            DeepLinkRouter.shared.open(url: url)
+        }
+        .onContinueUserActivity(CSSearchableItemActionType) { activity in
+            guard let identifier = activity.userInfo?[CSSearchableItemActivityIdentifier] as? String,
+                  let route = AppRoute(spotlightIdentifier: identifier) else { return }
+            DeepLinkRouter.shared.open(route)
+        }
+    }
+}
+
+/// Waits for the bundled Pokédex, then shows `content` with the database in the environment.
+/// Every window and the Mac's Settings scene go through this, so none of them can outrun the load.
+struct DatabaseLoadingView<Content: View>: View {
     @Environment(AppModel.self) private var appModel
+    @ViewBuilder var content: (PokedexDatabase) -> Content
 
     var body: some View {
         Group {
@@ -14,13 +46,8 @@ struct RootView: View {
                 ProgressView("Opening the Pokédex…")
                     .controlSize(.large)
             case .ready(let database):
-                MainTabView()
+                content(database)
                     .environment(\.database, database)
-                    .task(id: database.manifest?.generatedAt) {
-                        await SpotlightIndexer.indexIfNeeded(database: database)
-                        NeodexShortcuts.updateAppShortcutParameters()
-                        await WidgetBridge.refresh(database: database)
-                    }
             case .failed(let error):
                 ContentUnavailableView {
                     Label("Pokédex Unavailable", systemImage: "exclamationmark.triangle")
@@ -33,13 +60,5 @@ struct RootView: View {
             }
         }
         .task { await appModel.loadIfNeeded() }
-        .onOpenURL { url in
-            DeepLinkRouter.shared.open(url: url)
-        }
-        .onContinueUserActivity(CSSearchableItemActionType) { activity in
-            guard let identifier = activity.userInfo?[CSSearchableItemActivityIdentifier] as? String,
-                  let route = AppRoute(spotlightIdentifier: identifier) else { return }
-            DeepLinkRouter.shared.open(route)
-        }
     }
 }

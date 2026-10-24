@@ -1,12 +1,14 @@
 import NeodexKit
 import SwiftUI
+#if canImport(UIKit)
 import UIKit
+#endif
 
 /// The bundled dataset, presented like an App Store update with the blueprint developer icon.
-/// Tapping the icon is a small easter egg: it switches the Home Screen icon to the blueprint version and back.
+/// On iOS, tapping the icon is a small easter egg: it switches the Home Screen icon to the blueprint version and back.
 struct DatasetCard: View {
     @Environment(\.database) private var database
-    @State private var usingDevIcon = UIApplication.shared.alternateIconName == "DevIcon"
+    @State private var usingDevIcon = Self.devIconActive
     @State private var showsAllNotes = false
 
     private var manifest: DataManifest? { database.manifest }
@@ -14,16 +16,7 @@ struct DatasetCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             HStack(spacing: 14) {
-                Button(action: toggleIcon) {
-                    Image(.devIconArtwork)
-                        .resizable()
-                        .frame(width: 64, height: 64)
-                        .clipShape(RoundedRectangle(cornerRadius: 14.5, style: .continuous))
-                        .overlay(RoundedRectangle(cornerRadius: 14.5, style: .continuous).strokeBorder(.quaternary, lineWidth: 0.5))
-                }
-                .buttonStyle(.plain)
-                .sensoryFeedback(.impact, trigger: usingDevIcon)
-                .accessibilityLabel(usingDevIcon ? "Switch back to the standard app icon" : "Switch to the blueprint app icon")
+                icon
                 VStack(alignment: .leading, spacing: 3) {
                     Text("Neodex Dataset")
                         .font(.headline)
@@ -79,7 +72,38 @@ struct DatasetCard: View {
         }
     }
 
+    /// On iOS the icon is a button that swaps the Home Screen icon; the Mac just shows it.
+    @ViewBuilder
+    private var icon: some View {
+        #if os(iOS)
+        Button(action: toggleIcon) { iconArtwork }
+            .buttonStyle(.plain)
+            .sensoryFeedback(.impact, trigger: usingDevIcon)
+            .accessibilityLabel(usingDevIcon ? "Switch back to the standard app icon" : "Switch to the blueprint app icon")
+        #else
+        iconArtwork
+            .accessibilityLabel("Neodex developer icon")
+        #endif
+    }
+
+    private var iconArtwork: some View {
+        Image(.devIconArtwork)
+            .resizable()
+            .frame(width: 64, height: 64)
+            .clipShape(RoundedRectangle(cornerRadius: 14.5, style: .continuous))
+            .overlay(RoundedRectangle(cornerRadius: 14.5, style: .continuous).strokeBorder(.quaternary, lineWidth: 0.5))
+    }
+
+    private static var devIconActive: Bool {
+        #if os(iOS)
+        UIApplication.shared.alternateIconName == "DevIcon"
+        #else
+        false
+        #endif
+    }
+
     private func toggleIcon() {
+        #if os(iOS)
         guard UIApplication.shared.supportsAlternateIcons else { return }
         let target: String? = usingDevIcon ? nil : "DevIcon"
         Task {
@@ -90,6 +114,7 @@ struct DatasetCard: View {
                 // The system shows its own alert; nothing else to do.
             }
         }
+        #endif
     }
 }
 

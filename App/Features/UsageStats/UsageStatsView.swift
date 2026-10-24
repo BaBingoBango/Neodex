@@ -34,10 +34,10 @@ struct UsageStatsView: View {
         .listStyle(.plain)
         .searchable(text: $searchText, prompt: "Filter Pokémon")
         .navigationTitle("Global Stats")
-        .navigationBarTitleDisplayMode(.inline)
+        .inlineNavigationTitle()
         .safeAreaInset(edge: .top, spacing: 0) { selectionBar }
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
+            ToolbarItem(placement: .trailingBar) {
                 Button("Refresh", systemImage: "arrow.clockwise") { Task { await model.reload() } }
                     .disabled(model.isLoading)
             }
@@ -183,7 +183,7 @@ struct UsageFormatPicker: View {
             }
             .searchable(text: $searchText, prompt: "Format")
             .navigationTitle("Format")
-            .navigationBarTitleDisplayMode(.inline)
+            .inlineNavigationTitle()
             .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } } }
         }
     }

@@ -29,11 +29,11 @@ struct DamageCalculatorView: View {
             }
             .padding(.vertical)
         }
-        .background(Color(.systemGroupedBackground))
+        .background(Color.groupedBackground)
         .navigationTitle("Damage Calculator")
-        .navigationBarTitleDisplayMode(.inline)
+        .inlineNavigationTitle()
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
+            ToolbarItem(placement: .trailingBar) {
                 Button("Swap", systemImage: "arrow.left.arrow.right") {
                     withAnimation { model.swap() }
                 }
@@ -98,7 +98,7 @@ struct DamageCalculatorView: View {
             }
             .frame(maxWidth: .infinity, minHeight: 190, alignment: .top)
             .padding(12)
-            .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+            .background(Color.secondaryGroupedBackground, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
         }
         .buttonStyle(.plain)
         .contextMenu {
@@ -129,7 +129,7 @@ struct DamageCalculatorView: View {
                     }
                 }
             }
-            .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+            .background(Color.secondaryGroupedBackground, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
             FlowLayout(spacing: 8) {
                 fieldToggle("Doubles", "person.2", $model.isDoubles)
                 fieldToggle("Critical Hit", "scope", $model.isCritical)
@@ -261,9 +261,9 @@ struct CalcLineCard: View {
         }
         .padding(12)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .background(Color.secondaryGroupedBackground, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
         .contextMenu {
-            Button("Copy Calc", systemImage: "doc.on.doc") { UIPasteboard.general.string = summary }
+            Button("Copy Calc", systemImage: "doc.on.doc") { Clipboard.string = summary }
         }
     }
 

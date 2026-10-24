@@ -58,7 +58,7 @@ struct PokemonMovesView: View {
             }
         }
         .navigationTitle("\(pokemon.displayName) Moves")
-        .navigationBarTitleDisplayMode(.inline)
+        .inlineNavigationTitle()
         .onAppear {
             if !availableMethods.contains(method), let first = availableMethods.first { method = first }
         }

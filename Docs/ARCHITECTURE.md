@@ -110,7 +110,9 @@ re-runs cheap.
 
 ## App (`App/`)
 
-SwiftUI, iOS 26 and later, Swift 6 language mode with main-actor default isolation.
+SwiftUI, iOS 26 and macOS 26 and later, Swift 6 language mode with main-actor default isolation.
+The `Neodex` (iOS) and `NeodexMac` targets compile the same `App/` and `Shared/` folders; `Mac/`
+adds only what the Mac needs.
 
 ```
 Shared/                    Compiled into the app and the widget extension: TypeStyle/TypeBadge,
@@ -125,6 +127,9 @@ Watch/                     The watchOS app: WatchRootView (vertical pages), Watc
 WatchWidgets/              The watch complication extension: Pokémon of the Day, Who's That
                            Pokémon? (with a Reveal button in the Smart Stack) and an Open Neodex
                            Poké Ball, in the circular, rectangular, inline and corner families
+Mac/                       Mac-only files for the NeodexMac target: Info.plist (the neodex:// scheme),
+                           NeodexMac.entitlements (App Sandbox, camera, microphone, network, App Group)
+                           and NeodexCommands (the Go and Pokémon menus)
 App/
 ├── NeodexApp.swift        @main; SwiftData container for teams and history (in the App Group)
 ├── App/                   AppModel (load state), DatabaseProvider, DeepLinkRouter, RootView,
@@ -135,7 +140,8 @@ App/
 ├── Features/              One folder per feature: Home, Dexbot, Pokedex, Moves, Abilities, Items, Types,
 │                          Natures, Search, Teambuilder, DamageCalc, FaceOff, UsageStats, Settings,
 │                          About
-├── DesignSystem/          Type palette, TypeBadge, PokemonImage, shared components
+├── DesignSystem/          Type palette, TypeBadge, PokemonImage, shared components, Platform (the
+│                          iOS/macOS shims) and ImageDecoding (ImageIO → CGImage)
 ├── Services/              SmogonStatsClient (actor, rankings + trends), MediaCache (actor),
 │                          AnimatedSprite, CryPlayer, SpotlightIndexer, History
 ├── Persistence/           SwiftData models: SavedTeam, TeamMember, BrowsingRecord
@@ -150,8 +156,8 @@ Key decisions:
   the main actor, the whole dataset fits comfortably in memory, and every lookup is a dictionary hit.
   SwiftData is used only for what the user creates (teams, browsing history).
 - **Every feature is a tab.** `AppTab` declares them inside `TabSection`s (Reference, Battle) with
-  `customizationID`s. iPad shows the grouped sidebar with the system's drag-to-customise editing;
-  iPhone shows Home, Search and the tabs the user keeps visible. That set is stored by the app, since
+  `customizationID`s. iPad and the Mac show the grouped sidebar with the system's drag-to-customise
+  editing; iPhone shows Home, Search and the tabs the user keeps visible. That set is stored by the app, since
   `TabViewCustomization` exposes tab-bar visibility read-only; Settings' toggles write it and reset
   sidebar edits. Home's cards push the same feature content inside Home's own stack.
 - **One route type.** `AppRoute` enumerates every pushable screen; every `NavigationStack` registers
@@ -159,7 +165,8 @@ Key decisions:
   type doubles as the Spotlight deep-link identifier (`pokemon:bulbasaur`).
 - **Images are loose bundle files with unique names.** Xcode's synchronized folders flatten resources
   into the bundle root, so files are named `pikachu-art.heic`, `pikachu-thumb.heic`,
-  `pikachu-sprite.png` and loaded through a small cache (`BundledImageStore`).
+  `pikachu-sprite.png` and loaded through a small cache (`BundledImageStore`) that decodes them with
+  ImageIO straight to `CGImage`, which is `Sendable` and which iOS and macOS draw alike.
 - **Concurrency.** The database is `Sendable` and shared through the environment; the Smogon client is
   an actor with a disk `URLCache`; pure value types that cross isolation boundaries (`AppRoute`,
   `UsageSelection`) are declared `nonisolated`.
@@ -221,6 +228,21 @@ Key decisions:
   families and fails the whole placeholder batch, after which `chronod` benches the extension for a
   day. The reveal state lives in the App Group defaults so the Today page and the complication agree,
   and complications deep-link into the watch app (`neodex://pokemon/<id>`, `neodex://mystery`).
+- **The Mac is the same app with a sidebar and a menu bar.** `NeodexMac` compiles `App/` and
+  `Shared/` for macOS 26 under App Sandbox and the hardened runtime; `Mac/` holds its Info.plist,
+  entitlements and `NeodexCommands`. The platform differences are a handful of shims in
+  `App/DesignSystem/Platform.swift` (`inlineNavigationTitle()`, `ToolbarItemPlacement.trailingBar`,
+  `Color.groupedBackground`, `Clipboard`, …) so the views read the same on both, and the image path
+  is `CGImage` throughout, so there is no `UIImage`/`NSImage` split. `MainTabView`'s sidebar-adaptable
+  `TabView` is the Mac sidebar; the selected tab is published as a focused scene value so the Go menu
+  (⌘1–⌘9) can switch it. Entries requested from Spotlight, Siri, Dexbot or the Pokémon menu open in a
+  `WindowGroup(for: AppRoute.self)` window rather than a sheet, so two entries can sit side by side,
+  and `handlesExternalEvents` keeps URLs flowing to the open main window. Settings is a `Settings`
+  scene (General and About; the iPhone tab-bar section is left out). `CameraScanner` uses the camera
+  the system prefers (built-in, Continuity or USB) behind an `NSViewRepresentable` mirrored preview
+  and hands over upright frames. Not on the Mac yet: CarPlay (`#if canImport(CarPlay)`), visual
+  intelligence (the macOS 27 SDK has the framework but its types need macOS 27), widgets (so
+  `WidgetBridge` is skipped there) and the alternate app icon.
 - **CarPlay is a scene, not a second UI.** `CarPlaySceneDelegate` shows one `CPListTemplate` with
   "Ask Dexbot" and recent chats; everything is spoken and the list only carries short status text. The
   scene is declared in `App/Info.plist`. Apple granted the
@@ -270,3 +292,5 @@ xcodebuild -scheme Neodex -destination 'platform=iOS Simulator,name=iPhone 17 Pr
   use. A few of the newest forms have no animation yet and fall back to the still sprite.
 - The damage calculator models the modifiers that decide almost every real calc, but not entry
   hazards, multi-turn moves, ally abilities or Dynamax.
+- The Mac app has no widgets or visual intelligence yet, and its camera scanner and voice mode have
+  not been tried on a Mac; Home, the entry windows and the calculator have.

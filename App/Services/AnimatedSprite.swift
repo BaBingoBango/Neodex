@@ -1,7 +1,6 @@
 import ImageIO
 import NeodexKit
 import SwiftUI
-import UIKit
 
 /// A decoded GIF: its frames and how long each one shows.
 nonisolated struct AnimatedImage: @unchecked Sendable {
@@ -52,7 +51,7 @@ nonisolated struct AnimatedImage: @unchecked Sendable {
 /// What the sprite store found for a Pokémon.
 nonisolated enum SpriteMedia: Sendable {
     case animated(AnimatedImage)
-    case still(UIImage)
+    case still(CGImage)
     case unavailable
 }
 
@@ -84,7 +83,7 @@ final class SpriteMediaStore {
             return .animated(image)
         }
         if shiny, let data = try? await MediaCache.shared.data(for: ShowdownMedia.staticShinySprite(stem)),
-           let image = UIImage(data: data) {
+           let image = CGImage.decoded(data) {
             return .still(image)
         }
         return .unavailable
@@ -114,11 +113,7 @@ struct AnimatedSpriteView: View {
                     frame(image.frames[0], size: image.size)
                 }
             case .still(let image):
-                Image(uiImage: image)
-                    .interpolation(.none)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: image.size.width * scale(for: image.size), height: image.size.height * scale(for: image.size))
+                frame(image, size: CGSize(width: image.width, height: image.height))
             case .unavailable, nil:
                 PokemonImage(pokemon: pokemon, kind: .sprite)
                     .frame(width: 96 * scale(for: CGSize(width: 96, height: 96)), height: 96 * scale(for: CGSize(width: 96, height: 96)))

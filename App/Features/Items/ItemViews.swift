@@ -29,7 +29,7 @@ struct ItemListView: View {
         .navigationTitle("Items")
         .searchable(text: $searchText, prompt: "Item name")
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
+            ToolbarItem(placement: .trailingBar) {
                 Menu {
                     Picker("Category", selection: $category) {
                         Text("All Categories").tag(ItemCategory?.none)
@@ -123,7 +123,7 @@ struct ItemDetailView: View {
             }
         }
         .navigationTitle(item.name)
-        .navigationBarTitleDisplayMode(.inline)
+        .inlineNavigationTitle()
         .recordsHistory(.item, id: item.id)
     }
 

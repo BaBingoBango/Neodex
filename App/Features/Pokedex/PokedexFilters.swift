@@ -171,7 +171,7 @@ struct PokedexFilterSheet: View {
                 }
             }
             .navigationTitle("Filters")
-            .navigationBarTitleDisplayMode(.inline)
+            .inlineNavigationTitle()
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Reset") { filters = PokedexFilters() }
@@ -222,7 +222,7 @@ struct AbilityPickerList: View {
         .listStyle(.plain)
         .searchable(text: $searchText, prompt: "Ability name")
         .navigationTitle("Ability")
-        .navigationBarTitleDisplayMode(.inline)
+        .inlineNavigationTitle()
     }
 }
 
@@ -262,6 +262,6 @@ struct MovePickerList: View {
         .listStyle(.plain)
         .searchable(text: $searchText, prompt: "Move name")
         .navigationTitle("Move")
-        .navigationBarTitleDisplayMode(.inline)
+        .inlineNavigationTitle()
     }
 }

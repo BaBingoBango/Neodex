@@ -27,14 +27,14 @@ struct PokedexEntriesView: View {
                 .padding(.vertical, 6)
                 .contextMenu {
                     Button("Read Aloud", systemImage: "speaker.wave.2") { speaker.speak(entry: entry.text, for: pokemon) }
-                    Button("Copy", systemImage: "doc.on.doc") { UIPasteboard.general.string = entry.text }
+                    Button("Copy", systemImage: "doc.on.doc") { Clipboard.string = entry.text }
                 }
             }
         }
         .navigationTitle("Pokédex Entries")
-        .navigationBarTitleDisplayMode(.inline)
+        .inlineNavigationTitle()
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
+            ToolbarItem(placement: .trailingBar) {
                 Button {
                     if speaker.isSpeaking {
                         speaker.stop()

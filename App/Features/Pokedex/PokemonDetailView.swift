@@ -30,15 +30,15 @@ struct PokemonDetailView: View {
         }
         .ignoresSafeArea(edges: .top)
         .navigationTitle(pokemon.displayName)
-        .navigationBarTitleDisplayMode(.inline)
+        .inlineNavigationTitle()
         .recordsHistory(.pokemon, id: pokemon.id)
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
+            ToolbarItem(placement: .trailingBar) {
                 NavigationLink(value: AppRoute.faceOff(pokemon.id)) {
                     Label("Face-Off", systemImage: "bolt.circle")
                 }
             }
-            ToolbarItem(placement: .topBarTrailing) {
+            ToolbarItem(placement: .trailingBar) {
                 Button {
                     speaker.speak(entry: pokemon.dexEntries.indices.contains(selectedEntryIndex) ? pokemon.dexEntries[selectedEntryIndex].text : nil,
                                   for: pokemon)

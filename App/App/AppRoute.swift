@@ -4,7 +4,7 @@ import SwiftUI
 
 /// Every screen that can be pushed onto a navigation stack. Using a single route type lets any
 /// view link to any entity with `NavigationLink(value: AppRoute.move("flamethrower"))`.
-nonisolated enum AppRoute: Hashable, Identifiable {
+nonisolated enum AppRoute: Hashable, Codable, Identifiable {
     case pokemon(Pokemon.ID)
     case move(Move.ID)
     case moveLearners(Move.ID)

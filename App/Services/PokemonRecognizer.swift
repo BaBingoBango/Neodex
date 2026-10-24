@@ -4,7 +4,6 @@ import CoreVideo
 import Foundation
 import ImageIO
 import NeodexKit
-import UIKit
 import Vision
 
 /// A camera frame handed from the capture queue to the recogniser.
@@ -160,22 +159,5 @@ actor PokemonRecognizer {
         let head = Head(manifest: manifest, weights: Array(floats[0..<dimension * classCount]), biases: Array(floats[(dimension * classCount)...]))
         self.head = head
         return head
-    }
-}
-
-extension CGImagePropertyOrientation {
-    /// Vision's orientation for a `UIImage`'s orientation.
-    init(_ orientation: UIImage.Orientation) {
-        switch orientation {
-        case .up: self = .up
-        case .upMirrored: self = .upMirrored
-        case .down: self = .down
-        case .downMirrored: self = .downMirrored
-        case .left: self = .left
-        case .leftMirrored: self = .leftMirrored
-        case .right: self = .right
-        case .rightMirrored: self = .rightMirrored
-        @unknown default: self = .up
-        }
     }
 }

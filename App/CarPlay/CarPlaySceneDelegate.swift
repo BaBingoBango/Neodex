@@ -1,3 +1,4 @@
+#if canImport(CarPlay)
 import CarPlay
 import UIKit
 
@@ -16,3 +17,4 @@ final class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegat
         dexbot.disconnect()
     }
 }
+#endif

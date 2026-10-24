@@ -28,9 +28,9 @@ struct TeamMemberEditorView: View {
                 statsSection(pokemon)
             }
             .navigationTitle(pokemon.displayName)
-            .navigationBarTitleDisplayMode(.inline)
+            .inlineNavigationTitle()
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItem(placement: .trailingBar) {
                     Menu {
                         Button("Copy Set", systemImage: "doc.on.doc") {
                             TeamConversion.copyToPasteboard(TeamConversion.exportText(for: member.wrappedValue, database: database))
@@ -220,7 +220,7 @@ struct TeamMemberEditorView: View {
     }
 
     private func pasteSet() {
-        guard let text = UIPasteboard.general.string, let set = ShowdownTeamCodec.parseSet(text) else { return }
+        guard let text = Clipboard.string, let set = ShowdownTeamCodec.parseSet(text) else { return }
         guard let pokemon = database.pokemon(named: set.species) else { return }
         var warnings: [String] = []
         var updated = TeamConversion.member(from: set, pokemon: pokemon, database: database, warnings: &warnings)
@@ -262,7 +262,7 @@ struct ItemPickerList: View {
         .listStyle(.plain)
         .searchable(text: $searchText, prompt: "Item name")
         .navigationTitle("Item")
-        .navigationBarTitleDisplayMode(.inline)
+        .inlineNavigationTitle()
     }
 }
 
@@ -289,7 +289,7 @@ struct NaturePickerList: View {
             .buttonStyle(.plain)
         }
         .navigationTitle("Nature")
-        .navigationBarTitleDisplayMode(.inline)
+        .inlineNavigationTitle()
     }
 }
 

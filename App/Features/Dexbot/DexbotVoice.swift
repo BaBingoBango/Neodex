@@ -113,9 +113,11 @@ final class DexbotVoice {
         }
 
         do {
+            #if os(iOS)
             let session = AVAudioSession.sharedInstance()
             try session.setCategory(.playAndRecord, mode: .spokenAudio, options: [.defaultToSpeaker, .allowBluetoothHFP])
             try session.setActive(true)
+            #endif
             let input = engine.inputNode
             let inputFormat = input.outputFormat(forBus: 0)
             guard let analyzerFormat = await SpeechAnalyzer.bestAvailableAudioFormat(compatibleWith: [transcriber]) else {
@@ -164,8 +166,10 @@ final class DexbotVoice {
     func speak(_ text: String) {
         guard speaksReplies, !text.isEmpty else { return }
         stopSpeaking()
+        #if os(iOS)
         try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio, options: [.duckOthers])
         try? AVAudioSession.sharedInstance().setActive(true)
+        #endif
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(language: Locale.current.identifier) ?? AVSpeechSynthesisVoice(language: "en-US")
         utterance.rate = AVSpeechUtteranceDefaultSpeechRate

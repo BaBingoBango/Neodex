@@ -1,11 +1,15 @@
 import NeodexKit
 import SwiftUI
 
-/// Top-level navigation. iPad shows every feature in a grouped, customisable sidebar; iPhone shows
-/// Home, Search and the tabs the user keeps in the bar. Screens requested by Spotlight or Siri open
-/// as a sheet.
+/// Top-level navigation. iPad and Mac show every feature in a grouped, customisable sidebar; iPhone
+/// shows Home, Search and the tabs the user keeps in the bar. Screens requested by Spotlight or Siri
+/// open as a sheet on iOS and in their own window on the Mac.
 struct MainTabView: View {
+    #if os(iOS)
     @Environment(\.horizontalSizeClass) private var sizeClass
+    #else
+    @Environment(\.openWindow) private var openWindow
+    #endif
     @Environment(\.database) private var database
     @AppStorage(TabBarPreferences.customizationKey) private var customization = TabViewCustomization()
     @AppStorage(TabBarPreferences.storageKey) private var storedVisible = TabBarPreferences.encode(AppTab.defaultVisible)
@@ -13,6 +17,15 @@ struct MainTabView: View {
     @State private var selection: AppTab = .home
 
     private var visibleTabs: [AppTab] { TabBarPreferences.decode(storedVisible) }
+
+    /// iPhone shows a tab bar; iPad and the Mac show the sidebar.
+    private var isCompact: Bool {
+        #if os(iOS)
+        sizeClass == .compact
+        #else
+        false
+        #endif
+    }
 
     private func isVisible(_ tab: AppTab) -> Bool {
         TabBarPreferences.isVisible(tab, stored: visibleTabs, customization: customization)
@@ -24,9 +37,11 @@ struct MainTabView: View {
             Tab(AppTab.home.title, systemImage: AppTab.home.systemImage, value: AppTab.home) {
                 AppTab.home.root
             }
+            #if os(iOS)
             .customizationBehavior(.disabled, for: .sidebar, .tabBar)
+            #endif
 
-            if sizeClass == .compact {
+            if isCompact {
                 // iPhone keeps every declared tab reachable (overflowing into More), so only the
                 // chosen tabs are declared here. Everything else is on Home.
                 ForEach(visibleTabs) { tab in
@@ -55,6 +70,15 @@ struct MainTabView: View {
         }
         .tabViewStyle(.sidebarAdaptable)
         .tabViewCustomization($customization)
+        .focusedSceneValue(\.tabSelection, $selection)
+        #if os(macOS)
+        .onChange(of: router.pendingRoute) { _, route in
+            // A requested entry gets its own window, so the main window keeps its place.
+            guard let route else { return }
+            router.pendingRoute = nil
+            openWindow(value: route)
+        }
+        #else
         .sheet(item: $router.pendingRoute) { route in
             NavigationStack {
                 AppRouteView(route: route)
@@ -66,6 +90,7 @@ struct MainTabView: View {
                     }
             }
         }
+        #endif
         .onChange(of: router.pendingPick, initial: true) { _, request in
             guard let request else { return }
             let species = database.species
@@ -83,9 +108,14 @@ struct MainTabView: View {
 
     /// A tab hidden from the iPhone bar can't stay selected there; fall back to Home.
     private func fallBackIfHidden() {
-        guard sizeClass == .compact, selection != .home, selection != .search else { return }
+        guard isCompact, selection != .home, selection != .search else { return }
         if !isVisible(selection) { selection = .home }
     }
+}
+
+extension FocusedValues {
+    /// The focused window's selected tab, so the Mac's Go menu can switch it.
+    @Entry var tabSelection: Binding<AppTab>?
 }
 
 #if DEBUG
