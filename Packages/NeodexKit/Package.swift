@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "NeodexKit",
-    platforms: [.iOS(.v26), .macOS(.v26)],
+    platforms: [.iOS(.v26), .macOS(.v26), .watchOS(.v26)],
     products: [
         .library(name: "NeodexKit", targets: ["NeodexKit"]),
     ],

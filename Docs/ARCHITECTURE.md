@@ -118,6 +118,9 @@ Shared/                    Compiled into the app and the widget extension: TypeS
                            DailyPick), UsageDefaults, TeamReader, Shared.xcassets (type colours)
 Widgets/                   WidgetKit extension: Pokémon of the Day, Who's That Pokémon?, Team,
                            Popular on Showdown, and two Control Center controls
+Watch/                     The watchOS app: WatchRootView (vertical pages), WatchTodayView,
+                           WatchTypeMatchupView, WatchPokedexView, WatchPokemonDetailView,
+                           WatchPokemonImage (HEIC thumbnails from the bundle)
 App/
 ├── NeodexApp.swift        @main; SwiftData container for teams and history (in the App Group)
 ├── App/                   AppModel (load state), DatabaseProvider, DeepLinkRouter, RootView,
@@ -197,6 +200,15 @@ Key decisions:
   `SemanticContentDescriptor`, `PokemonEntity` is an `IndexedEntity`, and `OpenPokemonIntent` is the
   `OpenIntent` that opens a result. The framework only exists in the device SDK, so that query is
   compiled out of simulator builds.
+- **The watch app is the same data, trimmed to the wrist.** `NeodexWatch` is a watchOS target that
+  compiles `Watch/` and `Shared/` against NeodexKit and runs independently of the phone
+  (`WKRunsIndependentlyOfCompanionApp`). It ships the full `Data/` JSON and the 120 px thumbnails
+  through Xcode folder references into `App/Resources`, so nothing is duplicated in the repository
+  and the bundle has `Data/` and `thumbs/` subdirectories (about 23 MB). The screens are a vertical
+  page `TabView` with the long Pokédex list last, since you can't page past a thousand rows; the
+  daily picks come from the same `DailyPick` arithmetic as the widgets, so every device agrees on the
+  day's Pokémon. Thumbnails are decoded off the main thread into a `CGContext`, because watchOS has
+  no `preparingForDisplay()`.
 - **CarPlay is a scene, not a second UI.** `CarPlaySceneDelegate` shows one `CPListTemplate` with
   "Ask Dexbot" and recent chats; everything is spoken and the list only carries short status text. The
   scene is declared in `App/Info.plist`. Apple granted the
