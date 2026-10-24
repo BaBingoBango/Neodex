@@ -199,10 +199,11 @@ Key decisions:
   compiled out of simulator builds.
 - **CarPlay is a scene, not a second UI.** `CarPlaySceneDelegate` shows one `CPListTemplate` with
   "Ask Dexbot" and recent chats; everything is spoken and the list only carries short status text. The
-  scene is declared in `App/Info.plist`; the `com.apple.developer.carplay-voice-based-conversation`
-  entitlement lives in a simulator-only entitlements file (`App/Neodex-Simulator.entitlements`, which
-  also claims the Private Cloud Compute entitlement so both can be exercised in the simulator) until
-  Apple grants them for devices. Xcode 27's Device Hub has no CarPlay (or other external) display for
+  scene is declared in `App/Info.plist`. Apple granted the
+  `com.apple.developer.carplay-voice-based-conversation` entitlement in October 2026, so it is in the
+  device entitlements (`App/Neodex.entitlements`); the simulator-only file
+  (`App/Neodex-Simulator.entitlements`) also claims Private Cloud Compute so both can be exercised in
+  the simulator before that entitlement arrives. Xcode 27's Device Hub has no CarPlay (or other external) display for
   simulators; its CarPlay Simulator plug-in pairs with a physical iPhone over USB. To see the scene
   without the entitlement, run an iOS 26.4+ simulator from Xcode 26's Simulator app and choose
   I/O › External Displays › CarPlay.
