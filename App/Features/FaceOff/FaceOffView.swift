@@ -84,11 +84,14 @@ struct FaceOffView: View {
                 Button {
                     if side == .left { left = nil } else { right = nil }
                 } label: {
-                    Image(systemName: "xmark.circle.fill")
-                        .font(.title3)
+                    Image(systemName: "xmark")
+                        .font(.footnote.weight(.bold))
                         .foregroundStyle(.secondary)
+                        .frame(width: 30, height: 30)
+                        .glassEffect(.regular.interactive(), in: .circle)
                         .padding(8)
                 }
+                .buttonStyle(.plain)
                 .accessibilityLabel("Clear")
             }
         }
