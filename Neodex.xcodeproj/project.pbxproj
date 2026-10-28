@@ -7,38 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AADE00000000000000000054 /* NeodexKit in Frameworks */ = {isa = PBXBuildFile; productRef = AADE00000000000000000053 /* NeodexKit */; };
-		AADE00000000000000000056 /* NeodexWatchWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AADE0000000000000000004A /* NeodexWatchWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		AADE00000000000000000059 /* thumbs in Resources */ = {isa = PBXBuildFile; fileRef = AADE00000000000000000044 /* thumbs */; };
-		AADE0000000000000000005B /* pokemon-index.json in Resources */ = {isa = PBXBuildFile; fileRef = AADE0000000000000000005A /* pokemon-index.json */; };
-		AADE00000000000000000048 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = AADE00000000000000000047 /* AppIcon.icon */; };
+		AADE0000000000000000001E /* NeodexKit in Frameworks */ = {isa = PBXBuildFile; productRef = AADE0000000000000000001D /* NeodexKit */; };
+		AADE00000000000000000020 /* NeodexKit in Frameworks */ = {isa = PBXBuildFile; productRef = AADE0000000000000000001F /* NeodexKit */; };
+		AADE00000000000000000029 /* NeodexKit in Frameworks */ = {isa = PBXBuildFile; productRef = AADE00000000000000000028 /* NeodexKit */; };
+		AADE0000000000000000002D /* NeodexWidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AADE00000000000000000021 /* NeodexWidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AADE0000000000000000003E /* NeodexKit in Frameworks */ = {isa = PBXBuildFile; productRef = AADE0000000000000000003D /* NeodexKit */; };
 		AADE00000000000000000040 /* NeodexWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = AADE00000000000000000034 /* NeodexWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AADE00000000000000000045 /* Data in Resources */ = {isa = PBXBuildFile; fileRef = AADE00000000000000000043 /* Data */; };
 		AADE00000000000000000046 /* thumbs in Resources */ = {isa = PBXBuildFile; fileRef = AADE00000000000000000044 /* thumbs */; };
-		AADE0000000000000000001E /* NeodexKit in Frameworks */ = {isa = PBXBuildFile; productRef = AADE0000000000000000001D /* NeodexKit */; };
-		AADE00000000000000000020 /* NeodexKit in Frameworks */ = {isa = PBXBuildFile; productRef = AADE0000000000000000001F /* NeodexKit */; };
+		AADE00000000000000000048 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = AADE00000000000000000047 /* AppIcon.icon */; };
+		AADE00000000000000000054 /* NeodexKit in Frameworks */ = {isa = PBXBuildFile; productRef = AADE00000000000000000053 /* NeodexKit */; };
+		AADE00000000000000000056 /* NeodexWatchWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AADE0000000000000000004A /* NeodexWatchWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AADE00000000000000000059 /* thumbs in Resources */ = {isa = PBXBuildFile; fileRef = AADE00000000000000000044 /* thumbs */; };
+		AADE0000000000000000005B /* pokemon-index.json in Resources */ = {isa = PBXBuildFile; fileRef = AADE0000000000000000005A /* pokemon-index.json */; };
 		AADE00000000000000000065 /* NeodexKit in Frameworks */ = {isa = PBXBuildFile; productRef = AADE00000000000000000064 /* NeodexKit */; };
 		AADE0000000000000000006B /* ScopeLens in Frameworks */ = {isa = PBXBuildFile; productRef = AADE0000000000000000006A /* ScopeLens */; };
-		AADE00000000000000000029 /* NeodexKit in Frameworks */ = {isa = PBXBuildFile; productRef = AADE00000000000000000028 /* NeodexKit */; };
-		AADE0000000000000000002D /* NeodexWidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AADE00000000000000000021 /* NeodexWidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		AADE00000000000000000058 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AADE00000000000000000001 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AADE00000000000000000049;
-			remoteInfo = NeodexWatchWidgets;
-		};
-		AADE00000000000000000042 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AADE00000000000000000001 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AADE00000000000000000033;
-			remoteInfo = NeodexWatch;
-		};
 		AADE0000000000000000001A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AADE00000000000000000001 /* Project object */;
@@ -53,16 +39,30 @@
 			remoteGlobalIDString = AADE00000000000000000024;
 			remoteInfo = NeodexWidgetsExtension;
 		};
+		AADE00000000000000000042 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AADE00000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AADE00000000000000000033;
+			remoteInfo = NeodexWatch;
+		};
+		AADE00000000000000000058 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AADE00000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AADE00000000000000000049;
+			remoteInfo = NeodexWatchWidgets;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		AADE00000000000000000055 /* Embed Foundation Extensions */ = {
+		AADE0000000000000000002C /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				AADE00000000000000000056 /* NeodexWatchWidgets.appex in Embed Foundation Extensions */,
+				AADE0000000000000000002D /* NeodexWidgetsExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -78,13 +78,13 @@
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AADE0000000000000000002C /* Embed Foundation Extensions */ = {
+		AADE00000000000000000055 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				AADE0000000000000000002D /* NeodexWidgetsExtension.appex in Embed Foundation Extensions */,
+				AADE00000000000000000056 /* NeodexWatchWidgets.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -92,33 +92,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		AADE0000000000000000004A /* NeodexWatchWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NeodexWatchWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		AADE0000000000000000005A /* pokemon-index.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = "pokemon-index.json"; path = "App/Resources/Data/pokemon-index.json"; sourceTree = "<group>"; };
-		AADE00000000000000000047 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; name = AppIcon.icon; path = App/Resources/AppIcon.icon; sourceTree = "<group>"; };
-		AADE00000000000000000034 /* NeodexWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NeodexWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		AADE00000000000000000043 /* Data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Data; path = App/Resources/Data; sourceTree = "<group>"; };
-		AADE00000000000000000044 /* thumbs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = thumbs; path = App/Resources/Images/thumbs; sourceTree = "<group>"; };
 		AADE00000000000000000003 /* Neodex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Neodex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AADE00000000000000000005 /* NeodexTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NeodexTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AADE00000000000000000021 /* NeodexWidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NeodexWidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		AADE00000000000000000034 /* NeodexWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NeodexWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AADE00000000000000000043 /* Data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Data; path = App/Resources/Data; sourceTree = "<group>"; };
+		AADE00000000000000000044 /* thumbs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = thumbs; path = App/Resources/Images/thumbs; sourceTree = "<group>"; };
+		AADE00000000000000000047 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; name = AppIcon.icon; path = App/Resources/AppIcon.icon; sourceTree = "<group>"; };
+		AADE0000000000000000004A /* NeodexWatchWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NeodexWatchWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		AADE0000000000000000005A /* pokemon-index.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = "pokemon-index.json"; path = "App/Resources/Data/pokemon-index.json"; sourceTree = "<group>"; };
 		AADE0000000000000000005D /* Neodex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Neodex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		AADE00000000000000000052 /* Exceptions for "WatchWidgets" folder in "NeodexWatchWidgets" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = AADE00000000000000000049 /* NeodexWatchWidgets */;
-		};
-		AADE0000000000000000003C /* Exceptions for "Watch" folder in "NeodexWatch" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = AADE00000000000000000033 /* NeodexWatch */;
-		};
 		AADE00000000000000000031 /* Exceptions for "App" folder in "Neodex" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -132,6 +118,20 @@
 				Info.plist,
 			);
 			target = AADE00000000000000000024 /* NeodexWidgetsExtension */;
+		};
+		AADE0000000000000000003C /* Exceptions for "Watch" folder in "NeodexWatch" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = AADE00000000000000000033 /* NeodexWatch */;
+		};
+		AADE00000000000000000052 /* Exceptions for "WatchWidgets" folder in "NeodexWatchWidgets" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = AADE00000000000000000049 /* NeodexWatchWidgets */;
 		};
 		AADE00000000000000000067 /* Exceptions for "App" folder in "NeodexMac" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -150,22 +150,6 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		AADE00000000000000000051 /* WatchWidgets */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				AADE00000000000000000052 /* Exceptions for "WatchWidgets" folder in "NeodexWatchWidgets" target */,
-			);
-			path = WatchWidgets;
-			sourceTree = "<group>";
-		};
-		AADE0000000000000000003B /* Watch */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				AADE0000000000000000003C /* Exceptions for "Watch" folder in "NeodexWatch" target */,
-			);
-			path = Watch;
-			sourceTree = "<group>";
-		};
 		AADE00000000000000000008 /* App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -193,6 +177,22 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
+		AADE0000000000000000003B /* Watch */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				AADE0000000000000000003C /* Exceptions for "Watch" folder in "NeodexWatch" target */,
+			);
+			path = Watch;
+			sourceTree = "<group>";
+		};
+		AADE00000000000000000051 /* WatchWidgets */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				AADE00000000000000000052 /* Exceptions for "WatchWidgets" folder in "NeodexWatchWidgets" target */,
+			);
+			path = WatchWidgets;
+			sourceTree = "<group>";
+		};
 		AADE00000000000000000066 /* Mac */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -204,22 +204,6 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		AADE0000000000000000004C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AADE00000000000000000054 /* NeodexKit in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AADE00000000000000000036 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AADE0000000000000000003E /* NeodexKit in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AADE0000000000000000000C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -241,6 +225,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				AADE00000000000000000029 /* NeodexKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AADE00000000000000000036 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AADE0000000000000000003E /* NeodexKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AADE0000000000000000004C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AADE00000000000000000054 /* NeodexKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,82 +290,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AADE00000000000000000049 /* NeodexWatchWidgets */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AADE0000000000000000004E /* Build configuration list for PBXNativeTarget "NeodexWatchWidgets" */;
-			buildPhases = (
-				AADE0000000000000000004B /* Sources */,
-				AADE0000000000000000004C /* Frameworks */,
-				AADE0000000000000000004D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				AADE00000000000000000051 /* WatchWidgets */,
-				AADE00000000000000000023 /* Shared */,
-			);
-			name = NeodexWatchWidgets;
-			packageProductDependencies = (
-				AADE00000000000000000053 /* NeodexKit */,
-			);
-			productName = NeodexWatchWidgets;
-			productReference = AADE0000000000000000004A /* NeodexWatchWidgets.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
-		AADE00000000000000000033 /* NeodexWatch */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AADE00000000000000000038 /* Build configuration list for PBXNativeTarget "NeodexWatch" */;
-			buildPhases = (
-				AADE00000000000000000035 /* Sources */,
-				AADE00000000000000000036 /* Frameworks */,
-				AADE00000000000000000037 /* Resources */,
-				AADE00000000000000000055 /* Embed Foundation Extensions */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				AADE00000000000000000057 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				AADE0000000000000000003B /* Watch */,
-				AADE00000000000000000023 /* Shared */,
-			);
-			name = NeodexWatch;
-			packageProductDependencies = (
-				AADE0000000000000000003D /* NeodexKit */,
-			);
-			productName = NeodexWatch;
-			productReference = AADE00000000000000000034 /* NeodexWatch.app */;
-			productType = "com.apple.product-type.application";
-		};
-		AADE0000000000000000005C /* NeodexMac */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AADE00000000000000000061 /* Build configuration list for PBXNativeTarget "NeodexMac" */;
-			buildPhases = (
-				AADE0000000000000000005E /* Sources */,
-				AADE0000000000000000005F /* Frameworks */,
-				AADE00000000000000000060 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				AADE00000000000000000008 /* App */,
-				AADE00000000000000000023 /* Shared */,
-				AADE00000000000000000066 /* Mac */,
-			);
-			name = NeodexMac;
-			packageProductDependencies = (
-				AADE00000000000000000064 /* NeodexKit */,
-				AADE0000000000000000006A /* ScopeLens */,
-			);
-			productName = NeodexMac;
-			productReference = AADE0000000000000000005D /* Neodex.app */;
-			productType = "com.apple.product-type.application";
-		};
 		AADE00000000000000000002 /* Neodex */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AADE00000000000000000014 /* Build configuration list for PBXNativeTarget "Neodex" */;
@@ -442,6 +366,82 @@
 			productReference = AADE00000000000000000021 /* NeodexWidgetsExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		AADE00000000000000000033 /* NeodexWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AADE00000000000000000038 /* Build configuration list for PBXNativeTarget "NeodexWatch" */;
+			buildPhases = (
+				AADE00000000000000000035 /* Sources */,
+				AADE00000000000000000036 /* Frameworks */,
+				AADE00000000000000000037 /* Resources */,
+				AADE00000000000000000055 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AADE00000000000000000057 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				AADE00000000000000000023 /* Shared */,
+				AADE0000000000000000003B /* Watch */,
+			);
+			name = NeodexWatch;
+			packageProductDependencies = (
+				AADE0000000000000000003D /* NeodexKit */,
+			);
+			productName = NeodexWatch;
+			productReference = AADE00000000000000000034 /* NeodexWatch.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AADE00000000000000000049 /* NeodexWatchWidgets */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AADE0000000000000000004E /* Build configuration list for PBXNativeTarget "NeodexWatchWidgets" */;
+			buildPhases = (
+				AADE0000000000000000004B /* Sources */,
+				AADE0000000000000000004C /* Frameworks */,
+				AADE0000000000000000004D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				AADE00000000000000000023 /* Shared */,
+				AADE00000000000000000051 /* WatchWidgets */,
+			);
+			name = NeodexWatchWidgets;
+			packageProductDependencies = (
+				AADE00000000000000000053 /* NeodexKit */,
+			);
+			productName = NeodexWatchWidgets;
+			productReference = AADE0000000000000000004A /* NeodexWatchWidgets.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		AADE0000000000000000005C /* NeodexMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AADE00000000000000000061 /* Build configuration list for PBXNativeTarget "NeodexMac" */;
+			buildPhases = (
+				AADE0000000000000000005E /* Sources */,
+				AADE0000000000000000005F /* Frameworks */,
+				AADE00000000000000000060 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				AADE00000000000000000008 /* App */,
+				AADE00000000000000000023 /* Shared */,
+				AADE00000000000000000066 /* Mac */,
+			);
+			name = NeodexMac;
+			packageProductDependencies = (
+				AADE00000000000000000064 /* NeodexKit */,
+				AADE0000000000000000006A /* ScopeLens */,
+			);
+			productName = NeodexMac;
+			productReference = AADE0000000000000000005D /* Neodex.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -502,25 +502,6 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		AADE0000000000000000004D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AADE00000000000000000059 /* thumbs in Resources */,
-				AADE0000000000000000005B /* pokemon-index.json in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AADE00000000000000000037 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AADE00000000000000000045 /* Data in Resources */,
-				AADE00000000000000000046 /* thumbs in Resources */,
-				AADE00000000000000000048 /* AppIcon.icon in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AADE0000000000000000000D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -542,6 +523,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AADE00000000000000000037 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AADE00000000000000000045 /* Data in Resources */,
+				AADE00000000000000000046 /* thumbs in Resources */,
+				AADE00000000000000000048 /* AppIcon.icon in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AADE0000000000000000004D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AADE00000000000000000059 /* thumbs in Resources */,
+				AADE0000000000000000005B /* pokemon-index.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AADE00000000000000000060 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -552,20 +552,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		AADE0000000000000000004B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AADE00000000000000000035 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AADE0000000000000000000B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -587,6 +573,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AADE00000000000000000035 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AADE0000000000000000004B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AADE0000000000000000005E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -597,16 +597,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		AADE00000000000000000057 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AADE00000000000000000049 /* NeodexWatchWidgets */;
-			targetProxy = AADE00000000000000000058 /* PBXContainerItemProxy */;
-		};
-		AADE00000000000000000041 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AADE00000000000000000033 /* NeodexWatch */;
-			targetProxy = AADE00000000000000000042 /* PBXContainerItemProxy */;
-		};
 		AADE0000000000000000001B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = AADE00000000000000000002 /* Neodex */;
@@ -617,141 +607,19 @@
 			target = AADE00000000000000000024 /* NeodexWidgetsExtension */;
 			targetProxy = AADE0000000000000000002A /* PBXContainerItemProxy */;
 		};
+		AADE00000000000000000041 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AADE00000000000000000033 /* NeodexWatch */;
+			targetProxy = AADE00000000000000000042 /* PBXContainerItemProxy */;
+		};
+		AADE00000000000000000057 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AADE00000000000000000049 /* NeodexWatchWidgets */;
+			targetProxy = AADE00000000000000000058 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		AADE0000000000000000004F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CODE_SIGN_ENTITLEMENTS = WatchWidgets/NeodexWatchWidgets.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
-				DEVELOPMENT_TEAM = GUDZ7ALN9J;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WatchWidgets/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Neodex;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Ethan.Neodex.watchkitapp.widgets;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 26.0;
-			};
-			name = Debug;
-		};
-		AADE00000000000000000050 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CODE_SIGN_ENTITLEMENTS = WatchWidgets/NeodexWatchWidgets.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
-				DEVELOPMENT_TEAM = GUDZ7ALN9J;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WatchWidgets/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Neodex;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Ethan.Neodex.watchkitapp.widgets;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 26.0;
-			};
-			name = Release;
-		};
-		AADE00000000000000000039 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CODE_SIGN_ENTITLEMENTS = Watch/NeodexWatch.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
-				DEVELOPMENT_TEAM = GUDZ7ALN9J;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Watch/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Neodex;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = Ethan.Neodex;
-				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Ethan.Neodex.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 26.0;
-			};
-			name = Debug;
-		};
-		AADE0000000000000000003A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CODE_SIGN_ENTITLEMENTS = Watch/NeodexWatch.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
-				DEVELOPMENT_TEAM = GUDZ7ALN9J;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Watch/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Neodex;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = Ethan.Neodex;
-				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Ethan.Neodex.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 26.0;
-			};
-			name = Release;
-		};
 		AADE00000000000000000012 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1049,6 +917,138 @@
 			};
 			name = Release;
 		};
+		AADE00000000000000000039 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_ENTITLEMENTS = Watch/NeodexWatch.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 7;
+				DEVELOPMENT_TEAM = GUDZ7ALN9J;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Watch/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Neodex;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = Ethan.Neodex;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Ethan.Neodex.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Debug;
+		};
+		AADE0000000000000000003A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_ENTITLEMENTS = Watch/NeodexWatch.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 7;
+				DEVELOPMENT_TEAM = GUDZ7ALN9J;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Watch/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Neodex;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = Ethan.Neodex;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Ethan.Neodex.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Release;
+		};
+		AADE0000000000000000004F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_ENTITLEMENTS = WatchWidgets/NeodexWatchWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 7;
+				DEVELOPMENT_TEAM = GUDZ7ALN9J;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WatchWidgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Neodex;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Ethan.Neodex.watchkitapp.widgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Debug;
+		};
+		AADE00000000000000000050 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_ENTITLEMENTS = WatchWidgets/NeodexWatchWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 7;
+				DEVELOPMENT_TEAM = GUDZ7ALN9J;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WatchWidgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Neodex;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Ethan.Neodex.watchkitapp.widgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Release;
+		};
 		AADE00000000000000000062 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1129,24 +1129,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AADE0000000000000000004E /* Build configuration list for PBXNativeTarget "NeodexWatchWidgets" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AADE0000000000000000004F /* Debug */,
-				AADE00000000000000000050 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AADE00000000000000000038 /* Build configuration list for PBXNativeTarget "NeodexWatch" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AADE00000000000000000039 /* Debug */,
-				AADE0000000000000000003A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		AADE00000000000000000011 /* Build configuration list for PBXProject "Neodex" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1183,6 +1165,24 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		AADE00000000000000000038 /* Build configuration list for PBXNativeTarget "NeodexWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AADE00000000000000000039 /* Debug */,
+				AADE0000000000000000003A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AADE0000000000000000004E /* Build configuration list for PBXNativeTarget "NeodexWatchWidgets" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AADE0000000000000000004F /* Debug */,
+				AADE00000000000000000050 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		AADE00000000000000000061 /* Build configuration list for PBXNativeTarget "NeodexMac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1206,14 +1206,6 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		AADE00000000000000000053 /* NeodexKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = NeodexKit;
-		};
-		AADE0000000000000000003D /* NeodexKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = NeodexKit;
-		};
 		AADE0000000000000000001D /* NeodexKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = NeodexKit;
@@ -1223,6 +1215,14 @@
 			productName = NeodexKit;
 		};
 		AADE00000000000000000028 /* NeodexKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NeodexKit;
+		};
+		AADE0000000000000000003D /* NeodexKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NeodexKit;
+		};
+		AADE00000000000000000053 /* NeodexKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = NeodexKit;
 		};
