@@ -1,4 +1,5 @@
 import NeodexKit
+import os
 import SwiftUI
 
 /// Global Stats: Smogon usage rankings for any format and month.
@@ -32,15 +33,22 @@ struct UsageStatsView: View {
             }
         }
         .listStyle(.plain)
+        .refreshable { await model.refresh() }
         .searchable(text: $searchText, prompt: "Filter Pokémon")
         .navigationTitle("Global Stats")
         .inlineNavigationTitle()
-        .safeAreaInset(edge: .top, spacing: 0) { selectionBar }
+        // A safe-area bar, unlike an inset, shares the navigation bar's scroll edge effect, so the
+        // chips sit under the search field without a seam.
+        .safeAreaBar(edge: .top, spacing: 0) { selectionBar }
         .toolbar {
+            #if os(macOS)
+            // The Mac has no pull to refresh.
             ToolbarItem(placement: .trailingBar) {
-                Button("Refresh", systemImage: "arrow.clockwise") { Task { await model.reload() } }
+                Button("Refresh", systemImage: "arrow.clockwise") { Task { await model.refresh() } }
+                    .keyboardShortcut("r", modifiers: .command)
                     .disabled(model.isLoading)
             }
+            #endif
         }
         .overlay { stateOverlay }
         .task { await model.loadIfNeeded() }
@@ -77,7 +85,6 @@ struct UsageStatsView: View {
                 .padding(.horizontal)
                 .padding(.vertical, 8)
             }
-            .background(.bar)
         }
     }
 
@@ -196,6 +203,7 @@ struct UsageFormatPicker: View {
 final class UsageStatsModel {
     static let shared = UsageStatsModel()
     static let selectionKey = "usageSelection"
+    private static let log = Logger(subsystem: "Neodex", category: "UsageStats")
 
     private(set) var months: [String] = []
     private(set) var formats: [UsageFormat] = []
@@ -240,6 +248,13 @@ final class UsageStatsModel {
     func loadIfNeeded() async {
         guard !hasLoaded else { return }
         hasLoaded = true
+        await reload()
+    }
+
+    /// Pull to refresh: asks Smogon for the month list again, then reloads.
+    func refresh() async {
+        Self.log.info("Refreshing usage statistics")
+        await client.forgetMonths()
         await reload()
     }
 

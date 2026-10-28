@@ -114,8 +114,11 @@ struct SettingsView: View {
 
     private var dataSection: some View {
         Section("Your Data") {
-            Button("Clear Browsing History", systemImage: "clock.arrow.circlepath", role: .destructive) {
+            Button(role: .destructive) {
                 confirmingHistoryClear = true
+            } label: {
+                Label("Clear Browsing History", systemImage: "clock.arrow.circlepath")
+                    .foregroundStyle(.red)
             }
             Button {
                 reindexing = true

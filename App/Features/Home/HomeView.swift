@@ -36,7 +36,6 @@ struct HomeView: View {
                     }
                     spotlightSection
                     popularSection
-                    footer
                 }
                 .padding(.vertical)
             }
@@ -337,26 +336,6 @@ struct HomeView: View {
                 }
             }
         }
-    }
-
-    private var footer: some View {
-        NavigationLink {
-            AboutView()
-        } label: {
-            HStack {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("About Neodex").font(.subheadline.weight(.semibold)).foregroundStyle(.primary)
-                    Text("Dataset \(database.manifest?.displayVersion ?? "—") · \(database.pokemon.count.formatted()) Pokémon")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-                Spacer()
-                Image(systemName: "chevron.right").foregroundStyle(.tertiary)
-            }
-            .card()
-        }
-        .buttonStyle(.plain)
-        .padding(.horizontal)
     }
 
     private func loadPopular() async {

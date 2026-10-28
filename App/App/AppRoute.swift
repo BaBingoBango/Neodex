@@ -13,6 +13,8 @@ nonisolated enum AppRoute: Hashable, Codable, Identifiable {
     case nature(Nature.ID)
     case type(PokemonType)
     case typeMatchup([PokemonType])
+    /// Type-O-Matic, starting with these types chosen.
+    case typeOMatic([PokemonType])
     case pokemonMoves(Pokemon.ID)
     case faceOff(Pokemon.ID?)
     case usageDetail(UsageSelection, name: String)
@@ -73,6 +75,8 @@ struct AppRouteView: View {
             TypeDetailView(types: [type])
         case .typeMatchup(let types):
             TypeDetailView(types: types)
+        case .typeOMatic(let types):
+            TypeMatchupView(initial: types)
         case .pokemonMoves(let id):
             if let pokemon = database.pokemon(id: id) { PokemonMovesView(pokemon: pokemon) } else { missing }
         case .faceOff(let id):

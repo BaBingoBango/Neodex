@@ -385,7 +385,16 @@ struct PokemonHeader: View {
                         .multilineTextAlignment(.center)
                         .minimumScaleFactor(0.6)
                         .lineLimit(2)
-                    TypeBadgeRow(types: pokemon.types)
+                    HStack(spacing: 6) {
+                        // Each badge opens Type-O-Matic with that type chosen.
+                        ForEach(pokemon.types) { type in
+                            NavigationLink(value: AppRoute.typeOMatic([type])) {
+                                TypeBadge(type: type)
+                            }
+                            .buttonStyle(.plain)
+                            .accessibilityHint("Opens Type-O-Matic")
+                        }
+                    }
                     if let genus = pokemon.genus {
                         Text("— \(genus) Pokémon —")
                             .font(.headline)

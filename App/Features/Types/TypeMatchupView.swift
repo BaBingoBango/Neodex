@@ -3,7 +3,12 @@ import SwiftUI
 
 /// Type-O-Matic: pick one or two types and see the full defensive profile.
 struct TypeMatchupView: View {
-    @State private var selected: [PokemonType] = []
+    @State private var selected: [PokemonType]
+
+    /// `initial` pre-selects up to two types, as when a Pokémon page's type badge opens Type-O-Matic.
+    init(initial: [PokemonType] = []) {
+        _selected = State(initialValue: Array(initial.prefix(2)))
+    }
 
     private let columns = [GridItem(.adaptive(minimum: 100), spacing: 8)]
 

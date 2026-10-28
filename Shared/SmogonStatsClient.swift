@@ -72,6 +72,12 @@ actor SmogonStatsClient {
         return months
     }
 
+    /// Forgets which months exist, so the next request asks Smogon again: a refresh then picks up a
+    /// newly published month. A month's formats and rankings never change, so those caches stay.
+    func forgetMonths() {
+        monthsCache = nil
+    }
+
     /// Formats available for a month, with their rating cutoffs.
     func formats(for month: String) async throws -> [UsageFormat] {
         if let cached = formatsCache[month] { return cached }
