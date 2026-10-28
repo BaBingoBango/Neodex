@@ -88,7 +88,7 @@ struct PokemonDetailView: View {
                     .fixedSize(horizontal: false, vertical: true)
                     .contentTransition(.opacity)
                 if entries.count > 1 {
-                    Text("Tap the entry for the next game, or browse them all.")
+                    Text("Tap to Advance")
                         .font(.caption2)
                         .foregroundStyle(.tertiary)
                 }
