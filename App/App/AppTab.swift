@@ -146,6 +146,10 @@ enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
         switch self {
         case .home: HomeView()
         case .search: SearchView()
+        case .dexbot:
+            NavigationStack {
+                DexbotConversationsView(opensAskedQuestions: true).appDestinations()
+            }
         default:
             NavigationStack {
                 content.appDestinations()
@@ -157,7 +161,7 @@ enum AppTab: String, CaseIterable, Codable, Hashable, Identifiable {
     @ViewBuilder
     var content: some View {
         switch self {
-        case .dexbot: DexbotView()
+        case .dexbot: DexbotConversationsView()
         case .pokedex: PokedexListContent()
         case .moves: MoveListContent()
         case .abilities: AbilityListView()

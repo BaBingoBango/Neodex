@@ -14,6 +14,7 @@ struct RootView: View {
                 .task(id: database.manifest?.generatedAt) {
                     #if DEBUG && os(iOS)
                     DebugSeeds.seedSampleTeamIfRequested(context: modelContext, database: database)
+                    DebugSeeds.seedSampleChatsIfRequested(context: modelContext)
                     #endif
                     await SpotlightIndexer.indexIfNeeded(database: database)
                     NeodexShortcuts.updateAppShortcutParameters()

@@ -91,7 +91,7 @@ extension TeamReader {
     /// Saves a spoken exchange (CarPlay, Siri) as its own short chat so it shows up in the app.
     static func saveConversation(question: String, answer: String) {
         guard let context = sharedContext() else { return }
-        let conversation = DexbotConversation(title: String(question.prefix(48)),
+        let conversation = DexbotConversation(title: DexbotConversation.title(for: question),
                                               messages: [DexbotMessage(role: .user, text: question), DexbotMessage(role: .dexbot, text: answer)])
         context.insert(conversation)
         try? context.save()

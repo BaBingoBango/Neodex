@@ -16,9 +16,17 @@ final class DeepLinkRouter {
     var pendingPick: PickRequest?
     /// A sidebar destination to switch to (Scope Lens's "Ask Dexbot" lands on the Dexbot tab).
     var pendingTab: AppTab?
+    /// A question for the Dexbot tab to open as a new chat.
+    var pendingDexbotQuestion: String?
 
     func open(_ route: AppRoute) {
         pendingRoute = route
+    }
+
+    /// Switches to Dexbot and asks `question` in a new chat.
+    func askDexbot(_ question: String) {
+        pendingTab = .dexbot
+        pendingDexbotQuestion = question
     }
 
     /// Handles `neodex://` links from widgets and controls.

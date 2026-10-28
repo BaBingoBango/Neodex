@@ -6,37 +6,54 @@ import SwiftUI
 struct DexbotView: View {
     @Environment(\.database) private var database
     @Environment(\.modelContext) private var modelContext
-    @Query(sort: \DexbotConversation.updatedAt, order: .reverse) private var conversations: [DexbotConversation]
+    @Environment(\.dismiss) private var dismiss
 
-    var initialPrompt: String? = nil
+    /// The saved chat on screen, by ID so a chat deleted elsewhere is never read; a new chat has
+    /// none until its first message saves it.
+    @State private var conversationID: UUID?
+    @State private var title: String
+    private let initialPrompt: String?
 
     @State private var model = DexbotModel.shared
     @State private var voice = DexbotVoice()
     @State private var draft = ""
     @State private var confirmingDelete = false
+    /// The model's chat this screen started, so it only adopts the conversation its own first message saves.
+    @State private var chatID: UUID?
+    @State private var sentInitialPrompt = false
     @FocusState private var inputFocused: Bool
+
+    /// Opens a saved chat, or a new one that can start by sending `initialPrompt`.
+    init(conversation: DexbotConversation? = nil, initialPrompt: String? = nil) {
+        _conversationID = State(initialValue: conversation?.id)
+        _title = State(initialValue: conversation?.title ?? "New Chat")
+        self.initialPrompt = initialPrompt
+    }
 
     var body: some View {
         Group {
             if let reason = DexbotEngine.unavailableReason {
-                unavailable(reason)
+                DexbotUnavailableView(reason: reason)
             } else {
                 chat
             }
         }
-        .navigationTitle("Dexbot")
+        .navigationTitle(title)
         .inlineNavigationTitle()
         .toolbar { toolbarContent }
         .confirmationDialog("Delete this chat?", isPresented: $confirmingDelete, titleVisibility: .visible) {
-            Button("Delete Chat", role: .destructive) { model.deleteConversation() }
+            Button("Delete Chat", role: .destructive) {
+                model.deleteConversation()
+                dismiss()
+            }
         } message: {
             Text("Dexbot will forget this conversation. This can't be undone.")
         }
-        .onAppear {
-            model.configure(database: database, context: modelContext)
-            if let initialPrompt, !initialPrompt.isEmpty, model.messages.isEmpty {
-                Task { await model.send(initialPrompt) }
-            }
+        .onAppear(perform: open)
+        .onChange(of: model.conversation?.id) { _, id in
+            guard conversationID == nil, let id, model.chatID == chatID else { return }
+            conversationID = id
+            title = model.conversation?.title ?? title
         }
         .onChange(of: model.pendingSpeech) { _, text in
             guard let text else { return }
@@ -60,7 +77,7 @@ struct DexbotView: View {
                 ForEach(model.messages) { message in
                     DexbotBubble(message: message)
                 }
-                if model.isResponding {
+                if model.isResponding, model.respondingConversationID == model.conversation?.id {
                     DexbotBubble(message: DexbotMessage(role: .dexbot, text: model.streamingText), isStreaming: true)
                 }
                 if voice.isListening {
@@ -173,33 +190,39 @@ struct DexbotView: View {
         Task { await model.send(text) }
     }
 
+    /// Points the shared model at this screen's chat; another Dexbot screen may have switched it.
+    private func open() {
+        model.configure(database: database, context: modelContext)
+        if let conversationID {
+            if let conversation = model.storedConversation(conversationID) {
+                model.resume(conversation)
+                return
+            }
+            // Deleted from the conversations list while this screen was in the background.
+            self.conversationID = nil
+            title = "New Chat"
+        }
+        if chatID != model.chatID {
+            model.startNewChat()
+            chatID = model.chatID
+        }
+        if let initialPrompt, !initialPrompt.isEmpty, !sentInitialPrompt {
+            sentInitialPrompt = true
+            Task { await model.send(initialPrompt) }
+        }
+    }
+
     // MARK: Toolbar
 
     @ToolbarContentBuilder
     private var toolbarContent: some ToolbarContent {
         ToolbarItem(placement: .trailingBar) {
             Menu {
-                Button("New Chat", systemImage: "plus.bubble") { model.startNewChat() }
-                if !conversations.isEmpty {
-                    Menu("Recent Chats", systemImage: "clock") {
-                        ForEach(conversations.prefix(12)) { conversation in
-                            Button {
-                                model.resume(conversation)
-                            } label: {
-                                if conversation.id == model.conversation?.id {
-                                    Label(conversation.title, systemImage: "checkmark")
-                                } else {
-                                    Text(conversation.title)
-                                }
-                            }
-                        }
-                    }
-                }
                 if model.isPrivateCloudAvailable {
                     Toggle("Use Private Cloud Compute", systemImage: "icloud", isOn: Binding(get: { model.prefersPrivateCloud }, set: { model.prefersPrivateCloud = $0 }))
                 }
                 Toggle("Speak Replies", systemImage: "speaker.wave.2", isOn: $voice.speaksReplies)
-                if model.conversation != nil {
+                if conversationID != nil {
                     Divider()
                     Button("Delete Chat", systemImage: "trash", role: .destructive) { confirmingDelete = true }
                 }
@@ -209,7 +232,13 @@ struct DexbotView: View {
         }
     }
 
-    private func unavailable(_ reason: String) -> some View {
+}
+
+/// Shown instead of Dexbot where Apple Intelligence isn't available.
+struct DexbotUnavailableView: View {
+    var reason: String
+
+    var body: some View {
         ContentUnavailableView {
             Label("Dexbot Needs Apple Intelligence", systemImage: "apple.intelligence")
         } description: {

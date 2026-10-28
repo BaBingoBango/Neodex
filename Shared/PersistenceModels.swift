@@ -97,6 +97,14 @@ final class DexbotConversation {
     }
 
     func touch() { updatedAt = .now }
+
+    /// A chat's title: its first question, ending at a whole word when it runs long.
+    nonisolated static func title(for question: String) -> String {
+        let text = question.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard text.count > 60 else { return text }
+        let words = text.prefix(60).split(separator: " ").dropLast()
+        return (words.isEmpty ? String(text.prefix(60)) : words.joined(separator: " ")) + "…"
+    }
 }
 
 /// One turn of a Dexbot chat. Plain data that crosses isolation boundaries (CarPlay, widgets), so nonisolated.

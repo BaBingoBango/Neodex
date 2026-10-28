@@ -77,8 +77,7 @@ private struct NeodexBridgeInstaller: ViewModifier {
             }
         }
         NeodexBridge.askDexbot = { question in
-            DeepLinkRouter.shared.pendingTab = .dexbot
-            Task { await DexbotModel.shared.send(question) }
+            DeepLinkRouter.shared.askDexbot(question)
         }
     }
 }

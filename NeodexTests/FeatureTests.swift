@@ -83,6 +83,45 @@ struct FeatureTests {
         #expect(FavoriteFormats.unavailableNote(month: "2026-09") == "Not played in \(UsageStatsModel.displayMonth("2026-09"))")
     }
 
+    @Test("Dexbot conversations group by day, then by month")
+    func conversationSections() throws {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = try #require(TimeZone(identifier: "America/Los_Angeles"))
+        let now = try #require(calendar.date(from: DateComponents(year: 2026, month: 10, day: 28, hour: 9)))
+        func daysAgo(_ days: Int, hour: Int = 23) throws -> Date {
+            let day = try #require(calendar.date(byAdding: .day, value: -days, to: now))
+            return try #require(calendar.date(bySettingHour: hour, minute: 0, second: 0, of: day))
+        }
+        #expect(DexbotConversationsView.sectionTitle(for: try daysAgo(0, hour: 0), now: now, calendar: calendar) == "Today")
+        #expect(DexbotConversationsView.sectionTitle(for: try daysAgo(1), now: now, calendar: calendar) == "Yesterday")
+        let monday = try daysAgo(2)
+        #expect(DexbotConversationsView.sectionTitle(for: monday, now: now, calendar: calendar) == monday.formatted(.dateTime.weekday(.wide)))
+        let september = try daysAgo(40)
+        #expect(DexbotConversationsView.sectionTitle(for: september, now: now, calendar: calendar) == september.formatted(.dateTime.month(.wide)))
+        let lastYear = try daysAgo(400)
+        #expect(DexbotConversationsView.sectionTitle(for: lastYear, now: now, calendar: calendar) == lastYear.formatted(.dateTime.month(.wide).year()))
+    }
+
+    @Test("A long first question becomes a title that ends on a whole word")
+    func conversationTitle() {
+        #expect(DexbotConversation.title(for: "  What is Garchomp weak to?\n") == "What is Garchomp weak to?")
+        #expect(DexbotConversation.title(for: "Explain how Tera types work in detail, with three examples of good Tera picks")
+                == "Explain how Tera types work in detail, with three examples…")
+        #expect(DexbotConversation.title(for: String(repeating: "a", count: 70)) == String(repeating: "a", count: 60) + "…")
+    }
+
+    @Test("A conversation's preview is Dexbot's last reply as plain text")
+    func conversationPreview() {
+        let messages = [
+            DexbotMessage(role: .user, text: "Is Garchomp good?"),
+            DexbotMessage(role: .dexbot, text: "**Garchomp** is great.\nIt's _fast_ and hits hard."),
+            DexbotMessage(role: .user, text: "Thanks!"),
+        ]
+        #expect(DexbotConversationsView.preview(of: messages) == "Garchomp is great. It's fast and hits hard.")
+        #expect(DexbotConversationsView.preview(of: [DexbotMessage(role: .user, text: "Hi")]) == "Hi")
+        #expect(DexbotConversationsView.preview(of: []) == nil)
+    }
+
     @Test("Usage trend months parse to the first of the month")
     func trendDates() {
         let point = UsageTrendPoint(month: "2026-09", usagePercent: 12.5, rank: 3)

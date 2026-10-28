@@ -11,8 +11,12 @@ final class DexbotModel {
     static let shared = DexbotModel()
 
     private(set) var conversation: DexbotConversation?
+    /// Changes whenever the model switches chats, so a chat screen can tell its own chat from one opened elsewhere.
+    private(set) var chatID = UUID()
     private(set) var messages: [DexbotMessage] = []
     private(set) var isResponding = false
+    /// The saved chat a reply is streaming into, so only that chat's screen shows it.
+    private(set) var respondingConversationID: UUID?
     /// The reply being streamed, before it is saved.
     private(set) var streamingText = ""
     /// Set when Dexbot wants to say the last reply out loud (voice mode).
@@ -44,6 +48,7 @@ final class DexbotModel {
     }
 
     func startNewChat() {
+        chatID = UUID()
         conversation = nil
         messages = []
         session = nil
@@ -52,6 +57,7 @@ final class DexbotModel {
 
     func resume(_ conversation: DexbotConversation) {
         guard conversation.id != self.conversation?.id else { return }
+        chatID = UUID()
         self.conversation = conversation
         messages = conversation.messages
         session = nil
@@ -66,6 +72,19 @@ final class DexbotModel {
         startNewChat()
     }
 
+    /// Lets go of a conversation that is being deleted elsewhere (the conversations list).
+    func forget(_ conversation: DexbotConversation) {
+        if conversation.id == self.conversation?.id { startNewChat() }
+    }
+
+    /// A saved chat by ID, or nil once it has been deleted.
+    func storedConversation(_ id: UUID) -> DexbotConversation? {
+        guard let context else { return nil }
+        var descriptor = FetchDescriptor<DexbotConversation>(predicate: #Predicate { $0.id == id })
+        descriptor.fetchLimit = 1
+        return try? context.fetch(descriptor).first
+    }
+
     func clearPendingSpeech() { pendingSpeech = nil }
 
     /// Sends one message and streams the reply. `spoken` keeps the answer short and queues it for speech.
@@ -74,9 +93,15 @@ final class DexbotModel {
         guard !text.isEmpty, !isResponding, let database else { return }
         isResponding = true
         streamingText = ""
-        defer { isResponding = false }
+        defer {
+            isResponding = false
+            respondingConversationID = nil
+        }
 
         append(DexbotMessage(role: .user, text: text))
+        // Another screen can switch chats before the reply arrives; the answer still belongs here.
+        let askedID = conversation?.id
+        respondingConversationID = askedID
         if session == nil { session = makeSession(spoken: spoken) }
         guard let session else { return }
 
@@ -113,7 +138,13 @@ final class DexbotModel {
             reply = DexbotEngine.describe(error)
         }
         streamingText = ""
-        append(DexbotMessage(role: .dexbot, text: note.map { reply + "\n\n_\($0)_" } ?? reply))
+        let answer = DexbotMessage(role: .dexbot, text: note.map { reply + "\n\n_\($0)_" } ?? reply)
+        if conversation?.id == askedID {
+            append(answer)
+        } else if let askedID, let asked = storedConversation(askedID) {
+            asked.messages.append(answer)
+            asked.touch()
+        }
         if spoken { pendingSpeech = reply }
     }
 
@@ -148,7 +179,7 @@ final class DexbotModel {
     private func append(_ message: DexbotMessage) {
         messages.append(message)
         if conversation == nil, let context {
-            let title = messages.first { $0.role == .user }.map { String($0.text.prefix(48)) } ?? "New Chat"
+            let title = messages.first { $0.role == .user }.map { DexbotConversation.title(for: $0.text) } ?? "New Chat"
             let created = DexbotConversation(title: title)
             context.insert(created)
             conversation = created
