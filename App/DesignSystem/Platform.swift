@@ -21,6 +21,18 @@ enum DeviceIdiom {
     }
 }
 
+extension SearchFieldPlacement {
+    /// Under the navigation title and never scrolled away, for screens where searching is the point.
+    /// The Mac's toolbar search field always shows.
+    static var pinned: SearchFieldPlacement {
+        #if os(iOS)
+        .navigationBarDrawer(displayMode: .always)
+        #else
+        .automatic
+        #endif
+    }
+}
+
 extension ToolbarItemPlacement {
     /// The trailing end of the navigation bar on iOS; the window toolbar's primary area on macOS.
     static var trailingBar: ToolbarItemPlacement {

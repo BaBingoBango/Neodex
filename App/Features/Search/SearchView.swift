@@ -7,61 +7,73 @@ struct SearchView: View {
     @State private var searchText = ""
 
     private var results: PokedexDatabase.SearchResults {
-        database.search(searchText.trimmingCharacters(in: .whitespaces), limitPerCategory: 30)
+        database.search(query, limitPerCategory: 30)
     }
+
+    private var query: String { searchText.trimmingCharacters(in: .whitespaces) }
 
     var body: some View {
         NavigationStack {
-            List {
-                if !results.pokemon.isEmpty {
-                    Section("Pokémon") {
-                        ForEach(results.pokemon) { pokemon in
-                            NavigationLink(value: AppRoute.pokemon(pokemon.id)) { PokemonRow(pokemon: pokemon) }
-                        }
+            Group {
+                if query.isEmpty {
+                    SearchBrowseView()
+                } else {
+                    resultList
+                }
+            }
+            .navigationTitle("Search")
+            // A pinned search field starts a large title collapsed, so the title stays small, as on Global Stats.
+            .inlineNavigationTitle()
+            .navigationDestination(for: AppTab.self) { $0.content }
+            .appDestinations()
+            .searchable(text: $searchText, placement: .pinned, prompt: "Pokémon, moves, abilities, items…")
+        }
+    }
+
+    private var resultList: some View {
+        List {
+            if !results.pokemon.isEmpty {
+                Section("Pokémon") {
+                    ForEach(results.pokemon) { pokemon in
+                        NavigationLink(value: AppRoute.pokemon(pokemon.id)) { PokemonRow(pokemon: pokemon) }
                     }
                 }
-                if !results.moves.isEmpty {
-                    Section("Moves") {
-                        ForEach(results.moves) { move in
-                            NavigationLink(value: AppRoute.move(move.id)) { MoveRow(move: move) }
-                        }
+            }
+            if !results.moves.isEmpty {
+                Section("Moves") {
+                    ForEach(results.moves) { move in
+                        NavigationLink(value: AppRoute.move(move.id)) { MoveRow(move: move) }
                     }
                 }
-                if !results.abilities.isEmpty {
-                    Section("Abilities") {
-                        ForEach(results.abilities) { ability in
-                            NavigationLink(value: AppRoute.ability(ability.id)) { AbilityRow(ability: ability) }
-                        }
+            }
+            if !results.abilities.isEmpty {
+                Section("Abilities") {
+                    ForEach(results.abilities) { ability in
+                        NavigationLink(value: AppRoute.ability(ability.id)) { AbilityRow(ability: ability) }
                     }
                 }
-                if !results.items.isEmpty {
-                    Section("Items") {
-                        ForEach(results.items) { item in
-                            NavigationLink(value: AppRoute.item(item.id)) { ItemRow(item: item) }
-                        }
+            }
+            if !results.items.isEmpty {
+                Section("Items") {
+                    ForEach(results.items) { item in
+                        NavigationLink(value: AppRoute.item(item.id)) { ItemRow(item: item) }
                     }
                 }
-                if !results.natures.isEmpty {
-                    Section("Natures") {
-                        ForEach(results.natures) { nature in
-                            NavigationLink(value: AppRoute.nature(nature.id)) {
-                                LabeledContent(nature.name, value: nature.summary)
-                            }
+            }
+            if !results.natures.isEmpty {
+                Section("Natures") {
+                    ForEach(results.natures) { nature in
+                        NavigationLink(value: AppRoute.nature(nature.id)) {
+                            LabeledContent(nature.name, value: nature.summary)
                         }
                     }
                 }
             }
-            .groupedListStyle()
-            .navigationTitle("Search")
-            .appDestinations()
-            .searchable(text: $searchText, prompt: "Pokémon, moves, abilities, items…")
-            .overlay {
-                if searchText.trimmingCharacters(in: .whitespaces).isEmpty {
-                    ContentUnavailableView("Search Neodex", systemImage: "magnifyingglass",
-                                           description: Text("Find any Pokémon, move, Ability, item or nature."))
-                } else if results.isEmpty {
-                    ContentUnavailableView.search(text: searchText)
-                }
+        }
+        .groupedListStyle()
+        .overlay {
+            if results.isEmpty {
+                ContentUnavailableView.search(text: searchText)
             }
         }
     }
