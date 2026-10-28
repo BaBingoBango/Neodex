@@ -118,7 +118,14 @@ public struct UsageFormat: Sendable, Hashable, Identifiable {
             prefix = "Gen \(digit) "
             rest = rest.dropFirst(4)
         }
+        // Pokémon Champions formats: "gen9championsvgc2026regmb" is "Gen 9 Champions VGC 2026 Reg M-B".
+        if rest.hasPrefix("champions") {
+            prefix += "Champions "
+            rest = rest.dropFirst("champions".count)
+        }
         let known: [(String, String)] = [
+            ("nationaldex35pokes", "National Dex 35 Pokes"), ("natdexcamovechaos", "NatDex Camove Chaos"),
+            ("pokebilitiesaaa", "Pokebilities AAA"), ("tiershiftaaa", "Tier Shift AAA"),
             ("nationaldexmonotype", "National Dex Monotype"), ("nationaldexdoubles", "National Dex Doubles"),
             ("nationaldexubers", "National Dex Ubers"), ("nationaldexuu", "National Dex UU"), ("nationaldexag", "National Dex AG"),
             ("nationaldex", "National Dex"), ("doublesubers", "Doubles Ubers"), ("doublesou", "Doubles OU"), ("doublesuu", "Doubles UU"),
@@ -128,6 +135,7 @@ public struct UsageFormat: Sendable, Hashable, Identifiable {
             ("ubersuu", "Ubers UU"), ("monotype", "Monotype"), ("ubers", "Ubers"), ("1v1", "1v1"), ("2v2doubles", "2v2 Doubles"),
             ("mixandmega", "Mix and Mega"), ("godlygift", "Godly Gift"), ("stabmons", "STABmons"), ("partnersincrime", "Partners in Crime"),
             ("inheritance", "Inheritance"), ("sharedpower", "Shared Power"), ("purehackmons", "Pure Hackmons"), ("camomons", "Camomons"),
+            ("metronomebattle", "Metronome Battle"), ("noholdsbarred", "No Holds Barred"), ("nfe", "NFE"),
             ("ou", "OU"), ("uu", "UU"), ("ru", "RU"), ("nu", "NU"), ("pu", "PU"), ("zu", "ZU"), ("lc", "LC"), ("ag", "AG"), ("cap", "CAP"),
         ]
         for (key, name) in known where rest.hasPrefix(key) {
@@ -137,19 +145,29 @@ public struct UsageFormat: Sendable, Hashable, Identifiable {
         if rest.hasPrefix("vgc") {
             let remainder = rest.dropFirst(3)
             let year = remainder.prefix { $0.isNumber }
-            let series = remainder.dropFirst(year.count)
-            var name = "VGC \(year)"
-            if series.hasPrefix("reg") {
-                name += " Reg " + series.dropFirst(3).uppercased()
-            } else if !series.isEmpty {
-                name += " " + prettify(String(series))
-            }
-            return prefix + name
+            return prefix + (["VGC \(year)"] + seriesName(remainder.dropFirst(year.count))).joined(separator: " ")
         }
         if rest.hasPrefix("bss") {
-            return prefix + "Battle Stadium Singles " + prettify(String(rest.dropFirst(3)))
+            return prefix + (["BSS"] + seriesName(rest.dropFirst(3))).joined(separator: " ")
         }
         return prefix + prettify(String(rest))
+    }
+
+    /// A regulation or series suffix, as Showdown writes it: "regg" is "Reg G", Champions' two-letter
+    /// "regmb" is "Reg M-B", and a trailing "bo3" becomes "(Bo3)".
+    private static func seriesName(_ text: Substring) -> [String] {
+        var series = text
+        let bestOfThree = series.hasSuffix("bo3")
+        if bestOfThree { series = series.dropLast(3) }
+        var parts: [String] = []
+        if series.hasPrefix("reg") {
+            let letters = series.dropFirst(3).uppercased()
+            parts.append("Reg " + (letters.count == 2 ? "\(letters.prefix(1))-\(letters.suffix(1))" : letters))
+        } else if !series.isEmpty {
+            parts.append(prettify(String(series)))
+        }
+        if bestOfThree { parts.append("(Bo3)") }
+        return parts
     }
 
     private static func prettify(_ text: String) -> String {

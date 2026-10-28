@@ -90,6 +90,28 @@ struct UsageParsingTests {
         #expect(UsageFormat.displayName(for: "gen9nationaldexmonotype") == "Gen 9 National Dex Monotype")
     }
 
+    /// Smogon's September 2026 formats against the names Showdown gives them in `config/formats.ts`.
+    @Test("Format names match Showdown's", arguments: [
+        ("gen1ou", "Gen 1 OU"), ("gen5vgc2013", "Gen 5 VGC 2013"), ("gen6purehackmons", "Gen 6 Pure Hackmons"),
+        ("gen8nationaldex", "Gen 8 National Dex"), ("gen91v1", "Gen 9 1v1"), ("gen92v2doubles", "Gen 9 2v2 Doubles"),
+        ("gen9almostanyability", "Gen 9 Almost Any Ability"), ("gen9cap", "Gen 9 CAP"),
+        ("gen9championsbssregmb", "Gen 9 Champions BSS Reg M-B"), ("gen9championsou", "Gen 9 Champions OU"),
+        ("gen9championsuu", "Gen 9 Champions UU"), ("gen9championsvgc2026regmc", "Gen 9 Champions VGC 2026 Reg M-C"),
+        ("gen9championsvgc2026regmbbo3", "Gen 9 Champions VGC 2026 Reg M-B (Bo3)"), ("gen9bssregi", "Gen 9 BSS Reg I"),
+        ("gen9bssfactory", "Gen 9 BSS Factory"), ("gen9vgc2025regibo3", "Gen 9 VGC 2025 Reg I (Bo3)"),
+        ("gen9doublesubers", "Gen 9 Doubles Ubers"), ("gen9fortemons", "Gen 9 Fortemons"), ("gen9godlygift", "Gen 9 Godly Gift"),
+        ("gen9metronomebattle", "Gen 9 Metronome Battle"), ("gen9mixandmega", "Gen 9 Mix and Mega"),
+        ("gen9monocolor", "Gen 9 Monocolor"), ("gen9natdexcamovechaos", "Gen 9 NatDex Camove Chaos"),
+        ("gen9nationaldex35pokes", "Gen 9 National Dex 35 Pokes"), ("gen9nationaldexmonoletter", "Gen 9 National Dex Monoletter"),
+        ("gen9nationaldexubers", "Gen 9 National Dex Ubers"), ("gen9nfe", "Gen 9 NFE"), ("gen9noholdsbarred", "Gen 9 No Holds Barred"),
+        ("gen9pokebilitiesaaa", "Gen 9 Pokebilities AAA"), ("gen9sharedpower", "Gen 9 Shared Power"), ("gen9stabmons", "Gen 9 STABmons"),
+        ("gen9statmons", "Gen 9 Statmons"), ("gen9tiershiftaaa", "Gen 9 Tier Shift AAA"), ("gen9trademarked", "Gen 9 Trademarked"),
+        ("gen9vgc2024regg", "Gen 9 VGC 2024 Reg G"), ("gen9zu", "Gen 9 ZU"),
+    ])
+    func formatNames(id: String, name: String) {
+        #expect(UsageFormat.displayName(for: id) == name)
+    }
+
     @Test("Chaos JSON decodes into percentages")
     func chaos() throws {
         let json = """
