@@ -8,6 +8,19 @@ import AppKit
 // Small shims so the same SwiftUI reads naturally on iOS and macOS. Anything that differs between
 // the platforms lives here rather than as `#if os(...)` scattered through the views.
 
+/// The kind of device the app runs on, for layout choices that must not flip when the device rotates.
+enum DeviceIdiom {
+    /// True on iPhone. A size class can't tell an iPhone from an iPad: Plus and Pro Max iPhones report
+    /// a regular width in landscape.
+    static var isPhone: Bool {
+        #if os(iOS)
+        UIDevice.current.userInterfaceIdiom == .phone
+        #else
+        false
+        #endif
+    }
+}
+
 extension ToolbarItemPlacement {
     /// The trailing end of the navigation bar on iOS; the window toolbar's primary area on macOS.
     static var trailingBar: ToolbarItemPlacement {

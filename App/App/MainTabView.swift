@@ -5,9 +5,7 @@ import SwiftUI
 /// shows Home, Search and the tabs the user keeps in the bar. Screens requested by Spotlight or Siri
 /// open as a sheet on iOS and in their own window on the Mac.
 struct MainTabView: View {
-    #if os(iOS)
-    @Environment(\.horizontalSizeClass) private var sizeClass
-    #else
+    #if os(macOS)
     @Environment(\.openWindow) private var openWindow
     #endif
     @Environment(\.database) private var database
@@ -30,14 +28,11 @@ struct MainTabView: View {
 
     private var visibleTabs: [AppTab] { TabBarPreferences.decode(storedVisible) }
 
-    /// iPhone shows a tab bar; iPad and the Mac show the sidebar.
-    private var isCompact: Bool {
-        #if os(iOS)
-        sizeClass == .compact
-        #else
-        false
-        #endif
-    }
+    /// iPhone shows a tab bar of the chosen features; iPad and the Mac show the grouped sidebar.
+    /// Decided by the device, never the size class: a Pro Max turns regular-width in landscape, and
+    /// swapping the declared tabs mid-rotation crashed UIKit's tab bar rebuild (an
+    /// `insertObject:atIndex:` nil exception, first reported from TestFlight build 1).
+    private var usesPhoneTabBar: Bool { DeviceIdiom.isPhone }
 
     private func isVisible(_ tab: AppTab) -> Bool {
         TabBarPreferences.isVisible(tab, stored: visibleTabs, customization: customization)
@@ -53,7 +48,7 @@ struct MainTabView: View {
             .customizationBehavior(.disabled, for: .sidebar, .tabBar)
             #endif
 
-            if isCompact {
+            if usesPhoneTabBar {
                 // iPhone keeps every declared tab reachable (overflowing into More), so only the
                 // chosen tabs are declared here. Everything else is on Home.
                 ForEach(visibleTabs) { tab in
@@ -126,7 +121,7 @@ struct MainTabView: View {
 
     /// A tab hidden from the iPhone bar can't stay selected there; fall back to Home.
     private func fallBackIfHidden() {
-        guard isCompact, selection != .home, selection != .search else { return }
+        guard usesPhoneTabBar, selection != .home, selection != .search else { return }
         if !isVisible(selection) { selection = .home }
     }
 }
