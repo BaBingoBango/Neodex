@@ -122,6 +122,8 @@ struct MoveRow: View {
                     .monospacedDigit()
             }
         }
+        // The gap before the trailing label is part of the row, so a tap there opens the move too.
+        .contentShape(Rectangle())
     }
 }
 
