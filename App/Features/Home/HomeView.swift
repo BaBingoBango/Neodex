@@ -64,7 +64,7 @@ struct HomeView: View {
                 SettingsView()
             }
             .sheet(isPresented: $choosingPopularFormat) {
-                UsageFormatPicker(formats: popularFormats, selected: popularFormat) { format in
+                UsageFormatPicker(formats: popularFormats, selected: popularFormat, month: popularSelection?.month) { format in
                     popularFormat = format.id
                 }
             }
@@ -293,9 +293,9 @@ struct HomeView: View {
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                     }
-                    Button {
-                        choosingPopularFormat = true
-                    } label: {
+                    FavoriteFormatMenu(formats: popularFormats, selected: popularSelection.format, month: popularSelection.month,
+                                       onPick: { popularFormat = $0.id },
+                                       onShowAll: { choosingPopularFormat = true }) {
                         Label("Format", systemImage: "chevron.up.chevron.down")
                             .font(.subheadline.weight(.semibold))
                     }

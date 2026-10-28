@@ -23,6 +23,8 @@ nonisolated enum SharedContainer {
         static let usageFormats = "usageFormats"
         /// The format Home's "Popular on Showdown" shows; the leaderboard widget's default.
         static let popularFormat = "popularFormat"
+        /// Formats starred in the format picker, shared by Global Stats and Home.
+        static let favoriteFormats = "favoriteFormats"
         /// Day ordinal on which the mystery Pokémon was revealed.
         static let mysteryRevealedDay = "mysteryRevealedDay"
     }

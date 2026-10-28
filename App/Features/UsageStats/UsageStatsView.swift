@@ -53,7 +53,7 @@ struct UsageStatsView: View {
         .overlay { stateOverlay }
         .task { await model.loadIfNeeded() }
         .sheet(isPresented: $showingFormats) {
-            UsageFormatPicker(formats: model.formats, selected: model.selection?.format) { format in
+            UsageFormatPicker(formats: model.formats, selected: model.selection?.format, month: model.selection?.month) { format in
                 Task { await model.select(format: format) }
             }
         }
@@ -71,7 +71,9 @@ struct UsageStatsView: View {
                     } label: {
                         chip(UsageStatsModel.displayMonth(selection.month), systemImage: "calendar")
                     }
-                    Button { showingFormats = true } label: {
+                    FavoriteFormatMenu(formats: model.formats, selected: selection.format, month: selection.month,
+                                       onPick: { format in Task { await model.select(format: format) } },
+                                       onShowAll: { showingFormats = true }) {
                         chip(UsageFormat.displayName(for: selection.format), systemImage: "trophy")
                     }
                     Menu {
@@ -152,13 +154,34 @@ struct UsageRankingRow: View {
     }
 }
 
-/// Searchable list of formats for a month.
+/// Searchable list of formats for a month, with favorites starred and pinned at the top.
 struct UsageFormatPicker: View {
     @Environment(\.dismiss) private var dismiss
     var formats: [UsageFormat]
     var selected: String?
+    /// The month the formats belong to, for explaining favorites it doesn't include.
+    var month: String? = nil
     var onPick: (UsageFormat) -> Void
     @State private var searchText = ""
+    @State private var favorites = FavoriteFormats.shared
+
+    /// A starred format, and the month's format for it if the month has one.
+    private struct FavoriteRow: Identifiable {
+        var id: String
+        var format: UsageFormat?
+    }
+
+    private func matches(id: String, name: String, query: String) -> Bool {
+        query.isEmpty || SearchNormalizer.normalize(name).contains(query) || id.contains(query)
+    }
+
+    /// Favorites in the order they were starred, matching the search.
+    private var favoriteRows: [FavoriteRow] {
+        let query = SearchNormalizer.normalize(searchText)
+        return favorites.ids
+            .map { id in FavoriteRow(id: id, format: formats.first { $0.id == id }) }
+            .filter { matches(id: $0.id, name: $0.format?.displayName ?? UsageFormat.displayName(for: $0.id), query: query) }
+    }
 
     private var results: [UsageFormat] {
         let query = SearchNormalizer.normalize(searchText)
@@ -167,32 +190,84 @@ struct UsageFormatPicker: View {
             if lhs.generation != rhs.generation { return (lhs.generation ?? 0) > (rhs.generation ?? 0) }
             return lhs.displayName < rhs.displayName
         }
-        guard !query.isEmpty else { return sorted }
-        return sorted.filter { SearchNormalizer.normalize($0.displayName).contains(query) || $0.id.contains(query) }
+        return sorted.filter { matches(id: $0.id, name: $0.displayName, query: query) }
     }
 
     var body: some View {
         NavigationStack {
-            List(results) { format in
-                Button {
-                    onPick(format)
-                    dismiss()
-                } label: {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(format.displayName).foregroundStyle(.primary)
-                            Text(format.id).font(.caption).foregroundStyle(.secondary)
+            List {
+                let starred = favoriteRows
+                if !starred.isEmpty {
+                    Section("Favorites") {
+                        ForEach(starred) { row in
+                            if let format = row.format {
+                                formatRow(format)
+                            } else {
+                                unavailableRow(row.id)
+                            }
                         }
-                        Spacer()
-                        if format.id == selected { Image(systemName: "checkmark").foregroundStyle(.tint) }
                     }
                 }
+                Section {
+                    ForEach(results) { formatRow($0) }
+                } header: {
+                    if !starred.isEmpty { Text("All Formats") }
+                }
             }
+            .animation(.default, value: favorites.ids)
             .searchable(text: $searchText, prompt: "Format")
             .navigationTitle("Format")
             .inlineNavigationTitle()
             .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } } }
         }
+    }
+
+    private func formatRow(_ format: UsageFormat) -> some View {
+        HStack(spacing: 8) {
+            Button {
+                onPick(format)
+                dismiss()
+            } label: {
+                HStack {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(format.displayName).foregroundStyle(.primary)
+                        Text(format.id).font(.caption).foregroundStyle(.secondary)
+                    }
+                    Spacer()
+                    if format.id == selected { Image(systemName: "checkmark").foregroundStyle(.tint) }
+                }
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            starButton(format.id)
+        }
+    }
+
+    /// A favorite this month's statistics don't include: kept, explained, and still possible to unstar.
+    private func unavailableRow(_ id: String) -> some View {
+        HStack(spacing: 8) {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(UsageFormat.displayName(for: id)).foregroundStyle(.secondary)
+                Text(FavoriteFormats.unavailableNote(month: month)).font(.caption).foregroundStyle(.tertiary)
+            }
+            .accessibilityElement(children: .combine)
+            Spacer()
+            starButton(id)
+        }
+    }
+
+    private func starButton(_ id: String) -> some View {
+        let isFavorite = favorites.contains(id)
+        return Button {
+            favorites.toggle(id)
+        } label: {
+            Image(systemName: isFavorite ? "star.fill" : "star")
+                .foregroundStyle(isFavorite ? Color.yellow : Color.secondary)
+                .frame(width: 32, height: 32)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.borderless)
+        .accessibilityLabel(isFavorite ? "Remove from favorites" : "Add to favorites")
     }
 }
 

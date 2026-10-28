@@ -64,6 +64,25 @@ struct FeatureTests {
         #expect(Measurements.height(0.6).hasSuffix("2′00″"))
     }
 
+    @Test("Favorite formats keep their order, persist, and unstar cleanly")
+    @MainActor
+    func favoriteFormats() throws {
+        let suite = "FavoriteFormatsTests-\(UUID().uuidString)"
+        let defaults = try #require(UserDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+
+        let favorites = FavoriteFormats(defaults: defaults)
+        favorites.toggle("gen9ou")
+        favorites.toggle("gen9vgc2026regh")
+        favorites.toggle("gen7ou")
+        favorites.toggle("gen9vgc2026regh")
+        #expect(favorites.ids == ["gen9ou", "gen7ou"])
+        #expect(favorites.contains("gen7ou") && !favorites.contains("gen9vgc2026regh"))
+        // A favorite outlives the months that don't include it; only unstarring removes it.
+        #expect(FavoriteFormats(defaults: defaults).ids == ["gen9ou", "gen7ou"])
+        #expect(FavoriteFormats.unavailableNote(month: "2026-09") == "Not played in \(UsageStatsModel.displayMonth("2026-09"))")
+    }
+
     @Test("Usage trend months parse to the first of the month")
     func trendDates() {
         let point = UsageTrendPoint(month: "2026-09", usagePercent: 12.5, rank: 3)
