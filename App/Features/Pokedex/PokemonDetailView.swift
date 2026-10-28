@@ -10,11 +10,15 @@ struct PokemonDetailView: View {
 
     @State private var selectedEntryIndex = 0
     @State private var speaker = DexSpeaker()
+    /// The header's height, measured, so the bar knows when the header's name has scrolled under it.
+    @State private var headerHeight: CGFloat = 560
+    @State private var scrolledPastHeader = false
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 28) {
                 PokemonHeader(pokemon: pokemon)
+                    .onGeometryChange(for: CGFloat.self) { $0.size.height } action: { headerHeight = $0 }
                 dexEntrySection
                 abilitiesSection
                 statsSection
@@ -29,8 +33,16 @@ struct PokemonDetailView: View {
             .padding(.bottom, 32)
         }
         .ignoresSafeArea(edges: .top)
+        // The name sits about 280 points above the header's bottom edge; once it passes under the
+        // bar, the bar takes over the title.
+        .onScrollGeometryChange(for: Bool.self) { geometry in
+            geometry.contentOffset.y + geometry.contentInsets.top > headerHeight - 280
+        } action: { _, past in
+            withAnimation(.easeInOut(duration: 0.2)) { scrolledPastHeader = past }
+        }
         .navigationTitle(pokemon.displayName)
         .inlineNavigationTitle()
+        .heroNavigationBar(title: pokemon.displayName, revealed: scrolledPastHeader)
         .recordsHistory(.pokemon, id: pokemon.id)
         .toolbar {
             ToolbarItem(placement: .trailingBar) {
@@ -319,6 +331,32 @@ struct PokemonDetailView: View {
             }
         }
         .padding(.horizontal)
+    }
+}
+
+// MARK: - Hero bar
+
+private extension View {
+    /// The Pokémon page's navigation bar: clear over the coloured header, with no background, scroll
+    /// edge effect or title, until the header scrolls away. The Mac keeps its window title throughout.
+    @ViewBuilder
+    func heroNavigationBar(title: String, revealed: Bool) -> some View {
+        #if os(iOS)
+        self
+            .toolbarBackgroundVisibility(revealed ? .automatic : .hidden, for: .navigationBar)
+            .scrollEdgeEffectHidden(!revealed, for: .top)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text(title)
+                        .font(.headline)
+                        .lineLimit(1)
+                        .opacity(revealed ? 1 : 0)
+                        .accessibilityHidden(!revealed)
+                }
+            }
+        #else
+        self
+        #endif
     }
 }
 
