@@ -55,11 +55,17 @@ struct MoveListContent: View {
         .navigationTitle("Moves")
         .searchable(text: $searchText, prompt: "Move name")
         .toolbar {
-            ToolbarItem(placement: .trailingBar) {
+            // Sorting and filtering are separate controls, as in the Pokédex.
+            ToolbarItemGroup(placement: .trailingBar) {
                 Menu {
                     Picker("Sort", selection: $sort) {
                         ForEach(MoveSort.allCases) { Text($0.rawValue).tag($0) }
                     }
+                    .pickerStyle(.inline)
+                } label: {
+                    Label("Sort", systemImage: "arrow.up.arrow.down")
+                }
+                Menu {
                     Picker("Category", selection: $categoryFilter) {
                         Text("All Categories").tag(MoveCategory?.none)
                         ForEach(MoveCategory.allCases) { Text($0.name).tag(MoveCategory?.some($0)) }
@@ -69,6 +75,14 @@ struct MoveListContent: View {
                         ForEach(PokemonType.allCases) { Text($0.name).tag(PokemonType?.some($0)) }
                     }
                     Toggle("Include Z-Moves & Max Moves", isOn: $includeSpecialMoves)
+                    if hasFilters {
+                        Divider()
+                        Button("Clear Filters", systemImage: "xmark.circle") {
+                            typeFilter = nil
+                            categoryFilter = nil
+                            includeSpecialMoves = false
+                        }
+                    }
                 } label: {
                     Label("Filter", systemImage: hasFilters ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle")
                 }
@@ -79,7 +93,7 @@ struct MoveListContent: View {
         }
     }
 
-    private var hasFilters: Bool { typeFilter != nil || categoryFilter != nil || includeSpecialMoves || sort != .name }
+    private var hasFilters: Bool { typeFilter != nil || categoryFilter != nil || includeSpecialMoves }
 
     private func trailing(for move: Move) -> String? {
         switch sort {
