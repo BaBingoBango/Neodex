@@ -22,6 +22,8 @@
 		AADE0000000000000000005B /* pokemon-index.json in Resources */ = {isa = PBXBuildFile; fileRef = AADE0000000000000000005A /* pokemon-index.json */; };
 		AADE00000000000000000065 /* NeodexKit in Frameworks */ = {isa = PBXBuildFile; productRef = AADE00000000000000000064 /* NeodexKit */; };
 		AADE0000000000000000006B /* ScopeLens in Frameworks */ = {isa = PBXBuildFile; productRef = AADE0000000000000000006A /* ScopeLens */; };
+		AADE0000000000000000006E /* ClaudeForFoundationModels in Frameworks */ = {isa = PBXBuildFile; productRef = AADE0000000000000000006D /* ClaudeForFoundationModels */; };
+		AADE00000000000000000070 /* ClaudeForFoundationModels in Frameworks */ = {isa = PBXBuildFile; productRef = AADE0000000000000000006F /* ClaudeForFoundationModels */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -209,6 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AADE0000000000000000001E /* NeodexKit in Frameworks */,
+				AADE0000000000000000006E /* ClaudeForFoundationModels in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +253,7 @@
 			files = (
 				AADE00000000000000000065 /* NeodexKit in Frameworks */,
 				AADE0000000000000000006B /* ScopeLens in Frameworks */,
+				AADE00000000000000000070 /* ClaudeForFoundationModels in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +317,7 @@
 			name = Neodex;
 			packageProductDependencies = (
 				AADE0000000000000000001D /* NeodexKit */,
+				AADE0000000000000000006D /* ClaudeForFoundationModels */,
 			);
 			productName = Neodex;
 			productReference = AADE00000000000000000003 /* Neodex.app */;
@@ -437,6 +442,7 @@
 			packageProductDependencies = (
 				AADE00000000000000000064 /* NeodexKit */,
 				AADE0000000000000000006A /* ScopeLens */,
+				AADE0000000000000000006F /* ClaudeForFoundationModels */,
 			);
 			productName = NeodexMac;
 			productReference = AADE0000000000000000005D /* Neodex.app */;
@@ -485,6 +491,7 @@
 			packageReferences = (
 				AADE0000000000000000001C /* XCLocalSwiftPackageReference "Packages/NeodexKit" */,
 				AADE00000000000000000069 /* XCLocalSwiftPackageReference "Packages/ScopeLens" */,
+				AADE0000000000000000006C /* XCRemoteSwiftPackageReference "ClaudeForFoundationModels" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AADE00000000000000000007 /* Products */;
@@ -673,7 +680,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -736,7 +743,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -1077,7 +1084,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MACOSX_DEPLOYMENT_TARGET = 27.0;
 				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Ethan.Neodex;
 				PRODUCT_NAME = Neodex;
@@ -1116,7 +1123,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MACOSX_DEPLOYMENT_TARGET = 27.0;
 				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Ethan.Neodex;
 				PRODUCT_NAME = Neodex;
@@ -1205,6 +1212,17 @@
 		};
 /* End XCLocalSwiftPackageReference section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		AADE0000000000000000006C /* XCRemoteSwiftPackageReference "ClaudeForFoundationModels" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/anthropics/ClaudeForFoundationModels.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.2.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		AADE0000000000000000001D /* NeodexKit */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1233,6 +1251,16 @@
 		AADE0000000000000000006A /* ScopeLens */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ScopeLens;
+		};
+		AADE0000000000000000006D /* ClaudeForFoundationModels */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AADE0000000000000000006C /* XCRemoteSwiftPackageReference "ClaudeForFoundationModels" */;
+			productName = ClaudeForFoundationModels;
+		};
+		AADE0000000000000000006F /* ClaudeForFoundationModels */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AADE0000000000000000006C /* XCRemoteSwiftPackageReference "ClaudeForFoundationModels" */;
+			productName = ClaudeForFoundationModels;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

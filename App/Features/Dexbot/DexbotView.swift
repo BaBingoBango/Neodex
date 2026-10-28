@@ -25,6 +25,7 @@ struct DexbotView: View {
     @State private var voice = DexbotVoice()
     @State private var draft = ""
     @State private var confirmingDelete = false
+    @State private var showingSettings = false
     /// The model's chat this screen started, so it only adopts the conversation its own first message saves.
     @State private var chatID: UUID?
     @State private var sentInitialPrompt = false
@@ -60,6 +61,7 @@ struct DexbotView: View {
             Text("Dexbot will forget this conversation. This can't be undone.")
         }
         .onAppear(perform: open)
+        .sheet(isPresented: $showingSettings, onDismiss: model.refreshPreferences) { DexbotSettingsSheet() }
         .onChange(of: model.conversation?.id) { _, id in
             guard conversationID == nil, let id, model.chatID == chatID else { return }
             conversationID = id
@@ -122,8 +124,8 @@ struct DexbotView: View {
                         .font(.subheadline)
                 }
             }
-            Label(model.backend == .privateCloud ? "Answers come from Apple's Private Cloud Compute." : "Answers are generated on this device.",
-                  systemImage: model.backend == .privateCloud ? "icloud" : "iphone")
+            let source = DexbotEngine.sourceDescription
+            Label(source.text, systemImage: source.systemImage)
                 .font(.caption)
                 .foregroundStyle(.tertiary)
         }
@@ -241,9 +243,19 @@ struct DexbotView: View {
     private var toolbarContent: some ToolbarContent {
         ToolbarItem(placement: .trailingBar) {
             Menu {
-                if model.isPrivateCloudAvailable {
-                    Toggle("Use Private Cloud Compute", systemImage: "icloud", isOn: Binding(get: { model.prefersPrivateCloud }, set: { model.prefersPrivateCloud = $0 }))
+                Picker("Answers From", systemImage: "cpu", selection: Binding(get: { model.backend }, set: { model.preferredBackend = $0 })) {
+                    if DexbotEngine.isOnDeviceAvailable {
+                        Label("Apple Intelligence", systemImage: "apple.intelligence").tag(DexbotEngine.Backend.onDevice)
+                    }
+                    if model.isPrivateCloudAvailable {
+                        Label("Private Cloud Compute", systemImage: "icloud").tag(DexbotEngine.Backend.privateCloud)
+                    }
+                    if DexbotClaude.hasKey {
+                        Label(DexbotClaude.model.name, systemImage: "sparkle").tag(DexbotEngine.Backend.claude)
+                    }
                 }
+                .pickerStyle(.menu)
+                Button("Dexbot Settings…", systemImage: "gearshape") { showingSettings = true }
                 Toggle("Speak Replies", systemImage: "speaker.wave.2", isOn: $voice.speaksReplies)
                 if conversationID != nil {
                     Divider()
@@ -257,16 +269,21 @@ struct DexbotView: View {
 
 }
 
-/// Shown instead of Dexbot where Apple Intelligence isn't available.
+/// Shown instead of Dexbot where Apple Intelligence isn't available and there's no Claude key.
 struct DexbotUnavailableView: View {
     var reason: String
+    @State private var showingSettings = false
 
     var body: some View {
         ContentUnavailableView {
             Label("Dexbot Needs Apple Intelligence", systemImage: "apple.intelligence")
         } description: {
-            Text(reason + "\n\nYou can still ask Siri: “Ask Neodex what Garchomp is weak to.”")
+            Text(reason + "\n\nOr Dexbot can use Claude with your own Anthropic API key.")
+        } actions: {
+            Button("Use Claude", systemImage: "key") { showingSettings = true }
+                .buttonStyle(.glassProminent)
         }
+        .sheet(isPresented: $showingSettings, onDismiss: DexbotModel.shared.refreshPreferences) { DexbotSettingsSheet() }
     }
 }
 

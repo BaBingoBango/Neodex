@@ -2,10 +2,10 @@ import Foundation
 import FoundationModels
 import NeodexKit
 
-/// Dexbot's brain: the persona, which Apple model to use, and one-shot answers for Siri and CarPlay.
+/// Dexbot's brain: the persona, which model to use, and one-shot answers for Siri and CarPlay.
 /// The chat screen keeps a long-lived session; everything else goes through `answer`.
 nonisolated enum DexbotEngine {
-    static let usesPrivateCloudKey = "dexbotUsesPrivateCloud"
+    static let backendKey = "dexbotBackend"
 
     static let instructions = """
         You are Dexbot, the voice of Neodex, an offline Pokédex app. You know the Pokémon games and competitive \
@@ -20,14 +20,15 @@ nonisolated enum DexbotEngine {
          The user is listening, not reading: answer in one or two plain sentences with no Markdown, lists or symbols.
         """
 
-    /// Whether the user prefers Private Cloud Compute when it is available.
-    static var prefersPrivateCloud: Bool {
-        get { UserDefaults.standard.object(forKey: usesPrivateCloudKey) as? Bool ?? true }
-        set { UserDefaults.standard.set(newValue, forKey: usesPrivateCloudKey) }
+    /// The model the user picked, Apple Intelligence on device unless they chose another. Dexbot uses it
+    /// whenever it can run (`activeBackend`).
+    static var preferredBackend: Backend {
+        get { UserDefaults.standard.string(forKey: backendKey).flatMap(Backend.init(rawValue:)) ?? .onDevice }
+        set { UserDefaults.standard.set(newValue.rawValue, forKey: backendKey) }
     }
 
-    enum Backend: String, CaseIterable, Identifiable, Sendable {
-        case onDevice, privateCloud
+    nonisolated enum Backend: String, CaseIterable, Identifiable, Sendable {
+        case onDevice, privateCloud, claude
 
         var id: String { rawValue }
 
@@ -35,12 +36,15 @@ nonisolated enum DexbotEngine {
             switch self {
             case .onDevice: "On-Device"
             case .privateCloud: "Private Cloud Compute"
+            case .claude: "Claude"
             }
         }
     }
 
-    /// Why Dexbot can't run here, in the user's words.
+    /// Why Dexbot can't run here, in the user's words. Claude needs only a key, so it can stand in
+    /// where Apple Intelligence isn't available.
     static var unavailableReason: String? {
+        if activeBackend == .claude { return nil }
         switch SystemLanguageModel.default.availability {
         case .available: return nil
         case .unavailable(.deviceNotEligible): return "Dexbot needs a device that supports Apple Intelligence."
@@ -50,27 +54,70 @@ nonisolated enum DexbotEngine {
         }
     }
 
-    /// Private Cloud Compute arrived with iOS 27 and needs Apple's managed
-    /// `com.apple.developer.private-cloud-compute` entitlement. Without it the model still reports itself
-    /// available and the framework traps on the first request, so the cloud path is compiled in only when the
-    /// `PRIVATE_CLOUD_COMPUTE` condition is set together with the entitlement. iOS 26 runs on device only.
+    /// Private Cloud Compute needs Apple's managed `com.apple.developer.private-cloud-compute`
+    /// entitlement. Without it the model still reports itself available and the framework traps on the
+    /// first request, so the cloud path is compiled in only when the `PRIVATE_CLOUD_COMPUTE` condition is
+    /// set together with the entitlement.
     static var isPrivateCloudAvailable: Bool {
         #if PRIVATE_CLOUD_COMPUTE
-        if #available(iOS 27, *) { return PrivateCloudComputeLanguageModel().isAvailable }
+        return PrivateCloudComputeLanguageModel().isAvailable
+        #else
+        return false
         #endif
+    }
+
+    static var isOnDeviceAvailable: Bool { SystemLanguageModel.default.isAvailable }
+
+    /// Whether an error means a cloud model itself is unreachable, busy or down, in which case the
+    /// on-device model can take over.
+    static func isCloudOutage(_ error: Error, on backend: Backend) -> Bool {
+        switch backend {
+        case .onDevice:
+            return false
+        case .privateCloud:
+            #if PRIVATE_CLOUD_COMPUTE
+            return error is PrivateCloudComputeLanguageModel.Error
+            #else
+            return false
+            #endif
+        case .claude:
+            return DexbotClaude.isOutage(error)
+        }
+    }
+
+    /// Whether a conversation outgrew the model's context window, from Apple's models or Claude.
+    static func isContextOverflow(_ error: Error) -> Bool {
+        if let error = error as? LanguageModelError, case .contextSizeExceeded = error { return true }
         return false
     }
 
-    /// Whether an error means Private Cloud Compute itself is unreachable, out of quota or down,
-    /// in which case the on-device model can take over.
-    static func isCloudOutage(_ error: Error) -> Bool {
-        #if PRIVATE_CLOUD_COMPUTE
-        if #available(iOS 27, *), error is PrivateCloudComputeLanguageModel.Error { return true }
-        #endif
-        return false
+    static var activeBackend: Backend {
+        resolve(preferred: preferredBackend, hasClaudeKey: DexbotClaude.hasKey, privateCloudAvailable: isPrivateCloudAvailable)
     }
 
-    static var activeBackend: Backend { prefersPrivateCloud && isPrivateCloudAvailable ? .privateCloud : .onDevice }
+    /// The preferred model when it can run, otherwise the on-device one.
+    static func resolve(preferred: Backend, hasClaudeKey: Bool, privateCloudAvailable: Bool) -> Backend {
+        switch preferred {
+        case .claude where hasClaudeKey: .claude
+        case .privateCloud where privateCloudAvailable: .privateCloud
+        default: .onDevice
+        }
+    }
+
+    /// Identifies what a new session would run on, so a live chat notices a switch of model or key.
+    static var sessionSignature: String {
+        let backend = activeBackend
+        return backend == .claude ? "claude-\(DexbotClaude.model.rawValue)-\(DexbotClaude.APIKey.hint ?? "")" : backend.rawValue
+    }
+
+    /// Where answers come from, for the chat's intro.
+    static var sourceDescription: (text: String, systemImage: String) {
+        switch activeBackend {
+        case .onDevice: ("Answers are generated on this device.", "iphone")
+        case .privateCloud: ("Answers come from Apple's Private Cloud Compute.", "icloud")
+        case .claude: ("Answers come from \(DexbotClaude.model.name), with your API key.", "sparkle")
+        }
+    }
 
     /// A fresh session with Dexbot's tools and persona.
     static func makeSession(database: PokedexDatabase, spoken: Bool, backend: Backend = activeBackend) -> LanguageModelSession {
@@ -81,21 +128,24 @@ nonisolated enum DexbotEngine {
         tools.append(LiveBattleTool())
         text += ScopeLensDexbot.instructions
         #endif
+        if backend == .claude, let claude = DexbotClaude.languageModel() {
+            return LanguageModelSession(model: claude, tools: tools, instructions: text)
+        }
         #if PRIVATE_CLOUD_COMPUTE
-        if backend == .privateCloud, #available(iOS 27, *) {
+        if backend == .privateCloud {
             return LanguageModelSession(model: PrivateCloudComputeLanguageModel(), tools: tools, instructions: text)
         }
         #endif
         return LanguageModelSession(model: SystemLanguageModel.default, tools: tools, instructions: text)
     }
 
-    /// One question, one answer. Used by Siri and CarPlay. Falls back to the on-device model when
-    /// Private Cloud Compute can't be reached.
+    /// One question, one answer. Used by Siri, CarPlay and the watch. Falls back to the on-device model
+    /// when a cloud model can't be reached.
     static func answer(_ question: String, database: PokedexDatabase, spoken: Bool) async throws -> String {
         let backend = activeBackend
         do {
             return try await respond(to: question, in: makeSession(database: database, spoken: spoken, backend: backend))
-        } catch where backend == .privateCloud && isCloudOutage(error) {
+        } catch where isCloudOutage(error, on: backend) && isOnDeviceAvailable {
             return try await respond(to: question, in: makeSession(database: database, spoken: spoken, backend: .onDevice))
         }
     }
@@ -104,24 +154,34 @@ nonisolated enum DexbotEngine {
         try await session.respond(to: question).content.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
-    /// Friendly wording for the framework's errors.
-    static func describe(_ error: Error) -> String {
-        if let generation = error as? LanguageModelSession.GenerationError {
-            switch generation {
-            case .exceededContextWindowSize: return "That conversation got too long for me to keep in my head. I've started a fresh page; ask me again."
-            case .guardrailViolation, .refusal: return "I can't help with that one, but ask me anything about Pokémon."
-            case .rateLimited: return "I'm being asked a lot right now. Give me a moment and try again."
-            case .assetsUnavailable: return "Apple Intelligence isn't ready on this device yet."
-            case .concurrentRequests: return "One question at a time, Trainer. Let me finish this one first."
-            case .unsupportedLanguageOrLocale: return "I can only chat in languages Apple Intelligence supports."
-            default: break
-            }
+    /// Friendly wording for the framework's errors, and Claude's when it was answering.
+    static func describe(_ error: Error, backend: Backend = activeBackend) -> String {
+        if isContextOverflow(error) {
+            return "That conversation got too long for me to keep in my head. I've started a fresh page; ask me again."
         }
         if error is LanguageModelSession.ToolCallError {
             return "I couldn't look that up. Smogon's statistics need an internet connection; everything else works offline."
         }
+        if backend == .claude, let message = DexbotClaude.describe(error) {
+            return message
+        }
+        if let error = error as? LanguageModelError {
+            switch error {
+            case .guardrailViolation, .refusal: return "I can't help with that one, but ask me anything about Pokémon."
+            case .rateLimited: return "I'm being asked a lot right now. Give me a moment and try again."
+            case .unsupportedLanguageOrLocale: return "I can only chat in languages Apple Intelligence supports."
+            case .timeout: return "That took too long. Try asking again."
+            default: break
+            }
+        }
+        if error is SystemLanguageModel.Error {
+            return "Apple Intelligence isn't ready on this device yet."
+        }
+        if let error = error as? LanguageModelSession.Error, error == .concurrentRequests {
+            return "One question at a time, Trainer. Let me finish this one first."
+        }
         #if PRIVATE_CLOUD_COMPUTE
-        if #available(iOS 27, *), let cloud = error as? PrivateCloudComputeLanguageModel.Error {
+        if let cloud = error as? PrivateCloudComputeLanguageModel.Error {
             switch cloud {
             case .networkFailure: return "I couldn't reach Private Cloud Compute. Check your connection, or switch me to on-device answers from the menu."
             case .quotaLimitReached: return "You've used today's Private Cloud Compute requests. Switch me to on-device answers from the menu and I'll keep going."
@@ -130,6 +190,10 @@ nonisolated enum DexbotEngine {
             }
         }
         #endif
+        if backend == .claude {
+            // Anthropic's own wording, such as a low credit balance, is the useful part.
+            return "Claude couldn't answer: \(error.localizedDescription)"
+        }
         return "Something went wrong on my end. Try asking again."
     }
 

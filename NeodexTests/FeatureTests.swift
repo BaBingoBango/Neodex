@@ -122,6 +122,35 @@ struct FeatureTests {
         #expect(DexbotConversationsView.preview(of: []) == nil)
     }
 
+    @Test("Dexbot answers with the model it can run")
+    func dexbotBackends() {
+        #expect(DexbotEngine.resolve(preferred: .claude, hasClaudeKey: true, privateCloudAvailable: false) == .claude)
+        #expect(DexbotEngine.resolve(preferred: .claude, hasClaudeKey: false, privateCloudAvailable: true) == .onDevice)
+        #expect(DexbotEngine.resolve(preferred: .privateCloud, hasClaudeKey: true, privateCloudAvailable: false) == .onDevice)
+        #expect(DexbotEngine.resolve(preferred: .privateCloud, hasClaudeKey: false, privateCloudAvailable: true) == .privateCloud)
+        #expect(DexbotEngine.resolve(preferred: .onDevice, hasClaudeKey: true, privateCloudAvailable: true) == .onDevice)
+    }
+
+    @Test("Dexbot's Claude models are the API's IDs, and only Haiku goes without fallbacks")
+    func dexbotClaudeModels() {
+        #expect(DexbotClaude.Model.allCases.map(\.rawValue) == ["claude-fable-5-1", "claude-opus-5-5", "claude-sonnet-5-5", "claude-haiku-5-5"])
+        #expect(DexbotClaude.Model.allCases.filter { !$0.usesServerFallbacks } == [.haiku5_5])
+    }
+
+    @Test("A Claude key round-trips through the Keychain and shows only its last four characters")
+    func claudeKeyStorage() {
+        let existing = DexbotClaude.APIKey.saved
+        defer {
+            if let existing { DexbotClaude.APIKey.save(existing) } else { DexbotClaude.APIKey.remove() }
+        }
+        #expect(DexbotClaude.APIKey.save("sk-ant-not-a-real-key-1234"))
+        #expect(DexbotClaude.APIKey.saved == "sk-ant-not-a-real-key-1234")
+        #expect(DexbotClaude.APIKey.hint == "••••1234")
+        DexbotClaude.APIKey.remove()
+        #expect(DexbotClaude.APIKey.saved == nil)
+        #expect(DexbotClaude.languageModel() == nil)
+    }
+
     @Test("Usage trend months parse to the first of the month")
     func trendDates() {
         let point = UsageTrendPoint(month: "2026-09", usagePercent: 12.5, rank: 3)

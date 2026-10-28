@@ -33,7 +33,7 @@ struct AboutView: View {
             }
             #if os(macOS)
             Section {
-                Text("Scope Lens watches a mirrored Pokémon Champions battle through ScreenCaptureKit, reads it with on-device OCR and image matching, and advises with deterministic type and damage math. The optional “what's the play” advisor sends the battle state to the Claude API with your own key; nothing else leaves the Mac.")
+                Text("Scope Lens watches a mirrored Pokémon Champions battle through ScreenCaptureKit, reads it with on-device OCR and image matching, and advises with deterministic type and damage math. The optional “what's the play” advisor, and Dexbot when it uses Claude, send the battle state to the Claude API with your own key; nothing else leaves the Mac.")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             } header: {

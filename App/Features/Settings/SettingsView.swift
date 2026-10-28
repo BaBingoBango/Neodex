@@ -35,6 +35,10 @@ struct SettingsView: View {
                     .formStyle(.grouped)
                     .frame(width: 560, height: 300)
             }
+            Tab("Dexbot", systemImage: "bubble.left.and.text.bubble.right") {
+                DexbotSettingsView()
+                    .frame(width: 560, height: 600)
+            }
             Tab("Champions Team", systemImage: "person.3") {
                 ScopeLensTeamSettings()
             }
@@ -52,6 +56,13 @@ struct SettingsView: View {
         #else
         NavigationStack {
             List {
+                Section {
+                    NavigationLink { DexbotSettingsView() } label: {
+                        Label("Dexbot", systemImage: "bubble.left.and.text.bubble.right")
+                    }
+                } footer: {
+                    Text("Apple Intelligence, or Claude with your own API key.")
+                }
                 tabBarSections
                 watchSection
                 dataSection

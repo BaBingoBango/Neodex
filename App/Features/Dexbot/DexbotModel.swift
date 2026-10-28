@@ -22,25 +22,31 @@ final class DexbotModel {
     /// Set when Dexbot wants to say the last reply out loud (voice mode).
     private(set) var pendingSpeech: String?
 
-    var prefersPrivateCloud: Bool {
-        didSet {
-            DexbotEngine.prefersPrivateCloud = prefersPrivateCloud
-            session = nil
-        }
+    /// The model the user picked; the next answer starts a session on it.
+    var preferredBackend: DexbotEngine.Backend {
+        didSet { DexbotEngine.preferredBackend = preferredBackend }
     }
 
     private var session: LanguageModelSession?
-    /// Which model the live session runs on; a cloud outage switches the chat to on-device.
+    /// Which model the live session runs on; a cloud outage answers that turn on device.
     private var sessionBackend: DexbotEngine.Backend = .onDevice
+    /// What the live session was built for (`DexbotEngine.sessionSignature`). When the user switches model
+    /// or key, here or in Settings, the next answer starts a fresh session.
+    private var sessionSignature = ""
     private var database: PokedexDatabase?
     private var context: ModelContext?
 
     init() {
-        prefersPrivateCloud = DexbotEngine.prefersPrivateCloud
+        preferredBackend = DexbotEngine.preferredBackend
     }
 
     var backend: DexbotEngine.Backend { DexbotEngine.activeBackend }
     var isPrivateCloudAvailable: Bool { DexbotEngine.isPrivateCloudAvailable }
+
+    /// Picks up a choice made in Settings.
+    func refreshPreferences() {
+        if preferredBackend != DexbotEngine.preferredBackend { preferredBackend = DexbotEngine.preferredBackend }
+    }
 
     func configure(database: PokedexDatabase, context: ModelContext) {
         self.database = database
@@ -102,40 +108,41 @@ final class DexbotModel {
         // Another screen can switch chats before the reply arrives; the answer still belongs here.
         let askedID = conversation?.id
         respondingConversationID = askedID
-        if session == nil { session = makeSession(spoken: spoken) }
+        if session == nil || sessionSignature != DexbotEngine.sessionSignature { session = makeSession(spoken: spoken) }
         guard let session else { return }
+        let backend = sessionBackend
 
         var reply = ""
         var note: String?
         do {
             reply = try await stream(prompt(for: text, spoken: spoken), in: session)
-        } catch let error as LanguageModelSession.GenerationError {
-            if case .exceededContextWindowSize = error, let fresh = makeSession(spoken: spoken) {
-                // Start a fresh session that remembers the gist, and try once more.
+        } catch where DexbotEngine.isContextOverflow(error) {
+            // Start a fresh session that remembers the gist, and try once more.
+            if let fresh = makeSession(spoken: spoken) {
                 self.session = fresh
                 do {
                     reply = try await stream(prompt(for: text, spoken: spoken), in: fresh)
                 } catch {
-                    reply = DexbotEngine.describe(error)
+                    reply = DexbotEngine.describe(error, backend: backend)
                 }
             } else {
-                reply = DexbotEngine.describe(error)
+                reply = DexbotEngine.describe(error, backend: backend)
             }
-        } catch where sessionBackend == .privateCloud && DexbotEngine.isCloudOutage(error) {
-            // Private Cloud Compute is unreachable: finish this chat on device instead.
+        } catch where DexbotEngine.isCloudOutage(error, on: backend) && DexbotEngine.isOnDeviceAvailable {
+            // The cloud model can't be reached: answer this one on device. The next question tries it again.
             if let fallback = makeSession(spoken: spoken, backend: .onDevice) {
                 self.session = fallback
                 do {
                     reply = try await stream(prompt(for: text, spoken: spoken), in: fallback)
-                    note = "Private Cloud Compute wasn't reachable, so this answer came from the on-device model."
+                    note = "\(backend.name) wasn't reachable, so this answer came from the on-device model."
                 } catch {
-                    reply = DexbotEngine.describe(error)
+                    reply = DexbotEngine.describe(error, backend: .onDevice)
                 }
             } else {
-                reply = DexbotEngine.describe(error)
+                reply = DexbotEngine.describe(error, backend: backend)
             }
         } catch {
-            reply = DexbotEngine.describe(error)
+            reply = DexbotEngine.describe(error, backend: backend)
         }
         streamingText = ""
         let answer = DexbotMessage(role: .dexbot, text: note.map { reply + "\n\n_\($0)_" } ?? reply)
@@ -173,6 +180,8 @@ final class DexbotModel {
     private func makeSession(spoken: Bool, backend: DexbotEngine.Backend = DexbotEngine.activeBackend) -> LanguageModelSession? {
         guard let database else { return nil }
         sessionBackend = backend
+        // A fallback session gets a signature of its own, so the next question goes back to the user's choice.
+        sessionSignature = backend == DexbotEngine.activeBackend ? DexbotEngine.sessionSignature : backend.rawValue
         return DexbotEngine.makeSession(database: database, spoken: spoken, backend: backend)
     }
 

@@ -96,7 +96,7 @@ nonisolated enum NeodexIntentError: Error, CustomLocalizedStringResourceConverti
         switch self {
         case .noData: "The Pokédex couldn't be loaded."
         case .unknownPokemon: "That Pokémon isn't in the Pokédex."
-        case .appleIntelligenceUnavailable: "Dexbot needs Apple Intelligence, which isn't available on this device."
+        case .appleIntelligenceUnavailable: "Dexbot needs Apple Intelligence, or a Claude API key in Neodex's settings."
         }
     }
 }
