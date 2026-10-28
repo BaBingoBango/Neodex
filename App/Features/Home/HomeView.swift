@@ -16,6 +16,7 @@ struct HomeView: View {
     @State private var choosingPopularFormat = false
     @State private var shuffled: Pokemon?
     @State private var explainer = PickExplainer.shared
+    @State private var showingPickReasons = false
     @State private var dexbotDraft = ""
     @State private var dexbotPrompt: DexbotPrompt?
 
@@ -30,10 +31,7 @@ struct HomeView: View {
                     ForEach(AppTab.Group.allCases) { group in
                         featureSection(group)
                     }
-                    if !picks.isEmpty {
-                        shelf("Picks for You", subtitle: "Based on what you've been exploring", pokemon: picks)
-                        explainedPicks
-                    }
+                    if !picks.isEmpty { picksSection }
                     spotlightSection
                     popularSection
                 }
@@ -77,42 +75,33 @@ struct HomeView: View {
         }
     }
 
-    /// Apple Intelligence's one-line reasons for the first picks, when the on-device model is available.
-    @ViewBuilder
-    private var explainedPicks: some View {
-        let blurbs = explainer.blurbs.filter { blurb in picks.contains { $0.id == blurb.pokemonID } }
-        if !blurbs.isEmpty {
-            VStack(alignment: .leading, spacing: 10) {
-                Label("Why these picks", systemImage: "apple.intelligence")
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(.secondary)
-                ForEach(blurbs) { blurb in
-                    if let pokemon = database.pokemon(id: blurb.pokemonID) {
-                        NavigationLink(value: AppRoute.pokemon(pokemon.id)) {
-                            HStack(alignment: .top, spacing: 10) {
-                                PokemonImage(pokemon: pokemon, kind: .sprite).frame(width: 40, height: 40)
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text(pokemon.displayName).font(.subheadline.weight(.semibold)).foregroundStyle(.primary)
-                                    Text(blurb.text).font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
-                                }
-                                Spacer(minLength: 0)
-                            }
-                        }
-                        .buttonStyle(.plain)
+    /// Picks for You, with an info button beside the title that explains them.
+    private var picksSection: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            VStack(alignment: .leading, spacing: 2) {
+                HStack(alignment: .firstTextBaseline, spacing: 6) {
+                    Text("Picks for You")
+                        .font(.title2.weight(.bold))
+                        .accessibilityAddTraits(.isHeader)
+                    Button {
+                        showingPickReasons = true
+                    } label: {
+                        Image(systemName: "info.circle")
+                            .font(.title3)
                     }
+                    .buttonStyle(.plain)
+                    .foregroundStyle(.tint)
+                    .accessibilityLabel("Why these picks")
+                    .popover(isPresented: $showingPickReasons, arrowEdge: .top) {
+                        PickReasonsView(picks: picks, explainer: explainer)
+                            .presentationCompactAdaptation(.popover)
+                    }
+                    Spacer(minLength: 0)
                 }
-                Text("Written on your device by Apple Intelligence from this Pokémon's types and egg groups.")
-                    .font(.caption2)
-                    .foregroundStyle(.tertiary)
-            }
-            .padding(14)
-            .background(Color.secondaryGroupedBackground, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
-            .overlay {
-                RoundedRectangle(cornerRadius: 18, style: .continuous)
-                    .strokeBorder(LinearGradient(colors: [.purple.opacity(0.5), .blue.opacity(0.4), .orange.opacity(0.4)],
-                                                 startPoint: .topLeading, endPoint: .bottomTrailing), lineWidth: 1)
+                Text("Based on what you've been exploring").font(.subheadline).foregroundStyle(.secondary)
             }
             .padding(.horizontal)
+            shelfCards(picks)
         }
     }
 
@@ -251,25 +240,16 @@ struct HomeView: View {
         }
     }
 
-    private func shelf(_ title: LocalizedStringKey, subtitle: String?, pokemon: [Pokemon]) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            VStack(alignment: .leading, spacing: 2) {
-                SectionTitle(title)
-                if let subtitle {
-                    Text(subtitle).font(.subheadline).foregroundStyle(.secondary)
+    private func shelfCards(_ pokemon: [Pokemon]) -> some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 10) {
+                ForEach(pokemon) { entry in
+                    NavigationLink(value: AppRoute.pokemon(entry.id)) { PokemonShelfCard(pokemon: entry) }
+                        .buttonStyle(.plain)
+                        .shelfTransition()
                 }
             }
             .padding(.horizontal)
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 10) {
-                    ForEach(pokemon) { entry in
-                        NavigationLink(value: AppRoute.pokemon(entry.id)) { PokemonShelfCard(pokemon: entry) }
-                            .buttonStyle(.plain)
-                            .shelfTransition()
-                    }
-                }
-                .padding(.horizontal)
-            }
         }
     }
 
