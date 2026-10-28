@@ -160,6 +160,12 @@ struct DexbotConversationsView: View {
     }
 }
 
+/// A question to open as a new chat (Scope Lens's "Ask Dexbot" on the Mac).
+struct DexbotPrompt: Hashable, Identifiable {
+    var question: String
+    var id: String { question }
+}
+
 #if DEBUG
 #Preview { PreviewHost { NavigationStack { DexbotConversationsView() } } }
 #endif

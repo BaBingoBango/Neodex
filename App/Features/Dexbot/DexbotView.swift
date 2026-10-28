@@ -13,6 +13,13 @@ struct DexbotView: View {
     @State private var conversationID: UUID?
     @State private var title: String
     private let initialPrompt: String?
+    private let start: Start?
+
+    /// How a new chat opened from Home begins.
+    enum Start: String, Identifiable {
+        case typing, listening
+        var id: String { rawValue }
+    }
 
     @State private var model = DexbotModel.shared
     @State private var voice = DexbotVoice()
@@ -21,13 +28,16 @@ struct DexbotView: View {
     /// The model's chat this screen started, so it only adopts the conversation its own first message saves.
     @State private var chatID: UUID?
     @State private var sentInitialPrompt = false
+    @State private var didStart = false
     @FocusState private var inputFocused: Bool
 
-    /// Opens a saved chat, or a new one that can start by sending `initialPrompt`.
-    init(conversation: DexbotConversation? = nil, initialPrompt: String? = nil) {
+    /// Opens a saved chat, or a new one that can start by sending `initialPrompt`, or by putting the
+    /// cursor in the text field or listening (`start`).
+    init(conversation: DexbotConversation? = nil, initialPrompt: String? = nil, start: Start? = nil) {
         _conversationID = State(initialValue: conversation?.id)
         _title = State(initialValue: conversation?.title ?? "New Chat")
         self.initialPrompt = initialPrompt
+        self.start = start
     }
 
     var body: some View {
@@ -209,6 +219,19 @@ struct DexbotView: View {
         if let initialPrompt, !initialPrompt.isEmpty, !sentInitialPrompt {
             sentInitialPrompt = true
             Task { await model.send(initialPrompt) }
+        }
+        if let start, !didStart {
+            didStart = true
+            switch start {
+            case .typing:
+                // Focus taken while a sheet is still sliding up doesn't bring the keyboard.
+                Task {
+                    try? await Task.sleep(for: .milliseconds(450))
+                    inputFocused = true
+                }
+            case .listening:
+                voice.startListening()
+            }
         }
     }
 

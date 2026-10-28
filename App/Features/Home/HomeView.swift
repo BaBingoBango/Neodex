@@ -17,8 +17,7 @@ struct HomeView: View {
     @State private var shuffled: Pokemon?
     @State private var explainer = PickExplainer.shared
     @State private var showingPickReasons = false
-    @State private var dexbotDraft = ""
-    @State private var dexbotPrompt: DexbotPrompt?
+    @State private var dexbotSheet: DexbotView.Start?
 
     private let columns = [GridItem(.adaptive(minimum: 160), spacing: 10)]
 
@@ -47,7 +46,7 @@ struct HomeView: View {
             }
             .navigationTitle("Neodex")
             .navigationDestination(for: AppTab.self) { $0.content }
-            .navigationDestination(item: $dexbotPrompt) { prompt in DexbotView(initialPrompt: prompt.question) }
+            .sheet(item: $dexbotSheet) { DexbotSheet(start: $0) }
             .appDestinations()
             .toolbar {
                 #if os(iOS)
@@ -170,35 +169,39 @@ struct HomeView: View {
 
     // MARK: - Sections
 
-    /// Ask Dexbot from Home; submitting opens the chat with the question already sent.
+    /// Ask Dexbot from Home: the bar opens a new chat in a sheet, ready to type, and the mic opens it listening.
     private var dexbotBar: some View {
-        HStack(spacing: 10) {
-            NavigationLink(value: AppTab.dexbot) { DexbotAvatar(size: 40) }
-                .buttonStyle(.plain)
-            TextField("Ask Dexbot anything about Pokémon…", text: $dexbotDraft)
-                .textFieldStyle(.plain)
-                .submitLabel(.send)
-                .onSubmit {
-                    let question = dexbotDraft.trimmingCharacters(in: .whitespaces)
-                    guard !question.isEmpty else { return }
-                    dexbotDraft = ""
-                    dexbotPrompt = DexbotPrompt(question: question)
+        HStack(spacing: 0) {
+            Button {
+                dexbotSheet = .typing
+            } label: {
+                HStack(spacing: 10) {
+                    DexbotAvatar(size: 40)
+                    Text("Ask Dexbot about Pokémon…")
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                    Spacer(minLength: 0)
                 }
-            NavigationLink(value: AppTab.dexbot) {
-                Image(systemName: "arrow.up.right")
-                    .font(.body.weight(.semibold))
-                    .foregroundStyle(.secondary)
+                .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Open Dexbot")
+            .accessibilityLabel("Ask Dexbot")
+            Button {
+                dexbotSheet = .listening
+            } label: {
+                Image(systemName: "mic.fill")
+                    .font(.title3)
+                    .foregroundStyle(.secondary)
+                    .frame(width: 44, height: 44)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("Ask Dexbot by voice")
         }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 10)
-        .background(Color.secondaryGroupedBackground, in: RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .overlay {
-            RoundedRectangle(cornerRadius: 22, style: .continuous)
-                .strokeBorder(LinearGradient(colors: [.purple.opacity(0.6), .blue.opacity(0.5)], startPoint: .leading, endPoint: .trailing), lineWidth: 1)
-        }
+        .padding(.leading, 8)
+        .padding(.trailing, 6)
+        .padding(.vertical, 6)
+        .glassEffect(.regular.interactive(), in: .capsule)
         .padding(.horizontal)
     }
 
@@ -463,9 +466,3 @@ struct RecentMoveCard: View {
 #if DEBUG
 #Preview { HomeView().previewEnvironment() }
 #endif
-
-/// A question typed on Home, carried into the chat.
-struct DexbotPrompt: Hashable, Identifiable {
-    var question: String
-    var id: String { question }
-}
