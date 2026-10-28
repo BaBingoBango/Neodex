@@ -10,7 +10,7 @@ enum Writer {
         DataManifest.DataSource(name: "Pokémon Showdown sprites", url: "https://play.pokemonshowdown.com/sprites/", license: "Pokémon sprites © Nintendo / Game Freak / The Pokémon Company"),
     ]
 
-    static func write(_ dataset: Dataset, to dataDirectory: URL, pretty: Bool) throws -> [String: Int] {
+    static func write(_ dataset: Dataset, to dataDirectory: URL, pretty: Bool, showdownDate: Date? = nil) throws -> [String: Int] {
         try FileManager.default.createDirectory(at: dataDirectory, withIntermediateDirectories: true)
         let encoder = JSONEncoder()
         encoder.outputFormatting = pretty ? [.sortedKeys, .prettyPrinted, .withoutEscapingSlashes] : [.sortedKeys, .withoutEscapingSlashes]
@@ -38,7 +38,7 @@ enum Writer {
                                         learnsets: dataset.learnsets.count),
             sources: sources,
             version: DataManifest.calendarVersion(for: now),
-            releaseNotes: releaseNotes(for: dataset, generatedAt: now)
+            releaseNotes: releaseNotes(for: dataset, showdownDate: showdownDate ?? now)
         )
         try write(manifest, as: "manifest")
         return sizes
@@ -70,7 +70,7 @@ enum Writer {
         }
     }
 
-    static func releaseNotes(for dataset: Dataset, generatedAt: Date) -> [String] {
+    static func releaseNotes(for dataset: Dataset, showdownDate: Date) -> [String] {
         var notes: [String] = []
         let species = dataset.pokemon.filter(\.isBaseForm)
         if let newest = species.max(by: { $0.nationalDexNumber < $1.nationalDexNumber }) {
@@ -80,7 +80,7 @@ enum Writer {
         }
         notes.append("\(dataset.moves.count.formatted()) moves, \(dataset.abilities.count.formatted()) Abilities and \(dataset.items.count.formatted()) items with in-game and competitive descriptions.")
         let generation = dataset.pokemon.map(\.generation).max() ?? 9
-        notes.append("Generation \(generation) learnsets for \(dataset.learnsets.count.formatted()) Pokémon, plus Smogon tiers and Pokémon Showdown data as of \(generatedAt.formatted(date: .long, time: .omitted)).")
+        notes.append("Generation \(generation) learnsets for \(dataset.learnsets.count.formatted()) Pokémon, plus Smogon tiers and Pokémon Showdown data as of \(showdownDate.formatted(date: .long, time: .omitted)).")
         return notes
     }
 }

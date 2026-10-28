@@ -31,6 +31,14 @@ struct BundledDataTests {
         #expect(missing.isEmpty, "Missing images for: \(missing.joined(separator: ", "))")
     }
 
+    @Test("No two Pokémon share a name, so lists and search never show twins")
+    func displayNamesAreUnique() async throws {
+        let database = try await PokedexDatabase.load(from: .main)
+        let shared = Dictionary(grouping: database.pokemon, by: \.displayName).filter { $0.value.count > 1 }
+        #expect(shared.isEmpty, "Shared names: \(shared.map { "\($0.key) (\($0.value.map(\.id).joined(separator: ", ")))" })")
+        #expect(database.pokemon(id: "ogerponwellspringtera")?.displayName == "Wellspring Mask Ogerpon (Terastallized)")
+    }
+
     @Test("Showdown names round-trip through the database")
     func showdownNames() async throws {
         let database = try await PokedexDatabase.load(from: .main)

@@ -68,7 +68,8 @@ package enum Pipeline {
 
         log("Writing JSON…")
         let dataDirectory = options.outputDirectory.appendingPathComponent("Data")
-        let sizes = try Writer.write(dataset, to: dataDirectory, pretty: options.pretty)
+        let sizes = try Writer.write(dataset, to: dataDirectory, pretty: options.pretty,
+                                     showdownDate: ShowdownData.downloadDate(cacheDirectory: options.cacheDirectory))
         for (name, size) in sizes.sorted(by: { $0.key < $1.key }) {
             log(String(format: "  %@.json  %.1f MB", name, Double(size) / 1_000_000))
         }

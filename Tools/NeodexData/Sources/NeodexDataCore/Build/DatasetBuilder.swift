@@ -299,6 +299,8 @@ struct DatasetBuilder {
         let speciesName = species?.name ?? raw.name.components(separatedBy: "-").first ?? raw.name
         guard let forme = raw.forme else { return speciesName }
         if let apiName = apiRow?.pokemonName, !apiName.isEmpty {
+            // Ogerpon's Terastallized masks have no PokeAPI rows and borrow their mask's, name included.
+            if forme.hasSuffix("-Tera") { return "\(apiName) (Terastallized)" }
             if (nameCounts[apiName] ?? 0) > 1, let formName = apiRow?.formName, !formName.isEmpty {
                 return "\(apiName) (\(formName))"
             }

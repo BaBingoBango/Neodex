@@ -18,6 +18,13 @@ struct ShowdownData: Sendable {
     static let serverBase = URL(string: "https://raw.githubusercontent.com/smogon/pokemon-showdown/master/data/")!
     static let spriteBase = URL(string: "https://play.pokemonshowdown.com/sprites/")!
 
+    /// When the cached copy of Showdown's data was downloaded, which is what the dataset reflects;
+    /// rebuilding from the cache doesn't make it any newer.
+    static func downloadDate(cacheDirectory: URL) -> Date? {
+        let pokedex = Fetcher.cacheURL(for: clientBase.appendingPathComponent("pokedex.js"), in: cacheDirectory)
+        return try? FileManager.default.attributesOfItem(atPath: pokedex.path)[.modificationDate] as? Date
+    }
+
     static func load(using fetcher: Fetcher) async throws -> ShowdownData {
         async let pokedex = clientModule("pokedex", export: "BattlePokedex", fetcher)
         async let moves = clientModule("moves", export: "BattleMovedex", fetcher)

@@ -24,11 +24,16 @@ enum Fixture {
       "ogerpon": {"num":1017,"name":"Ogerpon","baseForme":"Teal","types":["Grass"],"gender":"F",
         "baseStats":{"hp":80,"atk":120,"def":84,"spa":60,"spd":96,"spe":110},"abilities":{"0":"Defiant"},
         "heightm":1.2,"weightkg":39.8,"color":"Green","tags":["Sub-Legendary"],"eggGroups":["Undiscovered"],
-        "otherFormes":["Ogerpon-Wellspring"],"formeOrder":["Ogerpon","Ogerpon-Wellspring"],"tier":"OU"},
+        "otherFormes":["Ogerpon-Wellspring","Ogerpon-Wellspring-Tera"],
+        "formeOrder":["Ogerpon","Ogerpon-Wellspring","Ogerpon-Wellspring-Tera"],"tier":"OU"},
       "ogerponwellspring": {"num":1017,"name":"Ogerpon-Wellspring","baseSpecies":"Ogerpon","forme":"Wellspring",
         "types":["Grass","Water"],"gender":"F","baseStats":{"hp":80,"atk":120,"def":84,"spa":60,"spd":96,"spe":110},
         "abilities":{"0":"Water Absorb"},"heightm":1.2,"weightkg":39.8,"color":"Blue","eggGroups":["Undiscovered"],
         "requiredItem":"Wellspring Mask","changesFrom":"Ogerpon","tier":"OU"},
+      "ogerponwellspringtera": {"num":1017,"name":"Ogerpon-Wellspring-Tera","baseSpecies":"Ogerpon","forme":"Wellspring-Tera",
+        "types":["Grass","Water"],"gender":"F","baseStats":{"hp":80,"atk":120,"def":84,"spa":60,"spd":96,"spe":110},
+        "abilities":{"0":"Water Absorb"},"heightm":1.2,"weightkg":39.8,"color":"Blue","eggGroups":["Undiscovered"],
+        "requiredItem":"Wellspring Mask","battleOnly":"Ogerpon-Wellspring","tier":"OU"},
       "arceus": {"num":493,"name":"Arceus","types":["Normal"],"gender":"N",
         "baseStats":{"hp":120,"atk":120,"def":120,"spa":120,"spd":120,"spe":120},"abilities":{"0":"Multitype"},
         "heightm":3.2,"weightkg":320,"color":"White","eggGroups":["Undiscovered"],"otherFormes":["Arceus-Fire"],
@@ -239,8 +244,14 @@ struct DatasetBuilderTests {
         #expect(wellspring.generation == 9)
         #expect(wellspring.requiredItems == ["wellspringmask"])
         #expect(wellspring.changesFrom == "ogerpon")
-        #expect(wellspring.otherFormIDs == ["ogerpon"])
+        #expect(wellspring.otherFormIDs == ["ogerpon", "ogerponwellspringtera"])
         #expect(dataset.pokeapiPokemonIDs["ogerponwellspring"] == 10273)
+
+        // The Terastallized mask borrows the mask's PokeAPI row but keeps a name of its own.
+        let tera = try #require(dataset.pokemon.first { $0.id == "ogerponwellspringtera" })
+        #expect(tera.displayName == "Wellspring Mask Ogerpon (Terastallized)")
+        #expect(tera.formKind == .terastal)
+        #expect(tera.isBattleOnly)
 
         let arceusFire = try #require(dataset.pokemon.first { $0.id == "arceusfire" })
         #expect(arceusFire.displayName == "Arceus (Fire)")
@@ -261,7 +272,8 @@ struct DatasetBuilderTests {
     @Test("Ordering follows dex number then Showdown's form order")
     func ordering() throws {
         let (dataset, _) = try Fixture.build()
-        #expect(dataset.pokemon.map(\.id) == ["bulbasaur", "ivysaur", "venusaurmega", "pikachustarter", "arceus", "arceusfire", "ogerpon", "ogerponwellspring"])
+        #expect(dataset.pokemon.map(\.id) == ["bulbasaur", "ivysaur", "venusaurmega", "pikachustarter", "arceus", "arceusfire", "ogerpon",
+                                               "ogerponwellspring", "ogerponwellspringtera"])
         #expect(dataset.pokemon.first { $0.id == "pikachustarter" }?.availability == .letsGo)
         #expect(dataset.spriteIDs["ogerponwellspring"] == "ogerpon-wellspring")
     }
@@ -367,11 +379,11 @@ struct PreviewFixtureTests {
         _ = try Writer.write(dataset, to: directory.appendingPathComponent("Data"), pretty: false)
         let summary = try PreviewFixture.write(from: directory.appendingPathComponent("Data"),
                                                to: directory.appendingPathComponent("Preview"))
-        #expect(summary.pokemon == 4)
+        #expect(summary.pokemon == 5)
         let database = try await PokedexDatabase.load(from: directory.appendingPathComponent("Preview"), filePrefix: "preview-")
-        #expect(database.pokemon.count == 4)
+        #expect(database.pokemon.count == 5)
         #expect(database.pokemon(named: "Ogerpon-Wellspring")?.requiredItems == ["wellspringmask"])
         #expect(database.item(id: "wellspringmask") != nil)
-        #expect(database.manifest?.counts.pokemon == 4)
+        #expect(database.manifest?.counts.pokemon == 5)
     }
 }
