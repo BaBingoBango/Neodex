@@ -28,6 +28,9 @@ Tools/NeodexData/.cache/
 # Scope Lens engine dependencies
 Tools/ScopeLensEngine/node_modules/
 
+# App Store Connect API keys live in ~/.appstoreconnect, never in this public repository
+*.p8
+
 # Scope Lens: secrets for the diagnostics harnesses, OCR dumps and any local copy of the private fixtures
 .env
 .env.*

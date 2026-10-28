@@ -1,0 +1,4 @@
+#!/bin/zsh
+# TestFlight feedback, crash reports and build status from the App Store Connect API.
+# Run `Tools/testflight help` for the commands; Tools/TestFlightCLI/README.md covers setup.
+exec swift run --quiet --package-path "${0:A:h}/TestFlightCLI" testflight "$@"

@@ -69,12 +69,22 @@ swift run neodex-data --preview-fixture  # just the Xcode Previews fixture
 swift run neodex-data --train-classifier # retrain the scanner's classifier (downloads card art; takes a while)
 ```
 
+### TestFlight feedback
+
+```bash
+Tools/testflight feedback   # new TestFlight notes and screenshots, saved outside the repo
+Tools/testflight builds     # recent uploads and whether they finished processing
+```
+
+It talks to the App Store Connect API with a key kept in `~/.appstoreconnect`; [Tools/TestFlightCLI](Tools/TestFlightCLI) covers the one-time setup.
+
 ### Tests
 
 ```bash
 cd Packages/NeodexKit && swift test   # models, type chart, stat math, damage calc, legality, Showdown codec, Smogon parsers
 cd Tools/NeodexData && swift test     # the data pipeline
 cd Packages/ScopeLens && swift test   # Scope Lens: the engine, vocabulary and species index load from the package bundle
+cd Tools/TestFlightCLI && swift test  # App Store Connect token signing, response decoding, the feedback archive
 ```
 
 The Xcode scheme also runs the kit tests plus the app's bundled‑data smoke tests and feature tests for the intents, calculator and legality (⌘U). Every screen has an Xcode Preview backed by a small fixture cut from the real dataset.
