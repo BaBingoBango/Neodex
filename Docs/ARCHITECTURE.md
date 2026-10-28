@@ -14,7 +14,7 @@ the Mac app links (see its section below):
             ▼                                                  ▼
 ┌─────────────────────────┐     depends on     ┌──────────────────────────────┐
 │ Packages/NeodexKit      │ ◀───────────────── │ App (Neodex.xcodeproj)       │
-│ Models · database ·     │                    │ SwiftUI, iOS 26+, Swift 6    │
+│ Models · database ·     │                    │ SwiftUI, iOS 27+, Swift 6    │
 │ type chart · stat math ·│                    │ SwiftData for user data      │
 │ Showdown codec · Smogon │                    │ Spotlight, Smogon client     │
 │ parsers · Swift Testing │                    └──────────────────────────────┘
@@ -111,7 +111,8 @@ re-runs cheap.
 
 ## App (`App/`)
 
-SwiftUI, iOS 26 and macOS 26 and later, Swift 6 language mode with main-actor default isolation.
+SwiftUI, iOS 27 and macOS 27 and later (the watch app stays on watchOS 26), Swift 6 language mode with
+main-actor default isolation.
 The `Neodex` (iOS) and `NeodexMac` targets compile the same `App/` and `Shared/` folders; `Mac/`
 adds only what the Mac needs.
 
@@ -203,12 +204,18 @@ Key decisions:
   lists every `DexbotConversation` in the shared store, grouped by day; each chat screen holds its
   conversation's ID and points the shared `DexbotModel` at it when it appears, and a reply that
   finishes after the user has moved to another chat is saved to the one it was asked in. Siri's
-  `AskNeodexIntent` and CarPlay use one-shot `answer` calls with spoken-style instructions. On iOS 27
-  the user can prefer Apple's Private Cloud Compute model. That model needs Apple's managed
+  `AskNeodexIntent` and CarPlay use one-shot `answer` calls with spoken-style instructions. The user
+  can prefer Apple's Private Cloud Compute model or Claude (`DexbotEngine.Backend`). Claude comes from
+  Anthropic's Claude for Foundation Models package, which conforms Claude to the framework's
+  `LanguageModel` protocol, so the same session, tools and transcript drive it; `DexbotClaude` keeps the
+  user's API key in the Keychain item Scope Lens's advisor uses (one key on the Mac), checks a key with
+  a free Models API request, and runs the chosen model at medium effort with the API's default refusal
+  fallbacks. A rejected key is reported, while a connection failure, rate limit or timeout answers that
+  question on device. Private Cloud Compute needs Apple's managed
   `com.apple.developer.private-cloud-compute` entitlement, and without it the framework still reports
   the model as available and then traps on the first request, so the cloud path is compiled in only
   when the `PRIVATE_CLOUD_COMPUTE` Swift condition is set next to the entitlement; a network, quota or
-  service failure mid-chat falls back to the on-device model and says so. iOS 26 runs on device only.
+  service failure mid-chat falls back to the on-device model and says so.
   Voice mode uses `SpeechAnalyzer`/`SpeechTranscriber` for on-device recognition and
   `AVSpeechSynthesizer` for replies.
 - **The scanner is one actor and one matrix.** `PokemonRecognizer` asks Vision for the image's
