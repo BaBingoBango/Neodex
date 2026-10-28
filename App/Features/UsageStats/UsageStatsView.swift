@@ -18,6 +18,12 @@ struct UsageStatsView: View {
 
     var body: some View {
         List {
+            // The chips scroll with the rankings. Held in a bar above the list instead, they changed
+            // the list's insets whenever the search field collapsed, and the two fed back into a jitter.
+            selectionBar
+                .listRowInsets(EdgeInsets())
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
             if let report = model.report, let selection = model.selection {
                 Section {
                     ForEach(rows) { ranking in
@@ -37,9 +43,6 @@ struct UsageStatsView: View {
         .searchable(text: $searchText, prompt: "Filter Pokémon")
         .navigationTitle("Global Stats")
         .inlineNavigationTitle()
-        // A safe-area bar, unlike an inset, shares the navigation bar's scroll edge effect, so the
-        // chips sit under the search field without a seam.
-        .safeAreaBar(edge: .top, spacing: 0) { selectionBar }
         .toolbar {
             #if os(macOS)
             // The Mac has no pull to refresh.
@@ -85,7 +88,7 @@ struct UsageStatsView: View {
                     }
                 }
                 .padding(.horizontal)
-                .padding(.vertical, 8)
+                .padding(.vertical, 4)
             }
         }
     }
