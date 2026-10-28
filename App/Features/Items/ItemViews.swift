@@ -7,6 +7,7 @@ struct ItemListView: View {
     @State private var searchText = ""
     @State private var category: ItemCategory?
     @State private var includePast = true
+    @AppStorage("itemDexLayout") private var showsGrid = false
 
     private var results: [Item] {
         var items = database.items
@@ -20,16 +21,27 @@ struct ItemListView: View {
     }
 
     var body: some View {
-        List(results) { item in
-            NavigationLink(value: AppRoute.item(item.id)) {
-                ItemRow(item: item)
+        Group {
+            if showsGrid {
+                grid
+            } else {
+                List(results) { item in
+                    NavigationLink(value: AppRoute.item(item.id)) {
+                        ItemRow(item: item)
+                    }
+                }
+                .listStyle(.plain)
             }
         }
-        .listStyle(.plain)
         .navigationTitle("Items")
         .searchable(text: $searchText, prompt: "Item name")
         .toolbar {
-            ToolbarItem(placement: .trailingBar) {
+            ToolbarItemGroup(placement: .trailingBar) {
+                Button {
+                    showsGrid.toggle()
+                } label: {
+                    Label(showsGrid ? "List" : "Grid", systemImage: showsGrid ? "list.bullet" : "square.grid.3x3")
+                }
                 Menu {
                     Picker("Category", selection: $category) {
                         Text("All Categories").tag(ItemCategory?.none)
@@ -42,6 +54,35 @@ struct ItemListView: View {
             }
         }
         .overlay { if results.isEmpty { ContentUnavailableView.search(text: searchText) } }
+    }
+
+    /// Every item's sprite, the way the original Neodex laid out the bag.
+    private var grid: some View {
+        ScrollView {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 76), spacing: 8)], spacing: 8) {
+                ForEach(results) { item in
+                    NavigationLink(value: AppRoute.item(item.id)) {
+                        VStack(spacing: 4) {
+                            ItemImage(item: item)
+                                .frame(width: 44, height: 44)
+                            Text(item.name)
+                                .font(.caption2)
+                                .foregroundStyle(.secondary)
+                                .lineLimit(2)
+                                .multilineTextAlignment(.center)
+                                .frame(height: 28, alignment: .top)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 8)
+                        .padding(.horizontal, 4)
+                        .background(.background.secondary, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel(item.name)
+                }
+            }
+            .padding(.horizontal)
+        }
     }
 }
 
