@@ -308,7 +308,7 @@ final class ScanModel {
     /// A picked photo: the whole image is classified and any printed names are read.
     func scan(_ item: PhotosPickerItem) async {
         guard let database, let data = try? await item.loadTransferable(type: Data.self),
-              let cgImage = CGImage.decoded(data) else { return }
+              let cgImage = await ImageDecoder.decode(data) else { return }
         isBusy = true
         photo = cgImage
         locked = nil

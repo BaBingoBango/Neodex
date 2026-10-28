@@ -59,9 +59,8 @@ final class BundledImageStore {
         "\(imageID)-\(kind.rawValue).\(kind.fileExtension)" as NSString
     }
 
-    @concurrent
     nonisolated private static func decode(_ url: URL) async -> CGImage? {
-        CGImage.decoded(contentsOf: url)
+        await ImageDecoder.decode(contentsOf: url)
     }
 }
 

@@ -29,7 +29,8 @@ nonisolated struct AnimatedImage: @unchecked Sendable {
         var frames: [CGImage] = []
         var durations: [TimeInterval] = []
         for index in 0..<count {
-            guard let image = CGImageSourceCreateImageAtIndex(source, index, nil) else { continue }
+            // Frames become plain bitmaps here, off the main thread; see CGImage.renderedBitmap().
+            guard let image = CGImageSourceCreateImageAtIndex(source, index, [kCGImageSourceShouldCache: false] as CFDictionary)?.renderedBitmap() else { continue }
             frames.append(image)
             durations.append(frameDuration(source, index))
         }
