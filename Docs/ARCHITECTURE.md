@@ -170,7 +170,11 @@ Key decisions:
 - **Images are loose bundle files with unique names.** Xcode's synchronized folders flatten resources
   into the bundle root, so files are named `pikachu-art.heic`, `pikachu-thumb.heic`,
   `pikachu-sprite.png` and loaded through a small cache (`BundledImageStore`) that decodes them with
-  ImageIO straight to `CGImage`, which is `Sendable` and which iOS and macOS draw alike.
+  ImageIO straight to `CGImage`, which is `Sendable` and which iOS and macOS draw alike. Decodes run
+  on `ImageDecoder`'s own operation queue (three at a time), never the Swift cooperative pool: a burst
+  of synchronous HEIC decodes there starved every other task. Each image is then redrawn into a plain
+  bitmap, because an ImageIO-backed `CGImage` makes Core Animation call back into ImageIO while it
+  renders, which deadlocked against decodes in flight.
 - **Concurrency.** The database is `Sendable` and shared through the environment; the Smogon client is
   an actor with a disk `URLCache`; pure value types that cross isolation boundaries (`AppRoute`,
   `UsageSelection`) are declared `nonisolated`.
@@ -195,8 +199,10 @@ Key decisions:
 - **Dexbot is tools first.** `DexbotEngine` builds a `LanguageModelSession` with ten `Tool`s over the
   dataset (`DexbotTools`: Pokémon fact sheets, matchups, moves, abilities, items, learnsets, Smogon
   usage, the damage calculator, the user's teams and legality). The instructions tell the model to use
-  them for every fact, so it phrases and reasons but never supplies data of its own. The chat screen
-  streams replies and persists them as `DexbotConversation`s in the shared store; Siri's
+  them for every fact, so it phrases and reasons but never supplies data of its own. The Dexbot tab
+  lists every `DexbotConversation` in the shared store, grouped by day; each chat screen holds its
+  conversation's ID and points the shared `DexbotModel` at it when it appears, and a reply that
+  finishes after the user has moved to another chat is saved to the one it was asked in. Siri's
   `AskNeodexIntent` and CarPlay use one-shot `answer` calls with spoken-style instructions. On iOS 27
   the user can prefer Apple's Private Cloud Compute model. That model needs Apple's managed
   `com.apple.developer.private-cloud-compute` entitlement, and without it the framework still reports
