@@ -14,11 +14,18 @@ struct PokedexListView: View {
 /// The National Pokédex: every species and form, searchable, filterable and sortable.
 struct PokedexListContent: View {
     @Environment(\.database) private var database
+    private let title: String
     @State private var searchText = ""
-    @State private var filters = PokedexFilters()
+    @State private var filters: PokedexFilters
     @State private var sort: PokedexSort = .dexNumber
     @State private var layout: PokedexLayout = .list
     @State private var showingFilters = false
+
+    /// The whole Pokédex, or a slice of it (Search's type tiles start filtered to one type).
+    init(title: String = "Pokédex", filters: PokedexFilters = PokedexFilters()) {
+        self.title = title
+        _filters = State(initialValue: filters)
+    }
 
     private var results: [Pokemon] {
         let trimmed = searchText.trimmingCharacters(in: .whitespaces)
@@ -61,7 +68,7 @@ struct PokedexListContent: View {
                 }
             }
         }
-        .navigationTitle("Pokédex")
+        .navigationTitle(title)
         .searchable(text: $searchText, prompt: "Name or number")
         .toolbar {
             ToolbarItemGroup(placement: .trailingBar) {

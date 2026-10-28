@@ -6,10 +6,12 @@ import SwiftUI
 struct SearchBrowseView: View {
     @Environment(\.database) private var database
 
-    /// The dex sections, each fronted by a Pokémon that suits it.
-    private static let sections: [(tab: AppTab, face: Pokemon.ID)] = [
-        (.pokedex, "bulbasaur"), (.moves, "smeargle"), (.abilities, "ditto"),
-        (.items, "meowth"), (.types, "eevee"), (.natures, "slowpoke"),
+    /// The dex sections: the Pokédex fronted by a Pokémon, the rest by their tab's symbol, and Items
+    /// by an item from the bag.
+    private static let sections: [(tab: AppTab, title: String, artwork: BrowseTile.Artwork)] = [
+        (.pokedex, "Pokémon", .pokemon("bulbasaur")), (.moves, "Moves", .symbol(AppTab.moves.systemImage)),
+        (.abilities, "Abilities", .symbol(AppTab.abilities.systemImage)), (.items, "Items", .item("pokeball")),
+        (.types, "Type-O-Matic", .symbol(AppTab.types.systemImage)), (.natures, "Natures", .symbol(AppTab.natures.systemImage)),
     ]
 
     /// A well-known Pokémon of each type.
@@ -28,8 +30,7 @@ struct SearchBrowseView: View {
                 LazyVGrid(columns: columns, spacing: 12) {
                     ForEach(Self.sections, id: \.tab) { section in
                         NavigationLink(value: section.tab) {
-                            BrowseTile(title: section.tab.title, color: section.tab.tint,
-                                       pokemon: database.pokemon(id: section.face))
+                            BrowseTile(title: section.title, color: section.tab.tint, artwork: section.artwork)
                         }
                     }
                 }
@@ -37,9 +38,8 @@ struct SearchBrowseView: View {
                     SectionTitle("Types")
                     LazyVGrid(columns: columns, spacing: 12) {
                         ForEach(PokemonType.allCases) { type in
-                            NavigationLink(value: AppRoute.type(type)) {
-                                BrowseTile(title: type.name, color: type.color,
-                                           pokemon: Self.typeFaces[type].flatMap(database.pokemon(id:)))
+                            NavigationLink(value: AppRoute.typePokemon(type)) {
+                                BrowseTile(title: type.name, color: type.color, artwork: .pokemon(Self.typeFaces[type] ?? ""))
                             }
                         }
                     }
@@ -52,12 +52,20 @@ struct SearchBrowseView: View {
     }
 }
 
-/// A colored tile with a Pokémon bleeding off its corner and a bold title.
+/// A colored tile with a Pokémon, symbol or item bleeding off its corner and a bold title.
 struct BrowseTile: View {
+    enum Artwork {
+        case pokemon(Pokemon.ID)
+        case symbol(String)
+        /// A bundled item sprite, by item ID.
+        case item(String)
+    }
+
     @Environment(\.self) private var environment
+    @Environment(\.database) private var database
     var title: String
     var color: Color
-    var pokemon: Pokemon?
+    var artwork: Artwork
 
     /// Light colors are deepened, the way Apple Music's tiles are mustard rather than lemon, so a
     /// white title reads on every tile.
@@ -72,16 +80,13 @@ struct BrowseTile: View {
             .aspectRatio(1.7, contentMode: .fit)
             .background(background.gradient)
             .overlay {
-                if let pokemon {
-                    GeometryReader { proxy in
-                        let side = proxy.size.height * 1.05
-                        PokemonImage(pokemon: pokemon)
-                            .frame(width: side, height: side)
-                            .shadow(color: .black.opacity(0.25), radius: 6, y: 3)
-                            .position(x: proxy.size.width - side * 0.36, y: proxy.size.height * 0.56)
-                    }
-                    .accessibilityHidden(true)
+                GeometryReader { proxy in
+                    let side = proxy.size.height * 1.05
+                    artworkView(side: side)
+                        .shadow(color: .black.opacity(0.25), radius: 6, y: 3)
+                        .position(x: proxy.size.width - side * 0.36, y: proxy.size.height * 0.56)
                 }
+                .accessibilityHidden(true)
             }
             .overlay(alignment: .bottomLeading) {
                 Text(title)
@@ -96,6 +101,39 @@ struct BrowseTile: View {
             .contentShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
             .accessibilityElement(children: .ignore)
             .accessibilityLabel(title)
+    }
+
+    @ViewBuilder
+    private func artworkView(side: CGFloat) -> some View {
+        switch artwork {
+        case .pokemon(let id):
+            if let pokemon = database.pokemon(id: id) {
+                PokemonImage(pokemon: pokemon)
+                    .frame(width: side, height: side)
+            }
+        case .symbol(let name):
+            // Tilted like a sticker, the way Apple Music angles its artwork, and kept high enough
+            // to clear a long title like "Type-O-Matic" on the smallest iPhone.
+            Image(systemName: name)
+                .resizable()
+                .scaledToFit()
+                .foregroundStyle(.white.opacity(0.9))
+                .frame(width: side * 0.56, height: side * 0.56)
+                .rotationEffect(.degrees(-14))
+                .offset(x: side * 0.04, y: -side * 0.14)
+                .frame(width: side, height: side)
+        case .item(let id):
+            if let image = BundledImageStore.shared.itemImage(id) {
+                Image(image, scale: 1, label: Text(title))
+                    .interpolation(.none)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: side * 0.72, height: side * 0.72)
+                    .rotationEffect(.degrees(-14))
+                    .offset(x: side * 0.04, y: -side * 0.1)
+                    .frame(width: side, height: side)
+            }
+        }
     }
 }
 
