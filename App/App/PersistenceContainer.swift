@@ -3,7 +3,10 @@ import SwiftData
 
 /// The app's SwiftData container, kept in the App Group so the Team widget can read teams.
 enum PersistenceContainer {
-    static func make() -> ModelContainer {
+    /// One container for the whole app process, so the screens and Dexbot's saved teams share a context.
+    static let shared = make()
+
+    private static func make() -> ModelContainer {
         let schema = Schema(SharedSchema.models)
         if let shared = SharedContainer.storeURL {
             migrateLegacyStoreIfNeeded(to: shared)

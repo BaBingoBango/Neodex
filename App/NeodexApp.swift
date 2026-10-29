@@ -6,7 +6,7 @@ import SwiftUI
 @main
 struct NeodexApp: App {
     @State private var appModel = AppModel()
-    private let container = PersistenceContainer.make()
+    private let container = PersistenceContainer.shared
 
     init() {
         #if os(iOS)
