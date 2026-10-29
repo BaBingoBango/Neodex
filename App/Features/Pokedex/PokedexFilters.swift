@@ -40,7 +40,7 @@ enum PokedexSort: String, CaseIterable, Identifiable {
     }
 
     /// Secondary text shown in the row when sorting by something other than dex number.
-    func detail(for pokemon: Pokemon) -> String? {
+    func detail(for pokemon: Pokemon, units: MeasurementUnits = .current) -> String? {
         switch self {
         case .dexNumber, .name: nil
         case .total: "BST \(pokemon.baseStats.total)"
@@ -50,8 +50,8 @@ enum PokedexSort: String, CaseIterable, Identifiable {
         case .specialAttack: "SpA \(pokemon.baseStats.specialAttack)"
         case .specialDefense: "SpD \(pokemon.baseStats.specialDefense)"
         case .speed: "Spe \(pokemon.baseStats.speed)"
-        case .height: Measurements.height(pokemon.height)
-        case .weight: Measurements.weight(pokemon.weight)
+        case .height: Measurements.height(pokemon.height, in: units)
+        case .weight: Measurements.weight(pokemon.weight, in: units)
         }
     }
 }

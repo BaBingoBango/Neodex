@@ -13,6 +13,7 @@ struct PokemonDetailView: View {
     /// The header's height, measured, so the bar knows when the header's name has scrolled under it.
     @State private var headerHeight: CGFloat = 560
     @State private var scrolledPastHeader = false
+    @AppStorage(MeasurementUnits.storageKey) private var units = MeasurementUnits.localeDefault
 
     var body: some View {
         ScrollView {
@@ -232,18 +233,15 @@ struct PokemonDetailView: View {
         VStack(alignment: .leading, spacing: 12) {
             SectionTitle("Characteristics")
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 160), spacing: 10)], spacing: 10) {
-                let height = Measurements.heightParts(pokemon.height)
-                let weight = Measurements.weightParts(pokemon.weight)
-                let gender = Measurements.genderParts(pokemon.maleRatio)
-                InfoTile(systemImage: "ruler", label: "Height", value: height.primary, detail: height.secondary, tint: .blue)
-                InfoTile(systemImage: "scalemass", label: "Weight", value: weight.primary, detail: weight.secondary, tint: .blue)
+                InfoTile(systemImage: "ruler", label: "Height", value: Measurements.height(pokemon.height, in: units), tint: .blue)
+                InfoTile(systemImage: "scalemass", label: "Weight", value: Measurements.weight(pokemon.weight, in: units), tint: .blue)
                 InfoTile(systemImage: "star", label: "EV Yield", value: Measurements.evYield(pokemon.evYield), tint: .green)
                 InfoTile(systemImage: "checkmark.seal", label: "Catch Rate", value: pokemon.catchRate.map(String.init) ?? "—", tint: .green)
                 InfoTile(systemImage: "heart", label: "Friendship", value: pokemon.baseFriendship.map(String.init) ?? "—", tint: .pink)
                 InfoTile(systemImage: "sparkles", label: "Base Exp.", value: pokemon.baseExperience.map(String.init) ?? "—", tint: .pink)
                 InfoTile(systemImage: "person.2", label: "Egg Groups", value: pokemon.eggGroups.isEmpty ? "—" : pokemon.eggGroups.joined(separator: " & "), tint: .yellow)
                 InfoTile(systemImage: "arrow.triangle.2.circlepath", label: "Egg Cycles", value: pokemon.hatchCycles.map(String.init) ?? "—", tint: .yellow)
-                InfoTile(systemImage: "figure.stand.dress.line.vertical.figure", label: "Gender", value: gender.primary, detail: gender.secondary, tint: .purple)
+                InfoTile(systemImage: "figure.stand.dress.line.vertical.figure", label: "Gender", value: Measurements.genderRatio(pokemon.maleRatio), tint: .purple)
                 InfoTile(systemImage: "chart.line.uptrend.xyaxis", label: "Growth Rate", value: pokemon.growthRate ?? "—", tint: .purple)
                 InfoTile(systemImage: "number", label: "Generation", value: "Gen \(pokemon.generation)", tint: .gray)
                 InfoTile(systemImage: "trophy", label: "Smogon Tier", value: pokemon.tier ?? "—", tint: .gray)

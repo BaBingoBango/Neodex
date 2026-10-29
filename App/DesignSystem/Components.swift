@@ -18,14 +18,14 @@ struct SectionTitle: View {
     }
 }
 
-/// A tinted tile with an icon, a caption, a value and an optional detail line — the "Characteristics"
-/// grid. Every tile reserves the detail line so the grid's rows stay the same height.
+/// A tinted tile with an icon, a caption and a one-line value — the "Characteristics" grid. The value's
+/// line keeps its height when a long value shrinks to fit, so every tile is the same size.
 struct InfoTile: View {
     var systemImage: String
     var label: LocalizedStringKey
     var value: String
-    var detail: String? = nil
     var tint: Color
+    @ScaledMetric(relativeTo: .body) private var valueLineHeight: CGFloat = 22
 
     var body: some View {
         HStack(spacing: 12) {
@@ -42,16 +42,12 @@ struct InfoTile: View {
                     .font(.body.weight(.semibold))
                     .lineLimit(1)
                     .minimumScaleFactor(0.65)
-                Text(detail ?? " ")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.8)
+                    .frame(height: valueLineHeight)
             }
             Spacer(minLength: 0)
         }
         .padding(12)
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
         .background(tint.opacity(0.14), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
         .accessibilityElement(children: .combine)
     }
@@ -127,6 +123,29 @@ struct MoveRow: View {
     }
 }
 
+/// How heights and weights appear across Neodex, chosen in Settings. Until it's set, the locale decides.
+nonisolated enum MeasurementUnits: String, CaseIterable, Identifiable {
+    case metric, imperial
+
+    static let storageKey = "measurementUnits"
+
+    static var localeDefault: MeasurementUnits { Locale.current.measurementSystem == .us ? .imperial : .metric }
+
+    /// The current choice, for code outside a view; views read `storageKey` with `@AppStorage` so they redraw.
+    static var current: MeasurementUnits {
+        UserDefaults.standard.string(forKey: storageKey).flatMap(MeasurementUnits.init(rawValue:)) ?? localeDefault
+    }
+
+    var id: String { rawValue }
+
+    var name: String {
+        switch self {
+        case .metric: "Metric (m, kg)"
+        case .imperial: "Imperial (ft, lb)"
+        }
+    }
+}
+
 /// Measurement formatting shared by detail screens.
 nonisolated enum Measurements {
     /// Feet and inches, rounding to the nearest inch first so 0.6 m is 2′00″ rather than 1′12″.
@@ -135,36 +154,20 @@ nonisolated enum Measurements {
         return "\(totalInches / 12)′\(String(format: "%02d", totalInches % 12))″"
     }
 
-    static func height(_ meters: Double) -> String {
-        let metric = meters.formatted(.number.precision(.fractionLength(1)))
-        return "\(metric) m · \(feetAndInches(meters))"
+    /// "1.9 m" or "6′03″".
+    static func height(_ meters: Double, in units: MeasurementUnits = .current) -> String {
+        switch units {
+        case .metric: "\(meters.formatted(.number.precision(.fractionLength(1)))) m"
+        case .imperial: feetAndInches(meters)
+        }
     }
 
-    static func weight(_ kilograms: Double) -> String {
-        let pounds = kilograms * 2.20462
-        return "\(kilograms.formatted(.number.precision(.fractionLength(1)))) kg · \(pounds.formatted(.number.precision(.fractionLength(1)))) lbs"
-    }
-
-    /// Height with the user's unit system first and the other second, e.g. `("6′03″", "1.9 m")`.
-    static func heightParts(_ meters: Double) -> (primary: String, secondary: String) {
-        let imperial = feetAndInches(meters)
-        let metric = "\(meters.formatted(.number.precision(.fractionLength(1)))) m"
-        return Locale.current.measurementSystem == .us ? (imperial, metric) : (metric, imperial)
-    }
-
-    /// Weight with the user's unit system first and the other second.
-    static func weightParts(_ kilograms: Double) -> (primary: String, secondary: String) {
-        let imperial = "\((kilograms * 2.20462).formatted(.number.precision(.fractionLength(1)))) lbs"
-        let metric = "\(kilograms.formatted(.number.precision(.fractionLength(1)))) kg"
-        return Locale.current.measurementSystem == .us ? (imperial, metric) : (metric, imperial)
-    }
-
-    /// `("87.5% ♂", "12.5% ♀")`, or `("Genderless", nil)`.
-    static func genderParts(_ maleRatio: Double?) -> (primary: String, secondary: String?) {
-        guard let maleRatio else { return ("Genderless", nil) }
-        let male = (maleRatio * 100).formatted(.number.precision(.fractionLength(0...1)))
-        let female = ((1 - maleRatio) * 100).formatted(.number.precision(.fractionLength(0...1)))
-        return ("\(male)% ♂", "\(female)% ♀")
+    /// "95.0 kg" or "209.4 lbs".
+    static func weight(_ kilograms: Double, in units: MeasurementUnits = .current) -> String {
+        switch units {
+        case .metric: "\(kilograms.formatted(.number.precision(.fractionLength(1)))) kg"
+        case .imperial: "\((kilograms * 2.20462).formatted(.number.precision(.fractionLength(1)))) lbs"
+        }
     }
 
     static func genderRatio(_ maleRatio: Double?) -> String {

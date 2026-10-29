@@ -20,6 +20,7 @@ struct PokedexListContent: View {
     @State private var sort: PokedexSort = .dexNumber
     @State private var layout: PokedexLayout = .list
     @State private var showingFilters = false
+    @AppStorage(MeasurementUnits.storageKey) private var units = MeasurementUnits.localeDefault
 
     /// The whole Pokédex, or a slice of it (Search's type tiles start filtered to one type).
     init(title: String = "Pokédex", filters: PokedexFilters = PokedexFilters()) {
@@ -41,7 +42,7 @@ struct PokedexListContent: View {
             case .list:
                 List(results) { pokemon in
                     NavigationLink(value: AppRoute.pokemon(pokemon.id)) {
-                        PokemonRow(pokemon: pokemon, detail: sort.detail(for: pokemon))
+                        PokemonRow(pokemon: pokemon, detail: sort.detail(for: pokemon, units: units))
                     }
                 }
                 .listStyle(.plain)

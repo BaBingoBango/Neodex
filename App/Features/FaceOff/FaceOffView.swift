@@ -7,6 +7,7 @@ struct FaceOffView: View {
     @State private var left: Pokemon?
     @State private var right: Pokemon?
     @State private var picking: Side?
+    @AppStorage(MeasurementUnits.storageKey) private var units = MeasurementUnits.localeDefault
 
     enum Side: Identifiable { case left, right; var id: Self { self } }
 
@@ -119,8 +120,8 @@ struct FaceOffView: View {
 
             VStack(alignment: .leading, spacing: 10) {
                 SectionTitle("Details")
-                detailRow("Height", Measurements.height(left.height), Measurements.height(right.height))
-                detailRow("Weight", Measurements.weight(left.weight), Measurements.weight(right.weight))
+                detailRow("Height", Measurements.height(left.height, in: units), Measurements.height(right.height, in: units))
+                detailRow("Weight", Measurements.weight(left.weight, in: units), Measurements.weight(right.weight, in: units))
                 detailRow("Abilities", left.abilities.all.compactMap { database.ability(id: $0)?.name }.joined(separator: ", "),
                           right.abilities.all.compactMap { database.ability(id: $0)?.name }.joined(separator: ", "))
                 detailRow("Catch rate", left.catchRate.map(String.init) ?? "—", right.catchRate.map(String.init) ?? "—")

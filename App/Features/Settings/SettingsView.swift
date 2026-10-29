@@ -10,6 +10,7 @@ struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @AppStorage(TabBarPreferences.customizationKey) private var customization = TabViewCustomization()
     @AppStorage(TabBarPreferences.storageKey) private var storedVisible = TabBarPreferences.encode(AppTab.defaultVisible)
+    @AppStorage(MeasurementUnits.storageKey) private var units = MeasurementUnits.localeDefault
     @State private var confirmingHistoryClear = false
     @State private var reindexing = false
 
@@ -31,9 +32,12 @@ struct SettingsView: View {
         #if os(macOS)
         TabView {
             Tab("General", systemImage: "gearshape") {
-                Form { dataSection }
-                    .formStyle(.grouped)
-                    .frame(width: 560, height: 300)
+                Form {
+                    unitsSection
+                    dataSection
+                }
+                .formStyle(.grouped)
+                .frame(width: 560, height: 400)
             }
             Tab("Dexbot", systemImage: "bubble.left.and.text.bubble.right") {
                 DexbotSettingsView()
@@ -63,6 +67,7 @@ struct SettingsView: View {
                 } footer: {
                     Text("Apple Intelligence, or Claude with your own API key.")
                 }
+                unitsSection
                 tabBarSections
                 watchSection
                 dataSection
@@ -122,6 +127,16 @@ struct SettingsView: View {
     #else
     private var watchSection: some View { EmptyView() }
     #endif
+
+    private var unitsSection: some View {
+        Section {
+            Picker("Height and Weight", selection: $units) {
+                ForEach(MeasurementUnits.allCases) { Text($0.name).tag($0) }
+            }
+        } header: {
+            Text("Units")
+        }
+    }
 
     private var dataSection: some View {
         Section("Your Data") {
