@@ -30,12 +30,16 @@ final class CameraScanner {
     private var device: AVCaptureDevice?
     private var relay: FrameRelay?
     private var configured = false
+    /// Set by `start()` and cleared by `stop()`, so a start still waiting on the permission prompt
+    /// doesn't turn the camera on after the scanner has been left.
+    private var wanted = false
 
     /// Called on the main actor with at most a few frames per second.
     var onFrame: ((CameraFrame) -> Void)?
 
     /// Asks for permission if needed and starts the session.
     func start() async {
+        wanted = true
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
             break
@@ -45,6 +49,7 @@ final class CameraScanner {
             availability = .denied
             return
         }
+        guard wanted else { return }
         if !configured { configure() }
         guard availability == .ready, !isRunning else { return }
         isRunning = true
@@ -53,9 +58,17 @@ final class CameraScanner {
     }
 
     func stop() {
+        wanted = false
         guard isRunning else { return }
         isRunning = false
         setTorch(false)
+        let session = self.session
+        queue.async { session.stopRunning() }
+    }
+
+    /// A scanner torn down while running (a hidden tab, say) still turns the camera off.
+    isolated deinit {
+        guard isRunning else { return }
         let session = self.session
         queue.async { session.stopRunning() }
     }

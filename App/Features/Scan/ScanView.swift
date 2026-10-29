@@ -13,6 +13,9 @@ struct ScanView: View {
     @State private var photoItem: PhotosPickerItem?
     @State private var cryPlayer = CryPlayer()
     @State private var lockPulse = false
+    /// A Scanner in a tab that isn't selected, or under a Pokémon page opened from a match, stays alive
+    /// off screen; only an on-screen Scanner may run the camera.
+    @State private var isOnScreen = false
 
     var body: some View {
         ZStack {
@@ -35,11 +38,21 @@ struct ScanView: View {
             model.configure(database: database)
             await PokemonRecognizer.shared.prepare()
             scanner.onFrame = { frame in model.consume(frame) }
+            // Leaving while the recogniser loads cancels this task; don't start the camera after all.
+            guard !Task.isCancelled else { return }
             await scanner.start()
         }
-        .onDisappear { scanner.stop() }
+        .onAppear { isOnScreen = true }
+        .onDisappear {
+            isOnScreen = false
+            scanner.stop()
+        }
         .onChange(of: scenePhase) { _, phase in
-            if phase == .active { Task { await scanner.start() } } else { scanner.stop() }
+            if phase != .active {
+                scanner.stop()
+            } else if isOnScreen {
+                Task { await scanner.start() }
+            }
         }
         .onChange(of: photoItem) { _, item in
             guard let item else { return }
