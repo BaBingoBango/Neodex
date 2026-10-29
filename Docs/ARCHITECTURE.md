@@ -228,7 +228,10 @@ Key decisions:
   for the next most common legal choice. The team goes into the shared store, and its ID rides at the
   end of the reply as a `neodex://team/<id>` Markdown link that the chat shows as a card opening the
   team (`DexbotTeamLink`), so saved conversations need no new fields. The tool's result is written to
-  read well to the user too, because the on-device model sometimes repeats it word for word.
+  read well to the user too, because the on-device model sometimes repeats it word for word. A team the
+  on-device model built gets an app-written note suggesting Claude, whose link opens Dexbot Settings
+  (`DexbotModel.answerText`). The weather is a required choice with `none` first, because that model
+  fills in an optional argument even when told to leave it out.
 - **The scanner is one actor and one matrix.** `PokemonRecognizer` asks Vision for the image's
   scene-print feature vector, standardises it with the manifest's statistics and multiplies it by the
   bundled weights (Accelerate), then reads printed names with `RecognizeTextRequest` as a second

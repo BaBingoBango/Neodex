@@ -396,21 +396,22 @@ nonisolated struct BuildTeamTool: Tool {
     let description = "Builds a team of six around the Pokémon you name and saves it to the user's Teambuilder. Neodex adds a Pokémon to set the weather for a weather team, fills the empty slots with the Pokémon Smogon's players most often use alongside the rest, completes every set with Smogon's most common choices for the format, fixes anything the format doesn't allow, and reports exactly what it saved. Saving again under the same name updates that team."
     let database: PokedexDatabase
 
+    /// Required, with "none" first: the on-device model fills in an optional weather even when told not to.
     @Generable
     enum TeamWeather {
-        case rain, sun, sand, snow
+        case none, rain, sun, sand, snow
     }
 
     @Generable
     struct Arguments {
-        @Guide(description: "A short name for the team, e.g. 'Rain Offense'.")
+        @Guide(description: "A short name for the team, e.g. 'Kingambit Balance'.")
         var name: String
         @Guide(description: "Showdown format ID: gen9ou, gen9ubers, gen9uu, gen9ru, gen9nu, gen9pu, gen9zu, gen9lc or gen9ag for singles, or a VGC ID such as gen9vgc2026 for doubles.")
         var format: String
         @Guide(description: "The Pokémon the user asked for, or else one or two the team is built around, e.g. ['Kingambit'].", .count(1...6))
         var pokemon: [String]
-        @Guide(description: "For a weather team only: the weather it's built around.")
-        var weather: TeamWeather?
+        @Guide(description: "none, unless the user asked for a rain, sun, sand or snow team.")
+        var weather: TeamWeather
         @Guide(description: "Optional full sets for any of those Pokémon in Pokémon Showdown's export format, separated by blank lines. Leave empty to use Smogon's most common sets.")
         var sets: String?
     }
@@ -422,7 +423,7 @@ nonisolated struct BuildTeamTool: Tool {
         case .sun: .sun
         case .sand: .sandstorm
         case .snow: .snow
-        case nil: nil
+        case .none: nil
         }
         return await DexbotTeamBuilder.build(name: arguments.name, format: arguments.format, pokemon: arguments.pokemon,
                                              weather: weather, sets: arguments.sets ?? "", database: database)
