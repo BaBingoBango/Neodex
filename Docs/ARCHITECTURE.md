@@ -197,12 +197,12 @@ Key decisions:
   sentence per Home pick, with guided generation (`@Generable`) so the output is always three strings.
   It only runs when `SystemLanguageModel.default.availability` is `.available`, is given nothing but
   the Pokémon's types, genus and egg groups, and the section simply doesn't appear otherwise.
-- **Dexbot is tools first.** `DexbotEngine` builds a `LanguageModelSession` with ten `Tool`s over the
-  dataset (`DexbotTools`: Pokémon fact sheets, matchups, moves, abilities, items, learnsets, Smogon
-  usage, the damage calculator, the user's teams and legality). The instructions tell the model to use
-  them for every fact, so it phrases and reasons but never supplies data of its own. The Dexbot tab
-  lists every `DexbotConversation` in the shared store, grouped by day; each chat screen holds its
-  conversation's ID and points the shared `DexbotModel` at it when it appears, and a reply that
+- **Dexbot is tools first.** `DexbotEngine` builds a `LanguageModelSession` with eleven `Tool`s over
+  the dataset (`DexbotTools`: Pokémon fact sheets, matchups, moves, abilities, items, learnsets, Smogon
+  usage, the damage calculator, the user's teams, legality and building a team). The instructions tell
+  the model to use them for every fact, so it phrases and reasons but never supplies data of its own.
+  The Dexbot tab lists every `DexbotConversation` in the shared store, grouped by day; each chat screen
+  holds its conversation's ID and points the shared `DexbotModel` at it when it appears, and a reply that
   finishes after the user has moved to another chat is saved to the one it was asked in. Siri's
   `AskNeodexIntent` and CarPlay use one-shot `answer` calls with spoken-style instructions. The user
   can prefer Apple's Private Cloud Compute model or Claude (`DexbotEngine.Backend`). Claude comes from
@@ -218,6 +218,17 @@ Key decisions:
   service failure mid-chat falls back to the on-device model and says so.
   Voice mode uses `SpeechAnalyzer`/`SpeechTranscriber` for on-device recognition and
   `AVSpeechSynthesizer` for replies.
+- **Dexbot's teams come from data, not the model's memory.** `buildTeam` (`DexbotTeamBuilder`) takes a
+  name, a format, the weather for a weather team and only the Pokémon the user asked for or the one or
+  two the team is built around; the rest comes from Smogon's chaos statistics. Neodex adds the format's
+  most-used setter for the weather (Drizzle, Drought, Sand Stream, Snow Warning), fills each empty slot
+  with the Pokémon that turns up alongside the team far more often than its usage alone explains
+  (Barraskewda with Pelipper, rather than the format's most used Pokémon), completes every set with the
+  most common Ability, item, moves, spread and Tera Type, and swaps anything `FormatLegality` rejects
+  for the next most common legal choice. The team goes into the shared store, and its ID rides at the
+  end of the reply as a `neodex://team/<id>` Markdown link that the chat shows as a card opening the
+  team (`DexbotTeamLink`), so saved conversations need no new fields. The tool's result is written to
+  read well to the user too, because the on-device model sometimes repeats it word for word.
 - **The scanner is one actor and one matrix.** `PokemonRecognizer` asks Vision for the image's
   scene-print feature vector, standardises it with the manifest's statistics and multiplies it by the
   bundled weights (Accelerate), then reads printed names with `RecognizeTextRequest` as a second
