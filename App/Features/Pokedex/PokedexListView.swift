@@ -21,6 +21,7 @@ struct PokedexListContent: View {
     @State private var layout: PokedexLayout = .list
     @State private var showingFilters = false
     @AppStorage(MeasurementUnits.storageKey) private var units = MeasurementUnits.localeDefault
+    @State private var favorites = FavoritePokemon.shared
 
     /// The whole Pokédex, or a slice of it (Search's type tiles start filtered to one type).
     init(title: String = "Pokédex", filters: PokedexFilters = PokedexFilters()) {
@@ -31,7 +32,7 @@ struct PokedexListContent: View {
     private var results: [Pokemon] {
         let trimmed = searchText.trimmingCharacters(in: .whitespaces)
         var pokemon = trimmed.isEmpty ? database.pokemon : database.search(trimmed, limitPerCategory: 400).pokemon
-        pokemon = filters.apply(to: pokemon, database: database)
+        pokemon = filters.apply(to: pokemon, database: database, favorites: favorites.ids)
         if trimmed.isEmpty || sort != .dexNumber { pokemon = sort.sorted(pokemon) }
         return pokemon
     }

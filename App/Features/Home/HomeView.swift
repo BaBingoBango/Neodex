@@ -10,6 +10,7 @@ struct HomeView: View {
 
     @AppStorage(SharedContainer.DefaultsKey.popularFormat, store: SharedContainer.defaults) private var popularFormat = "gen9ou"
     @State private var showingSettings = false
+    @State private var favorites = FavoritePokemon.shared
     @State private var popular: [Pokemon] = []
     @State private var popularSelection: UsageSelection?
     @State private var popularFormats: [UsageFormat] = []
@@ -27,6 +28,7 @@ struct HomeView: View {
                 VStack(alignment: .leading, spacing: 28) {
                     dexbotBar
                     if !recentItems.isEmpty { jumpBackIn }
+                    if !favoritePokemon.isEmpty { favoritesSection }
                     ForEach(AppTab.Group.allCases) { group in
                         featureSection(group)
                     }
@@ -228,6 +230,27 @@ struct HomeView: View {
         }
     }
 
+    /// Hearted Pokémon, newest first.
+    private var favoritePokemon: [Pokemon] {
+        favorites.ids.reversed().compactMap { database.pokemon(id: $0) }
+    }
+
+    private var favoritesSection: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            SectionTitle("Favorites").padding(.horizontal)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 10) {
+                    ForEach(favoritePokemon) { pokemon in
+                        NavigationLink(value: AppRoute.pokemon(pokemon.id)) { RecentPokemonCard(pokemon: pokemon) }
+                            .buttonStyle(.plain)
+                            .shelfTransition()
+                    }
+                }
+                .padding(.horizontal)
+            }
+        }
+    }
+
     private func featureSection(_ group: AppTab.Group) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             SectionTitle(LocalizedStringKey(group.title)).padding(.horizontal)
@@ -416,7 +439,7 @@ struct PokemonShelfCard: View {
     }
 }
 
-/// A small recently-viewed Pokémon tile.
+/// A small Pokémon tile, for Jump Back In and Favorites.
 struct RecentPokemonCard: View {
     var pokemon: Pokemon
 

@@ -47,6 +47,9 @@ struct PokemonDetailView: View {
         .recordsHistory(.pokemon, id: pokemon.id)
         .toolbar {
             ToolbarItem(placement: .trailingBar) {
+                FavoriteButton(pokemon: pokemon)
+            }
+            ToolbarItem(placement: .trailingBar) {
                 NavigationLink(value: AppRoute.faceOff(pokemon.id)) {
                     Label("Face-Off", systemImage: "bolt.circle")
                 }

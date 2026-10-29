@@ -65,6 +65,7 @@ struct PokedexFilters: Equatable {
     var currentGamesOnly = false
     var legendaryOnly = false
     var fullyEvolvedOnly = false
+    var favoritesOnly = false
     var eggGroup: String?
     var abilityID: String?
     var moveID: String?
@@ -73,12 +74,15 @@ struct PokedexFilters: Equatable {
 
     var activeCount: Int {
         [!types.isEmpty, !generations.isEmpty, !formKinds.isEmpty, baseFormsOnly, currentGamesOnly, legendaryOnly,
-         fullyEvolvedOnly, eggGroup != nil, abilityID != nil, moveID != nil].filter { $0 }.count
+         fullyEvolvedOnly, favoritesOnly, eggGroup != nil, abilityID != nil, moveID != nil].filter { $0 }.count
     }
 
-    func apply(to pokemon: [Pokemon], database: PokedexDatabase) -> [Pokemon] {
+    /// The Pokémon that pass every filter; `favorites` are the hearted Pokémon's IDs.
+    func apply(to pokemon: [Pokemon], database: PokedexDatabase, favorites: [String] = []) -> [Pokemon] {
         guard isActive else { return pokemon }
+        let favorites = Set(favorites)
         return pokemon.filter { entry in
+            if favoritesOnly, !favorites.contains(entry.id) { return false }
             if !types.isEmpty, !types.isSubset(of: Set(entry.types)) { return false }
             if !generations.isEmpty, !generations.contains(entry.generation) { return false }
             if !formKinds.isEmpty, entry.formKind.map({ !formKinds.contains($0) }) ?? true { return false }
@@ -149,6 +153,7 @@ struct PokedexFilterSheet: View {
                     }
                 }
                 Section("Traits") {
+                    Toggle("Favorites", isOn: $filters.favoritesOnly)
                     Toggle("Legendary, Mythical or Sub-Legendary", isOn: $filters.legendaryOnly)
                     Toggle("Fully evolved", isOn: $filters.fullyEvolvedOnly)
                     Toggle("Available in current games", isOn: $filters.currentGamesOnly)

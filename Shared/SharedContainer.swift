@@ -25,6 +25,8 @@ nonisolated enum SharedContainer {
         static let popularFormat = "popularFormat"
         /// Formats starred in the format picker, shared by Global Stats and Home.
         static let favoriteFormats = "favoriteFormats"
+        /// Pokémon hearted on their pages, shown on Home and as a Pokédex filter.
+        static let favoritePokemon = "favoritePokemon"
         /// Day ordinal on which the mystery Pokémon was revealed.
         static let mysteryRevealedDay = "mysteryRevealedDay"
     }
