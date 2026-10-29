@@ -194,8 +194,26 @@ struct ScopeLensTeamSettings: View {
     }
 }
 
+/// The advisor's settings in Neodex: the same Claude key section as Dexbot's, since they share one key.
 struct ScopeLensAdvisorSettings: View {
-    var body: some View { AdvisorSettingsView() }
+    @State private var savedKeyHint = DexbotClaude.APIKey.hint
+    @FocusState private var keyFieldFocused: Bool
+
+    var body: some View {
+        Form {
+            Section {
+                Text("“What's the play” advisor")
+                    .font(.headline)
+                Text("Scope Lens's opt-in advisor sends the current battle to Claude, about a cent per ask. The deterministic matchup and damage math never needs it.")
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+            }
+            ClaudeKeySection(savedKeyHint: $savedKeyHint, model: DexbotClaude.model, focus: $keyFieldFocused,
+                             usage: "When you ask, the advisor sends the battle from this Mac straight to Anthropic, billed to your Anthropic account.")
+        }
+        .formStyle(.grouped)
+        .frame(width: 560, height: 420)
+    }
 }
 
 struct ScopeLensMetaSettings: View {

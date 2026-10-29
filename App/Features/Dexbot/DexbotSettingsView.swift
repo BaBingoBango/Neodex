@@ -5,9 +5,6 @@ struct DexbotSettingsView: View {
     @State private var preferred = DexbotEngine.preferredBackend
     @State private var claudeModel = DexbotClaude.model
     @State private var savedKeyHint = DexbotClaude.APIKey.hint
-    @State private var draftKey = ""
-    @State private var checking = false
-    @State private var lastCheck: DexbotClaude.KeyCheck?
     @FocusState private var keyFieldFocused: Bool
 
     var body: some View {
@@ -28,32 +25,10 @@ struct DexbotSettingsView: View {
                 Text(sourceFooter)
             }
 
-            Section {
-                if let savedKeyHint {
-                    LabeledContent("API Key", value: savedKeyHint)
-                    Button("Test Key", systemImage: "checkmark.seal", action: checkSavedKey)
-                        .disabled(checking)
-                    Button("Remove Key", systemImage: "trash", role: .destructive, action: removeKey)
-                } else {
-                    SecureField("API Key", text: $draftKey, prompt: Text("sk-ant-…"))
-                        .autocorrectionDisabled()
-                        .neverAutocapitalized()
-                        .focused($keyFieldFocused)
-                        .onSubmit(saveKey)
-                    Button("Save Key", systemImage: "key", action: saveKey)
-                        .disabled(trimmedDraft.isEmpty)
-                }
-                if checking {
-                    Label("Checking with Anthropic…", systemImage: "hourglass")
-                        .foregroundStyle(.secondary)
-                } else if let lastCheck {
-                    checkResult(lastCheck)
-                }
-            } header: {
-                Text("Claude API Key")
-            } footer: {
-                Text(keyFooter)
-            }
+            ClaudeKeySection(savedKeyHint: $savedKeyHint, model: claudeModel, focus: $keyFieldFocused,
+                             usage: "Your questions and Dexbot's lookups go from this device straight to Anthropic, billed to your Anthropic account.",
+                             onSave: { preferred = .claude },
+                             onRemove: { if preferred == .claude { preferred = .onDevice } })
 
             Section("Claude Model") {
                 Picker("Model", selection: $claudeModel) {
@@ -80,11 +55,8 @@ struct DexbotSettingsView: View {
         }
         .onChange(of: claudeModel) { _, model in
             DexbotClaude.model = model
-            lastCheck = nil
         }
     }
-
-    private var trimmedDraft: String { draftKey.trimmingCharacters(in: .whitespacesAndNewlines) }
 
     private var sourceFooter: String {
         switch preferred {
@@ -98,11 +70,63 @@ struct DexbotSettingsView: View {
             "\(claudeModel.name) answers, with Dexbot's lookups into Neodex's own data. If Claude can't be reached, Apple Intelligence answers that question instead."
         }
     }
+}
+
+/// The one Claude API key. Dexbot and, on the Mac, Scope Lens's advisor read the same Keychain item, so both
+/// settings show this section and a key saved in either works for both.
+struct ClaudeKeySection: View {
+    /// The saved key's last four characters, shared with the settings around it.
+    @Binding var savedKeyHint: String?
+    /// The model a key test asks for.
+    var model: DexbotClaude.Model
+    var focus: FocusState<Bool>.Binding
+    /// What the key is used for here, the footer's first sentence.
+    var usage: String
+    var onSave: () -> Void = {}
+    var onRemove: () -> Void = {}
+
+    @State private var draftKey = ""
+    @State private var checking = false
+    @State private var lastCheck: DexbotClaude.KeyCheck?
+
+    var body: some View {
+        Section {
+            if let savedKeyHint {
+                LabeledContent("API Key", value: savedKeyHint)
+                Button("Test Key", systemImage: "checkmark.seal", action: checkSavedKey)
+                    .disabled(checking)
+                Button("Remove Key", systemImage: "trash", role: .destructive, action: removeKey)
+            } else {
+                SecureField("API Key", text: $draftKey, prompt: Text("sk-ant-…"))
+                    .autocorrectionDisabled()
+                    .neverAutocapitalized()
+                    .focused(focus)
+                    .onSubmit(saveKey)
+                Button("Save Key", systemImage: "key", action: saveKey)
+                    .disabled(trimmedDraft.isEmpty)
+            }
+            if checking {
+                Label("Checking with Anthropic…", systemImage: "hourglass")
+                    .foregroundStyle(.secondary)
+            } else if let lastCheck {
+                checkResult(lastCheck)
+            }
+        } header: {
+            Text("Claude API Key")
+        } footer: {
+            Text(keyFooter)
+        }
+        .onChange(of: model) { lastCheck = nil }
+        // The other settings tab may have saved or removed the key.
+        .onAppear { savedKeyHint = DexbotClaude.APIKey.hint }
+    }
+
+    private var trimmedDraft: String { draftKey.trimmingCharacters(in: .whitespacesAndNewlines) }
 
     private var keyFooter: AttributedString {
-        var text = "Your questions and Dexbot's lookups go from this device straight to Anthropic, billed to your Anthropic account. The key stays in this device's Keychain and is sent only to Anthropic."
+        var text = usage + " The key stays in this device's Keychain and is sent only to Anthropic."
         #if os(macOS)
-        text += " Scope Lens's advisor uses the same key."
+        text += " Dexbot and Scope Lens's advisor share this one key."
         #endif
         text += " [Get an API key](https://platform.claude.com/)"
         return (try? AttributedString(markdown: text)) ?? AttributedString(text)
@@ -118,7 +142,7 @@ struct DexbotSettingsView: View {
             Label("Anthropic didn't accept this key.", systemImage: "xmark.octagon.fill")
                 .foregroundStyle(.red)
         case .modelUnavailable:
-            Label("This key can't use \(claudeModel.name). Pick another model.", systemImage: "exclamationmark.triangle.fill")
+            Label("This key can't use \(model.name). Pick another model.", systemImage: "exclamationmark.triangle.fill")
                 .foregroundStyle(.orange)
         case .failed(let message):
             Label("Couldn't check the key: \(message)", systemImage: "wifi.exclamationmark")
@@ -131,8 +155,7 @@ struct DexbotSettingsView: View {
         guard !key.isEmpty, DexbotClaude.APIKey.save(key) else { return }
         draftKey = ""
         savedKeyHint = DexbotClaude.APIKey.hint
-        // Saving a key is asking for Claude.
-        preferred = .claude
+        onSave()
         checkSavedKey()
     }
 
@@ -140,12 +163,12 @@ struct DexbotSettingsView: View {
         DexbotClaude.APIKey.remove()
         savedKeyHint = nil
         lastCheck = nil
-        if preferred == .claude { preferred = .onDevice }
+        onRemove()
     }
 
     private func checkSavedKey() {
         guard let key = DexbotClaude.APIKey.saved else { return }
-        let model = claudeModel
+        let model = model
         checking = true
         Task {
             lastCheck = await DexbotClaude.check(key: key, model: model)
