@@ -16,6 +16,7 @@ struct DexbotSheet: View {
     var body: some View {
         NavigationStack {
             DexbotView(start: start)
+                .appDestinations()
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
                         Button("Close", systemImage: "xmark") { dismiss() }

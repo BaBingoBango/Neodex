@@ -153,8 +153,10 @@ struct DexbotConversationsView: View {
     /// Dexbot's latest reply (or the latest message) as one line of plain text.
     nonisolated static func preview(of messages: [DexbotMessage]) -> String? {
         guard let message = messages.last(where: { $0.role == .dexbot }) ?? messages.last else { return nil }
+        let parts = DexbotTeamLink.split(message.text)
+        if parts.text.isEmpty, !parts.teamIDs.isEmpty { return "Saved a team to Teams." }
         let options = AttributedString.MarkdownParsingOptions(interpretedSyntax: .inlineOnlyPreservingWhitespace)
-        let plain = (try? AttributedString(markdown: message.text, options: options)).map { String($0.characters) } ?? message.text
+        let plain = (try? AttributedString(markdown: parts.text, options: options)).map { String($0.characters) } ?? parts.text
         let line = plain.split(whereSeparator: \.isNewline).joined(separator: " ")
         return line.isEmpty ? nil : String(line.prefix(160))
     }

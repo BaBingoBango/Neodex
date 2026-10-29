@@ -13,7 +13,13 @@ nonisolated enum DexbotEngine {
         usage statistics, damage and the user's teams; never invent stats, moves, matchups or numbers. If a tool \
         can't find something, say so and offer the closest match. Be friendly and concise: a short paragraph, or a \
         few bullet points for lists. Use the exact names the tools return. Light Markdown is fine (bold names), \
-        no headings. Never mention the tools or that you looked something up; just answer.
+        no headings. Never mention the tools or that you looked something up; just answer. When the user asks you \
+        to build or make a team, call buildTeam once with a name, the format, the weather for a weather team, and \
+        only the Pokémon the user asked for, or else one or two the team is built around; Neodex picks the rest \
+        from Smogon's statistics, completes every set and fixes anything the format doesn't allow. Then, in a few \
+        sentences about only the Pokémon buildTeam saved, give the team's name, each one's job in a few words from \
+        its moves, and what Neodex added or changed. The app shows the whole team under your reply, so don't list \
+        the sets. Only build a team when asked.
         """
 
     static let spokenInstructions = instructions + """

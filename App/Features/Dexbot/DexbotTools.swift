@@ -17,6 +17,7 @@ nonisolated enum DexbotTools {
             DamageCalcTool(database: database),
             MyTeamsTool(database: database),
             TeamLegalityTool(database: database),
+            BuildTeamTool(database: database),
         ]
     }
 

@@ -108,6 +108,7 @@ final class DexbotModel {
         // Another screen can switch chats before the reply arrives; the answer still belongs here.
         let askedID = conversation?.id
         respondingConversationID = askedID
+        let teamsBefore = DexbotTeamBuilder.savedTeamIDs.count
         if session == nil || sessionSignature != DexbotEngine.sessionSignature { session = makeSession(spoken: spoken) }
         guard let session else { return }
         let backend = sessionBackend
@@ -145,7 +146,12 @@ final class DexbotModel {
             reply = DexbotEngine.describe(error, backend: backend)
         }
         streamingText = ""
-        let answer = DexbotMessage(role: .dexbot, text: note.map { reply + "\n\n_\($0)_" } ?? reply)
+        var answerText = note.map { reply + "\n\n_\($0)_" } ?? reply
+        // Teams Dexbot saved while answering travel with the reply, and the chat shows each as a card.
+        for teamID in DexbotTeamBuilder.savedTeamIDs.dropFirst(teamsBefore) {
+            answerText += "\n\n" + DexbotTeamLink.markdown(id: teamID, name: "Team")
+        }
+        let answer = DexbotMessage(role: .dexbot, text: answerText)
         if conversation?.id == askedID {
             append(answer)
         } else if let askedID, let asked = storedConversation(askedID) {

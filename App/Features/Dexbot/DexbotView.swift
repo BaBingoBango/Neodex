@@ -295,13 +295,15 @@ struct DexbotBubble: View {
     private var isUser: Bool { message.role == .user }
 
     var body: some View {
+        // Teams Dexbot saved ride along as links at the end of its reply; they show as cards.
+        let parts = DexbotTeamLink.split(message.text)
         HStack(alignment: .bottom, spacing: 8) {
             if isUser {
                 Spacer(minLength: 48)
             } else {
                 DexbotAvatar(size: 28)
             }
-            Group {
+            VStack(alignment: .leading, spacing: 8) {
                 if isStreaming, message.text.isEmpty {
                     HStack(spacing: 5) {
                         ForEach(0..<3, id: \.self) { index in
@@ -311,25 +313,68 @@ struct DexbotBubble: View {
                         }
                     }
                     .padding(.vertical, 6)
-                } else {
-                    Text(attributed(message.text))
+                    .bubble(isUser: isUser)
+                } else if !parts.text.isEmpty {
+                    Text(attributed(parts.text))
                         .textSelection(.enabled)
+                        .bubble(isUser: isUser)
+                        .contextMenu {
+                            Button("Copy", systemImage: "doc.on.doc") { Clipboard.string = parts.text }
+                        }
                 }
+                ForEach(parts.teamIDs, id: \.self) { DexbotTeamCard(teamID: $0) }
             }
-            .padding(.horizontal, 14)
-            .padding(.vertical, 10)
-            .background(isUser ? AnyShapeStyle(Color.accentColor) : AnyShapeStyle(Color.secondaryGroupedBackground),
-                        in: RoundedRectangle(cornerRadius: 18, style: .continuous))
-            .foregroundStyle(isUser ? .white : .primary)
             if !isUser { Spacer(minLength: 32) }
-        }
-        .contextMenu {
-            Button("Copy", systemImage: "doc.on.doc") { Clipboard.string = message.text }
         }
     }
 
     private func attributed(_ text: String) -> AttributedString {
         (try? AttributedString(markdown: text, options: .init(interpretedSyntax: .inlineOnlyPreservingWhitespace))) ?? AttributedString(text)
+    }
+}
+
+/// A team Dexbot saved, under its reply. Tapping it opens the team in the Teambuilder.
+struct DexbotTeamCard: View {
+    @Query private var teams: [SavedTeam]
+
+    init(teamID: UUID) {
+        _teams = Query(filter: #Predicate<SavedTeam> { $0.id == teamID })
+    }
+
+    var body: some View {
+        if let team = teams.first {
+            NavigationLink(value: AppRoute.team(team.id)) {
+                VStack(alignment: .leading, spacing: 6) {
+                    Label("Saved to Teams", systemImage: "checkmark.circle.fill")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(.green)
+                    TeamRow(team: team)
+                }
+                .padding(12)
+                .frame(maxWidth: 380, alignment: .leading)
+                .background(Color.secondaryGroupedBackground, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+                .contentShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+            }
+            .buttonStyle(.plain)
+            .accessibilityHint("Opens the team in the Teambuilder")
+        } else {
+            Label("This team has been deleted.", systemImage: "trash")
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+                .padding(12)
+                .background(Color.secondaryGroupedBackground, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        }
+    }
+}
+
+private extension View {
+    /// A chat bubble: the accent color for the user, a grouped background for Dexbot.
+    func bubble(isUser: Bool) -> some View {
+        padding(.horizontal, 14)
+            .padding(.vertical, 10)
+            .background(isUser ? AnyShapeStyle(Color.accentColor) : AnyShapeStyle(Color.secondaryGroupedBackground),
+                        in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+            .foregroundStyle(isUser ? .white : .primary)
     }
 }
 
