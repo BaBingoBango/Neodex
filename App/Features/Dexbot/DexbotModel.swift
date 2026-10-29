@@ -115,6 +115,8 @@ final class DexbotModel {
 
         var reply = ""
         var note: String?
+        // The model that wrote the answer, which a cloud outage can change.
+        var answeredBy = backend
         do {
             reply = try await stream(prompt(for: text, spoken: spoken), in: session)
         } catch where DexbotEngine.isContextOverflow(error) {
@@ -136,6 +138,7 @@ final class DexbotModel {
                 do {
                     reply = try await stream(prompt(for: text, spoken: spoken), in: fallback)
                     note = "\(backend.name) wasn't reachable, so this answer came from the on-device model."
+                    answeredBy = .onDevice
                 } catch {
                     reply = DexbotEngine.describe(error, backend: .onDevice)
                 }
@@ -146,12 +149,8 @@ final class DexbotModel {
             reply = DexbotEngine.describe(error, backend: backend)
         }
         streamingText = ""
-        var answerText = note.map { reply + "\n\n_\($0)_" } ?? reply
-        // Teams Dexbot saved while answering travel with the reply, and the chat shows each as a card.
-        for teamID in DexbotTeamBuilder.savedTeamIDs.dropFirst(teamsBefore) {
-            answerText += "\n\n" + DexbotTeamLink.markdown(id: teamID, name: "Team")
-        }
-        let answer = DexbotMessage(role: .dexbot, text: answerText)
+        let teams = Array(DexbotTeamBuilder.savedTeamIDs.dropFirst(teamsBefore))
+        let answer = DexbotMessage(role: .dexbot, text: Self.answerText(reply, note: note, teams: teams, answeredBy: answeredBy))
         if conversation?.id == askedID {
             append(answer)
         } else if let askedID, let asked = storedConversation(askedID) {
@@ -159,6 +158,23 @@ final class DexbotModel {
             asked.touch()
         }
         if spoken { pendingSpeech = reply }
+    }
+
+    /// Opens Dexbot's settings from a link in one of the app's notes.
+    nonisolated static let settingsURL = SharedContainer.deepLink("dexbot/settings")
+
+    /// A reply as it's saved: Dexbot's words, the app's notes in italics, and a link for each team Dexbot
+    /// saved while answering, which the chat shows as a card. A team from the small on-device model comes
+    /// with a pointer to a stronger one.
+    nonisolated static func answerText(_ reply: String, note: String?, teams: [UUID], answeredBy backend: DexbotEngine.Backend) -> String {
+        var notes = note.map { [$0] } ?? []
+        if !teams.isEmpty, backend == .onDevice {
+            notes.append("Built with Apple's small on-device model, so some picks may be odd. For a stronger team, try Claude in [Dexbot Settings](\(settingsURL.absoluteString)).")
+        }
+        var text = reply
+        for note in notes { text += "\n\n_\(note)_" }
+        for team in teams { text += "\n\n" + DexbotTeamLink.markdown(id: team, name: "Team") }
+        return text
     }
 
     private func stream(_ prompt: String, in session: LanguageModelSession) async throws -> String {

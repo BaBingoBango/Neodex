@@ -279,6 +279,16 @@ struct DexbotTeamTests {
         #expect(DexbotTeamBuilder.parseSpread("Jolly") == nil)
     }
 
+    @Test("A team from the on-device model comes with a pointer to a stronger model")
+    func onDeviceNote() {
+        let id = UUID()
+        let onDevice = DexbotModel.answerText("Here's your rain team.", note: nil, teams: [id], answeredBy: .onDevice)
+        #expect(onDevice.contains("try Claude in [Dexbot Settings](\(DexbotModel.settingsURL.absoluteString))._"), "\(onDevice)")
+        #expect(DexbotTeamLink.split(onDevice).teamIDs == [id])
+        #expect(!DexbotModel.answerText("Here's your rain team.", note: nil, teams: [id], answeredBy: .claude).contains("Dexbot Settings"))
+        #expect(DexbotModel.answerText("Garchomp is weak to Ice.", note: nil, teams: [], answeredBy: .onDevice) == "Garchomp is weak to Ice.")
+    }
+
     @Test("A saved team rides along with the reply and comes back out for its card")
     func teamLinks() throws {
         let id = UUID()

@@ -99,6 +99,11 @@ struct DexbotView: View {
             .padding()
         }
         .scrollDismissesKeyboard(.interactively)
+        .environment(\.openURL, OpenURLAction { url in
+            guard url == DexbotModel.settingsURL else { return .systemAction }
+            showingSettings = true
+            return .handled
+        })
         // Keeps the newest bubble in view as a reply streams in, without scrolling by hand on every token.
         .defaultScrollAnchor(.bottom, for: .initialOffset)
         .defaultScrollAnchor(.bottom, for: .sizeChanges)
