@@ -39,7 +39,7 @@ struct UsageStatsView: View {
             }
         }
         .listStyle(.plain)
-        .refreshable { await model.refresh() }
+        .pullToRefresh { await model.refresh() }
         .searchable(text: $searchText, prompt: "Filter Pokémon")
         .navigationTitle("Global Stats")
         .inlineNavigationTitle()
@@ -87,6 +87,7 @@ struct UsageStatsView: View {
                         chip(selection.rating == 0 ? "All ratings" : "Rating \(selection.rating)+", systemImage: "chart.bar")
                     }
                 }
+                .chipControls()
                 .padding(.horizontal)
                 .padding(.vertical, 4)
             }
@@ -223,6 +224,7 @@ struct UsageFormatPicker: View {
             .inlineNavigationTitle()
             .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } } }
         }
+        .macSheetFrame()
     }
 
     private func formatRow(_ format: UsageFormat) -> some View {

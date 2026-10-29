@@ -45,6 +45,8 @@ struct NeodexApp: App {
         }
         .modelContainer(container)
         .defaultSize(width: 720, height: 840)
+        // An entry window always opens on an entry; File › New Window belongs to the main window.
+        .commandsRemoved()
 
         Settings {
             DatabaseLoadingView { _ in SettingsView() }

@@ -27,6 +27,7 @@ struct TeamMemberEditorView: View {
                 movesSection(pokemon)
                 statsSection(pokemon)
             }
+            .formStyle(.grouped)
             .navigationTitle(pokemon.displayName)
             .inlineNavigationTitle()
             .toolbar {

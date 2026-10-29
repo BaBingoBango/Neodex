@@ -20,6 +20,7 @@ struct CalcSideEditorView: View {
                 movesSection(pokemon, member)
                 statsSection(pokemon, member)
             }
+            .formStyle(.grouped)
             .navigationTitle(role.title)
             .inlineNavigationTitle()
             .toolbar {

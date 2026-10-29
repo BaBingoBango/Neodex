@@ -154,6 +154,7 @@ struct TeamImportSheet: View {
                     }
                 }
             }
+            .formStyle(.grouped)
             .navigationTitle("Import Team")
             .inlineNavigationTitle()
             .toolbar {
@@ -164,6 +165,7 @@ struct TeamImportSheet: View {
                 }
             }
         }
+        .macSheetFrame()
     }
 
     private func runImport() {

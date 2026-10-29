@@ -170,6 +170,7 @@ struct PokedexFilterSheet: View {
                     }
                 }
             }
+            .formStyle(.grouped)
             .navigationTitle("Filters")
             .inlineNavigationTitle()
             .toolbar {
@@ -182,6 +183,7 @@ struct PokedexFilterSheet: View {
                 }
             }
         }
+        .macSheetFrame()
     }
 }
 

@@ -292,6 +292,7 @@ struct TeamExportSheet: View {
                 }
             }
         }
+        .macSheetFrame()
     }
 }
 
@@ -327,6 +328,7 @@ struct PokemonPickerSheet: View {
                 ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } }
             }
         }
+        .macSheetFrame()
     }
 }
 
