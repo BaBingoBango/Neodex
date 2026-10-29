@@ -19,7 +19,7 @@ struct TeamDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
                 nameSection
-                TeamSpriteLine(team: team)
+                TeamSpriteLine(team: team, onOpen: { editingMemberID = $0.id }, onAdd: { pickingPokemon = true })
                     .padding(.horizontal)
                 membersSection
                 if !team.members.isEmpty {
