@@ -290,6 +290,21 @@ Key decisions:
   and hands over upright frames. Not on the Mac yet: CarPlay (`#if canImport(CarPlay)`), visual
   intelligence (the macOS 27 SDK has the framework but its types need macOS 27), widgets (so
   `WidgetBridge` is skipped there) and the alternate app icon.
+- **Entries have context menus, open in new windows and drag.** `EntryActions` (`.entryActions(route)`,
+  `App/App/EntryActions.swift`) goes on every link to a Pokémon, move, Ability, item or nature: a context
+  menu with Open in New Window where `supportsMultipleWindows` (iPad and the Mac), plus Favorites and
+  Face-Off for a Pokémon, and for a Pokémon `draggable` with its `neodex://pokemon/<id>` link and a
+  `dropDestination` that opens a Face-Off of the dropped Pokémon against it. Usage-statistics links pass
+  the Pokémon they're about. The entry `WindowGroup(for: AppRoute.self)` is on iPad too, with
+  `commandsRemoved()` and `handlesExternalEvents(matching: [])` so File › New Window and incoming links
+  stay with the main window, and sidebar features open in one through `AppRoute.feature(AppTab)` (a
+  `contextMenu` on each `Tab`; Face-Off's tab spring-loads during a drag). On iPhone and iPad, a Face-Off
+  asked for by a menu or a drop shows over the window or sheet it came from: each window or sheet that
+  holds entry links installs `routePresenter()`, which supplies the `presentRoute` environment action;
+  the Mac opens a window instead. `AppRoute.faceOff` gained an optional `versus:`, and windows saved
+  with the old one-Pokémon form still decode. On the Mac, a main window opened while another is open
+  starts with its sidebar collapsed into the toolbar: that's the sidebar-adaptable `TabView`'s doing
+  (it happens without `tabViewCustomization` too), and `defaultTabBarPlacement(.sidebar)` is iPad-only.
 - **CarPlay is a scene, not a second UI.** `CarPlaySceneDelegate` shows one `CPListTemplate` with
   "Ask Dexbot" and recent chats; everything is spoken and the list only carries short status text. The
   scene is declared in `App/Info.plist`. Apple granted the
