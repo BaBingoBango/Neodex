@@ -66,11 +66,12 @@ extension View {
     }
 
     /// Room for a sheet's list or form on the Mac, where a sheet shrinks to its content's ideal size and a
-    /// list's ideal height is next to nothing. iOS sheets fill the screen anyway.
+    /// list's ideal height is next to nothing. A sheet doesn't shrink to fit its window either, so the height
+    /// keeps its bottom buttons inside the smallest main window (600 points). iOS sheets fill the screen anyway.
     @ViewBuilder
-    func macSheetFrame(minWidth: CGFloat = 480, minHeight: CGFloat = 560) -> some View {
+    func macSheetFrame() -> some View {
         #if os(macOS)
-        frame(minWidth: minWidth, idealWidth: minWidth, minHeight: minHeight, idealHeight: minHeight)
+        frame(minWidth: 480, idealWidth: 480, minHeight: 320, idealHeight: 440)
         #else
         self
         #endif

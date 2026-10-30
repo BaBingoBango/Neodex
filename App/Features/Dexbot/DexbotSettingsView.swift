@@ -188,9 +188,7 @@ struct DexbotSettingsSheet: View {
                     ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } }
                 }
         }
-        #if os(macOS)
-        .frame(minWidth: 480, minHeight: 560)
-        #endif
+        .macSheetFrame()
     }
 }
 
