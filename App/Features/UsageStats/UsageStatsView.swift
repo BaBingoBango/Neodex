@@ -295,7 +295,9 @@ final class UsageStatsModel {
     private(set) var error: Error?
 
     private let client = SmogonStatsClient.shared
-    private var hasLoaded = false
+    /// The first load. The model owns it rather than the screen that asked, so it finishes even if that
+    /// screen closes or another window opens on the way, and every window sees the rankings.
+    private var firstLoad: Task<Void, Never>?
     /// A format requested by a deep link before the format list has loaded.
     private var preferredFormatID: String?
 
@@ -305,7 +307,7 @@ final class UsageStatsModel {
             await select(format: format)
         } else {
             preferredFormatID = formatID
-            if hasLoaded { await reload() }
+            if firstLoad != nil { await reload() }
         }
     }
 
@@ -326,9 +328,8 @@ final class UsageStatsModel {
     var currentFormat: UsageFormat? { formats.first { $0.id == selection?.format } }
 
     func loadIfNeeded() async {
-        guard !hasLoaded else { return }
-        hasLoaded = true
-        await reload()
+        if firstLoad == nil { firstLoad = Task { await reload() } }
+        await firstLoad?.value
     }
 
     /// Pull to refresh: asks Smogon for the month list again, then reloads.
@@ -355,9 +356,9 @@ final class UsageStatsModel {
             let rating = selection.map { $0.rating } ?? Self.defaultRating(for: format)
             selection = UsageSelection(month: month, format: format.id, rating: format.ratingCutoffs.contains(rating) ? rating : Self.defaultRating(for: format))
             await loadRankings()
-        } catch {
+        } catch where !Self.isCancellation(error) {
             self.error = error
-        }
+        } catch {}
     }
 
     func select(month: String) async {
@@ -376,9 +377,9 @@ final class UsageStatsModel {
             }
             self.selection = selection
             await loadRankings()
-        } catch {
+        } catch where !Self.isCancellation(error) {
             self.error = error
-        }
+        } catch {}
     }
 
     func select(format: UsageFormat) async {
@@ -403,10 +404,15 @@ final class UsageStatsModel {
         defer { isLoading = false }
         do {
             report = try await client.rankings(for: selection)
-        } catch {
+        } catch where !Self.isCancellation(error) {
             report = nil
             self.error = error
-        }
+        } catch {}
+    }
+
+    /// A load stopped because whatever asked for it went away, which isn't worth an error on screen.
+    private static func isCancellation(_ error: Error) -> Bool {
+        error is CancellationError || (error as? URLError)?.code == .cancelled
     }
 
     static func defaultRating(for format: UsageFormat) -> Int { UsageDefaults.defaultRating(for: format) }
