@@ -34,6 +34,7 @@ struct UsageDetailView: View {
                     }
                     if let pokemon {
                         NavigationLink(value: AppRoute.pokemon(pokemon.id)) { header }
+                            .entryActions(AppRoute.pokemon(pokemon.id))
                     } else {
                         header
                     }
@@ -107,6 +108,7 @@ struct UsageDetailView: View {
                                     PercentRow(label: teammate.displayName, percent: entry.percent, tint: .green)
                                 }
                             }
+                            .entryActions(AppRoute.usageDetail(selection, name: entry.key), pokemon: teammate.id)
                         } else {
                             PercentRow(label: entry.key, percent: entry.percent, tint: .green)
                         }
@@ -128,6 +130,7 @@ struct UsageDetailView: View {
                                     PercentRow(label: threat.displayName, percent: check.probability * 100, tint: .red)
                                 }
                             }
+                            .entryActions(AppRoute.usageDetail(selection, name: check.name), pokemon: threat.id)
                         } else {
                             PercentRow(label: check.name, percent: check.probability * 100, tint: .red)
                         }

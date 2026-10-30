@@ -5,9 +5,8 @@ import SwiftUI
 /// shows Home, Search and the tabs the user keeps in the bar. Screens requested by Spotlight or Siri
 /// open as a sheet on iOS and in their own window on the Mac.
 struct MainTabView: View {
-    #if os(macOS)
     @Environment(\.openWindow) private var openWindow
-    #endif
+    @Environment(\.supportsMultipleWindows) private var supportsMultipleWindows
     @Environment(\.database) private var database
     @AppStorage(TabBarPreferences.customizationKey) private var customization = TabViewCustomization()
     @AppStorage(TabBarPreferences.storageKey) private var storedVisible = TabBarPreferences.encode(AppTab.defaultVisible)
@@ -65,6 +64,16 @@ struct MainTabView: View {
                             }
                             .customizationID(tab.customizationID)
                             .defaultVisibility(isVisible(tab) ? .visible : .hidden, for: .tabBar)
+                            .contextMenu {
+                                // Scope Lens runs one live tracker, in its own windows.
+                                if supportsMultipleWindows, tab != .scopeLens {
+                                    Button("Open in New Window", systemImage: EntryActions.newWindowImage) {
+                                        openWindow(value: AppRoute.feature(tab))
+                                    }
+                                }
+                            }
+                            // Holding a dragged Pokémon over Face-Off opens it, to drop on a slot.
+                            .springLoadingBehavior(tab == .faceOff ? .enabled : .automatic)
                         }
                     }
                     .customizationID("neodex.section.\(group.id)")
@@ -87,18 +96,9 @@ struct MainTabView: View {
             openWindow(value: route)
         }
         #else
-        .sheet(item: $router.pendingRoute) { route in
-            NavigationStack {
-                AppRouteView(route: route)
-                    .appDestinations()
-                    .toolbar {
-                        ToolbarItem(placement: .confirmationAction) {
-                            Button("Done") { router.pendingRoute = nil }
-                        }
-                    }
-            }
-        }
+        .sheet(item: $router.pendingRoute) { RouteSheet(route: $0) }
         #endif
+        .routePresenter()
         .onChange(of: router.pendingPick, initial: true) { _, request in
             guard let request else { return }
             let species = database.species

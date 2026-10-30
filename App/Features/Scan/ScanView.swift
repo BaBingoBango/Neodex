@@ -177,6 +177,7 @@ struct ScanView: View {
                     Label("Open Entry", systemImage: "book.pages")
                         .frame(maxWidth: .infinity)
                 }
+                .entryActions(AppRoute.pokemon(pokemon.id))
                 .buttonStyle(.glassProminent)
                 Button("Scan Again", systemImage: "arrow.counterclockwise") { model.reset() }
                     .buttonStyle(.glass)
@@ -244,6 +245,7 @@ private struct CandidateRow: View {
                     .foregroundStyle(.tertiary)
             }
         }
+        .entryActions(AppRoute.pokemon(pokemon.id))
         .buttonStyle(.plain)
     }
 }

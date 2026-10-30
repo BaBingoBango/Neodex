@@ -170,6 +170,7 @@ struct PokemonDetailView: View {
             }
             .card()
         }
+        .entryActions(AppRoute.ability(id))
         .buttonStyle(.plain)
     }
 
@@ -217,6 +218,7 @@ struct PokemonDetailView: View {
                                 .background(form.id == pokemon.id ? pokemon.primaryType.color.opacity(0.18) : Color.clear,
                                             in: RoundedRectangle(cornerRadius: 12, style: .continuous))
                             }
+                            .entryActions(AppRoute.pokemon(form.id))
                             .buttonStyle(.plain)
                         }
                     }
@@ -325,6 +327,7 @@ struct PokemonDetailView: View {
                             MoveRow(move: learned.move, trailing: learned.levelUpLevel().map { $0 <= 1 ? "Start" : "Lv. \($0)" })
                                 .padding(.vertical, 8)
                         }
+                        .entryActions(AppRoute.move(learned.move.id))
                         .buttonStyle(.plain)
                         Divider()
                     }
@@ -687,6 +690,7 @@ struct EvolutionStage: View {
             .background(pokemon.id == highlighted ? pokemon.primaryType.color.opacity(0.18) : Color.clear,
                         in: RoundedRectangle(cornerRadius: 12, style: .continuous))
         }
+        .entryActions(AppRoute.pokemon(pokemon.id))
         .buttonStyle(.plain)
     }
 }

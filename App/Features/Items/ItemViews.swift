@@ -29,6 +29,7 @@ struct ItemListView: View {
                     NavigationLink(value: AppRoute.item(item.id)) {
                         ItemRow(item: item)
                     }
+                    .entryActions(AppRoute.item(item.id))
                 }
                 .listStyle(.plain)
             }
@@ -77,6 +78,7 @@ struct ItemListView: View {
                         .padding(.horizontal, 4)
                         .background(.background.secondary, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
                     }
+                    .entryActions(AppRoute.item(item.id))
                     .buttonStyle(.plain)
                     .accessibilityLabel(item.name)
                 }
@@ -177,6 +179,7 @@ struct ItemDetailView: View {
                 TypeBadgeRow(types: pokemon.types, size: .small)
             }
         }
+        .entryActions(AppRoute.pokemon(pokemon.id))
     }
 }
 

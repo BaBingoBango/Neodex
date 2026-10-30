@@ -50,6 +50,7 @@ struct MoveListContent: View {
             NavigationLink(value: AppRoute.move(move.id)) {
                 MoveRow(move: move, trailing: trailing(for: move))
             }
+            .entryActions(AppRoute.move(move.id))
         }
         .listStyle(.plain)
         .navigationTitle("Moves")

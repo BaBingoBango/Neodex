@@ -115,6 +115,7 @@ struct TypePokemonListView: View {
     var body: some View {
         List(database.pokemon(ofType: type)) { pokemon in
             NavigationLink(value: AppRoute.pokemon(pokemon.id)) { PokemonRow(pokemon: pokemon) }
+                .entryActions(AppRoute.pokemon(pokemon.id))
         }
         .listStyle(.plain)
         .navigationTitle("\(type.name) Pokémon")
@@ -129,6 +130,7 @@ struct TypeMoveListView: View {
     var body: some View {
         List(database.moves(ofType: type).filter { $0.kind == .standard }) { move in
             NavigationLink(value: AppRoute.move(move.id)) { MoveRow(move: move, trailing: move.tmLabel) }
+                .entryActions(AppRoute.move(move.id))
         }
         .listStyle(.plain)
         .navigationTitle("\(type.name) Moves")

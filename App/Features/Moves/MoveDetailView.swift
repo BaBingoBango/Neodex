@@ -185,6 +185,7 @@ struct MoveLearnersView: View {
                     TypeBadgeRow(types: entry.pokemon.types, size: .small)
                 }
             }
+            .entryActions(AppRoute.pokemon(entry.pokemon.id))
         }
         .listStyle(.plain)
         .searchable(text: $searchText, prompt: "Filter Pokémon")

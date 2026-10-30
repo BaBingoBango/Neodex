@@ -36,6 +36,7 @@ struct NatureListView: View {
                                 .foregroundStyle(nature.isNeutral ? .secondary : .primary)
                         }
                     }
+                    .entryActions(AppRoute.nature(nature.id))
                 }
             }
         }

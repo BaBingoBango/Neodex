@@ -30,6 +30,7 @@ struct DexbotSheet: View {
                     }
                 }
         }
+        .routePresenter()
         .presentationDetents([.medium, .large], selection: $detent)
         .presentationDragIndicator(.visible)
         #if os(macOS)

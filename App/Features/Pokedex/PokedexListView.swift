@@ -45,6 +45,7 @@ struct PokedexListContent: View {
                     NavigationLink(value: AppRoute.pokemon(pokemon.id)) {
                         PokemonRow(pokemon: pokemon, detail: sort.detail(for: pokemon, units: units))
                     }
+                    .entryActions(AppRoute.pokemon(pokemon.id))
                 }
                 .listStyle(.plain)
             case .grid:
@@ -62,6 +63,7 @@ struct PokedexListContent: View {
                                 .padding(6)
                                 .background(.background.secondary, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
                             }
+                            .entryActions(AppRoute.pokemon(pokemon.id))
                             .buttonStyle(.plain)
                             .accessibilityLabel(pokemon.displayName)
                         }

@@ -36,6 +36,7 @@ struct SearchView: View {
                 Section("Pokémon") {
                     ForEach(results.pokemon) { pokemon in
                         NavigationLink(value: AppRoute.pokemon(pokemon.id)) { PokemonRow(pokemon: pokemon) }
+                            .entryActions(AppRoute.pokemon(pokemon.id))
                     }
                 }
             }
@@ -43,6 +44,7 @@ struct SearchView: View {
                 Section("Moves") {
                     ForEach(results.moves) { move in
                         NavigationLink(value: AppRoute.move(move.id)) { MoveRow(move: move) }
+                            .entryActions(AppRoute.move(move.id))
                     }
                 }
             }
@@ -50,6 +52,7 @@ struct SearchView: View {
                 Section("Abilities") {
                     ForEach(results.abilities) { ability in
                         NavigationLink(value: AppRoute.ability(ability.id)) { AbilityRow(ability: ability) }
+                            .entryActions(AppRoute.ability(ability.id))
                     }
                 }
             }
@@ -57,6 +60,7 @@ struct SearchView: View {
                 Section("Items") {
                     ForEach(results.items) { item in
                         NavigationLink(value: AppRoute.item(item.id)) { ItemRow(item: item) }
+                            .entryActions(AppRoute.item(item.id))
                     }
                 }
             }
@@ -66,6 +70,7 @@ struct SearchView: View {
                         NavigationLink(value: AppRoute.nature(nature.id)) {
                             LabeledContent(nature.name, value: nature.summary)
                         }
+                        .entryActions(AppRoute.nature(nature.id))
                     }
                 }
             }

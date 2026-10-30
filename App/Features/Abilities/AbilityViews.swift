@@ -17,6 +17,7 @@ struct AbilityListView: View {
             NavigationLink(value: AppRoute.ability(ability.id)) {
                 AbilityRow(ability: ability)
             }
+            .entryActions(AppRoute.ability(ability.id))
         }
         .listStyle(.plain)
         .navigationTitle("Abilities")
@@ -90,6 +91,7 @@ struct AbilityDetailView: View {
                             TypeBadgeRow(types: pokemon.types, size: .small)
                         }
                     }
+                    .entryActions(AppRoute.pokemon(pokemon.id))
                 }
             }
         }

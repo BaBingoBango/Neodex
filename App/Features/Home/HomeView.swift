@@ -216,10 +216,12 @@ struct HomeView: View {
                         switch item {
                         case .pokemon(let pokemon):
                             NavigationLink(value: AppRoute.pokemon(pokemon.id)) { RecentPokemonCard(pokemon: pokemon) }
+                                .entryActions(AppRoute.pokemon(pokemon.id))
                                 .buttonStyle(.plain)
                                 .shelfTransition()
                         case .move(let move):
                             NavigationLink(value: AppRoute.move(move.id)) { RecentMoveCard(move: move) }
+                                .entryActions(AppRoute.move(move.id))
                                 .buttonStyle(.plain)
                                 .shelfTransition()
                         }
@@ -242,6 +244,7 @@ struct HomeView: View {
                 HStack(spacing: 10) {
                     ForEach(favoritePokemon) { pokemon in
                         NavigationLink(value: AppRoute.pokemon(pokemon.id)) { RecentPokemonCard(pokemon: pokemon) }
+                            .entryActions(AppRoute.pokemon(pokemon.id))
                             .buttonStyle(.plain)
                             .shelfTransition()
                     }
@@ -271,6 +274,7 @@ struct HomeView: View {
             HStack(spacing: 10) {
                 ForEach(pokemon) { entry in
                     NavigationLink(value: AppRoute.pokemon(entry.id)) { PokemonShelfCard(pokemon: entry) }
+                        .entryActions(AppRoute.pokemon(entry.id))
                         .buttonStyle(.plain)
                         .shelfTransition()
                 }
@@ -303,6 +307,7 @@ struct HomeView: View {
                 .padding()
                 .background(spotlight.primaryType.color.opacity(0.18), in: RoundedRectangle(cornerRadius: 20, style: .continuous))
             }
+            .entryActions(AppRoute.pokemon(spotlight.id))
             .buttonStyle(.plain)
             .padding(.horizontal)
         }
@@ -334,6 +339,7 @@ struct HomeView: View {
                             NavigationLink(value: AppRoute.usageDetail(popularSelection, name: entry.name)) {
                                 PokemonShelfCard(pokemon: entry, badge: "#\(index + 1)")
                             }
+                            .entryActions(AppRoute.usageDetail(popularSelection, name: entry.name), pokemon: entry.id)
                             .buttonStyle(.plain)
                             .shelfTransition()
                         }

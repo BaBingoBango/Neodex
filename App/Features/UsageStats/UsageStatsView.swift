@@ -27,9 +27,11 @@ struct UsageStatsView: View {
             if let report = model.report, let selection = model.selection {
                 Section {
                     ForEach(rows) { ranking in
+                        let pokemon = database.pokemon(named: ranking.name)
                         NavigationLink(value: AppRoute.usageDetail(selection, name: ranking.name)) {
-                            UsageRankingRow(ranking: ranking, pokemon: database.pokemon(named: ranking.name))
+                            UsageRankingRow(ranking: ranking, pokemon: pokemon)
                         }
+                        .entryActions(AppRoute.usageDetail(selection, name: ranking.name), pokemon: pokemon?.id)
                     }
                 } header: {
                     if let battles = report.totalBattles {

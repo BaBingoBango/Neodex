@@ -37,6 +37,7 @@ struct PokemonMovesView: View {
                     NavigationLink(value: AppRoute.move(learned.move.id)) {
                         MoveRow(move: learned.move, trailing: trailingLabel(for: learned))
                     }
+                    .entryActions(AppRoute.move(learned.move.id))
                 }
             } header: {
                 if let generation = rows.first?.sources.first?.generation {

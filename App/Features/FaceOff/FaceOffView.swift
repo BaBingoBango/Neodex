@@ -7,12 +7,15 @@ struct FaceOffView: View {
     @State private var left: Pokemon?
     @State private var right: Pokemon?
     @State private var picking: Side?
+    /// The slot a dragged Pokémon is over.
+    @State private var dropTarget: Side?
     @AppStorage(MeasurementUnits.storageKey) private var units = MeasurementUnits.localeDefault
 
     enum Side: Identifiable { case left, right; var id: Self { self } }
 
-    init(initial: Pokemon? = nil) {
+    init(initial: Pokemon? = nil, versus: Pokemon? = nil) {
         _left = State(initialValue: initial)
+        _right = State(initialValue: versus)
     }
 
     var body: some View {
@@ -78,8 +81,25 @@ struct FaceOffView: View {
             .padding(12)
             .background((pokemon?.primaryType.color ?? .gray).opacity(pokemon == nil ? 0.08 : 0.18),
                         in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+            .overlay {
+                if dropTarget == side {
+                    RoundedRectangle(cornerRadius: 20, style: .continuous).strokeBorder(.tint, lineWidth: 3)
+                }
+            }
         }
         .buttonStyle(.plain)
+        // A Pokémon dragged from anywhere in the app, or another window, fills the slot.
+        .dropDestination(for: URL.self) { urls, _ in
+            guard let pokemon = urls.lazy.compactMap(PokemonDrag.pokemonID(in:)).compactMap(database.pokemon(id:)).first else { return }
+            if side == .left { left = pokemon } else { right = pokemon }
+        }
+        .onDropSessionUpdated { session in
+            if session.phase == .entering || session.phase == .active {
+                dropTarget = side
+            } else if dropTarget == side {
+                dropTarget = nil
+            }
+        }
         .overlay(alignment: .topTrailing) {
             if pokemon != nil {
                 Button {

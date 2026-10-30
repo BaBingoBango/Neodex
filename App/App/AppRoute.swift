@@ -18,13 +18,16 @@ nonisolated enum AppRoute: Hashable, Codable, Identifiable {
     /// The Pokédex filtered to one type.
     case typePokemon(PokemonType)
     case pokemonMoves(Pokemon.ID)
-    case faceOff(Pokemon.ID?)
+    /// Face-Off, starting with one or both Pokémon chosen.
+    case faceOff(Pokemon.ID?, versus: Pokemon.ID? = nil)
     case usageDetail(UsageSelection, name: String)
     case damageCalculator(attacker: Pokemon.ID?, defender: Pokemon.ID?)
     case dexEntries(Pokemon.ID)
     case team(UUID)
     case usageStats(format: String?)
     case scan
+    /// A sidebar feature in a window of its own.
+    case feature(AppTab)
 
     var id: String { String(describing: self) }
 
@@ -83,8 +86,8 @@ struct AppRouteView: View {
             PokedexListContent(title: "\(type.name) Pokémon", filters: PokedexFilters(types: [type]))
         case .pokemonMoves(let id):
             if let pokemon = database.pokemon(id: id) { PokemonMovesView(pokemon: pokemon) } else { missing }
-        case .faceOff(let id):
-            FaceOffView(initial: id.flatMap(database.pokemon(id:)))
+        case .faceOff(let id, let versus):
+            FaceOffView(initial: id.flatMap(database.pokemon(id:)), versus: versus.flatMap(database.pokemon(id:)))
         case .usageDetail(let selection, let name):
             UsageDetailView(selection: selection, name: name)
         case .damageCalculator(let attacker, let defender):
@@ -100,6 +103,8 @@ struct AppRouteView: View {
                 }
         case .scan:
             ScanView()
+        case .feature(let tab):
+            tab.content
         }
     }
 
