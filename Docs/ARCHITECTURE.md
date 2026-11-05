@@ -164,7 +164,9 @@ Key decisions:
   `customizationID`s. iPad and the Mac show the grouped sidebar with the system's drag-to-customise
   editing; iPhone shows Home, Search and the tabs the user keeps visible. That set is stored by the app, since
   `TabViewCustomization` exposes tab-bar visibility read-only; Settings' toggles write it and reset
-  sidebar edits. Home's cards push the same feature content inside Home's own stack.
+  sidebar edits. Home's cards push the same feature content inside Home's own stack. Scrolling down
+  shrinks the iPhone bar to the current tab and a separate Search button, as in Music and News
+  (`tabBarMinimizeBehavior(.onScrollDown)`); on iOS 27 the search tab stands apart only while the bar is shrunk.
 - **One route type.** `AppRoute` enumerates every pushable screen; every `NavigationStack` registers
   `.appDestinations()`, so any view can link to any entity with `NavigationLink(value:)`. The same
   type doubles as the Spotlight deep-link identifier (`pokemon:bulbasaur`).

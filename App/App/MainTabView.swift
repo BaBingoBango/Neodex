@@ -85,6 +85,11 @@ struct MainTabView: View {
             }
         }
         .tabViewStyle(.sidebarAdaptable)
+        #if os(iOS)
+        // Scrolling down shrinks the iPhone bar to the current tab and a separate Search button,
+        // like Music and News.
+        .tabBarMinimizeBehavior(.onScrollDown)
+        #endif
         .tabViewCustomization($customization)
         .focusedSceneValue(\.tabSelection, $selection)
         #if os(macOS)
