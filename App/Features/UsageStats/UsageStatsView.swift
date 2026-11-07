@@ -126,6 +126,9 @@ struct UsageStatsView: View {
 struct UsageRankingRow: View {
     var ranking: UsageRanking
     var pokemon: Pokemon?
+    /// Room for a three-digit rank. Ranks start at the row's edge, in line with the battle count and
+    /// search field above; right-aligned in a wide column, the top ranks looked indented.
+    @ScaledMetric(relativeTo: .subheadline) private var rankWidth: CGFloat = 30
 
     var body: some View {
         HStack(spacing: 12) {
@@ -133,7 +136,7 @@ struct UsageRankingRow: View {
                 .font(.subheadline.weight(.bold))
                 .monospacedDigit()
                 .foregroundStyle(rankColor)
-                .frame(width: 34, alignment: .trailing)
+                .frame(minWidth: rankWidth, alignment: .leading)
             if let pokemon {
                 PokemonImage(pokemon: pokemon, kind: .sprite).frame(width: 44, height: 44)
             } else {
@@ -143,6 +146,8 @@ struct UsageRankingRow: View {
                 Text(pokemon?.displayName ?? ranking.name).font(.body.weight(.medium))
                 if let pokemon { TypeBadgeRow(types: pokemon.types, size: .small) }
             }
+            // Separators start under the name, as in the Pokédex.
+            .alignmentGuide(.listRowSeparatorLeading) { $0[.leading] }
             Spacer()
             Text(ranking.usagePercent.formatted(.number.precision(.fractionLength(2))) + "%")
                 .font(.subheadline.weight(.semibold))
