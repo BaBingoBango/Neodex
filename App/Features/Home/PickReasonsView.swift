@@ -1,8 +1,8 @@
 import NeodexKit
 import SwiftUI
 
-/// Why Home picked these Pokémon, and where that reasoning happens: the popover behind the info
-/// button next to Picks for You.
+/// Why Home picked these Pokémon, and where that reasoning happens, behind the info button next to
+/// Picks for You: a popover on iPad and the Mac, a half sheet on iPhone.
 struct PickReasonsView: View {
     @Environment(\.database) private var database
     var picks: [Pokemon]
@@ -13,6 +13,17 @@ struct PickReasonsView: View {
     }
 
     var body: some View {
+        // The reasons fit a popover as they are; a half sheet scrolls them when it's shorter.
+        ViewThatFits(in: .vertical) {
+            content
+            ScrollView { content }
+        }
+        .frame(maxHeight: .infinity, alignment: .top)
+        .presentationDetents([.medium, .large])
+        .presentationDragIndicator(.visible)
+    }
+
+    private var content: some View {
         VStack(alignment: .leading, spacing: 14) {
             Label("Why these picks", systemImage: "apple.intelligence")
                 .font(.headline)
@@ -60,7 +71,7 @@ struct PickReasonsView: View {
             }
         }
         .padding(18)
-        .frame(width: 320, alignment: .leading)
+        .frame(idealWidth: 320, maxWidth: .infinity, alignment: .leading)
     }
 
     /// Accurate either way: picks are computed from history kept on the device, and the reasons come

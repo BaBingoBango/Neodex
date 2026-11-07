@@ -93,9 +93,11 @@ struct HomeView: View {
                     .buttonStyle(.plain)
                     .foregroundStyle(.tint)
                     .accessibilityLabel("Why these picks")
+                    // A popover on iPad and the Mac; a half sheet on iPhone, where a popover ran out
+                    // of room and cut off the reasons.
                     .popover(isPresented: $showingPickReasons, arrowEdge: .top) {
                         PickReasonsView(picks: picks, explainer: explainer)
-                            .presentationCompactAdaptation(.popover)
+                            .presentationCompactAdaptation(.sheet)
                     }
                     Spacer(minLength: 0)
                 }
