@@ -69,7 +69,8 @@ struct AbilityDetailView: View {
             } header: {
                 Text(ability.name)
                     .font(.system(.largeTitle, design: .rounded).weight(.heavy))
-                    .foregroundStyle(.primary)
+                    // `Color.primary`: in a section header, the hierarchical `.primary` turns grey.
+                    .foregroundStyle(Color.primary)
                     .textCase(nil)
                     .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 12, trailing: 0))
             }
