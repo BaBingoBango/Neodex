@@ -117,6 +117,10 @@ struct ItemDetailView: View {
     @Environment(\.database) private var database
     var item: Item
 
+    /// The hero's height, measured, so the bar knows when the hero's name has scrolled under it.
+    @State private var heroHeight: CGFloat = 230
+    @State private var scrolledPastHero = false
+
     var body: some View {
         List {
             Section {
@@ -138,14 +142,10 @@ struct ItemDetailView: View {
                     LabeledContent("Type") { NavigationLink(value: AppRoute.type(type)) { TypeBadge(type: type, size: .small) }.buttonStyle(.plain) }
                 }
             } header: {
-                HStack(spacing: 14) {
-                    ItemImage(item: item).frame(width: 48, height: 48)
-                    Text(item.name)
-                        .font(.system(.largeTitle, design: .rounded).weight(.heavy))
-                        .foregroundStyle(.primary)
-                }
-                .textCase(nil)
-                .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 12, trailing: 0))
+                ItemHero(item: item)
+                    .onGeometryChange(for: CGFloat.self) { $0.size.height } action: { heroHeight = $0 }
+                    .textCase(nil)
+                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 16, trailing: 0))
             }
 
             if let species = item.megaEvolves, let pokemon = database.pokemon(named: species) {
@@ -165,8 +165,15 @@ struct ItemDetailView: View {
                 }
             }
         }
+        // The name is the hero's last few lines; once it passes under the bar, the bar takes the title.
+        .onScrollGeometryChange(for: Bool.self) { geometry in
+            geometry.contentOffset.y + geometry.contentInsets.top > heroHeight - 40
+        } action: { _, past in
+            withAnimation(.easeInOut(duration: 0.2)) { scrolledPastHero = past }
+        }
         .navigationTitle(item.name)
         .inlineNavigationTitle()
+        .heroNavigationBar(title: item.name, revealed: scrolledPastHero)
         .recordsHistory(.item, id: item.id)
     }
 
@@ -180,6 +187,125 @@ struct ItemDetailView: View {
             }
         }
         .entryActions(AppRoute.pokemon(pokemon.id))
+    }
+}
+
+/// The item page's hero: the sprite scaled up pixel for pixel over a glow in its own colour, and the
+/// name. Tapping the sprite makes it twitch, just for fun.
+private struct ItemHero: View {
+    var item: Item
+
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var twitches = 0
+
+    var body: some View {
+        VStack(spacing: 8) {
+            ZStack {
+                Circle()
+                    .fill(RadialGradient(colors: [ItemTint.color(for: item.id).opacity(0.55), .clear],
+                                         center: .center, startRadius: 0, endRadius: 100))
+                    .frame(width: 200, height: 200)
+                // Item icons are 24 pixels square, so 120 points is a whole number of screen pixels
+                // per icon pixel at every display scale, and the pixel art stays crisp.
+                ItemImage(item: item)
+                    .frame(width: 120, height: 120)
+                    .shadow(color: .black.opacity(0.18), radius: 8, y: 6)
+                    .keyframeAnimator(initialValue: Twitch(), trigger: twitches) { sprite, twitch in
+                        sprite
+                            .scaleEffect(twitch.stretch, anchor: .bottom)
+                            .rotationEffect(twitch.angle, anchor: .bottom)
+                            .offset(y: twitch.lift)
+                    } keyframes: { _ in
+                        KeyframeTrack(\.lift) {
+                            CubicKeyframe(-18, duration: 0.13)
+                            CubicKeyframe(0, duration: 0.13)
+                            CubicKeyframe(-5, duration: 0.08)
+                            CubicKeyframe(0, duration: 0.09)
+                        }
+                        KeyframeTrack(\.angle) {
+                            CubicKeyframe(.degrees(-11), duration: 0.07)
+                            CubicKeyframe(.degrees(9), duration: 0.09)
+                            CubicKeyframe(.degrees(-6), duration: 0.09)
+                            CubicKeyframe(.degrees(3), duration: 0.08)
+                            CubicKeyframe(.zero, duration: 0.1)
+                        }
+                        KeyframeTrack(\.stretch) {
+                            CubicKeyframe(CGSize(width: 0.92, height: 1.1), duration: 0.13)
+                            CubicKeyframe(CGSize(width: 1.12, height: 0.88), duration: 0.13)
+                            SpringKeyframe(CGSize(width: 1, height: 1), duration: 0.3, spring: .bouncy)
+                        }
+                    }
+            }
+            .frame(height: 170)
+            .contentShape(Circle())
+            .onTapGesture {
+                if !reduceMotion { twitches += 1 }
+            }
+            .sensoryFeedback(.impact(weight: .light), trigger: twitches)
+            .accessibilityElement()
+            .accessibilityLabel(item.name)
+            .accessibilityAddTraits(.isImage)
+            Text(item.name)
+                .font(.system(.largeTitle, design: .rounded).weight(.heavy))
+                // `Color.primary`, not `.primary`: a section header's grey style would make the
+                // hierarchical `.primary` grey too.
+                .foregroundStyle(Color.primary)
+                .multilineTextAlignment(.center)
+                .lineLimit(2)
+                .minimumScaleFactor(0.6)
+                .padding(.horizontal)
+        }
+        .frame(maxWidth: .infinity)
+    }
+
+    private struct Twitch {
+        var lift: CGFloat = 0
+        var angle: Angle = .zero
+        var stretch = CGSize(width: 1, height: 1)
+    }
+}
+
+/// An item's colour, from its icon: the average of its pixels, weighted toward the bright and
+/// colourful ones so outlines and grey metal don't wash it out.
+enum ItemTint {
+    private static var cache: [String: Color] = [:]
+
+    static func color(for itemID: String) -> Color {
+        if let cached = cache[itemID] { return cached }
+        let color = averageColor(itemID) ?? .gray
+        cache[itemID] = color
+        return color
+    }
+
+    private static func averageColor(_ itemID: String) -> Color? {
+        guard let image = BundledImageStore.shared.itemImage(itemID),
+              let space = CGColorSpace(name: CGColorSpace.sRGB) else { return nil }
+        let width = image.width, height = image.height
+        var pixels = [UInt8](repeating: 0, count: width * height * 4)
+        let drawn = pixels.withUnsafeMutableBytes { buffer -> Bool in
+            guard let context = CGContext(data: buffer.baseAddress, width: width, height: height, bitsPerComponent: 8,
+                                          bytesPerRow: width * 4, space: space,
+                                          bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue) else { return false }
+            context.draw(image, in: CGRect(x: 0, y: 0, width: width, height: height))
+            return true
+        }
+        guard drawn else { return nil }
+        var red = 0.0, green = 0.0, blue = 0.0, total = 0.0
+        for index in stride(from: 0, to: pixels.count, by: 4) {
+            let alpha = Double(pixels[index + 3]) / 255
+            guard alpha > 0.5 else { continue }
+            let r = Double(pixels[index]) / 255 / alpha
+            let g = Double(pixels[index + 1]) / 255 / alpha
+            let b = Double(pixels[index + 2]) / 255 / alpha
+            let brightest = max(r, g, b)
+            let weight = (brightest - min(r, g, b)) * brightest + 0.02
+            red += r * weight
+            green += g * weight
+            blue += b * weight
+            total += weight
+        }
+        guard total > 0 else { return nil }
+        return Color(red: red / total, green: green / total, blue: blue / total)
     }
 }
 

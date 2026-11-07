@@ -338,32 +338,6 @@ struct PokemonDetailView: View {
     }
 }
 
-// MARK: - Hero bar
-
-private extension View {
-    /// The Pokémon page's navigation bar: clear over the coloured header, with no background, scroll
-    /// edge effect or title, until the header scrolls away. The Mac keeps its window title throughout.
-    @ViewBuilder
-    func heroNavigationBar(title: String, revealed: Bool) -> some View {
-        #if os(iOS)
-        self
-            .toolbarBackgroundVisibility(revealed ? .automatic : .hidden, for: .navigationBar)
-            .scrollEdgeEffectHidden(!revealed, for: .top)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text(title)
-                        .font(.headline)
-                        .lineLimit(1)
-                        .opacity(revealed ? 1 : 0)
-                        .accessibilityHidden(!revealed)
-                }
-            }
-        #else
-        self
-        #endif
-    }
-}
-
 // MARK: - Header
 
 /// The hero header: a type-coloured gradient that stretches when you pull down, the dex number,

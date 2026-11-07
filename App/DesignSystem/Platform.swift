@@ -163,3 +163,28 @@ enum Clipboard {
         }
     }
 }
+
+extension View {
+    /// The bar for pages with a hero header (Pokémon, items): clear over the header, with no
+    /// background, scroll edge effect or title, until the header scrolls away. The Mac keeps its
+    /// window title throughout.
+    @ViewBuilder
+    func heroNavigationBar(title: String, revealed: Bool) -> some View {
+        #if os(iOS)
+        self
+            .toolbarBackgroundVisibility(revealed ? .automatic : .hidden, for: .navigationBar)
+            .scrollEdgeEffectHidden(!revealed, for: .top)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text(title)
+                        .font(.headline)
+                        .lineLimit(1)
+                        .opacity(revealed ? 1 : 0)
+                        .accessibilityHidden(!revealed)
+                }
+            }
+        #else
+        self
+        #endif
+    }
+}
