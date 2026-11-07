@@ -281,6 +281,7 @@ struct HomeView: View {
                         .shelfTransition()
                 }
             }
+            .fixedSize(horizontal: false, vertical: true)
             .padding(.horizontal)
         }
     }
@@ -346,6 +347,7 @@ struct HomeView: View {
                             .shelfTransition()
                         }
                     }
+                    .fixedSize(horizontal: false, vertical: true)
                     .padding(.horizontal)
                 }
             }
@@ -428,10 +430,13 @@ struct PokemonShelfCard: View {
                 .lineLimit(2)
                 .multilineTextAlignment(.center)
                 .frame(width: 110)
-            TypeBadgeRow(types: pokemon.types, size: .small)
+            TypeBadgeRow(types: pokemon.types, size: .compact, stacksWhenNarrow: true)
         }
         .padding(10)
         .frame(width: 130)
+        // Shelves size every card to the tallest, so stacked badges or a two-line name don't leave
+        // the row ragged.
+        .frame(maxHeight: .infinity, alignment: .top)
         .background(Color.secondaryGroupedBackground, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
         .overlay(alignment: .topLeading) {
             if let badge {
