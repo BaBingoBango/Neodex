@@ -7,6 +7,7 @@ import SwiftUI
 /// Shows a launch placeholder until the Pokédex has loaded, then the main interface.
 struct RootView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
         DatabaseLoadingView { database in
@@ -17,7 +18,7 @@ struct RootView: View {
                     DebugSeeds.seedSampleChatsIfRequested(context: modelContext)
                     #endif
                     await SpotlightIndexer.indexIfNeeded(database: database)
-                    NeodexShortcuts.updateAppShortcutParameters()
+                    ShortcutPokemon.refreshPhrases()
                     #if os(iOS)
                     // The Mac has no widgets yet, so it skips copying sprites into the group container.
                     await WidgetBridge.refresh(database: database)
@@ -31,6 +32,10 @@ struct RootView: View {
         #endif
         .onOpenURL { url in
             DeepLinkRouter.shared.open(url: url)
+        }
+        .onChange(of: scenePhase) { _, phase in
+            // Siri's phrases name your favorites; tell it about a new one on the way out.
+            if phase == .background { ShortcutPokemon.refreshPhrasesIfFavoritesChanged() }
         }
         .onContinueUserActivity(CSSearchableItemActionType) { activity in
             guard let identifier = activity.userInfo?[CSSearchableItemActivityIdentifier] as? String,

@@ -15,7 +15,9 @@ struct FeatureTests {
         #expect(first.id == "garchomp")
         #expect(String(localized: first.displayRepresentation.title) == "Garchomp")
         #expect(try await query.entities(for: ["pecharunt"]).map(\.name) == ["Pecharunt"])
-        #expect(try await query.suggestedEntities().count == 1025)
+        // Suggestions become Siri phrases, which the system caps at 1,000 per app: a short list, not the Pokédex.
+        let suggested = try await query.suggestedEntities()
+        #expect(!suggested.isEmpty && suggested.count <= ShortcutPokemon.limit)
     }
 
     @Test("Type matchups can be spoken for every species")

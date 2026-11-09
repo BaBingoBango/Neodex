@@ -31,7 +31,8 @@ nonisolated struct PokemonEntity: AppEntity {
     }
 }
 
-/// Finds Pokémon by ID, by typed or spoken name, and offers every species as a suggestion.
+/// Finds Pokémon by ID and by typed or spoken name, and suggests the few that Siri's phrases name
+/// (see `ShortcutPokemon`).
 nonisolated struct PokemonEntityQuery: EntityStringQuery {
     func entities(for identifiers: [String]) async throws -> [PokemonEntity] {
         let database = try await DatabaseProvider.shared.database()
@@ -45,6 +46,6 @@ nonisolated struct PokemonEntityQuery: EntityStringQuery {
 
     func suggestedEntities() async throws -> [PokemonEntity] {
         let database = try await DatabaseProvider.shared.database()
-        return database.species.map(PokemonEntity.init)
+        return await ShortcutPokemon.ids().compactMap { database.pokemon(id: $0) }.map(PokemonEntity.init)
     }
 }

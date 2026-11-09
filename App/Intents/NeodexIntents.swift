@@ -7,7 +7,7 @@ struct OpenPokemonIntent: OpenIntent {
     nonisolated static let title: LocalizedStringResource = "Open a Pokémon"
     nonisolated static let description = IntentDescription("Opens a Pokémon's Pokédex page in Neodex.")
 
-    @Parameter(title: "Pokémon")
+    @Parameter(title: "Pokémon", requestValueDialog: "Which Pokémon?")
     var target: PokemonEntity
 
     nonisolated static var parameterSummary: some ParameterSummary {
@@ -51,7 +51,7 @@ struct TypeMatchupIntent: AppIntent {
     nonisolated static let title: LocalizedStringResource = "Check Type Matchups"
     nonisolated static let description = IntentDescription("Tells you what a Pokémon is weak to and what it resists.")
 
-    @Parameter(title: "Pokémon")
+    @Parameter(title: "Pokémon", requestValueDialog: "Which Pokémon?")
     var pokemon: PokemonEntity
 
     nonisolated static var parameterSummary: some ParameterSummary {
@@ -71,7 +71,7 @@ struct DexEntryIntent: AppIntent {
     nonisolated static let title: LocalizedStringResource = "Read a Pokédex Entry"
     nonisolated static let description = IntentDescription("Reads a Pokémon's Pokédex entry.")
 
-    @Parameter(title: "Pokémon")
+    @Parameter(title: "Pokémon", requestValueDialog: "Which Pokémon?")
     var pokemon: PokemonEntity
 
     nonisolated static var parameterSummary: some ParameterSummary {
@@ -101,7 +101,8 @@ nonisolated enum NeodexIntentError: Error, CustomLocalizedStringResourceConverti
     }
 }
 
-/// Siri phrases that work out of the box; the Pokémon names come from `PokemonEntityQuery.suggestedEntities()`.
+/// Siri phrases that work out of the box. The Pokémon they can name are the short list in
+/// `ShortcutPokemon`; the phrases without a name have Siri ask which Pokémon, and any will do.
 nonisolated struct NeodexShortcuts: AppShortcutsProvider {
     static var appShortcuts: [AppShortcut] {
         AppShortcut(intent: AskNeodexIntent(), phrases: [
@@ -113,6 +114,7 @@ nonisolated struct NeodexShortcuts: AppShortcutsProvider {
             "Open \(\.$target) in \(.applicationName)",
             "Show \(\.$target) in \(.applicationName)",
             "Look up \(\.$target) in \(.applicationName)",
+            "Open a Pokémon in \(.applicationName)",
         ], shortTitle: "Open a Pokémon", systemImageName: "book")
         AppShortcut(intent: ScanPokemonIntent(), phrases: [
             "Scan a Pokémon in \(.applicationName)",
@@ -121,10 +123,12 @@ nonisolated struct NeodexShortcuts: AppShortcutsProvider {
         AppShortcut(intent: TypeMatchupIntent(), phrases: [
             "What is \(\.$pokemon) weak to in \(.applicationName)",
             "Check \(\.$pokemon) matchups in \(.applicationName)",
+            "Check type matchups in \(.applicationName)",
         ], shortTitle: "Type Matchups", systemImageName: "circle.grid.cross")
         AppShortcut(intent: DexEntryIntent(), phrases: [
             "Read the \(.applicationName) entry for \(\.$pokemon)",
             "Tell me about \(\.$pokemon) in \(.applicationName)",
+            "Read a Pokédex entry in \(.applicationName)",
         ], shortTitle: "Read an Entry", systemImageName: "text.book.closed")
         AppShortcut(intent: RandomPokemonIntent(), phrases: [
             "Random Pokémon in \(.applicationName)",
