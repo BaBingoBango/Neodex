@@ -61,6 +61,13 @@ A Swift package with a tested library (`NeodexDataCore`) and a thin command-line
 | [Pokémon Showdown](https://github.com/smogon/pokemon-showdown) (MIT) | Species, forms, stats, abilities, moves, items, learnsets, tiers, competitive descriptions, natures, type chart | Competitive-accurate, complete through the current generation (including Legends: Z-A Megas), same naming as the Showdown teambuilder |
 | [PokeAPI](https://github.com/PokeAPI/pokeapi) (BSD-3) | Pokédex entries, genus, catch rate, friendship, growth rate, egg cycles, EV yields, in-game move/ability/item descriptions, TM numbers, encounter locations, official artwork | The canonical in-game flavor that Showdown does not carry |
 
+Showdown marks everything that isn't in Scarlet and Violet with `isNonstandard`. The pipeline keeps
+`Past` (older generations), `LGPE`, `Unobtainable` and `Future`, and maps each to an `Availability`;
+only `CAP` (fan-made Create-A-Pokémon) and `Custom` entries are left out. `Future` is Showdown's
+name for what arrived after Scarlet and Violet: Legends: Z-A's 49 Mega Evolutions, their Mega Stones
+and Champions' new Abilities. Champions formats use all of them, so Smogon's usage statistics do too;
+while the pipeline skipped `Future`, those rows in Global Stats had no Pokémon to show.
+
 Showdown ships its data as JavaScript/TypeScript modules, so the tool evaluates them with
 JavaScriptCore and reads the resulting JSON through a loose `JSONValue` tree (the data is
 heterogeneous: a field may be a string in one entry and an array in another). PokeAPI's CSV dump is
@@ -75,7 +82,10 @@ Steps, in order:
    and natures in NeodexKit are checked against Showdown's data.
 4. Images: official artwork → 400 px HEIC (`-art`), 120 px HEIC thumbnail (`-thumb`), Showdown's
    96 px battle sprite (`-sprite`), and item icons sliced from Showdown's sprite sheet (`-item`).
-   Forms without their own artwork borrow their species' images (recorded in `imageID`).
+   Forms without their own artwork borrow their species' images (recorded in `imageID`). A Mega
+   Evolution that Showdown has no pixel sprite for yet (20 of Legends: Z-A's, in November 2026) gets
+   a 192 px copy of its own artwork as its sprite instead of its base form's; the app tells the two
+   apart by size (`CGImage.isPixelSprite`) and smooths the artwork.
 5. Write `Data/*.json`, a `pokemon-index.json` slice for widgets and complications, and a
    `manifest.json` with counts, timestamp and source attribution.
 
@@ -137,9 +147,9 @@ Mac/                       Mac-only files for the NeodexMac target: Info.plist (
 App/
 ├── NeodexApp.swift        @main; SwiftData container for teams and history (in the App Group)
 ├── App/                   AppModel (load state), DatabaseProvider, DeepLinkRouter, RootView,
-│                          MainTabView, AppTab, AppRoute
+│                          MainTabView, AppTab, AppRoute, QuickActions (Home Screen quick actions)
 ├── Intents/               App Intents: PokemonEntity + query, Open / Random / Type Matchup /
-│                          Dex Entry intents, and the App Shortcuts phrases
+│                          Dex Entry intents, the App Shortcuts phrases and the Pokémon they name
 ├── CarPlay/               CPTemplateApplicationScene delegate: Dexbot as a voice-based conversation app
 ├── Features/              One folder per feature: Home, Dexbot, Pokedex, Moves, Abilities, Items, Types,
 │                          Natures, Search, Teambuilder, DamageCalc, FaceOff, UsageStats, Settings,
@@ -189,6 +199,19 @@ Key decisions:
   Spotlight and Siri hand a screen to the app. `AppIntent`, `AppEntity` and `AppShortcutsProvider`
   require `Sendable`, so those types are `nonisolated` (or expose `nonisolated` static requirements)
   despite the module's main-actor default isolation.
+- **Siri knows a short list of Pokémon by name.** The system writes out one phrase for every pairing
+  of an App Shortcut phrase and a suggested entity, and allows an app 1,000. Suggesting all 1,025
+  species made 7,182 phrases, and the Shortcuts app lagged while searching actions. `ShortcutPokemon`
+  suggests at most 50: favorites, then Pokémon everyone knows. Browsing history stays out: Home says
+  it never leaves the device, and Apple may extract App Shortcuts data to improve the feature. The
+  phrases are rebuilt at launch, and on the way to the background when a favorite changed. Phrases
+  without a name ("Open a Pokémon in Neodex") have Siri ask which, and
+  `PokemonEntityQuery.entities(matching:)` finds any of them.
+- **Home Screen quick actions are links.** `UIApplicationShortcutItems` in Info.plist lists Search,
+  Ask Dexbot, Scan a Pokémon and Damage Calc, each with a `neodex://` URL as its type. SwiftUI has no
+  hook for them, so `AppDelegate` (through `UIApplicationDelegateAdaptor`) gives window scenes a
+  delegate, `QuickActionSceneDelegate`, that passes the chosen action's URL to `DeepLinkRouter`. It
+  returns CarPlay's scene configuration untouched.
 - **Media streams on demand.** Animated sprites and cries come from Pokémon Showdown the first time
   they are shown and are kept in `Caches/ShowdownMedia`. GIFs are decoded with ImageIO and driven by
   `TimelineView`; Reduce Motion shows a single frame; the bundled still sprite is the stand-in.
@@ -430,6 +453,10 @@ xcodebuild -scheme Neodex -destination 'platform=iOS Simulator,name=iPhone 17 Pr
   offline.
 - Animated sprites and cries are not bundled; they stream from Showdown and are cached after first
   use. A few of the newest forms have no animation yet and fall back to the still sprite.
+- Global Stats shows a question mark for the fan-made Pokémon of Create-A-Pokémon formats and for
+  Metronome Battle's joke entries (Pokéstar Studios props, MissingNo.), which the Pokédex leaves out.
+- The Teambuilder's item list offers only items from Scarlet and Violet, so a Mega Stone gets onto a
+  team by importing a Showdown set, not by picking it.
 - The damage calculator models the modifiers that decide almost every real calc, but not entry
   hazards, multi-turn moves, ally abilities or Dynamax.
 - The Mac app has no widgets or visual intelligence yet, and its camera scanner and voice mode have
