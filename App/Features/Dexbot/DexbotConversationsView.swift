@@ -76,9 +76,13 @@ struct DexbotConversationsView: View {
         }
         .navigationDestination(isPresented: $composing) { DexbotView() }
         .navigationDestination(item: $asked) { DexbotView(initialPrompt: $0.question) }
-        .confirmationDialog("Delete this chat?", isPresented: Binding(get: { pendingDelete != nil }, set: { if !$0 { pendingDelete = nil } }),
-                            titleVisibility: .visible, presenting: pendingDelete) { conversation in
+        // An alert that names the chat. A confirmation dialog attached to the list opens as a popover at
+        // the top of it on iPhone, pointing at some other chat.
+        .alert("Delete “\(pendingDelete?.title ?? "")”?",
+               isPresented: Binding(get: { pendingDelete != nil }, set: { if !$0 { pendingDelete = nil } }),
+               presenting: pendingDelete) { conversation in
             Button("Delete Chat", role: .destructive) { delete(conversation) }
+            Button("Cancel", role: .cancel) {}
         } message: { _ in
             Text("Dexbot will forget this conversation. This can't be undone.")
         }

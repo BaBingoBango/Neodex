@@ -20,6 +20,8 @@ struct TeamsContent: View {
     @Query(sort: \SavedTeam.updatedAt, order: .reverse) private var teams: [SavedTeam]
     @State private var showingImport = false
     @State private var newTeam: SavedTeam?
+    /// The team whose deletion is waiting to be confirmed.
+    @State private var teamToDelete: SavedTeam?
 
     var body: some View {
         List {
@@ -29,11 +31,27 @@ struct TeamsContent: View {
                 } label: {
                     TeamRow(team: team)
                 }
+                .swipeActions {
+                    // Tinted rather than given the destructive role, which takes the row away the
+                    // moment it's tapped, before the question has been answered.
+                    Button("Delete", systemImage: "trash") { teamToDelete = team }
+                        .tint(.red)
+                }
+                .contextMenu {
+                    Button("Delete Team", systemImage: "trash", role: .destructive) { teamToDelete = team }
+                }
             }
-            .onDelete(perform: delete)
         }
         .listStyle(.plain)
         .navigationTitle("Teams")
+        // An alert that names the team, as for a Dexbot chat. A confirmation dialog attached to the
+        // list opens as a popover at the top of it on iPhone, pointing at some other row.
+        .alert("Delete “\(teamToDelete?.name ?? "")”?", isPresented: confirmingDeletion, presenting: teamToDelete) { team in
+            Button("Delete Team", role: .destructive) { delete(team) }
+            Button("Cancel", role: .cancel) {}
+        } message: { _ in
+            Text("The team and its sets will be gone. This can't be undone.")
+        }
         .toolbar {
             ToolbarItemGroup(placement: .trailingBar) {
                 Button {
@@ -75,8 +93,14 @@ struct TeamsContent: View {
         }
     }
 
-    private func delete(at offsets: IndexSet) {
-        for index in offsets { modelContext.delete(teams[index]) }
+    private var confirmingDeletion: Binding<Bool> {
+        Binding { teamToDelete != nil } set: { shown in
+            if !shown { teamToDelete = nil }
+        }
+    }
+
+    private func delete(_ team: SavedTeam) {
+        modelContext.delete(team)
         WidgetCenter.shared.reloadTimelines(ofKind: WidgetKind.team)
     }
 }
