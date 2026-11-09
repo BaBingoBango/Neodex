@@ -13,6 +13,13 @@ enum PokemonImageKind: String {
     var fileExtension: String { self == .sprite ? "png" : "heic" }
 }
 
+extension CGImage {
+    /// Whether a sprite is Showdown's pixel art, 96 pixels square, which is drawn unsmoothed. A Mega
+    /// Evolution Showdown hasn't drawn yet has a larger, shrunken copy of its artwork instead, which
+    /// wants smoothing like any other artwork.
+    var isPixelSprite: Bool { width <= 96 }
+}
+
 /// Loads bundled Pokémon and item images, decoding them off the main actor and caching the result.
 /// Images are kept as `CGImage`, which both platforms draw directly.
 @MainActor
@@ -80,7 +87,7 @@ struct PokemonImage: View {
         Group {
             if let image {
                 Image(image, scale: 1, label: Text(pokemon.displayName))
-                    .interpolation(kind == .sprite ? .none : .high)
+                    .interpolation(kind == .sprite && image.isPixelSprite ? .none : .high)
                     .resizable()
                     .scaledToFit()
                     .accessibilityLabel(pokemon.displayName)

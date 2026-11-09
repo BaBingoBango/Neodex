@@ -192,5 +192,15 @@ struct ImageConverterTests {
         try ImageConverter.writePNG(try #require(image.cropping(to: CGRect(x: 0, y: 0, width: 24, height: 24))), to: png)
         let decodedPNG = try #require(ImageConverter.image(from: Data(contentsOf: png)))
         #expect(decodedPNG.width == 24 && decodedPNG.height == 24)
+
+        // An artwork stand-in for a sprite: the whole image, centred in a transparent square.
+        let standIn = directory.appendingPathComponent("stand-in.png")
+        try ImageConverter.writePNG(image, centeredInSquare: ImagePipeline.standInSpriteSize, to: standIn)
+        let square = try #require(ImageConverter.image(from: Data(contentsOf: standIn)))
+        #expect(square.width == 192 && square.height == 192)
+        let pixels = try #require(square.dataProvider?.data as Data?)
+        func alpha(x: Int, y: Int) -> UInt8 { pixels[y * square.bytesPerRow + x * 4 + 3] }
+        #expect(alpha(x: 96, y: 96) == 255)   // the 192 × 115 image crosses the middle
+        #expect(alpha(x: 96, y: 10) == 0)     // and leaves the top and bottom clear
     }
 }

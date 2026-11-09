@@ -48,7 +48,8 @@ struct ItemListView: View {
                         Text("All Categories").tag(ItemCategory?.none)
                         ForEach(ItemCategory.allCases) { Text($0.name).tag(ItemCategory?.some($0)) }
                     }
-                    Toggle("Include past-generation items", isOn: $includePast)
+                    // Past generations' items and, since Legends: Z-A, newer games' Mega Stones.
+                    Toggle("Include items from other games", isOn: $includePast)
                 } label: {
                     Label("Filter", systemImage: category != nil || !includePast ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle")
                 }
@@ -103,9 +104,10 @@ struct ItemRow: View {
             }
             Spacer()
             if item.availability != .current {
-                Image(systemName: "clock")
+                // The Mega Stones from Legends: Z-A are newer than the current games, not older.
+                Image(systemName: item.availability == .future ? "sparkles" : "clock")
                     .foregroundStyle(.tertiary)
-                    .accessibilityLabel("Past generations only")
+                    .accessibilityLabel(item.availability.name)
             }
         }
         .padding(.vertical, 2)

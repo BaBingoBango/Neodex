@@ -62,6 +62,7 @@ package enum Pipeline {
             log("  artwork files: \(report.artworkWritten), item icons: \(report.itemIcons)")
             if !report.dexSpriteFallbacks.isEmpty { log("  using Showdown dex sprite as artwork (\(report.dexSpriteFallbacks.count)): " + report.dexSpriteFallbacks.joined(separator: ", ")) }
             if !report.speciesFallbacks.isEmpty { log("  using base species artwork (\(report.speciesFallbacks.count)): " + report.speciesFallbacks.joined(separator: ", ")) }
+            if !report.artworkSprites.isEmpty { log("  no pixel sprite yet, using artwork as the sprite (\(report.artworkSprites.count)): " + report.artworkSprites.joined(separator: ", ")) }
             if !report.missingArtwork.isEmpty { log("  WARNING no artwork (\(report.missingArtwork.count)): " + report.missingArtwork.joined(separator: ", ")) }
             if !report.missingSprites.isEmpty { log("  WARNING no sprite (\(report.missingSprites.count)): " + report.missingSprites.joined(separator: ", ")) }
         }

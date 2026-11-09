@@ -292,7 +292,9 @@ struct SpriteImage: View {
 
     var body: some View {
         if let image = WidgetStore.sprite(imageID) {
-            Image(uiImage: image).interpolation(.none).resizable().scaledToFit().frame(width: size, height: size)
+            // Pixel sprites are 96 pixels square; anything larger is artwork standing in for one.
+            Image(uiImage: image).interpolation(image.size.width * image.scale <= 96 ? .none : .high)
+                .resizable().scaledToFit().frame(width: size, height: size)
         } else {
             Image(systemName: "questionmark.circle").resizable().scaledToFit().frame(width: size * 0.7, height: size * 0.7)
         }

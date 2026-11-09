@@ -39,12 +39,16 @@ struct DatasetBuilder {
 
     // MARK: - Shared helpers
 
-    private static let skippedNonstandard: Set<String> = ["CAP", "Custom", "Future"]
+    /// Fan-made Create-A-Pokémon entries and Showdown's joke entries stay out. "Future" stays in: it is
+    /// how Showdown marks what arrived after Scarlet and Violet (Legends: Z-A's Mega Evolutions, their
+    /// Mega Stones, Champions' new Abilities), all of which Champions formats and usage statistics use.
+    private static let skippedNonstandard: Set<String> = ["CAP", "Custom"]
 
     private func availability(for nonstandard: String?) -> Availability {
         switch nonstandard {
         case nil: .current
         case "Past": .past
+        case "Future": .future
         case "LGPE": .letsGo
         default: .unobtainable
         }
@@ -91,6 +95,7 @@ struct DatasetBuilder {
         "basculin-white-striped": "basculin-white-striped",
         "greninja-ash": "greninja-ash",
         "floette-eternal": "floette-eternal",
+        "meowstic-m-mega": "meowstic-male-mega", "meowstic-f-mega": "meowstic-female-mega",
         "eevee-starter": "eevee-starter", "pikachu-starter": "pikachu-starter",
         "dialga-origin": "dialga-origin", "palkia-origin": "palkia-origin",
         "ursaluna-bloodmoon": "ursaluna-bloodmoon",
@@ -213,7 +218,9 @@ struct DatasetBuilder {
 
             let dexEntries = buildDexEntries(for: raw.num)
             let locations = buildLocations(for: raw.num)
-            let effort = apiRow?.effort ?? pokeapi.defaultPokemonForSpecies[raw.num].flatMap { pokeapi.pokemon[$0] }?.effort
+            // PokeAPI lists no EV yield for Legends: Z-A's Mega Evolutions; like the older ones, they share their species'.
+            let speciesEffort = pokeapi.defaultPokemonForSpecies[raw.num].flatMap { pokeapi.pokemon[$0] }?.effort
+            let effort = [apiRow?.effort, speciesEffort].compactMap { $0 }.first { $0.total > 0 }
 
             let displayName = Self.displayName(raw: raw, species: species, apiRow: matchedOwnRow ? apiRow : nil,
                                                nameCounts: apiNameCounts[raw.num] ?? [:])
@@ -229,7 +236,7 @@ struct DatasetBuilder {
                 maleRatio: maleRatio, genus: species?.genus.isEmpty == false ? species?.genus : nil, color: e["color"]?.string,
                 eggGroups: e["eggGroups"]?.stringArray ?? [], catchRate: species?.captureRate, baseFriendship: species?.baseHappiness,
                 baseExperience: apiRow?.baseExperience, growthRate: species?.growthRate, hatchCycles: species?.hatchCounter,
-                evYield: (effort?.total ?? 0) > 0 ? effort : nil, dexEntries: dexEntries, evolvesFrom: evolvesFrom,
+                evYield: effort, dexEntries: dexEntries, evolvesFrom: evolvesFrom,
                 evolutions: evolutions, otherFormIDs: (siblings[raw.baseID ?? raw.id] ?? []).filter { $0 != raw.id },
                 cosmeticForms: e["cosmeticFormes"]?.stringArray ?? [], tier: e["tier"]?.string,
                 availability: availability(for: e["isNonstandard"]?.string), tags: tags, locations: locations, imageID: raw.id
@@ -257,7 +264,8 @@ struct DatasetBuilder {
 
     static func formKind(forForme forme: String) -> FormKind {
         let lower = forme.lowercased()
-        if lower.hasPrefix("mega") { return .mega }
+        // "Mega", "Mega-X", and the Mega Evolutions of forms: "F-Mega" (Meowstic), "Curly-Mega" (Tatsugiri).
+        if lower.hasPrefix("mega") || lower.hasSuffix("-mega") { return .mega }
         if lower == "gmax" || lower.hasSuffix("-gmax") { return .gigantamax }
         if lower.hasPrefix("primal") { return .primal }
         if lower.hasPrefix("alola") { return .alolan }
@@ -301,8 +309,10 @@ struct DatasetBuilder {
         if let apiName = apiRow?.pokemonName, !apiName.isEmpty {
             // Ogerpon's Terastallized masks have no PokeAPI rows and borrow their mask's, name included.
             if forme.hasSuffix("-Tera") { return "\(apiName) (Terastallized)" }
-            if (nameCounts[apiName] ?? 0) > 1, let formName = apiRow?.formName, !formName.isEmpty {
-                return "\(apiName) (\(formName))"
+            if (nameCounts[apiName] ?? 0) > 1 {
+                if let formName = apiRow?.formName, !formName.isEmpty, formName != apiName { return "\(apiName) (\(formName))" }
+                // Both Mega Meowstic are just "Mega Meowstic" in PokeAPI; Showdown's forme says which.
+                if let qualifier = megaFormQualifier(forme) { return "\(apiName) (\(qualifier))" }
             }
             return apiName
         }
@@ -317,6 +327,19 @@ struct DatasetBuilder {
         case "Paldea": return "Paldean \(speciesName)" + suffix(parts.dropFirst())
         default: return "\(speciesName) (\(parts.joined(separator: " ")))"
         }
+    }
+
+    /// What tells one Mega Evolution of a species from another when they share a name:
+    /// "F-Mega" → "Female", "Curly-Mega" → "Curly". `nil` for a plain "Mega".
+    static func megaFormQualifier(_ forme: String) -> String? {
+        let parts = forme.components(separatedBy: "-").filter { $0 != "Mega" }.map { part in
+            switch part {
+            case "M": "Male"
+            case "F": "Female"
+            default: part
+            }
+        }
+        return parts.isEmpty ? nil : parts.joined(separator: " ")
     }
 
     private static func suffix(_ parts: ArraySlice<String>) -> String {

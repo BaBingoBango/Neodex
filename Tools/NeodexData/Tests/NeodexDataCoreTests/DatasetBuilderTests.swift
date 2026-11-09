@@ -46,8 +46,18 @@ enum Fixture {
         "genderRatio":{"M":0.5,"F":0.5},"baseStats":{"hp":45,"atk":80,"def":50,"spa":75,"spd":60,"spe":120},
         "abilities":{"0":"Static"},"heightm":0.4,"weightkg":6,"color":"Yellow","eggGroups":["Undiscovered"],
         "isNonstandard":"LGPE","tier":"Illegal"},
-      "futuremon": {"num":2000,"name":"Futuremon","types":["Fire"],"baseStats":{"hp":1,"atk":1,"def":1,"spa":1,"spd":1,"spe":1},
-        "abilities":{"0":"Static"},"isNonstandard":"Future"},
+      "meowstic": {"num":678,"name":"Meowstic","baseForme":"M","types":["Psychic"],"gender":"M",
+        "baseStats":{"hp":74,"atk":48,"def":76,"spa":83,"spd":81,"spe":104},"abilities":{"0":"Keen Eye"},
+        "heightm":0.6,"weightkg":8.5,"color":"Blue","eggGroups":["Field"],"otherFormes":["Meowstic-M-Mega","Meowstic-F-Mega"],
+        "formeOrder":["Meowstic","Meowstic-M-Mega","Meowstic-F-Mega"],"tier":"ZU"},
+      "meowsticmmega": {"num":678,"name":"Meowstic-M-Mega","baseSpecies":"Meowstic","forme":"M-Mega","types":["Psychic"],"gender":"M",
+        "baseStats":{"hp":74,"atk":48,"def":76,"spa":143,"spd":101,"spe":124},"abilities":{"0":"Trace"},"heightm":0.8,"weightkg":10.1,
+        "color":"Blue","eggGroups":["Field"],"requiredItem":"Meowsticite","battleOnly":"Meowstic","gen":9,"tier":"Illegal",
+        "isNonstandard":"Future"},
+      "meowsticfmega": {"num":678,"name":"Meowstic-F-Mega","baseSpecies":"Meowstic","forme":"F-Mega","types":["Psychic"],"gender":"F",
+        "baseStats":{"hp":74,"atk":48,"def":76,"spa":143,"spd":101,"spe":124},"abilities":{"0":"Trace"},"heightm":0.8,"weightkg":10.1,
+        "color":"White","eggGroups":["Field"],"requiredItem":"Meowsticite","battleOnly":"Meowstic-F","gen":9,"tier":"Illegal",
+        "isNonstandard":"Future"},
       "syclant": {"num":-1,"name":"Syclant","types":["Ice","Bug"],"baseStats":{"hp":70,"atk":116,"def":70,"spa":114,"spd":64,"spe":121},
         "abilities":{"0":"Compound Eyes"},"isNonstandard":"CAP"}
     }
@@ -91,6 +101,10 @@ enum Fixture {
       "waterabsorb": {"name":"Water Absorb","rating":3.5,"num":11},
       "multitype": {"name":"Multitype","rating":4,"num":121},
       "static": {"name":"Static","rating":2,"num":9},
+      "keeneye": {"name":"Keen Eye","rating":0.5,"num":51},
+      "trace": {"name":"Trace","rating":2.5,"num":36},
+      "dragonize": {"name":"Dragonize","rating":4,"num":309,"isNonstandard":"Future"},
+      "mountaineer": {"name":"Mountaineer","rating":3,"num":-1,"isNonstandard":"CAP"},
       "noability": {"name":"No Ability","rating":0.1,"num":0}
     }
     """
@@ -101,6 +115,8 @@ enum Fixture {
       "wellspringmask": {"name":"Wellspring Mask","spritenum":759,"fling":{"basePower":60},"itemUser":["Ogerpon-Wellspring"],"num":2407,"gen":9},
       "flameplate": {"name":"Flame Plate","spritenum":146,"onPlate":"Fire","fling":{"basePower":90},"num":298,"gen":4},
       "venusaurite": {"name":"Venusaurite","spritenum":608,"megaStone":"Venusaur-Mega","itemUser":["Venusaur"],"num":659,"gen":6,"isNonstandard":"Past"},
+      "meowsticite": {"name":"Meowsticite","spritenum":506,"megaStone":{"Meowstic":"Meowstic-M-Mega","Meowstic-F":"Meowstic-F-Mega"},
+        "itemUser":["Meowstic","Meowstic-F"],"num":2643,"gen":9,"isNonstandard":"Future"},
       "sitrusberry": {"name":"Sitrus Berry","spritenum":448,"isBerry":true,"naturalGift":{"basePower":80,"type":"Psychic"},"num":158,"gen":3},
       "choicescarf": {"name":"Choice Scarf","spritenum":69,"fling":{"basePower":10},"isChoice":true,"num":287,"gen":4}
     }
@@ -109,7 +125,7 @@ enum Fixture {
     static let learnsets = """
     {
       "bulbasaur": {"learnset": {"flamethrower":["9M","8M","7M"],"swordsdance":["8M"],"unknownmove":["9L1"],"closecombat":["9L5","9L5","9M"]}},
-      "futuremon": {"learnset": {"flamethrower":["9M"]}}
+      "syclant": {"learnset": {"flamethrower":["9M"]}}
     }
     """
 
@@ -157,6 +173,8 @@ enum Fixture {
                           hatchCounter: 10, growthRate: "Slow", isLegendary: false, isMythical: false, name: "Ogerpon", genus: "Mask"),
             493: Species(id: 493, identifier: "arceus", generation: 4, evolvesFrom: nil, genderRate: -1, captureRate: 3, baseHappiness: 0,
                          hatchCounter: 120, growthRate: "Slow", isLegendary: false, isMythical: true, name: "Arceus", genus: "Alpha"),
+            678: Species(id: 678, identifier: "meowstic", generation: 6, evolvesFrom: nil, genderRate: 4, captureRate: 75, baseHappiness: 50,
+                         hatchCounter: 20, growthRate: "Medium Fast", isLegendary: false, isMythical: false, name: "Meowstic", genus: "Constraint"),
         ]
         let rows: [Int: Row] = [
             1: Row(id: 1, identifier: "bulbasaur", speciesID: 1, height: 7, weight: 69, baseExperience: 64, isDefault: true,
@@ -169,6 +187,13 @@ enum Fixture {
                        isDefault: false, effort: StatBlock(attack: 3), formName: "Wellspring Mask", pokemonName: "Wellspring Mask Ogerpon"),
             493: Row(id: 493, identifier: "arceus", speciesID: 493, height: 32, weight: 3200, baseExperience: 324, isDefault: true,
                      effort: StatBlock(hp: 3), formName: "Normal", pokemonName: "Arceus"),
+            678: Row(id: 678, identifier: "meowstic-male", speciesID: 678, height: 6, weight: 85, baseExperience: 163, isDefault: true,
+                     effort: StatBlock(speed: 2), formName: "Male", pokemonName: "Male Meowstic"),
+            // PokeAPI gives both Mega Meowstic the same names and no EV yield.
+            10314: Row(id: 10314, identifier: "meowstic-male-mega", speciesID: 678, height: 8, weight: 101, baseExperience: nil,
+                       isDefault: false, effort: .zero, formName: "Mega Meowstic", pokemonName: "Mega Meowstic"),
+            10326: Row(id: 10326, identifier: "meowstic-female-mega", speciesID: 678, height: 8, weight: 101, baseExperience: nil,
+                       isDefault: false, effort: .zero, formName: "Mega Meowstic", pokemonName: "Mega Meowstic"),
         ]
         let versions: [Int: PokeAPIData.Version] = [
             41: .init(id: 41, name: "Violet", order: 25, versionGroupID: 25),
@@ -269,11 +294,39 @@ struct DatasetBuilderTests {
         #expect(mega.requiredItems == ["venusaurite"])
     }
 
+    @Test("What Showdown calls Future, Legends: Z-A's Mega Evolutions and what came with them, is included")
+    func newerGames() throws {
+        let (dataset, _) = try Fixture.build()
+        let male = try #require(dataset.pokemon.first { $0.id == "meowsticmmega" })
+        let female = try #require(dataset.pokemon.first { $0.id == "meowsticfmega" })
+        // Usage statistics name it "Meowstic-F-Mega"; PokeAPI calls both "Mega Meowstic".
+        #expect(male.displayName == "Mega Meowstic (Male)")
+        #expect(female.displayName == "Mega Meowstic (Female)")
+        #expect(female.formKind == .mega)
+        #expect(female.availability == .future)
+        #expect(female.generation == 9)
+        #expect(female.isBattleOnly)
+        #expect(female.requiredItems == ["meowsticite"])
+        #expect(female.evYield == StatBlock(speed: 2))
+        #expect(dataset.pokeapiPokemonIDs["meowsticfmega"] == 10326)
+        #expect(dataset.spriteIDs["meowsticfmega"] == "meowstic-fmega")
+
+        let stone = try #require(dataset.items.first { $0.id == "meowsticite" })
+        #expect(stone.category == .megaStone)
+        #expect(stone.availability == .future)
+        #expect(stone.megaEvolves == "Meowstic")
+        #expect(dataset.abilities.first { $0.id == "dragonize" }?.availability == .future)
+
+        // Fan-made Create-A-Pokémon entries stay out.
+        #expect(!dataset.pokemon.contains { $0.id == "syclant" })
+        #expect(!dataset.abilities.contains { $0.id == "mountaineer" })
+    }
+
     @Test("Ordering follows dex number then Showdown's form order")
     func ordering() throws {
         let (dataset, _) = try Fixture.build()
-        #expect(dataset.pokemon.map(\.id) == ["bulbasaur", "ivysaur", "venusaurmega", "pikachustarter", "arceus", "arceusfire", "ogerpon",
-                                               "ogerponwellspring", "ogerponwellspringtera"])
+        #expect(dataset.pokemon.map(\.id) == ["bulbasaur", "ivysaur", "venusaurmega", "pikachustarter", "arceus", "arceusfire", "meowstic",
+                                               "meowsticmmega", "meowsticfmega", "ogerpon", "ogerponwellspring", "ogerponwellspringtera"])
         #expect(dataset.pokemon.first { $0.id == "pikachustarter" }?.availability == .letsGo)
         #expect(dataset.spriteIDs["ogerponwellspring"] == "ogerpon-wellspring")
     }
@@ -336,7 +389,7 @@ struct DatasetBuilderTests {
         #expect(learnset.moves["swordsdance"] == [LearnSource(code: "8M")!])
         #expect(learnset.moves["unknownmove"] == nil)
         #expect(learnset.moves["closecombat"] == [LearnSource(code: "9L5")!, LearnSource(code: "9M")!])
-        #expect(dataset.learnsets["futuremon"] == nil)
+        #expect(dataset.learnsets["syclant"] == nil)
     }
 
     @Test("Verification passes for a consistent dataset and fails on dangling references")

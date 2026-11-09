@@ -15,11 +15,15 @@ struct ImagePipeline {
     static let artworkSize = 400
     static let thumbnailSize = 120
     static let heicQuality = 0.8
+    /// Showdown's pixel sprites are 96 pixels square. An artwork stand-in is twice that, which is how
+    /// the app tells the two apart: pixel art is drawn unsmoothed, a stand-in smoothed.
+    static let standInSpriteSize = 192
 
     struct Report: Sendable {
         var artworkWritten = 0
         var dexSpriteFallbacks: [String] = []
         var speciesFallbacks: [String] = []
+        var artworkSprites: [String] = []
         var missingArtwork: [String] = []
         var missingSprites: [String] = []
         var itemIcons = 0
@@ -36,6 +40,7 @@ struct ImagePipeline {
         var wroteArtwork: Bool
         var artworkSource: String
         var wroteSprite: Bool
+        var spriteIsArtwork = false
     }
 
     var artworkDirectory: URL { imagesDirectory.appendingPathComponent("artwork") }
@@ -84,6 +89,7 @@ struct ImagePipeline {
                 report.missingArtwork.append(entry.name)
             }
             if !result.wroteSprite, pokemon[index].imageID == entry.id { report.missingSprites.append(entry.name) }
+            if result.spriteIsArtwork { report.artworkSprites.append(entry.name) }
         }
 
         report.itemIcons = try await writeItemIcons(items)
@@ -119,17 +125,28 @@ struct ImagePipeline {
         }
 
         var wroteSprite = fileManager.fileExists(atPath: spriteURL.path) && !force
+        var spriteIsArtwork = false
         if !wroteSprite {
-            let candidates = spriteID == speciesSpriteID ? [spriteID] : [spriteID, speciesSpriteID]
-            for candidate in candidates {
-                if let data = try await fetcher.data(for: ShowdownData.spriteBase.appendingPathComponent("gen5/\(candidate).png"), allowNotFound: true) {
-                    try data.write(to: spriteURL, options: .atomic)
-                    wroteSprite = true
-                    break
-                }
+            func pixelSprite(_ id: String) async throws -> Data? {
+                try await fetcher.data(for: ShowdownData.spriteBase.appendingPathComponent("gen5/\(id).png"), allowNotFound: true)
+            }
+            if let data = try await pixelSprite(spriteID) {
+                try data.write(to: spriteURL, options: .atomic)
+                wroteSprite = true
+            } else if entry.formKind == .mega, wroteArtwork,
+                      let artwork = (try? Data(contentsOf: artworkURL)).flatMap(ImageConverter.image(from:)) {
+                // A Mega Evolution never looks like its base form, so until Showdown has a pixel sprite
+                // for one, a small copy of its own artwork stands in instead of the base form's sprite.
+                try ImageConverter.writePNG(artwork, centeredInSquare: Self.standInSpriteSize, to: spriteURL)
+                wroteSprite = true
+                spriteIsArtwork = true
+            } else if spriteID != speciesSpriteID, let data = try await pixelSprite(speciesSpriteID) {
+                try data.write(to: spriteURL, options: .atomic)
+                wroteSprite = true
             }
         }
-        return Result(id: entry.id, wroteArtwork: wroteArtwork, artworkSource: artworkSource, wroteSprite: wroteSprite)
+        return Result(id: entry.id, wroteArtwork: wroteArtwork, artworkSource: artworkSource, wroteSprite: wroteSprite,
+                      spriteIsArtwork: spriteIsArtwork)
     }
 
     /// Slices Showdown's 16-column item sprite sheet (24×24 tiles) into one PNG per item.
@@ -180,6 +197,18 @@ enum ImageConverter {
 
     static func writePNG(_ image: CGImage, to url: URL) throws {
         try write(image, type: .png, options: [:], to: url)
+    }
+
+    /// Writes `image` scaled to fit a transparent square of `side` pixels, centred.
+    static func writePNG(_ image: CGImage, centeredInSquare side: Int, to url: URL) throws {
+        guard let fitted = resized(image, maxDimension: side), let colorSpace = CGColorSpace(name: CGColorSpace.sRGB),
+              let context = CGContext(data: nil, width: side, height: side, bitsPerComponent: 8, bytesPerRow: 0,
+                                      space: colorSpace, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue) else {
+            throw ConversionError.decodeFailed
+        }
+        context.draw(fitted, in: CGRect(x: (side - fitted.width) / 2, y: (side - fitted.height) / 2, width: fitted.width, height: fitted.height))
+        guard let square = context.makeImage() else { throw ConversionError.encodeFailed }
+        try writePNG(square, to: url)
     }
 
     private static func write(_ image: CGImage, type: UTType, options: [CFString: Any], to url: URL) throws {

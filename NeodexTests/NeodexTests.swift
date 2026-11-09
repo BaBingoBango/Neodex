@@ -1,3 +1,4 @@
+import CoreGraphics
 import Foundation
 import NeodexKit
 import Testing
@@ -37,6 +38,33 @@ struct BundledDataTests {
         let shared = Dictionary(grouping: database.pokemon, by: \.displayName).filter { $0.value.count > 1 }
         #expect(shared.isEmpty, "Shared names: \(shared.map { "\($0.key) (\($0.value.map(\.id).joined(separator: ", ")))" })")
         #expect(database.pokemon(id: "ogerponwellspringtera")?.displayName == "Wellspring Mask Ogerpon (Terastallized)")
+    }
+
+    @Test("Legends: Z-A's Mega Evolutions are in the Pokédex under the names Smogon's statistics use")
+    func newerMegaEvolutions() async throws {
+        let database = try await PokedexDatabase.load(from: .main)
+        // The rows that showed a question mark in Global Stats.
+        let names = ["Raichu-Mega-Y": "Mega Raichu Y", "Raichu-Mega-X": "Mega Raichu X", "Floette-Mega": "Mega Floette",
+                     "Staraptor-Mega": "Mega Staraptor", "Golisopod-Mega": "Mega Golisopod", "Garchomp-Mega-Z": "Mega Garchomp Z",
+                     "Froslass-Mega": "Mega Froslass", "Delphox-Mega": "Mega Delphox", "Dragonite-Mega": "Mega Dragonite",
+                     "Meowstic-F-Mega": "Mega Meowstic (Female)", "Tatsugiri-Curly-Mega": "Mega Curly Tatsugiri"]
+        for (usageName, displayName) in names {
+            let pokemon = try #require(database.pokemon(named: usageName), "\(usageName) is missing")
+            #expect(pokemon.displayName == displayName)
+            #expect(pokemon.formKind == .mega && pokemon.availability == .future)
+            for itemID in pokemon.requiredItems ?? [] {
+                #expect(database.item(id: itemID)?.category == .megaStone, "\(usageName) needs unknown stone \(itemID)")
+            }
+        }
+        #expect(database.pokemon.filter { $0.formKind == .mega }.count == 97)
+        #expect(database.ability(named: "Dragonize")?.availability == .future)
+
+        // Showdown has a pixel sprite for Mega Dragonite but not yet for Mega Raichu Y, whose artwork stands in.
+        func sprite(_ id: String) throws -> CGImage {
+            try #require(Bundle.main.url(forResource: "\(id)-sprite", withExtension: "png").flatMap(CGImage.decoded(contentsOf:)))
+        }
+        #expect(try sprite("dragonitemega").isPixelSprite)
+        #expect(try !sprite("raichumegay").isPixelSprite)
     }
 
     @Test("Showdown names round-trip through the database")

@@ -221,6 +221,8 @@ public enum Availability: String, Codable, Sendable, Hashable, CaseIterable {
     case current
     /// Existed in earlier generations but is not in the current games.
     case past
+    /// Arrived after the current generation's games, in Legends: Z-A or Champions, and is not in them.
+    case future
     /// Exclusive to Let's Go, Pikachu! / Let's Go, Eevee!.
     case letsGo
     /// Exists in the game data but cannot be legitimately obtained.
@@ -230,6 +232,7 @@ public enum Availability: String, Codable, Sendable, Hashable, CaseIterable {
         switch self {
         case .current: "Current games"
         case .past: "Past generations only"
+        case .future: "Newer games only"
         case .letsGo: "Let's Go only"
         case .unobtainable: "Unobtainable"
         }

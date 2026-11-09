@@ -27,6 +27,15 @@ nonisolated enum DexbotTools {
         return text
     }
 
+    /// What to say about something that isn't in the current games; `nil` when it is.
+    static func availabilityNote(_ availability: Availability, obtainable: Bool = false) -> String? {
+        switch availability {
+        case .current: nil
+        case .future: "From newer games (Legends: Z-A, Champions); not in Scarlet and Violet."
+        case .past, .letsGo, .unobtainable: "Not \(obtainable ? "obtainable" : "available") in the current games."
+        }
+    }
+
     static func stats(_ block: StatBlock) -> String {
         "HP \(block.hp), Atk \(block.attack), Def \(block.defense), SpA \(block.specialAttack), SpD \(block.specialDefense), Spe \(block.speed) (total \(block.total))"
     }
@@ -102,7 +111,7 @@ nonisolated struct MoveLookupTool: Tool {
         if move.priority != 0 { text += ", priority \(move.priority > 0 ? "+" : "")\(move.priority)" }
         text += ". " + (move.shortDescription ?? move.description ?? "")
         if let tm = move.tmLabel { text += " Available as \(tm)." }
-        if move.availability != .current { text += " Not available in the current games." }
+        if let note = DexbotTools.availabilityNote(move.availability) { text += " " + note }
         text += " Learned by \(learners.count) Pokémon"
         if !learners.isEmpty { text += ", e.g. " + learners.prefix(6).map(\.pokemon.displayName).joined(separator: ", ") }
         return text + "."
@@ -150,7 +159,7 @@ nonisolated struct ItemLookupTool: Tool {
             return DexbotTools.notFound("item", arguments.item, suggestions: database.search(arguments.item, limitPerCategory: 4).items.map(\.name))
         }
         var text = "\(item.name) (\(item.category.name)): \(item.shortDescription ?? item.description ?? "")"
-        if item.availability != .current { text += " Not available in the current games." }
+        if let note = DexbotTools.availabilityNote(item.availability) { text += " " + note }
         return text
     }
 }
@@ -417,7 +426,7 @@ extension PokedexDatabase {
         lines.append("Base stats: \(DexbotTools.stats(pokemon.baseStats)).")
         lines.append("Matchups: \(TypeMatchupSummary.compact(profile: pokemon.defensiveProfile))")
         if let tier = pokemon.tier { lines.append("Smogon Gen 9 tier: \(tier).") }
-        if pokemon.availability != .current { lines.append("Not obtainable in the current games.") }
+        if let note = DexbotTools.availabilityNote(pokemon.availability, obtainable: true) { lines.append(note) }
         let family = evolutionFamily(of: pokemon)
         if family.count > 1 {
             let chain = family.map { stage -> String in
