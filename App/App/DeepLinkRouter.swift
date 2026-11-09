@@ -1,7 +1,8 @@
 import Foundation
 import Observation
 
-/// Screens requested from outside the app — Spotlight, Siri, widgets and controls — presented once data is ready.
+/// Screens requested from outside the app — Spotlight, Siri, widgets, controls and Home Screen quick
+/// actions — presented once data is ready.
 @Observable
 @MainActor
 final class DeepLinkRouter {
@@ -18,6 +19,10 @@ final class DeepLinkRouter {
     var pendingTab: AppTab?
     /// A question for the Dexbot tab to open as a new chat.
     var pendingDexbotQuestion: String?
+    /// A new Dexbot chat to show over whatever is on screen, on iPhone and iPad.
+    var pendingDexbotStart: DexbotView.Start?
+    /// Set when Search should open with its field ready to type in.
+    var wantsSearchFocus = false
 
     func open(_ route: AppRoute) {
         pendingRoute = route
@@ -29,11 +34,26 @@ final class DeepLinkRouter {
         pendingDexbotQuestion = question
     }
 
-    /// Handles `neodex://` links from widgets and controls.
+    /// Starts a new Dexbot chat, ready to type: in a sheet on iPhone and iPad, where Dexbot may not
+    /// be in the tab bar, and in Dexbot's own section on the Mac.
+    func startDexbotChat() {
+        #if os(macOS)
+        pendingTab = .dexbot
+        #else
+        pendingDexbotStart = .typing
+        #endif
+    }
+
+    /// Handles `neodex://` links from widgets, controls and Home Screen quick actions.
     func open(url: URL) {
         guard url.scheme == SharedContainer.urlScheme else { return }
         let argument = url.pathComponents.dropFirst().first
         switch url.host() {
+        case "search":
+            pendingTab = .search
+            wantsSearchFocus = true
+        case "dexbot":
+            startDexbotChat()
         case "pokemon":
             if let argument { pendingRoute = .pokemon(argument) }
         case "team":

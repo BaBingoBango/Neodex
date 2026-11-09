@@ -5,6 +5,9 @@ import SwiftUI
 struct SearchView: View {
     @Environment(\.database) private var database
     @State private var searchText = ""
+    @State private var router = DeepLinkRouter.shared
+    @State private var path = NavigationPath()
+    @FocusState private var searchFocused: Bool
 
     private var results: PokedexDatabase.SearchResults {
         database.search(query, limitPerCategory: 30)
@@ -13,7 +16,7 @@ struct SearchView: View {
     private var query: String { searchText.trimmingCharacters(in: .whitespaces) }
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             Group {
                 if query.isEmpty {
                     SearchBrowseView()
@@ -27,6 +30,19 @@ struct SearchView: View {
             .navigationDestination(for: AppTab.self) { $0.content }
             .appDestinations()
             .searchable(text: $searchText, placement: .pinned, prompt: "Pokémon, moves, abilities, items…")
+            .searchFocused($searchFocused)
+        }
+        // The Search quick action on the Home Screen opens this tab ready to type in, whatever entry
+        // was left open in it.
+        .onChange(of: router.wantsSearchFocus, initial: true) { _, wanted in
+            guard wanted else { return }
+            router.wantsSearchFocus = false
+            path = NavigationPath()
+            Task {
+                // The field can't take focus until the tab has finished switching in.
+                try? await Task.sleep(for: .milliseconds(400))
+                searchFocused = true
+            }
         }
     }
 

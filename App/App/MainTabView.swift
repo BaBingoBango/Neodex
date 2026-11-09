@@ -102,6 +102,7 @@ struct MainTabView: View {
         }
         #else
         .sheet(item: $router.pendingRoute) { RouteSheet(route: $0) }
+        .sheet(item: $router.pendingDexbotStart) { DexbotSheet(start: $0) }
         #endif
         .routePresenter()
         .onChange(of: router.pendingPick, initial: true) { _, request in
@@ -115,7 +116,8 @@ struct MainTabView: View {
             router.pendingPick = nil
             if let pick { router.pendingRoute = .pokemon(pick.id) }
         }
-        .onChange(of: router.pendingTab) { _, tab in
+        // `initial`: a quick action that launched the app asked for its tab before this view existed.
+        .onChange(of: router.pendingTab, initial: true) { _, tab in
             guard let tab else { return }
             router.pendingTab = nil
             selection = tab

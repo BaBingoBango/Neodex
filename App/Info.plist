@@ -19,6 +19,41 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>neodex://search</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Search</string>
+			<key>UIApplicationShortcutItemIconSymbolName</key>
+			<string>magnifyingglass</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>neodex://dexbot</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Ask Dexbot</string>
+			<key>UIApplicationShortcutItemIconSymbolName</key>
+			<string>bubble.left.and.text.bubble.right</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>neodex://scan</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Scan a Pokémon</string>
+			<key>UIApplicationShortcutItemIconSymbolName</key>
+			<string>camera.viewfinder</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>neodex://calc</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Damage Calc</string>
+			<key>UIApplicationShortcutItemIconSymbolName</key>
+			<string>function</string>
+		</dict>
+	</array>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

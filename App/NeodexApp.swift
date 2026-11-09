@@ -5,6 +5,9 @@ import SwiftUI
 /// Neodex — an offline Pokédex with Pokémon Showdown teambuilding.
 @main
 struct NeodexApp: App {
+    #if os(iOS)
+    @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
+    #endif
     @State private var appModel = AppModel()
     private let container = PersistenceContainer.shared
 
