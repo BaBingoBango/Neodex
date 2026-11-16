@@ -380,7 +380,7 @@ struct PokemonHeader: View {
                         .frame(width: 280, height: 280)
                     Group {
                         if showsSprite {
-                            AnimatedSpriteView(pokemon: pokemon, shiny: shiny, maxHeight: 200)
+                            AnimatedSpriteView(pokemon: pokemon, shiny: shiny, maxHeight: 200, loadingStandIn: .artwork)
                         } else {
                             PokemonImage(pokemon: pokemon, kind: .artwork)
                         }

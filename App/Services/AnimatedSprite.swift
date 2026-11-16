@@ -64,6 +64,11 @@ final class SpriteMediaStore {
     private var cache: [String: SpriteMedia] = [:]
     private var inFlight: [String: Task<SpriteMedia, Never>] = [:]
 
+    /// What was loaded for the Pokémon earlier, if anything, without waiting.
+    func cached(for pokemon: Pokemon, shiny: Bool) -> SpriteMedia? {
+        cache["\(pokemon.showdownSpriteID)|\(shiny)"]
+    }
+
     func sprite(for pokemon: Pokemon, shiny: Bool) async -> SpriteMedia {
         let stem = pokemon.showdownSpriteID
         let key = "\(stem)|\(shiny)"
@@ -91,16 +96,38 @@ final class SpriteMediaStore {
     }
 }
 
-/// Showdown's animated battle sprite for a Pokémon, with the bundled still sprite as the stand-in
-/// while it loads or when Showdown has no animation. Honours Reduce Motion by showing one frame.
+/// Showdown's animated battle sprite for a Pokémon, with the bundled still sprite in its place when
+/// Showdown has no animation. Honours Reduce Motion by showing one frame.
 struct AnimatedSpriteView: View {
+    /// What shows while the animation loads.
+    enum LoadingStandIn {
+        /// The bundled still sprite, where that's what showed before.
+        case stillSprite
+        /// The artwork, on the Pokémon page: it showed a moment ago, and the still sprite would flash
+        /// between it and the animation.
+        case artwork
+    }
+
     var pokemon: Pokemon
-    var shiny: Bool = false
-    var maxHeight: CGFloat = 200
+    var shiny: Bool
+    var maxHeight: CGFloat
+    var loadingStandIn: LoadingStandIn
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var media: SpriteMedia?
-    @State private var mediaKey = ""
+    @State private var mediaKey: String
+    @State private var showsSpinner = false
+
+    init(pokemon: Pokemon, shiny: Bool = false, maxHeight: CGFloat = 200, loadingStandIn: LoadingStandIn = .stillSprite) {
+        self.pokemon = pokemon
+        self.shiny = shiny
+        self.maxHeight = maxHeight
+        self.loadingStandIn = loadingStandIn
+        // An animation loaded earlier shows straight away, without a frame of the stand-in first.
+        let cached = SpriteMediaStore.shared.cached(for: pokemon, shiny: shiny)
+        _media = State(initialValue: cached)
+        _mediaKey = State(initialValue: cached == nil ? "" : "\(pokemon.id)|\(shiny)")
+    }
 
     var body: some View {
         Group {
@@ -115,25 +142,45 @@ struct AnimatedSpriteView: View {
                 }
             case .still(let image):
                 frame(image, size: CGSize(width: image.width, height: image.height))
-            case .unavailable, nil:
-                PokemonImage(pokemon: pokemon, kind: .sprite)
-                    .frame(width: 96 * scale(for: CGSize(width: 96, height: 96)), height: 96 * scale(for: CGSize(width: 96, height: 96)))
-                    .overlay {
-                        if media == nil { ProgressView().tint(.white) }
+            case .unavailable:
+                stillSprite
+            case nil:
+                Group {
+                    switch loadingStandIn {
+                    case .stillSprite: stillSprite
+                    case .artwork: PokemonImage(pokemon: pokemon, kind: .artwork)
                     }
+                }
+                .overlay {
+                    if showsSpinner { ProgressView().tint(.white) }
+                }
             }
         }
         .animation(.easeInOut(duration: 0.3), value: mediaKey)
         .accessibilityLabel(shiny ? "Shiny \(pokemon.displayName)" : pokemon.displayName)
         .task(id: "\(pokemon.id)|\(shiny)") {
+            let key = "\(pokemon.id)|\(shiny)"
+            guard mediaKey != key else { return }
             // Keep showing the previous variant while the next one loads, then crossfade.
             if mediaKey.hasPrefix(pokemon.id + "|") == false { media = nil }
+            // A spinner only for a slow download, so a quick load doesn't flash one.
+            let spinner = Task {
+                try? await Task.sleep(for: .milliseconds(400))
+                if !Task.isCancelled, media == nil { showsSpinner = true }
+            }
             let loaded = await SpriteMediaStore.shared.sprite(for: pokemon, shiny: shiny)
+            spinner.cancel()
+            showsSpinner = false
             if !Task.isCancelled {
                 media = loaded
-                mediaKey = "\(pokemon.id)|\(shiny)"
+                mediaKey = key
             }
         }
+    }
+
+    private var stillSprite: some View {
+        PokemonImage(pokemon: pokemon, kind: .sprite)
+            .frame(width: 96 * scale(for: CGSize(width: 96, height: 96)), height: 96 * scale(for: CGSize(width: 96, height: 96)))
     }
 
     private func scale(for size: CGSize) -> CGFloat {
