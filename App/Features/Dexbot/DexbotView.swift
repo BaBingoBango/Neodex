@@ -249,11 +249,11 @@ struct DexbotView: View {
         ToolbarItem(placement: .trailingBar) {
             Menu {
                 Picker("Answers From", systemImage: "cpu", selection: Binding(get: { model.backend }, set: { model.preferredBackend = $0 })) {
-                    if DexbotEngine.isOnDeviceAvailable {
-                        Label("Apple Intelligence", systemImage: "apple.intelligence").tag(DexbotEngine.Backend.onDevice)
-                    }
                     if model.isPrivateCloudAvailable {
                         Label("Private Cloud Compute", systemImage: "icloud").tag(DexbotEngine.Backend.privateCloud)
+                    }
+                    if DexbotEngine.isOnDeviceAvailable {
+                        Label("On This Device", systemImage: "apple.intelligence").tag(DexbotEngine.Backend.onDevice)
                     }
                     if DexbotClaude.hasKey {
                         Label(DexbotClaude.model.name, systemImage: "sparkle").tag(DexbotEngine.Backend.claude)

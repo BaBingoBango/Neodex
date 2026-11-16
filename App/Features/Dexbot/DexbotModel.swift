@@ -169,7 +169,7 @@ final class DexbotModel {
     nonisolated static func answerText(_ reply: String, note: String?, teams: [UUID], answeredBy backend: DexbotEngine.Backend) -> String {
         var notes = note.map { [$0] } ?? []
         if !teams.isEmpty, backend == .onDevice {
-            notes.append("Built with Apple's small on-device model, so some picks may be odd. For a stronger team, try Claude in [Dexbot Settings](\(settingsURL.absoluteString)).")
+            notes.append("Built with Apple's small on-device model, so some picks may be odd. For a stronger team, try Private Cloud Compute or Claude in [Dexbot Settings](\(settingsURL.absoluteString)).")
         }
         var text = reply
         for note in notes { text += "\n\n_\(note)_" }

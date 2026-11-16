@@ -26,10 +26,10 @@ nonisolated enum DexbotEngine {
          The user is listening, not reading: answer in one or two plain sentences with no Markdown, lists or symbols.
         """
 
-    /// The model the user picked, Apple Intelligence on device unless they chose another. Dexbot uses it
-    /// whenever it can run (`activeBackend`).
+    /// The model the user picked: Apple's larger Private Cloud Compute model unless they chose another.
+    /// Dexbot uses it whenever it can run (`activeBackend`), and the on-device model otherwise.
     static var preferredBackend: Backend {
-        get { UserDefaults.standard.string(forKey: backendKey).flatMap(Backend.init(rawValue:)) ?? .onDevice }
+        get { UserDefaults.standard.string(forKey: backendKey).flatMap(Backend.init(rawValue:)) ?? .privateCloud }
         set { UserDefaults.standard.set(newValue.rawValue, forKey: backendKey) }
     }
 
@@ -40,17 +40,26 @@ nonisolated enum DexbotEngine {
 
         var name: String {
             switch self {
-            case .onDevice: "On-Device"
+            case .onDevice: "On This Device"
             case .privateCloud: "Private Cloud Compute"
             case .claude: "Claude"
             }
         }
+
+        /// What choosing it means, under its name in Dexbot's settings.
+        var summary: String {
+            switch self {
+            case .onDevice: "Apple Intelligence's model on this device. Private, free and works offline."
+            case .privateCloud: "Apple Intelligence's larger model, run privately on Apple's servers. Free, with a daily limit."
+            case .claude: "Anthropic's models, with your own API key."
+            }
+        }
     }
 
-    /// Why Dexbot can't run here, in the user's words. Claude needs only a key, so it can stand in
-    /// where Apple Intelligence isn't available.
+    /// Why Dexbot can't run here, in the user's words. Claude needs only a key, and Private Cloud Compute
+    /// can answer while the on-device model is still downloading, so either stands in for it.
     static var unavailableReason: String? {
-        if activeBackend == .claude { return nil }
+        if activeBackend != .onDevice { return nil }
         switch SystemLanguageModel.default.availability {
         case .available: return nil
         case .unavailable(.deviceNotEligible): return "Dexbot needs a device that supports Apple Intelligence."

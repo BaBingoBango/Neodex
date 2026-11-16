@@ -1,8 +1,12 @@
 import SwiftUI
 
-/// Where Dexbot's answers come from: Apple Intelligence, or Claude with the user's own Anthropic API key.
+/// Where Dexbot's answers come from: Apple Intelligence on this device or in Private Cloud Compute, or Claude
+/// with the user's own Anthropic API key.
 struct DexbotSettingsView: View {
-    @State private var preferred = DexbotEngine.preferredBackend
+    /// Private Cloud Compute is the default, but where it isn't available the choice shows as this device,
+    /// which is what answers there.
+    @State private var preferred = DexbotEngine.preferredBackend == .privateCloud && !DexbotEngine.isPrivateCloudAvailable
+        ? .onDevice : DexbotEngine.preferredBackend
     @State private var claudeModel = DexbotClaude.model
     @State private var savedKeyHint = DexbotClaude.APIKey.hint
     @FocusState private var keyFieldFocused: Bool
@@ -11,11 +15,11 @@ struct DexbotSettingsView: View {
         Form {
             Section {
                 Picker("Answers From", selection: $preferred) {
-                    Text("Apple Intelligence").tag(DexbotEngine.Backend.onDevice)
                     if DexbotEngine.isPrivateCloudAvailable {
-                        Text("Private Cloud Compute").tag(DexbotEngine.Backend.privateCloud)
+                        backendRow(.privateCloud)
                     }
-                    Text("Claude").tag(DexbotEngine.Backend.claude)
+                    backendRow(.onDevice)
+                    backendRow(.claude)
                 }
                 .pickerStyle(.inline)
                 .labelsHidden()
@@ -28,7 +32,7 @@ struct DexbotSettingsView: View {
             ClaudeKeySection(savedKeyHint: $savedKeyHint, model: claudeModel, focus: $keyFieldFocused,
                              usage: "Your questions and Dexbot's lookups go from this device straight to Anthropic, billed to your Anthropic account.",
                              onSave: { preferred = .claude },
-                             onRemove: { if preferred == .claude { preferred = .onDevice } })
+                             onRemove: { if preferred == .claude { preferred = DexbotEngine.isPrivateCloudAvailable ? .privateCloud : .onDevice } })
 
             Section("Claude Model") {
                 Picker("Model", selection: $claudeModel) {
@@ -58,16 +62,26 @@ struct DexbotSettingsView: View {
         }
     }
 
+    private func backendRow(_ backend: DexbotEngine.Backend) -> some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text(backend.name)
+            Text(backend.summary)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+        .tag(backend)
+    }
+
     private var sourceFooter: String {
         switch preferred {
         case .onDevice:
-            "Private and free: Apple Intelligence answers on this device."
+            "Apple Intelligence answers on this device, so your questions never leave it."
         case .privateCloud:
-            "Apple's Private Cloud Compute answers when it's available, and this device otherwise."
+            "Apple's larger model answers from Private Cloud Compute, which Apple says uses your questions only to answer them and never stores them. If it can't be reached, or you've used today's requests, this device answers instead."
         case .claude where savedKeyHint == nil:
-            "Add your Anthropic API key below to use Claude. Until then, Apple Intelligence answers."
+            "Add your Anthropic API key below to use Claude. Until then, Apple Intelligence answers on this device."
         case .claude:
-            "\(claudeModel.name) answers, with Dexbot's lookups into Neodex's own data. If Claude can't be reached, Apple Intelligence answers that question instead."
+            "\(claudeModel.name) answers, with Dexbot's lookups into Neodex's own data. If Claude can't be reached, Apple Intelligence answers that question on this device instead."
         }
     }
 }

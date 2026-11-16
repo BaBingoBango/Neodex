@@ -65,7 +65,7 @@ struct SettingsView: View {
                         Label("Dexbot", systemImage: "bubble.left.and.text.bubble.right")
                     }
                 } footer: {
-                    Text("Apple Intelligence, or Claude with your own API key.")
+                    Text("Apple Intelligence, on this device or in Private Cloud Compute, or Claude with your own API key.")
                 }
                 unitsSection
                 tabBarSections

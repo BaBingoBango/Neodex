@@ -283,7 +283,8 @@ struct DexbotTeamTests {
     func onDeviceNote() {
         let id = UUID()
         let onDevice = DexbotModel.answerText("Here's your rain team.", note: nil, teams: [id], answeredBy: .onDevice)
-        #expect(onDevice.contains("try Claude in [Dexbot Settings](\(DexbotModel.settingsURL.absoluteString))._"), "\(onDevice)")
+        #expect(onDevice.contains("try Private Cloud Compute or Claude in [Dexbot Settings](\(DexbotModel.settingsURL.absoluteString))._"), "\(onDevice)")
+        #expect(!DexbotModel.answerText("Here's your rain team.", note: nil, teams: [id], answeredBy: .privateCloud).contains("Dexbot Settings"))
         #expect(DexbotTeamLink.split(onDevice).teamIDs == [id])
         #expect(!DexbotModel.answerText("Here's your rain team.", note: nil, teams: [id], answeredBy: .claude).contains("Dexbot Settings"))
         #expect(DexbotModel.answerText("Garchomp is weak to Ice.", note: nil, teams: [], answeredBy: .onDevice) == "Garchomp is weak to Ice.")
