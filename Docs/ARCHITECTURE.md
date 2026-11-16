@@ -229,8 +229,9 @@ Key decisions:
   The Dexbot tab lists every `DexbotConversation` in the shared store, grouped by day; each chat screen
   holds its conversation's ID and points the shared `DexbotModel` at it when it appears, and a reply that
   finishes after the user has moved to another chat is saved to the one it was asked in. Siri's
-  `AskNeodexIntent` and CarPlay use one-shot `answer` calls with spoken-style instructions. The user
-  can prefer Apple's Private Cloud Compute model or Claude (`DexbotEngine.Backend`). Claude comes from
+  `AskNeodexIntent` and CarPlay use one-shot `answer` calls with spoken-style instructions. Dexbot
+  answers with Apple's Private Cloud Compute model by default; the user can choose the on-device model
+  or Claude instead (`DexbotEngine.Backend`). Claude comes from
   Anthropic's Claude for Foundation Models package, which conforms Claude to the framework's
   `LanguageModel` protocol, so the same session, tools and transcript drive it; `DexbotClaude` keeps the
   user's API key in the Keychain item Scope Lens's advisor uses (one key on the Mac), checks a key with
@@ -239,8 +240,10 @@ Key decisions:
   question on device. Private Cloud Compute needs Apple's managed
   `com.apple.developer.private-cloud-compute` entitlement, and without it the framework still reports
   the model as available and then traps on the first request, so the cloud path is compiled in only
-  when the `PRIVATE_CLOUD_COMPUTE` Swift condition is set next to the entitlement; a network, quota or
-  service failure mid-chat falls back to the on-device model and says so.
+  when the `PRIVATE_CLOUD_COMPUTE` Swift condition is set next to the entitlement. Apple granted it in
+  November 2026, so the iPhone/iPad and Mac targets set both; never set the condition on a target whose
+  entitlements lack the key. A network, quota or service failure mid-chat falls back to the on-device
+  model and says so.
   Voice mode uses `SpeechAnalyzer`/`SpeechTranscriber` for on-device recognition and
   `AVSpeechSynthesizer` for replies.
 - **Dexbot's teams come from data, not the model's memory.** `buildTeam` (`DexbotTeamBuilder`) takes a
@@ -334,9 +337,9 @@ Key decisions:
   "Ask Dexbot" and recent chats; everything is spoken and the list only carries short status text. The
   scene is declared in `App/Info.plist`. Apple granted the
   `com.apple.developer.carplay-voice-based-conversation` entitlement in October 2026, so it is in the
-  device entitlements (`App/Neodex.entitlements`); the simulator-only file
-  (`App/Neodex-Simulator.entitlements`) also claims Private Cloud Compute so both can be exercised in
-  the simulator before that entitlement arrives. Xcode 27's Device Hub has no CarPlay (or other external) display for
+  device entitlements (`App/Neodex.entitlements`) next to Private Cloud Compute (granted in November
+  2026); the simulator-only file (`App/Neodex-Simulator.entitlements`) claims both too. A Private Cloud
+  Compute request in the simulator asks for the simulator's Apple Account password. Xcode 27's Device Hub has no CarPlay (or other external) display for
   simulators; its CarPlay Simulator plug-in pairs with a physical iPhone over USB. To see the scene
   without the entitlement, run an iOS 26.4+ simulator from Xcode 26's Simulator app and choose
   I/O › External Displays › CarPlay.
