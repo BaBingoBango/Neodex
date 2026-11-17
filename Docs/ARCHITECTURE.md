@@ -242,9 +242,12 @@ Key decisions:
   the model as available and then traps on the first request, so the cloud path is compiled in only
   when the `PRIVATE_CLOUD_COMPUTE` Swift condition is set next to the entitlement. Apple granted it in
   November 2026, so the iPhone/iPad and Mac targets set both; never set the condition on a target whose
-  entitlements lack the key. A network, quota or service failure mid-chat falls back to the on-device
-  model and says so. The app keeps one `PrivateCloudComputeLanguageModel` (`DexbotEngine.privateCloud`),
-  because each instance opens and prewarms model sessions and SwiftUI checks availability on every update.
+  entitlements lack the key. A Private Cloud Compute failure that isn't about the question itself falls
+  back to the on-device model and says so. That covers more than `PrivateCloudComputeLanguageModel.Error`:
+  on a network that blocks iCloud Private Relay, the token server Private Cloud Compute shares with it
+  doesn't resolve, and the framework passes on an error of its own. The app keeps one
+  `PrivateCloudComputeLanguageModel` (`DexbotEngine.privateCloud`), because each instance opens and
+  prewarms model sessions and SwiftUI checks availability on every update.
   Voice mode uses `SpeechAnalyzer`/`SpeechTranscriber` for on-device recognition and
   `AVSpeechSynthesizer` for replies.
 - **Dexbot's teams come from data, not the model's memory.** `buildTeam` (`DexbotTeamBuilder`) takes a

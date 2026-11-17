@@ -1,5 +1,6 @@
 import AppIntents
 import Foundation
+import FoundationModels
 import NeodexKit
 import Testing
 @testable import Neodex
@@ -131,6 +132,27 @@ struct FeatureTests {
         #expect(DexbotEngine.resolve(preferred: .privateCloud, hasClaudeKey: true, privateCloudAvailable: false) == .onDevice)
         #expect(DexbotEngine.resolve(preferred: .privateCloud, hasClaudeKey: false, privateCloudAvailable: true) == .privateCloud)
         #expect(DexbotEngine.resolve(preferred: .onDevice, hasClaudeKey: true, privateCloudAvailable: true) == .onDevice)
+    }
+
+    @Test("A Private Cloud Compute failure goes to the on-device model unless the question was the problem")
+    func dexbotCloudFallback() {
+        // What reached the app on a network that blocks the token server iCloud Private Relay and
+        // Private Cloud Compute share: not a PrivateCloudComputeLanguageModel.Error.
+        let unreachable = NSError(domain: "ModelManagerServices.ModelManagerError", code: 1001)
+        let quota = PrivateCloudComputeLanguageModel.Error.quotaLimitReached(.init(debugDescription: "test"))
+        #expect(DexbotEngine.isCloudOutage(unreachable, on: .privateCloud))
+        #expect(DexbotEngine.isCloudOutage(quota, on: .privateCloud))
+        #expect(DexbotEngine.isCloudOutage(PrivateCloudComputeLanguageModel.Error.networkFailure(.init(debugDescription: "test")), on: .privateCloud))
+        #expect(DexbotEngine.isCloudOutage(LanguageModelError.timeout(.init(debugDescription: "test")), on: .privateCloud))
+        #expect(!DexbotEngine.isCloudOutage(LanguageModelError.guardrailViolation(.init(debugDescription: "test")), on: .privateCloud))
+        #expect(!DexbotEngine.isCloudOutage(LanguageModelError.contextSizeExceeded(.init(contextSize: 4096, tokenCount: 5000, debugDescription: "test")), on: .privateCloud))
+        #expect(!DexbotEngine.isCloudOutage(CancellationError(), on: .privateCloud))
+        #expect(!DexbotEngine.isCloudOutage(unreachable, on: .onDevice))
+
+        #expect(DexbotEngine.fallbackNote(after: unreachable, from: .privateCloud) == "Private Cloud Compute wasn't reachable, so this answer came from the on-device model.")
+        #expect(DexbotEngine.fallbackNote(after: quota, from: .privateCloud) == "You've used today's Private Cloud Compute requests, so this answer came from the on-device model.")
+        #expect(DexbotEngine.describe(unreachable, backend: .privateCloud) == "I couldn't reach Private Cloud Compute. Check your connection and try again.")
+        #expect(DexbotEngine.describe(quota, backend: .privateCloud) == "You've used today's Private Cloud Compute requests. Try again tomorrow.")
     }
 
     @Test("Dexbot's Claude models are the API's IDs, and only Haiku goes without fallbacks")

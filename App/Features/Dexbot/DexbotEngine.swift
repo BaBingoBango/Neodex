@@ -1,11 +1,13 @@
 import Foundation
 import FoundationModels
 import NeodexKit
+import os
 
 /// Dexbot's brain: the persona, which model to use, and one-shot answers for Siri and CarPlay.
 /// The chat screen keeps a long-lived session; everything else goes through `answer`.
 nonisolated enum DexbotEngine {
     static let backendKey = "dexbotBackend"
+    private static let log = Logger(subsystem: "Neodex", category: "Dexbot")
 
     static let instructions = """
         You are Dexbot, the voice of Neodex, an offline Pokédex app. You know the Pokémon games and competitive \
@@ -98,13 +100,52 @@ nonisolated enum DexbotEngine {
             return false
         case .privateCloud:
             #if PRIVATE_CLOUD_COMPUTE
-            return error is PrivateCloudComputeLanguageModel.Error
+            // Not every failure arrives as `PrivateCloudComputeLanguageModel.Error`: on a network that
+            // blocks iCloud Private Relay, the token server Private Cloud Compute needs is unreachable and
+            // the framework passes on an error of its own. Anything that isn't about the question means
+            // the cloud couldn't answer it, so the device can.
+            return !isAboutTheQuestion(error)
             #else
             return false
             #endif
         case .claude:
             return DexbotClaude.isOutage(error)
         }
+    }
+
+    /// Failures the on-device model would run into as well: the question itself, a tool, or the user.
+    static func isAboutTheQuestion(_ error: Error) -> Bool {
+        if error is CancellationError || error is LanguageModelSession.ToolCallError
+            || error is LanguageModelSession.Error || isContextOverflow(error) {
+            return true
+        }
+        if let error = error as? LanguageModelError {
+            switch error {
+            case .guardrailViolation, .refusal, .unsupportedLanguageOrLocale: return true
+            default: return false
+            }
+        }
+        return false
+    }
+
+    /// The note under an answer the on-device model gave because `backend` couldn't.
+    static func fallbackNote(after error: Error, from backend: Backend) -> String {
+        #if PRIVATE_CLOUD_COMPUTE
+        if let cloud = error as? PrivateCloudComputeLanguageModel.Error, case .quotaLimitReached = cloud {
+            return "You've used today's Private Cloud Compute requests, so this answer came from the on-device model."
+        }
+        #endif
+        return "\(backend.name) wasn't reachable, so this answer came from the on-device model."
+    }
+
+    /// Records why a model couldn't answer, for Console. The error's type, domain and code are public; its
+    /// wording stays private, since it can quote the question.
+    static func logFailure(_ error: Error, on backend: Backend) {
+        let bridged = error as NSError
+        log.error("""
+            \(backend.rawValue, privacy: .public) couldn't answer: \(String(reflecting: type(of: error)), privacy: .public) \
+            (\(bridged.domain, privacy: .public) \(bridged.code, privacy: .public)) \(String(describing: error), privacy: .private)
+            """)
     }
 
     /// Whether a conversation outgrew the model's context window, from Apple's models or Claude.
@@ -167,7 +208,9 @@ nonisolated enum DexbotEngine {
         let backend = activeBackend
         do {
             return try await respond(to: question, in: makeSession(database: database, spoken: spoken, backend: backend))
-        } catch where isCloudOutage(error, on: backend) && isOnDeviceAvailable {
+        } catch {
+            logFailure(error, on: backend)
+            guard isCloudOutage(error, on: backend), isOnDeviceAvailable else { throw error }
             return try await respond(to: question, in: makeSession(database: database, spoken: spoken, backend: .onDevice))
         }
     }
@@ -202,14 +245,19 @@ nonisolated enum DexbotEngine {
         if let error = error as? LanguageModelSession.Error, error == .concurrentRequests {
             return "One question at a time, Trainer. Let me finish this one first."
         }
+        // A cloud failure lands here only when the on-device model couldn't take over either, so these
+        // don't suggest switching to it.
         #if PRIVATE_CLOUD_COMPUTE
         if let cloud = error as? PrivateCloudComputeLanguageModel.Error {
             switch cloud {
-            case .networkFailure: return "I couldn't reach Private Cloud Compute. Check your connection, or switch me to on-device answers from the menu."
-            case .quotaLimitReached: return "You've used today's Private Cloud Compute requests. Switch me to on-device answers from the menu and I'll keep going."
-            case .serviceUnavailable: return "Private Cloud Compute isn't available right now. Switch me to on-device answers from the menu and I'll keep going."
+            case .quotaLimitReached: return "You've used today's Private Cloud Compute requests. Try again tomorrow."
+            case .serviceUnavailable: return "Private Cloud Compute isn't available right now. Try again in a little while."
+            case .networkFailure: break
             @unknown default: break
             }
+        }
+        if backend == .privateCloud, isCloudOutage(error, on: .privateCloud) {
+            return "I couldn't reach Private Cloud Compute. Check your connection and try again."
         }
         #endif
         if backend == .claude {

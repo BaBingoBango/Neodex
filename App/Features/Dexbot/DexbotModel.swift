@@ -118,13 +118,13 @@ final class DexbotModel {
         // The model that wrote the answer, which a cloud outage can change.
         var answeredBy = backend
         do {
-            reply = try await stream(prompt(for: text, spoken: spoken), in: session)
+            reply = try await stream(prompt(for: text, spoken: spoken), in: session, on: backend)
         } catch where DexbotEngine.isContextOverflow(error) {
             // Start a fresh session that remembers the gist, and try once more.
             if let fresh = makeSession(spoken: spoken) {
                 self.session = fresh
                 do {
-                    reply = try await stream(prompt(for: text, spoken: spoken), in: fresh)
+                    reply = try await stream(prompt(for: text, spoken: spoken), in: fresh, on: sessionBackend)
                 } catch {
                     reply = DexbotEngine.describe(error, backend: backend)
                 }
@@ -136,8 +136,8 @@ final class DexbotModel {
             if let fallback = makeSession(spoken: spoken, backend: .onDevice) {
                 self.session = fallback
                 do {
-                    reply = try await stream(prompt(for: text, spoken: spoken), in: fallback)
-                    note = "\(backend.name) wasn't reachable, so this answer came from the on-device model."
+                    reply = try await stream(prompt(for: text, spoken: spoken), in: fallback, on: .onDevice)
+                    note = DexbotEngine.fallbackNote(after: error, from: backend)
                     answeredBy = .onDevice
                 } catch {
                     reply = DexbotEngine.describe(error, backend: .onDevice)
@@ -177,11 +177,16 @@ final class DexbotModel {
         return text
     }
 
-    private func stream(_ prompt: String, in session: LanguageModelSession) async throws -> String {
+    private func stream(_ prompt: String, in session: LanguageModelSession, on backend: DexbotEngine.Backend) async throws -> String {
         var latest = ""
-        for try await snapshot in session.streamResponse(to: prompt) {
-            latest = snapshot.content
-            streamingText = latest
+        do {
+            for try await snapshot in session.streamResponse(to: prompt) {
+                latest = snapshot.content
+                streamingText = latest
+            }
+        } catch {
+            DexbotEngine.logFailure(error, on: backend)
+            throw error
         }
         return latest.trimmingCharacters(in: .whitespacesAndNewlines)
     }
