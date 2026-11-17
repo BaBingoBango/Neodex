@@ -36,3 +36,13 @@ Tools/ScopeLensEngine/node_modules/
 .env.*
 ocr-dump.txt
 /Fixtures/
+
+# Server (Firebase): build output, dependencies, emulator secrets and CLI caches. The Wallet pass
+# certificate and key live in ~/.neodex-wallet and Secret Manager, never in this public repository.
+Server/functions/node_modules/
+Server/functions/lib/
+Server/functions/.secret.local
+Server/.firebase/
+Server/*-debug.log
+*.p12
+*.key

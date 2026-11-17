@@ -1,0 +1,25 @@
+{
+  "name": "neodex-server",
+  "description": "Neodex's Firebase functions: signs Wallet passes without seeing them.",
+  "private": true,
+  "type": "module",
+  "main": "lib/src/index.js",
+  "engines": {
+    "node": "24"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "tsc && node --test \"lib/test/**/*.test.js\"",
+    "deploy": "firebase deploy --only functions"
+  },
+  "dependencies": {
+    "firebase-admin": "^14.5.1",
+    "firebase-functions": "^7.4.0",
+    "node-forge": "^1.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "@types/node-forge": "^1.3.14",
+    "typescript": "^7.0.2"
+  }
+}
