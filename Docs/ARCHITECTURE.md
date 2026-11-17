@@ -439,12 +439,28 @@ Docs/ScopeLens/              the spec, the session briefs and the backlog
   a CLI), replays recorded battles and stills from the private fixtures, checks PlayLint, builds the
   Mac app and checks the MCP server against the engine.
 
+## Server (`Server/`)
+
+Firebase functions in the `neodex26` project, for the Trainer Card's Wallet pass (`Docs/TrainerCard.md`).
+Not deployed yet. `signPass` signs a pass without seeing it:
+
+- The app builds the pass on the device (`App/Features/TrainerCard/Wallet`), including `pass.json`,
+  the images and a `manifest.json` of their SHA-1 hashes.
+- It sends only the manifest, and gets back the detached PKCS #7 signature Wallet checks.
+- Each image carries a random PNG text chunk, so its hash can't be matched against known artwork.
+- A consumed limited-use App Check token gates every signature.
+- The function stores nothing.
+
+`Server/README.md` has the setup: the Blaze plan, the pass type certificate as Secret Manager secrets,
+Apple's WWDR intermediate and App Check.
+
 ## Testing
 
 ```bash
 cd Packages/NeodexKit && swift test     # logic, codec, parsers, database (fast, macOS)
 cd Tools/NeodexData && swift test       # pipeline: CSV, JS evaluation, name mapping, join rules, fixture
 cd Packages/ScopeLens && swift test     # Scope Lens: engine, vocabulary, templates load from the package bundle
+cd Server/functions && npm test         # Wallet signer: manifest checks, signatures verified with OpenSSL
 # The widget extension builds with the app; the simulator ignores the App Group entitlement, so widgets
 # can be added to the simulator Home Screen and read the group container like on a device.
 xcodebuild -scheme Neodex -destination 'platform=iOS Simulator,name=iPhone 17 Pro' test   # + bundled-data and fixture smoke tests

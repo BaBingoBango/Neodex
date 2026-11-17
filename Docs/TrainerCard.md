@@ -1,6 +1,8 @@
 # Trainer Card
 
-Status: idea, not started (brainstormed November 2026).
+Status: the Wallet signing function (`Server/`) and the on-device pass builder
+(`App/Features/TrainerCard/Wallet`) are written and tested, but nothing is deployed and the card itself
+isn't started (brainstormed November 2026).
 
 A card like the trainer cards and save screens in the games: who you are as a trainer, shown in the
 app, on Home and in Wallet, and shared as an image. Everything stays on the device unless a section
