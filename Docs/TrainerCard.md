@@ -90,10 +90,52 @@ below says otherwise.
 
   It has no database or storage and doesn't log the request body. Google's request logs still record
   each call's time and IP address.
-- **Updates.** There's no pass web service, because that would mean storing push tokens. When the
-  card changes, the app signs a new pass and swaps it in with `PKPassLibrary.replacePass(with:)`.
-  That needs the Wallet capability (`com.apple.developer.pass-type-identifiers`) on the App ID.
+- **Updates (default).** There's no pass web service, so nothing is stored. When the card changes, the
+  app signs a new pass and swaps it in with `PKPassLibrary.replacePass(with:)`. That needs the Wallet
+  capability (`com.apple.developer.pass-type-identifiers`) on the App ID.
 - **QR code.** The pass's QR code can be the card-trading code.
+
+### Optional: updates from Wallet (pull to refresh, automatic updates)
+
+Wallet refreshes a pass through the pass's web service, and pull to refresh shows the latest copy, so
+the server has to hold that copy. Users opt in on a splash screen that explains what is kept. Without
+it, the pass stays as above.
+
+- **Neodex stays the source of truth.** When the card changes (uploads are debounced, for example when
+  the app goes to the background), the app builds and blind-signs the new pass as before. It then
+  uploads it encrypted (AES-GCM) with a key derived by HKDF from the pass's `authenticationToken`.
+- **The stored copy can't be read.** The server keeps only a hash of the token, so the copy is
+  unreadable at rest. Apple never lets a pass's token or serial number change, so the key stays valid
+  for the pass's life.
+- **Uploads stay blind too.** Each upload carries the ciphertext and a separate upload key, also derived
+  from the token, from which the token can't be recovered. Uploads also need App Check, are size-capped
+  and are rate-limited.
+- **Wallet's requests.** Wallet authenticates register, unregister and fetch with
+  `Authorization: ApplePass <token>`.
+  - On a fetch, the server checks the token's hash, derives the key, decrypts the pass in memory and
+    returns it with `Last-Modified`, answering `If-Modified-Since` with 304. A fetch is the only time
+    the server can read a card.
+  - The list of updated passes is requested without the token, so registrations are stored in the
+    clear: Wallet's device library identifier and push token.
+- **Automatic updates.** After an upload, the server sends each registered device an empty push through
+  APNs, with the pass certificate and the pass type ID as the topic (production only). Wallet then
+  fetches the new pass on its own, on the iPhone and the paired Apple Watch.
+- **Clean-up.**
+  - When the last device unregisters (the pass was removed from Wallet), the server deletes the copy.
+  - Turning updates off in Neodex deletes it too, and reissues the pass without a web service.
+  - Copies no Wallet has fetched for 90 days expire (Firestore TTL).
+- **What the splash screen says.**
+  - The server can read a card only while handing it to Wallet. Protection covers stored data, not a
+    compromised server.
+  - The function is open source in this repository.
+  - Google's request logs record each call's time and IP address.
+  - Optionally, the photo and city can stay off the Wallet card.
+- **Firebase pieces.**
+  - Firestore holds the copies and registrations. The encrypted pass could move to Cloud Storage if it
+    outgrows Firestore's 1 MiB documents.
+  - Hosting gives the stable `webServiceURL`. That URL is baked into every pass, so it can never change.
+  - Push reuses the pass certificate, so there are no extra keys.
+- **App Store.** A release would list the stored card in the app's privacy details.
 
 ### Setup
 
