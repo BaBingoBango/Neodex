@@ -243,7 +243,8 @@ Key decisions:
   when the `PRIVATE_CLOUD_COMPUTE` Swift condition is set next to the entitlement. Apple granted it in
   November 2026, so the iPhone/iPad and Mac targets set both; never set the condition on a target whose
   entitlements lack the key. A network, quota or service failure mid-chat falls back to the on-device
-  model and says so.
+  model and says so. The app keeps one `PrivateCloudComputeLanguageModel` (`DexbotEngine.privateCloud`),
+  because each instance opens and prewarms model sessions and SwiftUI checks availability on every update.
   Voice mode uses `SpeechAnalyzer`/`SpeechTranscriber` for on-device recognition and
   `AVSpeechSynthesizer` for replies.
 - **Dexbot's teams come from data, not the model's memory.** `buildTeam` (`DexbotTeamBuilder`) takes a

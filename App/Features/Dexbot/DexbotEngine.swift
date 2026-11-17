@@ -69,13 +69,20 @@ nonisolated enum DexbotEngine {
         }
     }
 
+    #if PRIVATE_CLOUD_COMPUTE
+    /// The one Private Cloud Compute model the app uses. Each `PrivateCloudComputeLanguageModel()` opens and
+    /// prewarms model sessions of its own, and SwiftUI checks availability on every update, so a fresh
+    /// instance per check churned through hundreds of sessions a second while a reply streamed.
+    static let privateCloud = PrivateCloudComputeLanguageModel()
+    #endif
+
     /// Private Cloud Compute needs Apple's managed `com.apple.developer.private-cloud-compute`
     /// entitlement. Without it the model still reports itself available and the framework traps on the
     /// first request, so the cloud path is compiled in only when the `PRIVATE_CLOUD_COMPUTE` condition is
     /// set together with the entitlement.
     static var isPrivateCloudAvailable: Bool {
         #if PRIVATE_CLOUD_COMPUTE
-        return PrivateCloudComputeLanguageModel().isAvailable
+        return privateCloud.isAvailable
         #else
         return false
         #endif
@@ -148,7 +155,7 @@ nonisolated enum DexbotEngine {
         }
         #if PRIVATE_CLOUD_COMPUTE
         if backend == .privateCloud {
-            return LanguageModelSession(model: PrivateCloudComputeLanguageModel(), tools: tools, instructions: text)
+            return LanguageModelSession(model: privateCloud, tools: tools, instructions: text)
         }
         #endif
         return LanguageModelSession(model: SystemLanguageModel.default, tools: tools, instructions: text)
